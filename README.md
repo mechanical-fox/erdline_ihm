@@ -9,8 +9,7 @@
 
     Rappel: API et Site sont tous deux en https
         1. Fait: Finir page Accueil
-        2. Finir Page A propos + marquer mon nom, et juste dire que j'ai un GitHub et nom Github sans préciser qu'il 
-              contient code. Marquer Nom nécessaire, pour vérifier rapport CV.
+        2. Fait: Finir Page A propos
         2. Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
         3. Faire les tests manuels
         4. Faire les tests unitaires + Hibernate, vérifier swagger

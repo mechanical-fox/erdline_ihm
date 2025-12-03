@@ -2,12 +2,13 @@ import { Component, Signal, signal, WritableSignal} from '@angular/core';
 import {GenerationComponent} from './GenerationComponent';
 import {ExampleComponent} from './ExampleComponent';
 import {WelcomeComponent} from './WelcomeComponent';
+import { AboutComponent } from './AboutComponent';
 import { Util } from '../util/Util';
 import { MessageUtil } from '../util/MessageUtil';
  
 @Component({
     selector: 'erd-nav',
-    imports : [GenerationComponent, ExampleComponent, WelcomeComponent],
+    imports : [GenerationComponent, ExampleComponent, WelcomeComponent, AboutComponent],
     templateUrl: '../../html/nav.html',
     styleUrl: '../../css/nav.css'
 })
