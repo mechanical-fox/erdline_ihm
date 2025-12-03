@@ -1,0 +1,63 @@
+
+.error-message{
+  position: fixed;
+  inset-inline-end: 50px;
+  inset-block-start: 30px;
+  background: rgb(255,0,0);
+  font: bold 16px "Times New Roman", Serif;
+  padding: 18px 26px 18px 26px;
+  border-radius: 10px 10px 10px 10px;
+  color: rgb(0, 0, 0);
+  box-shadow: 2px 2px 2px rgb(0, 0, 0);
+  max-width: 200px;
+}
+
+
+.banner{
+    height: 200px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 100%;
+    background-image: linear-gradient(180deg, rgb(46, 46, 175), rgb(102, 102, 223));
+}
+
+.banner-div-title{
+    padding: 0px 0px 0px 0px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-title{
+    display : block;
+    color: rgb(0, 0, 0);
+    text-shadow: 3px 3px 3px rgb(51, 51, 51);
+    font: bold 40px "Times New Roman", Serif;
+}
+
+.banner-div{
+    padding: 30px 0px 0px 0px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-item-active{
+    cursor : default;
+    padding: 0px 30px 0px 30px;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    display: inline-block;
+    color: rgb(255,255,255);
+    font: bold 18px "Times New Roman", Serif;
+}
+
+.banner-item-inactive{
+    cursor : default;
+    padding: 0px 30px 0px 30px;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    display: inline-block;
+    color: rgb(194, 194, 194);
+    font: bold 18px "Times New Roman", Serif;
+}

@@ -1,0 +1,134 @@
+
+
+@if(creationInProgress()){
+    <erd-endpoint-creation/>
+}
+@else{
+
+    <div class="container_center">
+
+        <div class="button_div">
+            <button class="button4" (click)="loadExample()">Charger Exemple</button>
+            <button class="button4" (click)="downloadHtml()">Télécharger Html</button>
+            <button class="button4" (click)="openHtml()">Visualiser Html</button>
+        </div>
+
+        <div class="generation_group">
+            <select id="endpoint_method" class="method_select">
+                @for(option of methodOption;track option.value){
+                    <option [value]="option.value">{{option.text}}</option>
+                }
+            </select>
+            <input id="endpoint_path" type="text" class="input_text"/>
+            <button class="button_basic" (click)="addEndpoint()"> Ajouter Url </button>
+        </div>
+
+        <div class="generation_div">
+            <p class="generation_title">Informations Generales</p>
+            <p class="text"> Nom API </p>
+            <input id="input_name" type="text" class="input_text"/>
+            <p class="text"> Version API </p>
+            <input id="input_version" type="text" class="input_text"/>
+            <p class="text"> Adresse Serveur </p>
+            <input id="input_url" type="text" class="input_text"/>
+        </div>
+
+        <div class="generation_endpoint_div">
+        
+            @if(endpoints().length == 0){
+                <p class="user_message">
+                    &nbsp;&nbsp;&nbsp;&nbsp;Aucun Endpoint n'est actuellement renseigné pour cette API. Vous pouvez ajouter des Endpoints 
+                    en utilisant le bouton "Ajouter Url" qui se trouve en haut de l'écran.
+                </p>
+            }
+
+            @for(tag of tags(); track tag){
+
+                <p class="generation_title">{{tag}}</p>
+
+                @for(endpoint of endpoints(); track endpoint.id){
+                    @if(endpoint.tag == tag && endpoint.open){
+            
+                        <div class="container_center_line">
+                            <p class="tab"> 
+                                <svg height="12pt" width="12pt" viewBox="0 0 1178 1178" (click)="closeEndpoint(endpoint.id)">
+                                    <g fill="rgb(200,200,200)" stroke="none" transform="translate(0,1178) scale(0.1,-0.1)">
+                                        <path d="M1017 8243 c-31 -31 -23 -39 2479 -2549 1788 -1793 2493 -2494 2508 -2494 16 0 633 653 
+                                            2352 2490 1937 2070 2329 2494 2329 2517 l0 28 -2710 6c-3996 9 -6951 10 -6958 2z"/>
+                                    </g>
+                                </svg>
+                
+                                &nbsp;<b>{{endpoint.method}}</b>&nbsp;&nbsp; {{endpoint.path}}&nbsp;
+                            </p>
+                            <img class="cross_image" src="images/cross.svg" (click)="deleteEndpoint(endpoint.id)"/>
+                        </div>
+                        <br/>
+
+                        <div class="indent">
+                            <p class="text_gen"> Paramètres </p>
+                            @if(endpoint.parameters.length == 0){
+                                <p class="text_gen2">
+                                    <i>Aucun Paramètres requis</i>
+                                </p>
+                                <br/>
+                            }
+
+                            @for(parameter of endpoint.parameters; track parameter.name){
+                                <p class="text_gen2"> {{parameter.name}} ({{parameter.type}}) </p>
+                                <p class="text_gen2">   
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <i>Exemple: {{parameter.example}} </i>
+                                </p>
+                                <br/>
+                            }
+
+                            <p class="text_gen3"> Codes de retour </p>
+                            @for(status_code of endpoint.status_list; track status_code){
+                                <p class="status"> {{status_code}} </p>
+                            }
+                            <br/>
+
+                            @if(endpoint.exampleBody != null || endpoint.exampleResponse != null){
+                                <br/>
+                                <p class="text_gen"> Exemples </p>
+                                <div class="gen_div2">
+            
+                                    @if(endpoint.selectedTab() == "body"){
+                                        <p class="tab_activated"> Body </p>
+                                        <p class="tab_desactivated" (click)="switchTab(endpoint.id, `response`)"> Reponse </p>
+                                        <div class="tab_div">
+                                            <p class="tab_text" [innerHtml]="endpoint.exampleBodyHtml"></p>
+                                        </div>
+                                        
+                                    }
+                                    @else{
+                                        <p class="tab_desactivated" (click)="switchTab(endpoint.id, `body`)"> Body </p>
+                                        <p class="tab_activated"> Reponse </p>
+                                        <div class="tab_div">
+                                            <p class="tab_text" [innerHtml]="endpoint.exampleResponseHtml"></p>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                    @if(endpoint.tag == tag && !endpoint.open){
+                        <div class="container_center_line">
+                            <p class="tab"> 
+                                <svg height="12pt" width="12pt" viewBox="0 0 1178 1178" (click)="openEndpoint(endpoint.id)">
+                                    <g fill="rgb(200,200,200)" stroke="none" transform="translate(0,1178) scale(0.1,-0.1)">
+                                        <path d="M3547 10683 c-3 -4 -6 -2181 -8 -4838 l-4 -4830 28 -3 c25 -3 267 235 2523 
+                                            2484 1793 1788 2494 2493 2494 2508 0 30 -4968 4679 -5004 4684 -13 2 -26 0 -29 -5z"/>
+                                    </g>
+                                </svg>
+
+                                &nbsp;<b>{{endpoint.method}}</b>&nbsp;&nbsp; {{endpoint.path}}&nbsp;
+                            </p>
+                            <img class="cross_image" src="images/cross.svg" (click)="deleteEndpoint(endpoint.id)"/>
+                        </div>
+                        <br/>
+                    }
+                }
+            }
+        </div>
+    </div>
+}

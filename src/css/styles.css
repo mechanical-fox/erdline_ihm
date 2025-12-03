@@ -1,0 +1,112 @@
+
+/* This file contains the styles to apply for all the pages */
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+body{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+
+.loader {
+    animation: spin 2s linear infinite;
+    margin: 20vh 0vw 0vh 45vw;
+    border: 12px solid #3498db;
+    border-top: 4px solid #ecf0f1;
+    border-radius: 80%;
+    width: 100px;
+    height: 100px;
+}
+
+
+.container_center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+
+.text{
+    width: 100px;
+    text-align: right;
+    display: inline-block;
+    font: 15px "Times New Roman", Serif;
+}
+
+.input_text{
+    border: 1px solid rgb(88, 88, 88);
+    height: 19px;
+    width: 200px;
+    margin: 0px 0px 0px 25px;
+    display: inline-block;
+    box-shadow: 2px 2px 2px rgb(117, 117, 117);
+    border-radius: 8px 8px 8px 8px;
+    font: 14px "Times New Roman", Serif;
+    padding: 4px 6px 4px 6px;
+}
+
+.button_basic{
+    margin: 0px 20px 0px 20px;
+    padding: 8px 11px 8px 11px;
+    background-color: rgb(250, 141, 15);
+    border: 0px;
+    box-shadow: 2px 2px 2px rgb(82, 82, 82);
+    border-radius: 8px 8px 8px 8px;
+    font: bold 16px "Times New Roman", Serif;
+    cursor: pointer;
+}
+
+
+.status{
+    display: inline-block;
+    min-width: 10px;
+    border: 1px solid rgb(63, 63, 63);
+    margin: 0px 6px 0px 6px;
+    padding: 5px 7px 5px 7px;
+    box-shadow: 2px 2px 2px rgb(117, 117, 117);
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgb(250, 141, 15);
+    font:  14px "Times New Roman", Serif;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+
+.tab_activated{
+    box-shadow: 3px 0px 2px rgb(117, 117, 117);
+    margin: 0px 8px 0px 0px; 
+    border: 0px solid rgb(71, 71, 71);
+    padding: 6px 8px 6px 8px;
+    cursor: default;
+    display: inline-block;
+    background-image : linear-gradient(180deg, rgb(21, 28, 80), rgb(70, 92, 221));
+    text-align: center;
+    border-radius: 6px 15px 0px 0px;
+    font: 14px "Times New Roman", Serif;
+    width: 140px;
+    color: rgb(255,255,255);
+}
+
+
+.tab_desactivated{
+    box-shadow: 3px 0px 2px rgb(117, 117, 117);
+    margin: 0px 8px 0px 0px; 
+    border: 0px solid rgb(71, 71, 71);
+    padding: 6px 8px 6px 8px;
+    cursor: default;
+    display: inline-block;
+    background-image : linear-gradient(180deg, rgb(19, 19, 19), rgb(116, 116, 116));
+    text-align: center;
+    border-radius: 6px 15px 0px 0px;
+    font: 14px "Times New Roman", Serif;
+    width: 140px;
+    color: rgb(255,255,255);
+}

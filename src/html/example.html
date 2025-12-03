@@ -1,0 +1,41 @@
+
+
+
+@if(isLoaded()){
+    @if(examples().length == 0){
+        <div class="example_div">
+            <p class="user_message2">
+                &nbsp;&nbsp;&nbsp;&nbsp;Aucun Exemple n'est actuellement renseigné.<br/>
+                Ceux-ci seront ajoutés prochainement.
+            </p>
+        </div>
+    }
+    @else{
+
+        <div class="example_div">
+            <p class="user_message3">
+                &nbsp;&nbsp;&nbsp;&nbsp;Veuillez trouver ci-dessous plusieurs documentations API générées par ce site
+                à titre d'exemple. Le but est de vous permettre de visualiser les résultats qui pourront être obtenus    
+                en termes de documentation.
+            </p>
+
+            <div class="indent2">
+                @for(example of examples();track example.htmlId){
+                    <p class="example_item">{{example.name}}</p>
+                    <div class="indent2">
+                        <button class="button_example" (click)="openExample(example.htmlId)"> Voir </button> 
+                        <button class="button_example" (click)="downloadExample(example.htmlId)"> Telecharger </button> 
+                    </div>
+                }
+            </div>
+        </div>
+
+        
+    }
+    
+}
+@else{
+    <div class="loader"></div> 
+}
+
+

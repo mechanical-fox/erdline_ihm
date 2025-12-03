@@ -1,0 +1,28 @@
+
+
+@if(errorMessage() && errorTimer()){
+    <p class="error-message"> {{errorMessage()}} </p>
+}
+
+<div class="banner">
+    <div class="banner-div">
+        @for(item of items(); track item){
+            @if(item == selected() || item == mouseSelect()){
+                <p class="banner-item-active" (click)="select(item)" (mouseleave)="mouseLeave()"> {{item}} </p>
+            }
+            @else{
+                <p class="banner-item-inactive" (click)="select(item)" (mouseenter)="mouseSelected(item)" > {{item}} </p>
+            }
+        }
+    </div>
+    <div class="banner-div-title">
+        <p class="banner-title">Erdline</p>
+    </div>
+</div>
+
+@if(selected()=="Generation"){
+    <erd-generation />
+}
+@if(selected()=="Exemples"){
+    <erd-example />
+}

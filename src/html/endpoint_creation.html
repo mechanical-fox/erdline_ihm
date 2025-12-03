@@ -1,0 +1,105 @@
+
+@if(url()){
+<div class="container_center">
+    
+    <div class="generation_endpoint_div">
+
+        <p class="supra_title">
+            {{method()}} &nbsp;&nbsp; {{url()}}
+        </p>
+
+        <div class="url_div_1">
+            <p class="text"> Tag </p>
+            <input id="input_tag" type="text" class="input_text"/>
+        </div>
+        <div class="url_div_2">
+            <p class="text"> Codes de retour </p>
+            <div class="url_div_3">
+                @if(returned_codes().length == 0){
+                    <p class="text2"> Pas de codes de retours précisés </p>
+                }
+                @for(status_code of returned_codes(); track status_code){
+                    <p class="status"> {{status_code}} </p>
+                }
+            </div>
+        </div>
+        <div class="div_status">
+            <input type="text" class="input_status" id="statusInput"/>
+            <button class="button_status" (click)="addStatusCode()"> + Code </button>
+        </div>
+        <div class="url_div_2">
+            <p class="text"> Nombre de paramètres </p>
+            <div class="url_div_3">
+                @for(choice of choices_number_parameter; track choice){
+                    @if(choice == parameters().length){
+                        <p class="choice_activated">{{choice}}</p>
+                    }
+                    @else{
+                        <p class="choice_desactivated" (click)="setNumberParameter(choice)">{{choice}}</p>
+                    }
+                }
+            </div>
+        </div>     
+
+        @if(parameters().length > 0){
+            <p class="sub_title">Paramètres</p>
+
+            <div class="column">
+                <div class="line">
+                    <div class="cell">
+                        <p class="cell_text"> Type </p>
+                    </div>
+                    <div class="cell">
+                        <p class="cell_text"> Nom </p>
+                    </div>
+                    <div class="cell">
+                        <p class="cell_text"> Exemple Valeur </p>
+                    </div>
+                </div>
+
+                @for(parameter of parameters(); track parameter){
+                    <div class="line">
+                        <div class="cell">
+                            <select [id]="parameter.idTypeInput" class="cell_select"> 
+                                <option value="0"> </option>
+                                <option value="Header"> Header </option>
+                                <option value="Query"> Query </option>
+                                <option value="Path"> Path </option>
+                            </select>
+                        </div>
+                        <div class="cell">
+                            <input [id]="parameter.idNameInput" type="text" class="cell_input"/>
+                        </div>
+                        <div class="cell">
+                            <input [id]="parameter.idExampleInput" type="text" class="cell_input"/>
+                        </div>
+                    </div>
+                }   
+            </div>
+        }
+
+        <p class="sub_title2">Exemples</p>
+
+        <div class="url_div_4">
+            
+            @if(selectedTab() == "body"){
+                <p class="tab_activated"> Body </p>
+                <p class="tab_desactivated" (click)="switchTab(`response`)"> Reponse </p>
+                <textarea id="field_textarea" class="field_textarea" cols="70" rows="14" spellcheck="false">{{bodyText()}}</textarea>
+            }
+            @else{
+                <p class="tab_desactivated" (click)="switchTab(`body`)"> Body </p>
+                <p class="tab_activated"> Reponse </p>
+                <textarea id="field_textarea" class="field_textarea" cols="70" rows="14" spellcheck="false">{{responseText()}}</textarea>
+            }
+            
+        </div>
+
+        <button class="button_add" (click)="save()"> Ajouter </button>
+        
+    </div>
+
+    
+</div>
+}
+
