@@ -11,6 +11,26 @@ body{
     padding: 0px 0px 0px 0px;
 }
 
+.basic_div{
+    margin: 100px 0px 300px 500px;
+}
+
+.basic_title{
+    color: rgb(49, 63, 170);
+    width: 500px;
+    margin: 80px 0px 65px 60px;
+    text-align: center;
+    display: block;
+    font: bold 28px "Times New Roman", Serif;
+}
+
+.basic_text{
+    width: 600px;
+    text-align: justify;
+    display: block;
+    text-justify: inter-word;
+    font: 17px "Times New Roman", Serif;
+}
 
 .loader {
     animation: spin 2s linear infinite;
@@ -110,3 +130,6 @@ body{
     width: 140px;
     color: rgb(255,255,255);
 }
+
+
+

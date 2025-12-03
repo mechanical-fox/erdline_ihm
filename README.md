@@ -3,26 +3,20 @@
 
 
 **BUG A Resoudre:**
-    - Aucun !!
+    - Nom API perdu dès lors que je fais un ajout d'exemple
 
 **Actuel:**
 
     Rappel: API et Site sont tous deux en https
-
-        1. Fait: programmer le bouton "charger exemple"
-        2. Fait: Finir exemple niveau API
-        3. Fait: Mettre des uuid comme pour mes autres fichiers pour les exemples.
-            Pour avoir des urls de consultation plus sympa.
-        4. Fait: Gérer mot passe pour POST / DELETE
-        5. Fait: Indiquer les header mot de passe en doc spring boot
-        6. Fait: Finir la page exemple en IHM
-        7 bis. Fait: En premier exemple
-        8 bis. Fait: En deuxième exemple utiliser l'API Flopbox
-        
-        9. Finir les 2 autres pages, donc du texte surtout
-        10. Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
-        11. Faire les tests manuels
-        10. Faire les tests unitaires + Hibernate, vérifier swagger
+        1. Fait: Finir page Accueil
+        2. Finir Page A propos + marquer mon nom, et juste dire que j'ai un GitHub et nom Github sans préciser qu'il 
+              contient code. Marquer Nom nécessaire, pour vérifier rapport CV.
+        2. Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
+        3. Faire les tests manuels
+        4. Faire les tests unitaires + Hibernate, vérifier swagger
+        5. Changer doc en API pour dire de faire UNIQUEMENT deploiement docker, et tester avec mon server   
+            L'idée est que cela simplifiera beaucoup quand même. Que cela soit le processus, ou la   
+            documentation.   
 
     
 
@@ -84,9 +78,11 @@ site internet réalise actuellement les fonctionnalités suivante.
 - Une page accueil, et une page A propos sont également crées  
 
 
-Il est prévu dans le futur de pouvoir à la fois exporter en format OpenAI, et importer   
-en format OpenAI. Cela permettra aussi aux utilisateurs de pouvoir ainsi sauvegarder   
-les documentations d'API déjà crée.   
+Il est prévu dans le futur de pouvoir importer et exporter, depuis un format spécifique au   
+site Erdline. Ce qui fera le rôle de sauvegarde, pour pouvoir reprendre la création de    
+documentation API, et cela sans avoir à créer de compte.        
+
+Il est aussi prévu de permettre d'exporter les documentations en format OpenAI.   
 
 
 # Execution    
