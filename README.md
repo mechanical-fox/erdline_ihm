@@ -11,5 +11,5 @@ Erdline. Le but du site internet sera de gérer les éléments suivant.
 
 Ce projet est lié a l'API Erdline.   
 
-Ce site est en cours de construction, je décrit ici le but futur.   
+Ce site est en cours de construction, il est décrit ici le but futur.   
 L'API est aussi en cours de construction.   
