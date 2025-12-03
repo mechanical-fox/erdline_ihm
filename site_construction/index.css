@@ -1,0 +1,15 @@
+
+.text{
+    display: inline-block;
+    text-align: left;
+    font: bold 45px "Times New Roman", Serif;
+    margin: 5px 0px 5px 0px;
+}
+
+.flex-line{
+    margin: 40vh 0vw 0vh 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: line;
+}

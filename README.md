@@ -1,4 +1,77 @@
 
+# TO DO
+
+
+**BUG A Resoudre:**
+    - Aucun !!
+
+**Actuel:**
+
+    Rappel: API et Site sont tous deux en https
+
+        1. Fait: programmer le bouton "charger exemple"
+        2. Fait: Finir exemple niveau API
+        3. Fait: Mettre des uuid comme pour mes autres fichiers pour les exemples.
+            Pour avoir des urls de consultation plus sympa.
+        4. Fait: Gérer mot passe pour POST / DELETE
+        5. Fait: Indiquer les header mot de passe en doc spring boot
+        6. Fait: Finir la page exemple en IHM
+        7 bis. Fait: En premier exemple
+        8 bis. Fait: En deuxième exemple utiliser l'API Flopbox
+        
+        9. Finir les 2 autres pages, donc du texte surtout
+        10. Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
+        11. Faire les tests manuels
+        10. Faire les tests unitaires + Hibernate, vérifier swagger
+
+    
+
+    - Fait: Résolution bug IHM avec API en https (refus certificat non signé) -> résolution marqué en haut
+    - Fait: Faire les profils Java + Synthèse marquer comment mettre en place / executer profil
+    - Fait: modifier README API pour indiquer API profil + comment executer
+    - Fait: Faire profils Angular + synthèse marquer comment mettre en place / executer profil
+    - Fait: modifier README IHM pour indiquer IHM profil + comment executer
+    - Fait: Connexion à une base de donnée locale, et réalisation des opérations de base
+    
+    - Actuel: Faire prod connexion + sans mettre mot de passe en README + mot de passe est stocké dans mon fichier keypass
+
+    - Séparer en 3 repos sur Github au lieu de 1.
+         Donc erdline_api, erdline_ihm et database (A mettre en privée ou public le dernier).
+    - README indiquer le mot de passe à indiquer en variable environnement avant de lancer. 
+         Et sinon qu'il y aura soucis.
+    - Attention arreter mon docker pour base de donnée en local...
+    - Gérer contact base donnée prod
+    - IMPORTANT dans tests modifier le test "charger exemple" en indiquant le vrai nom des endpoints prix...
+    - Marquer README comment faire secret et tout pour PROD
+    - Faire le bouton "Charger Exemple"
+    - Faire les tests manuels déjà écrits + voir tester page exemple
+    - Faire les Pages Accueil, A propos et Exemples (Necessitera JPA + base donnée)
+    - Faire tests unitaires DONT HYBERNATE + images dockers
+    - verifier CHAQUE commande docker indiqué + la commande python pour ihm, que celle-ci fonctionne.
+       Et cela avec les liens indiqués en README. ATTENTION à garder les commandes docker, comme je présente cela comme
+       exemple.
+    - Pour la page exemple, faire montrer html généré, yaml généré + crée une url "Ajouter exemple" qui ajoute en exemple
+        le dernier envoie que l'on à fait, avec le bouton "voir html"
+
+    - Finalement en README en faire UN PAR FICHIER + UN GENERAL, ou j'explique le principe. Car sinon niveau execution,
+        configuration, ... cela va être dur
+
+    - ATTENTION deploiement serveur je vais devoir changer le certificat car celui actuellement utilisé avec alias
+        "whatever" et j'ai actuellement changé ma synthèse + le code java pour utiliser l'alias "certificat".
+    - README Ecrire une partie build
+    - README Ecrire la partie comment lancer les tests unitaires sur chaque applicatif
+    - README Ecrire comment configurer dev et prod
+    - En README réécrire la présentation du projet pour bien dire qu'il a une API et qu'il y a une IHM en Angular.
+    - Ecrire en READ ME les Dépendances du projet (Java, Maven, NodeJS je suppose)
+    - ENLEVER site_construction qui sera devenu inutile
+    - Faire un tag "sans texte" et une relise
+    - Supprimer to do
+
+
+- Attention, toujours penser à commit en "cd .." car j'ai deux projets
+
+
+
 
 # Projet   
 
@@ -59,29 +132,8 @@ Les valeurs utilisées peuvent être trouvées dans les fichiers suivants
 [src/environments/production.ts](./src/environments/production.ts)
 
 
-# Build Docker   
-
-Si vous souhaitez utiliser une image docker.    
-Vous pouvez construire l'image docker avec la commande suivante.   
-Faites attention à modifier le numéro de version, selon la version de votre ihm.         
-
-```sh
-docker build -t erdline_ihm/1.0  .
-```
-
-Et le lancement en interactif pour tester avant déploiement se fait avec la commande suivante.
-En production, le flag -it devra être remplacé par -d, et --name.
-
-```sh
-docker run -it -p 80:80 erdline_ihm/1.0
-```
-
-Vérifiez alors que vous puissez vous connecter à l'interface graphique
-
-http://127.0.0.1
-
     
-# Deploiement Hebergeur web    
+# Deploiement    
 
 Si vous souhaitez déployez l'application via un hebergeur web.     
 Tout d'abord, il vous faut construire le répertoire dist pour le serveur.     
@@ -91,16 +143,23 @@ npm install
 npx ng build
 ```
 
-Vous avez ensuite à dist/erdline-ihm/browser un répertoire qui correspond à ce    
-que vous pouvez mettre à servir à un serveur comme répertoire dist.   
+Vous avez ensuite à dist/erdline-ihm/browser un répertoire qui correspond au dossier dist   
+que l'on donne à servir à un hébergeur web.    
 
-Pour tester le rendu, sur votre PC vous pouvez utiliser 
 
-```sh
-cd dist/erdline-ihm/browser
-python3 -m http.server 80
-```
+# Tests   
 
-Vérifiez alors que vous puissez vous connecter à l'interface graphique
+Afin de vérifier le bon fonctionnement du logiciel, une suite de tests manuels est inclus.   
+Celle-ci est constituée d'un total de 5 tests. Voir le fichier   
 
-http://127.0.0.1
+[doc/tests.md](./doc/tests.md)    
+
+# Idées d'améliorations    
+
+
+Quelques idées d'amélioration ont été préparées en avance pour ce site.   
+D'autant que le site est actuellement dans une version assez alpha.   
+
+Pour des soucis de lissibilité, les idées d'améliorations sont regroupées dans le fichier    
+
+[doc/amelioration_ideas.md](./doc/amelioration_ideas.md)    
