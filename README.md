@@ -10,9 +10,13 @@
     Rappel: API et Site sont tous deux en https
         1. Fait: Finir page Accueil
         2. Fait: Finir Page A propos
-        2. Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
+        2. Fait: Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
         3. Faire les tests manuels
         4. Faire les tests unitaires + Hibernate, vérifier swagger
+        4 bis. Comme je vais faire du déploiement docker finalement, voir à supprimer les dépendances maven
+            de l'image avec "mvn dependency:purge-local-repository" en DockerFile. Et ainsi, j'aurai
+            enfin une image assez petit :p + j'ai vérifié, inutile de supprimer le répertoire target car
+            il n'est pas lourd
         5. Changer doc en API pour dire de faire UNIQUEMENT deploiement docker, et tester avec mon server   
             L'idée est que cela simplifiera beaucoup quand même. Que cela soit le processus, ou la   
             documentation.   

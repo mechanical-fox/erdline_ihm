@@ -22,6 +22,9 @@ import { example } from '../data/example/example';
 export class GenerationComponent {
 
     methodOption : MethodOption[];
+    nameServer : WritableSignal<string>;
+    versionServer : WritableSignal<string>;
+    urlServer : WritableSignal<string>;
     endpoints : WritableSignal<EndpointIHM[]>;
     creationInProgress : WritableSignal<boolean>;
     tags : WritableSignal<string[]>;
@@ -30,6 +33,9 @@ export class GenerationComponent {
         this.endpoints = signal([]);
         this.tags = signal([]);
         this.methodOption = [];
+        this.nameServer = signal("");
+        this.versionServer = signal("");
+        this.urlServer = signal("");
         this.creationInProgress = signal(false);
         MessageUtil.listen("endpointCreated", (args : string[])=>this.endpointCreated(args));
 
@@ -44,8 +50,8 @@ export class GenerationComponent {
 
     /** When an endpoint is Created, this function is called with the endpoint in JSON format given at args[0].
      * This function will add the endpoint in the actual component. */
-    endpointCreated(args : string[]){
-        this.creationInProgress.set(false);
+    async endpointCreated(args : string[]){
+
         let endpointString : string = args[0];
         let endpoint : Endpoint = JSON.parse(endpointString);
         let endpointIHM : EndpointIHM = new EndpointIHM(`endpoint-${this.endpoints().length + 1}-close`, false, endpoint);
@@ -59,6 +65,8 @@ export class GenerationComponent {
             value.push(endpoint.tag);
             this.tags.set(value);
         }
+
+        this.creationInProgress.set(false);
         
     }
 
@@ -286,6 +294,33 @@ export class GenerationComponent {
             this.tags.set(newTags);
             this.endpoints.set(newEndpoints);
         }
+    }
+
+    /** A function called when the server name is changed, to ask for the component to save the value 
+     * internally.*/
+    nameServerChanged(){
+        let nodeName : HTMLInputElement = document.getElementById("input_name") as HTMLInputElement ;
+
+        if(nodeName)
+            this.nameServer.set(nodeName.value); 
+    }
+
+    /** A function called when the server version is changed, to ask for the component to save the value 
+     * internally.*/
+    versionServerChanged(){
+        let nodeVersion : HTMLInputElement = document.getElementById("input_version") as HTMLInputElement ;
+
+        if(nodeVersion)
+            this.versionServer.set(nodeVersion.value); 
+    }
+
+    /** A function called when the server version is changed, to ask for the component to save the value 
+     * internally.*/
+    urlServerChanged(){
+        let nodeUrl : HTMLInputElement = document.getElementById("input_url") as HTMLInputElement ;
+
+        if(nodeUrl)
+            this.urlServer.set(nodeUrl.value); 
     }
 
 }

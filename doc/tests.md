@@ -5,14 +5,6 @@
 
 Ceci est une suite de tests manuels, afin de vérifier que le logiciel fonctionne tel qu'attendu.   
 
-## Test 0 - Vérification du jar
-
-Vérifier que en lancant l'API en mode jar, je puisse générer une page de documentation, puis récupérer celle-ci.   
-Je m'inquiétais surtout à cause de la lecture des fichiers template.css, template.html... et de savoir si les   
-lectures seront toujours disponibles.   
-
-En tout cas, le 1er test était concluant.    
-
 ## Test 1 - Vérification des couleurs   
 
 

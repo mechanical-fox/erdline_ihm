@@ -26,11 +26,11 @@
         <div class="generation_div">
             <p class="generation_title">Informations Generales</p>
             <p class="text"> Nom API </p>
-            <input id="input_name" type="text" class="input_text"/>
+            <input id="input_name" type="text" class="input_text" [value]="nameServer()" (change)="nameServerChanged()"/>
             <p class="text"> Version API </p>
-            <input id="input_version" type="text" class="input_text"/>
+            <input id="input_version" type="text" class="input_text" [value]="versionServer()" (change)="versionServerChanged()"/>
             <p class="text"> Adresse Serveur </p>
-            <input id="input_url" type="text" class="input_text"/>
+            <input id="input_url" type="text" class="input_text" [value]="urlServer()" (change)="urlServerChanged()"/>
         </div>
 
         <div class="generation_endpoint_div">

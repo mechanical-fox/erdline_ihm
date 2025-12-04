@@ -5,6 +5,8 @@
 
 Voici ci-dessous quelques idées d'améliorations pour le futur.   
 
+**Idée 0:** Réaliser un bouton "Annuler" au niveau de la création d'un endpoint
+
 **Idée 1:** Pouvoir importer et exporter depuis un modèle de fichier spécifique au site Erdline.    
 Ce qui permettra de réaliser des sauvegardes.   
 
