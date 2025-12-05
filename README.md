@@ -2,59 +2,24 @@
 # TO DO
 
 
-**BUG A Resoudre:**
-    - Nom API perdu dès lors que je fais un ajout d'exemple
-
 **Actuel:**
 
     Rappel: API et Site sont tous deux en https
-        1. Fait: Finir page Accueil
-        2. Fait: Finir Page A propos
-        2. Fait: Résoudre le bug "Nom API perdu dès que je fais ajout d'exemple"
-        3. Faire les tests manuels
-        4. Faire les tests unitaires + Hibernate, vérifier swagger
-        4 bis. Comme je vais faire du déploiement docker finalement, voir à supprimer les dépendances maven
-            de l'image avec "mvn dependency:purge-local-repository" en DockerFile. Et ainsi, j'aurai
-            enfin une image assez petit :p + j'ai vérifié, inutile de supprimer le répertoire target car
-            il n'est pas lourd
-        5. Changer doc en API pour dire de faire UNIQUEMENT deploiement docker, et tester avec mon server   
-            L'idée est que cela simplifiera beaucoup quand même. Que cela soit le processus, ou la   
-            documentation.   
+        5. Fait: J'ai fait à la main les tests manuels mis
+        6. Fait: Déploiement API Prod + Merge request, tag ...
+        7. Fait: Connecter l'ihm sur API prod depuis mon ordinateur + voir si cela marche (Html et exemples)
+        8. Faire les tests unitaires IHM
+        8 bis. Indiquer la commande de test unitaire + ou lire le % de couverture de code
+        9. Mettre la CI/CD pour IHM
+        9 bis. Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
+        10. Faire les taches écrites juste en dessous
+        10 bis. Vérifier sur Github l'affichage obtenu
+        11. Faire  pull request / merge + tag + release pour IHM
+        12. Faire aussi un pull pour tout ce qui est database :p + pas de tag par contre
+          
 
-    
-
-    - Fait: Résolution bug IHM avec API en https (refus certificat non signé) -> résolution marqué en haut
-    - Fait: Faire les profils Java + Synthèse marquer comment mettre en place / executer profil
-    - Fait: modifier README API pour indiquer API profil + comment executer
-    - Fait: Faire profils Angular + synthèse marquer comment mettre en place / executer profil
-    - Fait: modifier README IHM pour indiquer IHM profil + comment executer
-    - Fait: Connexion à une base de donnée locale, et réalisation des opérations de base
-    
-    - Actuel: Faire prod connexion + sans mettre mot de passe en README + mot de passe est stocké dans mon fichier keypass
-
-    - Séparer en 3 repos sur Github au lieu de 1.
-         Donc erdline_api, erdline_ihm et database (A mettre en privée ou public le dernier).
-    - README indiquer le mot de passe à indiquer en variable environnement avant de lancer. 
-         Et sinon qu'il y aura soucis.
-    - Attention arreter mon docker pour base de donnée en local...
-    - Gérer contact base donnée prod
-    - IMPORTANT dans tests modifier le test "charger exemple" en indiquant le vrai nom des endpoints prix...
-    - Marquer README comment faire secret et tout pour PROD
-    - Faire le bouton "Charger Exemple"
-    - Faire les tests manuels déjà écrits + voir tester page exemple
-    - Faire les Pages Accueil, A propos et Exemples (Necessitera JPA + base donnée)
-    - Faire tests unitaires DONT HYBERNATE + images dockers
-    - verifier CHAQUE commande docker indiqué + la commande python pour ihm, que celle-ci fonctionne.
-       Et cela avec les liens indiqués en README. ATTENTION à garder les commandes docker, comme je présente cela comme
-       exemple.
-    - Pour la page exemple, faire montrer html généré, yaml généré + crée une url "Ajouter exemple" qui ajoute en exemple
-        le dernier envoie que l'on à fait, avec le bouton "voir html"
-
-    - Finalement en README en faire UN PAR FICHIER + UN GENERAL, ou j'explique le principe. Car sinon niveau execution,
-        configuration, ... cela va être dur
-
-    - ATTENTION deploiement serveur je vais devoir changer le certificat car celui actuellement utilisé avec alias
-        "whatever" et j'ai actuellement changé ma synthèse + le code java pour utiliser l'alias "certificat".
+    - verifier CHAQUE commande indiqué en README, donc docker ou autre, que celle-ci fonctionne.
+    - README voir si je dois réécrire la présentation
     - README Ecrire une partie build
     - README Ecrire la partie comment lancer les tests unitaires sur chaque applicatif
     - README Ecrire comment configurer dev et prod
@@ -63,10 +28,6 @@
     - ENLEVER site_construction qui sera devenu inutile
     - Faire un tag "sans texte" et une relise
     - Supprimer to do
-
-
-- Attention, toujours penser à commit en "cd .." car j'ai deux projets
-
 
 
 
@@ -152,6 +113,7 @@ Afin de vérifier le bon fonctionnement du logiciel, une suite de tests manuels 
 Celle-ci est constituée d'un total de 5 tests. Voir le fichier   
 
 [doc/tests.md](./doc/tests.md)    
+
 
 # Idées d'améliorations    
 

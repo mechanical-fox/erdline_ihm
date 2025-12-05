@@ -27,7 +27,7 @@ aucun exemple n'est rempli. Donc ni body, ni reponse.
 
 Il faudra vérifier que dans la documentation générée:
 
-- La rubrique Paramètre inclus le texte "Aucun paramètres n'est à renseigner"
+- La rubrique Paramètre inclus le texte "Aucun paramètres requis"
 - La rubrique Exemple inclus le texte "Endpoint ne renvoyant pas de résultats"
 
 
@@ -53,7 +53,6 @@ Il faudra vérifier que dans la documentation générée:
 
 - Appuyer sur le mot "Rapport" renvoit vers la section Rapports
 - Appuyer sur le mot "Bucket" renvoit vers la section Bucket
-- Si l'on appuye 2 fois sur le mot "Rapport" en ayant changé de position, l'on revient bien à la section "Rapports"
 
 ## Test 5 - Vérification du bouton Charger Exemple
 
@@ -66,15 +65,15 @@ documentation générée semble correcte.
  
 Il faudra vérifier que dans la documentation générée:
 
-- Appuyer sur le mot "Rapport" renvoit vers la section Rapports
-- Appuyer sur le mot "Bucket" renvoit vers la section Bucket
-- Si l'on appuye 2 fois sur le mot "Rapport" en ayant changé de position, l'on revient bien à la section "Rapports"
+- Appuyer sur le mot "Executions" renvoit vers la section Executions
+- Appuyer sur le mot "Resultats" renvoit vers la section Resultats
+- Si l'on appuye 2 fois sur le mot "Executions" en ayant changé de position, l'on revient bien à la section "Executions"
 
 ## Test 6 - Visualisation des Exemples
 
 Vérifier sur le site internet à l'onglet "Exemples" que:   
 
-- Des exemples soient déjà renseignés
+- Deux exemples soient déjà renseignés (Sinon les ajouter via l'API)
 - Cliquer sur le bouton "Voir" ouvre un deuxième onglet avec la documentation attendu
 - Cliquer sur le bouton "Télécharger" va télécharger une page internet, qui soit identique à celle du bouton "Voir" 
 

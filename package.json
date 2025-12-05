@@ -1,8 +1,7 @@
 {
   "name": "erdline-ihm",
-  "version": "0.6",
+  "version": "1.0",
   "scripts": {
-    "ng": "ng",
     "serve": "ng serve",
     "build": "ng build"
   },
@@ -21,6 +20,7 @@
     "@angular/build": "^20.3.4",
     "@angular/cli": "^20.3.4",
     "@angular/compiler-cli": "^20.3.0",
+    "baseline-browser-mapping": "^2.9.2",
     "typescript": "~5.9.2"
   }
 }
