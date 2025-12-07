@@ -3,6 +3,7 @@
 /out-tsc
 /node_modules
 .vscode/*
-/.angular/cache
+/.angular
+/coverage
 
 

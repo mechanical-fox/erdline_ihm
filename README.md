@@ -11,9 +11,14 @@
         8. Faire les tests unitaires IHM
         8 bis. Indiquer la commande de test unitaire + ou lire le % de couverture de code
         9. Mettre la CI/CD pour IHM
-        9 bis. Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
+        9 bis. deployer IHM et tester
+        9 bis bis. Verifier si www.erdline.fr l'API fonctionne aussi, ou juste pour erdline.fr... 
+                Car dans CORS policy j'ai juste mis erdline.fr
+        9 bis bis bis. Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
         10. Faire les taches écrites juste en dessous
         10 bis. Vérifier sur Github l'affichage obtenu
+        10 bis bis. deployer IHM et tester
+        10 bis bis.
         11. Faire  pull request / merge + tag + release pour IHM
         12. Faire aussi un pull pour tout ce qui est database :p + pas de tag par contre
           
@@ -48,6 +53,17 @@ documentation API, et cela sans avoir à créer de compte.
 
 Il est aussi prévu de permettre d'exporter les documentations en format OpenAI.   
 
+# Tests unitaires   
+
+Pour lancer les tests unitaires, vous pouvez executer la commande  
+
+```sh
+npx ng test --no-watch
+```
+La commande de test échouera en cas de coverage insuffissant.     
+Un rapport html sur le coverage obtenu sera généré dans le répertoire    
+
+**coverage/erdline-ihm**
 
 # Execution    
 
@@ -107,10 +123,10 @@ Vous avez ensuite à dist/erdline-ihm/browser un répertoire qui correspond au d
 que l'on donne à servir à un hébergeur web.    
 
 
-# Tests   
+# Tests Manuels
 
 Afin de vérifier le bon fonctionnement du logiciel, une suite de tests manuels est inclus.   
-Celle-ci est constituée d'un total de 5 tests. Voir le fichier   
+Voir le fichier   
 
 [doc/tests.md](./doc/tests.md)    
 

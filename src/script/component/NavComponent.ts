@@ -12,7 +12,7 @@ import { MessageUtil } from '../util/MessageUtil';
     templateUrl: '../../html/nav.html',
     styleUrl: '../../css/nav.css'
 })
-export default class NavComponent {
+export class NavComponent {
 
     static MESSAGE_DURATION_MS : number = 7000;
 

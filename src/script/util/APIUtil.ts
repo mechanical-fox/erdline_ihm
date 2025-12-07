@@ -19,16 +19,17 @@ export default class API_Util {
         return API_Util.request<T, V>(url, 'POST', headers, body);
     }
 
+
     /** A function able to send a GET call, and return the response immediatly. So a little different
      * of the observable of the class HttpClient. A little easier to manage when a error happen.*/
     static async get<V>(url: string): Promise<API_Response<V>> {
         return API_Util.request<undefined, V>(url, 'GET', {}, undefined);
     }
 
-    /** This function perform a  request to a url, and return the response of the request.
-     * In the case of a error, the message stored in the API_Response is volontary fuzzy, because the message will be
-     * displayed on screen. And it's better to not display to the customer a error too much precise, because else
-     * it's a security risk. */
+
+    /** This function perform a  request to a url, and return the response of the request. In the case of a 
+     * error, the message stored in the API_Response is volontary fuzzy, to allow to display the message
+     * to the client in the browser, if needed.*/
     private static async request<T, V>(url: string,method: string, headers: Record<string, string>, 
     body: T): Promise<API_Response<V>> {
         const newUrl = API_Util.BASE_URL + url;
@@ -40,7 +41,6 @@ export default class API_Util {
         const options: Fetch_Options = new Fetch_Options(method, headers, bodyParsed);
         let response: Fetch_Response | null = null;
 
-        // this try/catch is designed to intercept the ERR_CONNECT error when the server is down
         try {
             response = await fetch(newUrl, options);
         } catch {
