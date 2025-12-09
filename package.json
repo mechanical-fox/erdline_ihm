@@ -4,7 +4,7 @@
   "scripts": {
     "serve": "ng serve",
     "build": "ng build",
-    "test": "ng test --no-watch"
+    "test": "ng test --coverage --no-watch"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +26,7 @@
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
     "@types/express": "^5.0.1",
-    "@types/node": "^20.17.19",
+    "@types/node": "^20.19.26",
     "@vitest/coverage-v8": "^4.0.15",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",

@@ -1,6 +1,7 @@
 import API_Response from "../data/util/API_Response";
 import Fetch_Options from "../data/util/Fetch_Options";
 import Fetch_Response from "../data/util/Fetch_Response";
+import {Provider} from "../app/Provider";
 import {environment} from "../../environments/environment";
 
 
@@ -42,7 +43,7 @@ export default class API_Util {
         let response: Fetch_Response | null = null;
 
         try {
-            response = await fetch(newUrl, options);
+            response = await Provider.fetch(newUrl, options);
         } catch {
             return new API_Response<V>(newUrl, undefined, true, 'Serveur éteint ou non disponible', null, null);
         }

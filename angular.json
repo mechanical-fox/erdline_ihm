@@ -83,7 +83,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {            
-            "coverage": true,
+            "coverage": false,
             "coverageThresholds": {              
               "statements": 70,              
               "branches": 60         

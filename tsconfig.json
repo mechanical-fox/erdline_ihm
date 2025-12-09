@@ -10,11 +10,12 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-    "types": ["node", "jest"]
+    "types": ["vitest/globals","node"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -22,14 +23,5 @@
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
     "strictTemplates": true
-  },
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ]
+  }
 }

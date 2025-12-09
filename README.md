@@ -8,8 +8,15 @@
         5. Fait: J'ai fait à la main les tests manuels mis
         6. Fait: Déploiement API Prod + Merge request, tag ...
         7. Fait: Connecter l'ihm sur API prod depuis mon ordinateur + voir si cela marche (Html et exemples)
+        8 bis. Fait: Indiquer la commande de test unitaire + ou lire le % de couverture de code
+
         8. Faire les tests unitaires IHM
-        8 bis. Indiquer la commande de test unitaire + ou lire le % de couverture de code
+              Reste - Activer le mock avant test page exemple
+                    - Remplir le Mock avec des données ok pour test page exemple (et pas ceux de l'ancienne application)
+                    - Test page Exemple (Vérifier que l'on a les bons noms qui apparaissent)
+                    - Test page Génération avec un charger exemple
+                    - Test quand l'on génère une url
+
         9. Mettre la CI/CD pour IHM
         9 bis. deployer IHM et tester
         9 bis bis. Verifier si www.erdline.fr l'API fonctionne aussi, ou juste pour erdline.fr... 
@@ -18,9 +25,8 @@
         10. Faire les taches écrites juste en dessous
         10 bis. Vérifier sur Github l'affichage obtenu
         10 bis bis. deployer IHM et tester
-        10 bis bis.
         11. Faire  pull request / merge + tag + release pour IHM
-        12. Faire aussi un pull pour tout ce qui est database :p + pas de tag par contre
+        12. Faire aussi un pull request / merge pour tout ce qui est database :p + idem tag / release
           
 
     - verifier CHAQUE commande indiqué en README, donc docker ou autre, que celle-ci fonctionne.
@@ -55,13 +61,19 @@ Il est aussi prévu de permettre d'exporter les documentations en format OpenAI.
 
 # Tests unitaires   
 
-Pour lancer les tests unitaires, vous pouvez executer la commande  
+Pour lancer les tests unitaires, vous pouvez executer la commande suivante
 
 ```sh
 npx ng test --no-watch
 ```
-La commande de test échouera en cas de coverage insuffissant.     
-Un rapport html sur le coverage obtenu sera généré dans le répertoire    
+
+Pour lancer les tests unitaires, et vérifier le taux de couverture des tests
+
+```sh
+npx ng test --coverage --no-watch
+```
+La seconde commande échouera en cas de coverage insuffissant.     
+De plus, la seconde commande génère un rapport html sur le coverage obtenu dans le répertoire    
 
 **coverage/erdline-ihm**
 

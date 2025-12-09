@@ -1,7 +1,7 @@
 import { ServerInfo } from "../api/ServerInfo";
 
 
-export const example : ServerInfo = {
+const example : ServerInfo = {
     "name" : "API Supervision",
     "version" : "v1.4",
     "urlServer" : "http://127.0.0.1:8080",
@@ -113,3 +113,5 @@ export const example : ServerInfo = {
         }
     ]
 };
+
+export default example;

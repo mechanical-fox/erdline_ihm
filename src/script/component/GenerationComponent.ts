@@ -10,7 +10,7 @@ import { ServerInfo } from '../data/api/ServerInfo';
 import API_Util from '../util/APIUtil';
 import DocReponse from '../data/api/DocReponse';
 import API_Response from '../data/util/API_Response';
-import { example } from '../data/example/example';
+import example from '../data/example/example';
 
 
 @Component({
