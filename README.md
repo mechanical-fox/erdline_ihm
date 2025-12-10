@@ -8,8 +8,11 @@
 
         8. Faire les tests unitaires IHM
             Reste
-                - Faire appel API pour "openHtml" avec CHARGER EXEMPLE et verifier les informations envoyé en body
-                - Si cela ne suffit pas... alors regarder le code ce qu'il reste à tester
+                - Regarder le code ce qu'il reste (Actuel: 72.78% des statements et 52.86% des branches)
+                - Avec le delete --> 76.24% statement et 54.54 % branches
+                - Avec le test bouton download -> 77.75% et 57.23 %
+                - Avec test message d'erreur pour Nav -> 78.61% et 57.57 %
+                - Avec test switch Tab -> 79.91% et 59.93 %
 
         9. Mettre la CI/CD pour IHM
         9 bis. deployer IHM et tester

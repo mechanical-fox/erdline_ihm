@@ -36,6 +36,42 @@ describe('EndpointCreationComponent Tests',()=>{
     
     });
 
+    test(`Lorsque je change d'onglet, le texte de l'onglet Body est conservé`, async()=>{
+        
+        TestBed.configureTestingModule({imports: [EndpointCreationComponent]}).compileComponents();
+        const fixture = TestBed.createComponent(EndpointCreationComponent);
+        fixture.autoDetectChanges();  
+        const compiled : HTMLElement = fixture.nativeElement as HTMLElement;
+
+        MessageUtil.call("initCreationEndpoint", ["GET", "/users"]);
+        await Helper.sleep(300);
+
+        let textNode : HTMLInputElement = compiled.querySelector("#field_textarea") as HTMLInputElement;
+        textNode.value = "Hello World";
+        textNode.textContent = "Hello World";
+        textNode.dispatchEvent(new Event('input'));
+
+        await Helper.sleep(300);
+        textNode = compiled.querySelector("#field_textarea") as HTMLInputElement;
+        expect(textNode?.textContent).toContain("Hello World");
+
+        let responseNode : HTMLInputElement = compiled.querySelector("#response_tab") as HTMLInputElement;
+        responseNode.click();
+        await Helper.sleep(300);
+
+        textNode = compiled.querySelector("#field_textarea") as HTMLInputElement;
+        expect(textNode?.textContent.trim()).toBe("");
+
+        let bodyNode : HTMLInputElement = compiled.querySelector("#body_tab") as HTMLInputElement;
+        bodyNode.click();
+        await Helper.sleep(300);
+
+        textNode = compiled.querySelector("#field_textarea") as HTMLInputElement;
+        expect(textNode?.textContent).toContain("Hello World");
+
+    
+    });
+
 
     test(`Message d'erreur pour créer un endpoint sans tag renseigné`, async()=>{
         
@@ -68,7 +104,7 @@ describe('EndpointCreationComponent Tests',()=>{
     });
 
 
-    test(`Message d'erreur pour créer un endpoint sans codes retour renseignés`, async()=>{
+    test(`Message d'erreur pour créer un endpoint sans codes de retour renseignés`, async()=>{
         
         TestBed.configureTestingModule({imports: [EndpointCreationComponent]}).compileComponents();
         const fixture = TestBed.createComponent(EndpointCreationComponent);

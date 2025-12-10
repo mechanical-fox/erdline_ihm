@@ -205,7 +205,7 @@ describe('GenerationComponent Tests',()=>{
     });
 
 
-    test(`Lorsque j'appuye sur Visualiser Html l'appel serveur effectué est correct`, async()=>{
+    test(`Lorsque j'appuye sur "Visualiser Html" l'appel serveur effectué est correct`, async()=>{
         
         TestBed.configureTestingModule({imports: [GenerationComponent]}).compileComponents();
         const fixture = TestBed.createComponent(GenerationComponent);
@@ -244,6 +244,71 @@ describe('GenerationComponent Tests',()=>{
         expect(body.endpoints[0].status_list[0]).toBe(200);
         expect(body.endpoints[0].examples.length).toBe(1);
         expect(body.endpoints[0].examples[0].name).toBe("Body");
+    });
+
+
+    test(`Lorsque j'appuye sur "Télécharger Html" l'appel serveur effectué est correct`, async()=>{
+        
+        TestBed.configureTestingModule({imports: [GenerationComponent]}).compileComponents();
+        const fixture = TestBed.createComponent(GenerationComponent);
+        fixture.autoDetectChanges();  
+        const compiled : HTMLElement = fixture.nativeElement as HTMLElement;
+
+        await Helper.sleep(300);
+
+        let nodeButtonExample : HTMLElement = compiled.querySelector("#button_example") as HTMLElement;
+        nodeButtonExample?.click();
+        await Helper.sleep(300);
+
+        let downloadButton : HTMLElement = compiled.querySelector("#button_download") as HTMLElement;
+        downloadButton?.click();
+        await Helper.sleep(300);
+
+        expect(FetchMock.getLastUrlCalled() == "/documentation/html");
+        expect(FetchMock.getLastMethodCalled() == "POST");
+
+        let bodyString : string | null = FetchMock.getLastBodyGiven();
+        expect(bodyString).toBeDefined();
+        let body : any = bodyString == null ? null : JSON.parse(bodyString);
+
+        expect(body.name).toBe("API Supervision");
+        expect(body.version).toBe("v1.4");
+        expect(body.urlServer).toBe("http://127.0.0.1:8080");
+        expect(body.endpoints.length).toBe(5);
+        expect(body.endpoints[0].method).toBe("POST");
+        expect(body.endpoints[0].path).toBe("/pipeline/{project}/{type}/{environment}/start");
+        expect(body.endpoints[0].tag).toBe("Executions");
+        expect(body.endpoints[0].parameters.length).toBe(3);
+        expect(body.endpoints[0].parameters[0].type).toBe("Path");
+        expect(body.endpoints[0].parameters[0].name).toBe("project");
+        expect(body.endpoints[0].parameters[0].example).toBe("LoyaltyWS");
+        expect(body.endpoints[0].status_list.length).toBe(4);
+        expect(body.endpoints[0].status_list[0]).toBe(200);
+        expect(body.endpoints[0].examples.length).toBe(1);
+        expect(body.endpoints[0].examples[0].name).toBe("Body");
+    });
+
+
+    test(`Je peux supprimer un endpoint`, async()=>{
+        
+        TestBed.configureTestingModule({imports: [GenerationComponent]}).compileComponents();
+        const fixture = TestBed.createComponent(GenerationComponent);
+        fixture.autoDetectChanges();  
+        const compiled : HTMLElement = fixture.nativeElement as HTMLElement;
+
+        await Helper.sleep(300);
+
+        let nodeButtonExample : HTMLElement = compiled.querySelector("#button_example") as HTMLElement;
+        nodeButtonExample?.click();
+        await Helper.sleep(300);
+
+        let deleteButton : NodeListOf<HTMLElement> = compiled.querySelectorAll(".cross_image") as NodeListOf<HTMLElement>;
+        deleteButton[0].click();
+        await Helper.sleep(300);
+
+        const items : NodeListOf<HTMLElement> = compiled.querySelectorAll(".container_center_line");
+        expect(items.length).toBe(4);
+
     });
 
 

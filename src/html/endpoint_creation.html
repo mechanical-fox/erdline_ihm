@@ -83,13 +83,13 @@
         <div class="url_div_4">
             
             @if(selectedTab() == "body"){
-                <p class="tab_activated"> Body </p>
-                <p class="tab_desactivated" (click)="switchTab(`response`)"> Reponse </p>
+                <p id="body_tab" class="tab_activated"> Body </p>
+                <p id="response_tab" class="tab_desactivated" (click)="switchTab(`response`)"> Reponse </p>
                 <textarea id="field_textarea" class="field_textarea" cols="70" rows="14" spellcheck="false">{{bodyText()}}</textarea>
             }
             @else{
-                <p class="tab_desactivated" (click)="switchTab(`body`)"> Body </p>
-                <p class="tab_activated"> Reponse </p>
+                <p id="body_tab" class="tab_desactivated" (click)="switchTab(`body`)"> Body </p>
+                <p id="response_tab" class="tab_activated"> Reponse </p>
                 <textarea id="field_textarea" class="field_textarea" cols="70" rows="14" spellcheck="false">{{responseText()}}</textarea>
             }
             

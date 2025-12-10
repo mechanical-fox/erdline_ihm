@@ -28,5 +28,11 @@
             "url_download": "/download/7a1fcbda8b63483e",
             "expireIn": 180
         }
+    },
+    {
+        "method": "GET",
+        "url": "/error",
+        "status": 500,
+        "data": null
     }
 ]

@@ -25,18 +25,8 @@ export class FetchMock {
         for (const mock of FetchMock.mocks) {
 
             if (url.endsWith(mock.url) && mock.method == options.method) {
-
                 const answer = new Fetch_Response_Impl(mock.status, JSON.stringify(mock.data));
-
-                if (!mock.status || mock.status < 200 || mock.status >= 300) {
-                    let msg = `Not implemented: FetchMock has received a code ${mock.status},`;
-                    msg += ` but FetchMock don't implement the feature of managing the errors actually.`;
-                    console.warn(`\n\n${msg}\n_n`);
-                    throw new Error(msg);
-                } 
-                else
-                    return answer;
-                
+                return answer;
             }
         }
 
