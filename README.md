@@ -5,48 +5,34 @@
 **Actuel:**
 
     Rappel: API et Site sont tous deux en https
-        8. fait: les tests unitaires
-        9. Mettre la CI/CD pour IHM
-        9 bis. deployer IHM et tester
-        9 bis bis. Verifier si www.erdline.fr appel API via "download" fonctionne aussi, ou juste pour erdline.fr... 
-                Car dans CORS policy j'ai juste mis erdline.fr
-        9 bis bis bis. Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
-        10. Faire les taches écrites juste en dessous
-        10 bis. Vérifier sur Github l'affichage obtenu
-        10 bis bis. deployer IHM et tester
-        11. Faire  pull request / merge + tag + release pour IHM
-        12. Faire aussi un pull request / merge pour tout ce qui est database :p + idem tag / release
+        9.  Fait: Ajout "www.erdline.fr" en plus de "erdline.fr" en CORS policy
+        10. Fait: deployer IHM et tester après ajout url
+        11. Fait: Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
+        
+        12. Vérifier sur Github l'affichage obtenu
+        13. Faire un pull request / merge pour tout ce qui est DATABASE + idem tag / release
+        14. Faire les taches écrites juste en dessous
+        15. Supprimer TO DO
+        16. Faire  pull request / merge + tag + release pour INTERFACE GRAPHIQUE
+        
           
-
-    - verifier CHAQUE commande indiqué en README, donc docker ou autre, que celle-ci fonctionne.
-    - README voir si je dois réécrire la présentation
-    - README Ecrire une partie build
-    - README Ecrire la partie comment lancer les tests unitaires sur chaque applicatif
-    - README Ecrire comment configurer dev et prod
-    - En README réécrire la présentation du projet pour bien dire qu'il a une API et qu'il y a une IHM en Angular.
-    - Ecrire en READ ME les Dépendances du projet (Java, Maven, NodeJS je suppose)
-    - ENLEVER site_construction qui sera devenu inutile
-    - Faire un tag "sans texte" et une relise
-    - Supprimer to do
-
-
-
 # Projet   
 
-Ce projet contient le code du site internet Erdline, qui se connecte à l'API Erdline. Le    
-site internet réalise actuellement les fonctionnalités suivante.   
+Ce projet contient le code du site internet Erdline, qui se connecte à l'API Erdline. Le
+site internet réalise actuellement les fonctionnalités suivante.
 
-- Génération d'une documentation API depuis une interface graphique    
-- Génération de la documentation API en format Html    
-- Le site internet contient une page d'exemple de documentations déjà crées   
-- Une page accueil, et une page A propos sont également crées  
+- Génération d'une documentation API depuis une interface graphique
+- Génération de la documentation API en format Html
+- Une page d'exemple de documentations déjà crées
+- Une page d'accueil
+- une page A propos
 
 
-Il est prévu dans le futur de pouvoir importer et exporter, depuis un format spécifique au   
-site Erdline. Ce qui fera le rôle de sauvegarde, pour pouvoir reprendre la création de    
-documentation API, et cela sans avoir à créer de compte.        
+Il est prévu dans le futur de pouvoir importer et exporter, depuis un format spécifique au
+site Erdline. Ce qui fera le rôle de sauvegarde, pour pouvoir reprendre la création de
+documentation API, et cela sans avoir à créer de compte.
 
-Il est aussi prévu de permettre d'exporter les documentations en format OpenAI.   
+Il est aussi prévu de permettre d'exporter les documentations en format OpenAI.
 
 # Tests unitaires   
 
@@ -61,42 +47,37 @@ Pour lancer les tests unitaires, et vérifier le taux de couverture des tests
 ```sh
 npx ng test --coverage --no-watch
 ```
-La seconde commande échouera en cas de coverage insuffissant.     
-De plus, la seconde commande génère un rapport html sur le coverage obtenu dans le répertoire    
+La seconde commande échouera en cas de coverage insuffisant. De plus, la seconde commande
+génère un rapport html sur le coverage obtenu dans le répertoire
 
 **coverage/erdline-ihm**
 
 # Execution    
 
-Installez tout d'abord les dépendances du projet avec   
+Installez tout d'abord les dépendances du projet avec
 
 ```sh
 npm install
 ```
 
-Ensuite vous pouvez soit servir directement le site internet avec 
+Ensuite vous pouvez soit servir directement le site internet avec
 
 ```sh
 npx ng serve
 ```
 
-Le site internet sera disponible à l'url suivante
-http://localhost:4200  
+Vous pourrez alors vous connecter à l'url    
+http://localhost:4200
 
-Vous pouvez aussi construire un répertoire dist, avec la commande
-
-```sh
-npx ng build
-```
 
 # Profils / Environnements
 
-Ce projet dispose de deux environnements, "development" et "production".    
-Par défaut, executer npx ng serve utilisera l'environnement '"development", et executer       
-npx ng build utilisera la configuration production.
+Ce projet dispose de deux environnements, "development" et "production". Par défaut, executer
+npx ng serve utilisera l'environnement "development", et executer npx ng build utilisera
+l'environnement "production".
 
-**Profil development:**  Utilisation d'une API localhost
-**Profil production:**   Utilisation de l'API déployée
+**Profil development:**  Utilisation d'une API localhost     
+**Profil production:**   Utilisation de l'API déployée    
 
 Vous pouvez spécifier un autre environnement avec --configuration
 
@@ -104,40 +85,37 @@ Vous pouvez spécifier un autre environnement avec --configuration
 npx ng serve --configuration production
 ```
 
-Les valeurs utilisées peuvent être trouvées dans les fichiers suivants
-[src/environments/development.ts](./src/environments/development.ts)
-[src/environments/production.ts](./src/environments/production.ts)
+Les configurations utilisées sont décrites dans les fichiers suivants    
+[src/environments/development.ts](./src/environments/development.ts)     
+[src/environments/production.ts](./src/environments/production.ts)    
 
 
     
 # Deploiement    
 
-Si vous souhaitez déployez l'application via un hebergeur web.     
-Tout d'abord, il vous faut construire le répertoire dist pour le serveur.     
+
+Un site internet se déploie en remplacant dans un serveur spécifique les fichiers html, css,
+et javascript, correspondant au site. L'on parle généralement de répertoire dist, car il faudra
+généralement dans le serveur, placer ces fichiers dans un répertoire appellé dist.
+
+Tout d'abord, il vous faut construire le répertoire dist pour le serveur.
 
 ```sh
 npm install
 npx ng build
 ```
 
-Vous avez ensuite à dist/erdline-ihm/browser un répertoire qui correspond au dossier dist   
-que l'on donne à servir à un hébergeur web.    
+Vous avez ensuite à dist/erdline-ihm/browser un répertoire qui correspond au dossier dist
+à placer sur votre serveur.
 
 
-# Tests Manuels
-
-Afin de vérifier le bon fonctionnement du logiciel, une suite de tests manuels est inclus.   
-Voir le fichier   
-
-[doc/tests.md](./doc/tests.md)    
+# Documentation SUpplémentaires
 
 
-# Idées d'améliorations    
+Afin de faciliter les mises à jours futur du projet, il est inclus un peu de documentation.
+Il s'agit ici d'une liste de tests manuels possibles, ainsi que de quelques idées d'améliorations.
 
 
-Quelques idées d'amélioration ont été préparées en avance pour ce site.   
-D'autant que le site est actuellement dans une version assez alpha.   
-
-Pour des soucis de lissibilité, les idées d'améliorations sont regroupées dans le fichier    
-
-[doc/amelioration_ideas.md](./doc/amelioration_ideas.md)    
+Tests Manuels: [doc/tests.md](./doc/tests.md)    
+Idées d'améliorations: [doc/amelioration_ideas.md](./doc/amelioration_ideas.md)      
+   
