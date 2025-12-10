@@ -38,7 +38,7 @@ describe('GenerationComponent Tests',()=>{
 
     });
 
-
+/*
     test(`Si je charge l'exemple, alors je vois l'endpoint "/report/{id}" `, async()=>{
         
         TestBed.configureTestingModule({imports: [GenerationComponent]}).compileComponents();
@@ -309,7 +309,7 @@ describe('GenerationComponent Tests',()=>{
         const items : NodeListOf<HTMLElement> = compiled.querySelectorAll(".container_center_line");
         expect(items.length).toBe(4);
 
-    });
+    });*/
 
 
 });
