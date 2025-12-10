@@ -10,22 +10,24 @@
         11. Fait: Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
         
         12. Vérifier sur Github l'affichage obtenu
+        12 bis. VERIFIER ORTHOGRAPHE avant merge request
         13. Faire un pull request / merge pour tout ce qui est DATABASE + idem tag / release
         14. Faire les taches écrites juste en dessous
         15. Supprimer TO DO
+        15 bis. VERIFIER ORTHOGRAPHE avant merge request
         16. Faire  pull request / merge + tag + release pour INTERFACE GRAPHIQUE
         
           
 # Projet   
 
 Ce projet contient le code du site internet Erdline, qui se connecte à l'API Erdline. Le
-site internet réalise actuellement les fonctionnalités suivante.
+site internet réalise actuellement les fonctionnalités suivantes.
 
 - Génération d'une documentation API depuis une interface graphique
 - Génération de la documentation API en format Html
 - Une page d'exemple de documentations déjà crées
 - Une page d'accueil
-- une page A propos
+- une page "A propos"
 
 
 Il est prévu dans le futur de pouvoir importer et exporter, depuis un format spécifique au
@@ -60,7 +62,7 @@ Installez tout d'abord les dépendances du projet avec
 npm install
 ```
 
-Ensuite vous pouvez soit servir directement le site internet avec
+Ensuite vous pouvez démarrer le site internet en local avec
 
 ```sh
 npx ng serve
@@ -109,11 +111,11 @@ Vous avez ensuite à dist/erdline-ihm/browser un répertoire qui correspond au d
 à placer sur votre serveur.
 
 
-# Documentation SUpplémentaires
+# Documentation Supplémentaires
 
 
-Afin de faciliter les mises à jours futur du projet, il est inclus un peu de documentation.
-Il s'agit ici d'une liste de tests manuels possibles, ainsi que de quelques idées d'améliorations.
+Afin de faciliter les mises à jours futures du projet, il est inclus un peu de documentation.
+Il s'agit pour l'instant d'une liste de tests manuels, ainsi que de plusieurs idées d'améliorations.
 
 
 Tests Manuels: [doc/tests.md](./doc/tests.md)    
