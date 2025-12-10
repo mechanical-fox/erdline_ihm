@@ -8,7 +8,7 @@
     <div class="container_center">
 
         <div class="button_div">
-            <button class="button4" (click)="loadExample()">Charger Exemple</button>
+            <button id="button_example" class="button4" (click)="loadExample()">Charger Exemple</button>
             <button class="button4" (click)="downloadHtml()">Télécharger Html</button>
             <button class="button4" (click)="openHtml()">Visualiser Html</button>
         </div>
@@ -48,23 +48,31 @@
 
                 @for(endpoint of endpoints(); track endpoint.id){
                     @if(endpoint.tag == tag && endpoint.open){
-            
+
                         <div class="container_center_line">
-                            <p class="tab"> 
-                                <svg height="12pt" width="12pt" viewBox="0 0 1178 1178" (click)="closeEndpoint(endpoint.id)">
-                                    <g fill="rgb(200,200,200)" stroke="none" transform="translate(0,1178) scale(0.1,-0.1)">
-                                        <path d="M1017 8243 c-31 -31 -23 -39 2479 -2549 1788 -1793 2493 -2494 2508 -2494 16 0 633 653 
-                                            2352 2490 1937 2070 2329 2494 2329 2517 l0 28 -2710 6c-3996 9 -6951 10 -6958 2z"/>
-                                    </g>
-                                </svg>
-                
-                                &nbsp;<b>{{endpoint.method}}</b>&nbsp;&nbsp; {{endpoint.path}}&nbsp;
-                            </p>
+                            
+                            <div class="endpoint_tab_div" >
+                                <div class="div_clickable_tab" (click)="closeEndpoint(endpoint.id)">
+                                    <svg height="12pt" width="12pt" viewBox="0 0 1178 1178" >
+                                        <g fill="rgb(200,200,200)" stroke="none" transform="translate(0,1178) scale(0.1,-0.1)">
+                                             <path d="M1017 8243 c-31 -31 -23 -39 2479 -2549 1788 -1793 2493 -2494 2508 
+                                                -2494 16 0 633 653 2352 2490 1937 2070 2329 2494 2329 2517 l0 28 -2710 
+                                                6c-3996 9 -6951 10 -6958 2z"/>
+                                        </g>
+                                    </svg>
+                                </div>
+        
+                                <p class="tab"> 
+                                    &nbsp;<b>{{endpoint.method}}</b>&nbsp;&nbsp; {{endpoint.path}}&nbsp;
+                                </p>
+                            </div>
+                            
                             <img class="cross_image" src="images/cross.svg" (click)="deleteEndpoint(endpoint.id)"/>
                         </div>
+            
                         <br/>
 
-                        <div class="indent">
+                        <div class="indentAndEspaceEachLine">
                             <p class="text_gen"> Paramètres </p>
                             @if(endpoint.parameters.length == 0){
                                 <p class="text_gen2">
@@ -113,16 +121,23 @@
                     }
                     @if(endpoint.tag == tag && !endpoint.open){
                         <div class="container_center_line">
-                            <p class="tab"> 
-                                <svg height="12pt" width="12pt" viewBox="0 0 1178 1178" (click)="openEndpoint(endpoint.id)">
-                                    <g fill="rgb(200,200,200)" stroke="none" transform="translate(0,1178) scale(0.1,-0.1)">
-                                        <path d="M3547 10683 c-3 -4 -6 -2181 -8 -4838 l-4 -4830 28 -3 c25 -3 267 235 2523 
-                                            2484 1793 1788 2494 2493 2494 2508 0 30 -4968 4679 -5004 4684 -13 2 -26 0 -29 -5z"/>
-                                    </g>
-                                </svg>
-
-                                &nbsp;<b>{{endpoint.method}}</b>&nbsp;&nbsp; {{endpoint.path}}&nbsp;
-                            </p>
+                            
+                            <div class="endpoint_tab_div" >
+                                <div class="div_clickable_tab" (click)="openEndpoint(endpoint.id)">
+                                    <svg height="12pt" width="12pt" viewBox="0 0 1178 1178" >
+                                        <g fill="rgb(200,200,200)" stroke="none" transform="translate(0,1178) scale(0.1,-0.1)">
+                                            <path d="M3547 10683 c-3 -4 -6 -2181 -8 -4838 l-4 -4830 28 -3 c25 -3 267 
+                                                235 2523 2484 1793 1788 2494 2493 2494 2508 0 30 -4968 4679 -5004 4684 
+                                                -13 2 -26 0 -29 -5z"/>
+                                        </g>
+                                    </svg>
+                                </div>
+        
+                                <p class="tab"> 
+                                    &nbsp;<b>{{endpoint.method}}</b>&nbsp;&nbsp; {{endpoint.path}}&nbsp;
+                                </p>
+                            </div>
+                            
                             <img class="cross_image" src="images/cross.svg" (click)="deleteEndpoint(endpoint.id)"/>
                         </div>
                         <br/>

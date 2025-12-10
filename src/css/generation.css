@@ -2,6 +2,33 @@
     margin: 0px 0px 0px 70px;
 }
 
+.indentAndEspaceEachLine{
+    margin: 10px 0px 25px 70px;
+}
+
+.div_clickable_tab{
+    display: inline-block;
+}
+
+.endpoint_tab_div{
+    display: inline-block;
+    margin: 7px 5px 7px 5px;
+    padding: 4px 10px 4px 10px;
+    box-shadow: 2px 2px 2px rgb(82, 82, 82);
+    border-radius: 8px 8px 8px 8px;
+    background-image: linear-gradient(180deg, rgb(19, 19, 19), rgb(65, 64, 64));
+    max-width: 400px;
+}
+
+.tab{
+    display: inline-block;
+    padding: 4px 10px 4px 10px;
+    margin: 0px 0px 0px 0px;
+    color: rgb(255,255,255);
+    font: 16px "Times New Roman", Serif;
+    max-width: 400px;
+}
+
 .button_div{
     margin: 60px 0px 0px 0px;
     width: 400px;
@@ -102,16 +129,7 @@
     font: 13px "Times New Roman", Serif;
 }
 
-.tab{
-    display: inline-block;
-    padding: 6px 10px 6px 10px;
-    box-shadow: 2px 2px 2px rgb(82, 82, 82);
-    border-radius: 8px 8px 8px 8px;
-    background-image: linear-gradient(180deg, rgb(19, 19, 19), rgb(65, 64, 64));
-    color: rgb(255,255,255);
-    font: 16px "Times New Roman", Serif;
-    max-width: 400px;
-}
+
 
 .generation_group{
     margin: 40px 0px 0px 0px;

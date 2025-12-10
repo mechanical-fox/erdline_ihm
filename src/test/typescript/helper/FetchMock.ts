@@ -1,9 +1,9 @@
 import fs from 'fs';
-import Fetch_Options from '../../script/data/util/Fetch_Options'
-import Fetch_Response from '../../script/data/util/Fetch_Response';
+import Fetch_Options from '../../../script/data/util/Fetch_Options'
+import Fetch_Response from '../../../script/data/util/Fetch_Response';
 import Fetch_Response_Impl from './Fetch_Response_Impl';
 
-export default class FetchMock {
+export class FetchMock {
 
     static mocks = JSON.parse(fs.readFileSync('src/test/resources/fetch_mock.json').toString());
 

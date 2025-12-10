@@ -11,9 +11,8 @@
         8 bis. Fait: Indiquer la commande de test unitaire + ou lire le % de couverture de code
 
         8. Faire les tests unitaires IHM
-              Reste - Activer le mock avant test page exemple
-                    - Remplir le Mock avec des données ok pour test page exemple (et pas ceux de l'ancienne application)
-                    - Test page Exemple (Vérifier que l'on a les bons noms qui apparaissent)
+              Reste 
+                    - Fait: Test page Exemple (Vérifier que l'on a les bons noms qui apparaissent)
                     - Test page Génération avec un charger exemple
                     - Test quand l'on génère une url
 

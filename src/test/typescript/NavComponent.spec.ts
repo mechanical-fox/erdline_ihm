@@ -1,6 +1,6 @@
 
 import {TestBed} from '@angular/core/testing';
-import {NavComponent} from '../script/component/NavComponent';
+import {NavComponent} from '../../script/component/NavComponent';
 import {Helper} from './helper/Helper';
 
 
@@ -22,7 +22,7 @@ describe('NavComponent Tests',()=>{
     });
 
 
-    test(`Changement de page si je clique sur l'item "A propos"`, async()=>{
+    test(`Changement de page effectif si je clique sur l'item "A propos"`, async()=>{
         
         TestBed.configureTestingModule({imports: [NavComponent]}).compileComponents();
         const fixture = TestBed.createComponent(NavComponent);
