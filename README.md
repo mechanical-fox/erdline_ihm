@@ -5,18 +5,10 @@
 **Actuel:**
 
     Rappel: API et Site sont tous deux en https
-
-        8. Faire les tests unitaires IHM
-            Reste
-                - Regarder le code ce qu'il reste (Actuel: 72.78% des statements et 52.86% des branches)
-                - Avec le delete --> 76.24% statement et 54.54 % branches
-                - Avec le test bouton download -> 77.75% et 57.23 %
-                - Avec test message d'erreur pour Nav -> 78.61% et 57.57 %
-                - Avec test switch Tab -> 79.91% et 59.93 %
-
+        8. fait: les tests unitaires
         9. Mettre la CI/CD pour IHM
         9 bis. deployer IHM et tester
-        9 bis bis. Verifier si www.erdline.fr l'API fonctionne aussi, ou juste pour erdline.fr... 
+        9 bis bis. Verifier si www.erdline.fr appel API via "download" fonctionne aussi, ou juste pour erdline.fr... 
                 Car dans CORS policy j'ai juste mis erdline.fr
         9 bis bis bis. Reindenter le README avec "pas de quadruple espace en fin, car cela rend peu super sur github"
         10. Faire les taches écrites juste en dessous
