@@ -10,7 +10,7 @@ import { Endpoint } from '../data/api/Endpoint';
     templateUrl: '../../html/endpoint_creation.html',
     styleUrl: '../../css/endpoint_creation.css'
 })
-export class EnpointCreationComponent {
+export class EndpointCreationComponent {
 
     method :  WritableSignal<string | null>;
     url : WritableSignal<string | null>;

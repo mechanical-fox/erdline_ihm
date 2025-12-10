@@ -5,16 +5,11 @@
 **Actuel:**
 
     Rappel: API et Site sont tous deux en https
-        5. Fait: J'ai fait à la main les tests manuels mis
-        6. Fait: Déploiement API Prod + Merge request, tag ...
-        7. Fait: Connecter l'ihm sur API prod depuis mon ordinateur + voir si cela marche (Html et exemples)
-        8 bis. Fait: Indiquer la commande de test unitaire + ou lire le % de couverture de code
 
         8. Faire les tests unitaires IHM
-              Reste 
-                    - Fait: Test page Exemple (Vérifier que l'on a les bons noms qui apparaissent)
-                    - Test page Génération avec un charger exemple
-                    - Test quand l'on génère une url
+            Reste
+                - Faire appel API pour "openHtml" avec CHARGER EXEMPLE et verifier les informations envoyé en body
+                - Si cela ne suffit pas... alors regarder le code ce qu'il reste à tester
 
         9. Mettre la CI/CD pour IHM
         9 bis. deployer IHM et tester

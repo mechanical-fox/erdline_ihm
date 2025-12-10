@@ -17,5 +17,16 @@
                 "url_download": "/download/4372f88139164d87"
             }
         ]
+    },
+    {
+        "method": "POST",
+        "url": "/documentation/html",
+        "status": 201,
+        "data": {
+            "htmlId": "7a1fcbda8b63483e",
+            "url_consultation": "/access/7a1fcbda8b63483e",
+            "url_download": "/download/7a1fcbda8b63483e",
+            "expireIn": 180
+        }
     }
 ]

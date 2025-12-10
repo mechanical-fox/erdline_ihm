@@ -3,7 +3,7 @@ import { MessageUtil } from '../util/MessageUtil';
 import { Endpoint } from '../data/api/Endpoint';
 import { MethodOption } from '../data/ihm/MethodOption';
 import { EMethod } from '../data/ihm/EMethod';
-import { EnpointCreationComponent} from './EndpointCreationComponent';
+import { EndpointCreationComponent} from './EndpointCreationComponent';
 import { Util } from '../util/Util';
 import { EndpointIHM } from '../data/ihm/EndpointIHM';
 import { ServerInfo } from '../data/api/ServerInfo';
@@ -11,11 +11,12 @@ import API_Util from '../util/APIUtil';
 import DocReponse from '../data/api/DocReponse';
 import API_Response from '../data/util/API_Response';
 import example from '../data/example/example';
+import { Provider } from '../app/Provider';
 
 
 @Component({
     selector: 'erd-generation',
-    imports :  [EnpointCreationComponent],
+    imports :  [EndpointCreationComponent],
     templateUrl: '../../html/generation.html',
     styleUrl: '../../css/generation.css'
 })
@@ -179,15 +180,12 @@ export class GenerationComponent {
         if(infos != null){
             let answer : API_Response<DocReponse> = await API_Util.post<ServerInfo,DocReponse>("/documentation/html", infos);
 
-            if(answer.hasFailed == true && answer.status){
+            if(answer.hasFailed == true && answer.status)
                 MessageUtil.call("logError", ["Erreur Serveur " + answer.status]);
-            }
-            else if(answer.hasFailed == true && !answer.status){
+            else if(answer.hasFailed == true && !answer.status)
                 MessageUtil.call("logError", ["Erreur Serveur : " + answer.errorMessage]);
-            }
-            else if(answer.data && answer.data.url_consultation){
-                open(API_Util.BASE_URL + answer.data.url_consultation);
-            }
+            else if(answer.data && answer.data.url_consultation)
+                Provider.open(API_Util.BASE_URL + answer.data.url_consultation);
         }
     }
 
@@ -198,15 +196,12 @@ export class GenerationComponent {
         if(infos != null){
             let answer : API_Response<DocReponse> = await API_Util.post<ServerInfo,DocReponse>("/documentation/html", infos);
 
-            if(answer.hasFailed == true && answer.status){
+            if(answer.hasFailed == true && answer.status)
                 MessageUtil.call("logError", ["Erreur Serveur " + answer.status]);
-            }
-            else if(answer.hasFailed == true && !answer.status){
+            else if(answer.hasFailed == true && !answer.status)
                 MessageUtil.call("logError", ["Erreur Serveur : " + answer.errorMessage]);
-            }
-            else if(answer.data && answer.data.url_download){
-                open(API_Util.BASE_URL + answer.data.url_download);
-            }
+            else if(answer.data && answer.data.url_download)
+                Provider.open(API_Util.BASE_URL + answer.data.url_download);
         }
     }
     
