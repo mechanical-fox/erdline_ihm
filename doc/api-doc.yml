@@ -1,0 +1,710 @@
+openapi: 3.0.4
+info:
+  title: API Supervision
+  version: v1.4
+servers:
+  - url: http://127.0.0.1:8080
+    description: Generated server url
+paths:
+  /config/pages:
+    get:
+      tags:
+        - Configuration Pages
+      summary: Retourne les pages visibles en interface IHM
+      operationId: getPageConfig
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigPage'
+        '500':
+          description: Erreur Serveur
+          content: {}
+    put:
+      tags:
+        - Configuration Pages
+      summary: Modifie les pages visibles en interface IHM
+      operationId: putPageConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigPage'
+        required: true
+      responses:
+        '204':
+          description: Succès
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /config/gatling/{project}:
+    put:
+      tags:
+        - Configuration Gatling
+      summary: Modifie la configuration Gatling utilisée pour ce projet
+      operationId: putGatlingConfiguration
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+          example: CustomerParams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyConfigGatling'
+        required: true
+      responses:
+        '204':
+          description: Succès
+        '404':
+          description: Projet Gatling Inexistant
+          content: {}
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /config/functional/{project}/{file}:
+    get:
+      tags:
+        - Configuration Gherkin
+      summary: Consultation des tests Gherkin
+      operationId: getFunctionalTests
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+          example: LoyaltyWS
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: string
+          example: Cartes
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GherkinFeature'
+        '404':
+          description: Couple Projet / Fichier Inexistant
+          content: {}
+        '500':
+          description: ''
+          content: {}
+    put:
+      tags:
+        - Configuration Gherkin
+      summary: Modification d'une liste de test Gherkin
+      operationId: modifyTest
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+          example: LoyaltyWS
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: string
+          example: Demo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GherkinFeatureBody'
+        required: true
+      responses:
+        '204':
+          description: Succès
+        '400':
+          description: Utilisation d'une phrase gherkin non configurée
+          content: {}
+        '404':
+          description: Projet Gherkin Inexistant
+          content: {}
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /pipeline/{project}/{type}/{environment}/start:
+    post:
+      tags:
+        - Executions
+      summary: Execute un test
+      operationId: startPipeline
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+          example: LoyaltyWS
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+          example: CYPRESS
+        - name: environment
+          in: path
+          required: true
+          schema:
+            type: string
+          example: PRE
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineStatus'
+        '400':
+          description: Environnement non autorisé
+          content: {}
+        '404':
+          description: Couple Projet / Type inexistant
+          content: {}
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /result/gatling:
+    get:
+      tags:
+        - Resultats
+      summary: Lister les résultats des tests Gatling
+      operationId: getGatlingResult
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GatlingProject'
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /result/functional:
+    get:
+      tags:
+        - Resultats
+      summary: Lister les résultats des tests Fonctionnels
+      operationId: getProjects
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /report/{id}:
+    get:
+      tags:
+        - Resultats
+      summary: Obtenir l'Url de consultation d'un rapport
+      operationId: getReport
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 106
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example: /public/report106/index.html
+        '404':
+          description: Rapport demandé inexistant
+          content: {}
+        '500':
+          description: Erreur serveur
+          content: {}
+  /pipeline:
+    get:
+      tags:
+        - Executions
+      summary: Lister les tests executables
+      operationId: getPipelines
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PipelineProject'
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /config/gatling:
+    get:
+      tags:
+        - Configuration Gatling
+      summary: Lister les configurations Gatling
+      operationId: getGatlingConfigurations
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigGatling'
+        '500':
+          description: Erreur Serveur
+          content: {}
+  /config/functional/{project}/{file}/errors:
+    get:
+      tags:
+        - Configuration Gherkin
+      summary: Consultation des erreurs Gherkin
+      operationId: getFunctionalTestsParsingErrors
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+          example: LoyaltyWS
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: string
+          example: Cartes
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GherkinParsingError'
+        '404':
+          description: Couple Projet / Fichier Inexistant
+          content: {}
+        '500':
+          description: ''
+          content: {}
+  /config/functional/{project}/steps:
+    get:
+      tags:
+        - Configuration Gherkin
+      summary: Retourne les étapes Gherkin disponibles pour ce projet
+      operationId: getAvailableSteps
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+          example: LoyaltyWS
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GherkinTemplateExtended'
+        '404':
+          description: Projet Inexistant
+          content: {}
+        '500':
+          description: ''
+          content: {}
+  /config/functional/list:
+    get:
+      tags:
+        - Configuration Gherkin
+      summary: Retourne les projets de test Gherkin
+      operationId: listFunctionalProjects
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GherkinPath'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    ConfigPage:
+      type: object
+      properties:
+        seePageResultat:
+          type: boolean
+          example: true
+        seePageGatling:
+          type: boolean
+          example: false
+        seePageExecution:
+          type: boolean
+          example: true
+        seePageFunctionalConfig:
+          type: boolean
+          example: false
+        seePageGatlingConfig:
+          type: boolean
+          example: false
+    BodyConfigGatling:
+      type: object
+      properties:
+        injectionRandomized:
+          type: boolean
+          example: false
+        periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigGatlingPeriod'
+    ConfigGatlingPeriod:
+      type: object
+      properties:
+        duration:
+          type: integer
+          format: int32
+          example: 60
+        requestByMn:
+          type: integer
+          format: int32
+          example: 1500
+    GherkinFeatureBody:
+      type: object
+      properties:
+        featureName:
+          type: string
+          example: LoyaltyWS Gestion Cartes Fidélités
+        tags:
+          type: array
+          example: []
+          items:
+            type: string
+            example: []
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/GherkinTestBody'
+    GherkinStepBody:
+      type: object
+      properties:
+        gherkin:
+          type: string
+          example: j'appelle en GET {string}
+        params:
+          type: array
+          example:
+            - /loyaltiesApi/v2/loyalties/{{NEW_NUM_CARTE}}
+          items:
+            type: string
+            example:
+              - /loyaltiesApi/v2/loyalties/{{NEW_NUM_CARTE}}
+    GherkinTestBody:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Creation d'une carte fidelité
+        tags:
+          type: array
+          example:
+            - '@zoom'
+          items:
+            type: string
+            example:
+              - '@zoom'
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/GherkinStepBody'
+    PipelineStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1933885662
+        ref:
+          type: string
+          example: main
+        status:
+          type: string
+          example: created
+        created_at:
+          type: string
+          example: '2025-07-18T08:45:42.053Z'
+        web_url:
+          type: string
+          example: https://gitlab.com/kiabi-com/group/retail/marketing-client/tests/api-automation-tests/-/pipelines/1933885662
+    GatlingGroup:
+      type: object
+      properties:
+        environment:
+          type: string
+          example: REC
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GatlingResult'
+    GatlingProject:
+      type: object
+      properties:
+        project:
+          type: string
+          example: CustomerWS-v1
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GatlingGroup'
+    GatlingResult:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2025-04-30 15:12:10.506588'
+        reportId:
+          type: integer
+          format: int32
+          example: 129
+        total:
+          type: integer
+          format: int32
+          example: 3097
+        nbRequestFailed:
+          type: integer
+          format: int32
+          example: 8
+        meanTime:
+          type: integer
+          format: int32
+          example: 208
+        percentile95:
+          type: integer
+          format: int32
+          example: 617
+        maxTime:
+          type: integer
+          format: int32
+          example: 30058
+    Project:
+      type: object
+      properties:
+        project_id:
+          type: string
+          example: 2
+        project_name:
+          type: string
+          example: LoyaltyWS
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result'
+    Result:
+      type: object
+      properties:
+        environment:
+          type: string
+          example: PRE
+        date:
+          type: string
+          example: '2025-05-12 16:56:01.575319'
+        reportId:
+          type: integer
+          format: int32
+          example: 159
+        succeed:
+          type: integer
+          format: int32
+          example: 23
+        failed:
+          type: integer
+          format: int32
+          example: 0
+        broken:
+          type: integer
+          format: int32
+          example: 0
+    PipelineProject:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        project:
+          type: string
+          example: LoyaltyWS
+        type:
+          type: string
+          example: CYPRESS
+        gitlab:
+          type: string
+          example: https://gitlab.com/kiabi-com/group/retail/marketing-client/tests/api-automation-tests/-/pipelines
+        lastExecution:
+          type: string
+          example: 2025-07-18 11:21
+        environments:
+          type: array
+          example:
+            - REC
+            - PRE
+          items:
+            type: string
+            example:
+              - REC
+              - PRE
+    ConfigGatling:
+      type: object
+      properties:
+        project:
+          type: string
+          example: CustomerParams
+        injectionRandomized:
+          type: boolean
+          example: false
+        periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigGatlingPeriod'
+    GherkinFeature:
+      type: object
+      properties:
+        featureName:
+          type: string
+          example: LoyaltyWS Gestion Cartes Fidélités
+        tags:
+          type: array
+          example: []
+          items:
+            type: string
+            example: []
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/GherkinTest'
+    GherkinParameter:
+      type: object
+      properties:
+        name:
+          type: string
+          example: url
+        type:
+          type: string
+          example: string
+        value:
+          type: string
+          example: /loyaltiesApi/v1/loyalties/{{NEW_NUM_CARTE}}
+    GherkinStep:
+      type: object
+      properties:
+        line:
+          type: integer
+          format: int32
+          example: 1
+        gherkin:
+          type: string
+          example: j'appelle en GET {string}
+        display:
+          type: string
+          example: Appel GET
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/GherkinParameter'
+    GherkinTest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Creation d'une carte fidelité
+        tags:
+          type: array
+          example:
+            - '@zoom'
+          items:
+            type: string
+            example:
+              - '@zoom'
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/GherkinStep'
+    GherkinParsingError:
+      type: object
+      properties:
+        line:
+          type: integer
+          format: int32
+          example: 16
+        error:
+          type: string
+          example: 'Ligne ''pour ...'' inattendue. A l''intérieur d''un scénario de test, une ligne devrait commencer par #, Etant donné, Quand, Alors, Et'
+    GherkinDefaultParameter:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Code Retour
+        type:
+          type: string
+          example: int
+        defaultValue:
+          type: string
+          example: 0
+    GherkinTemplateExtended:
+      type: object
+      properties:
+        gherkin:
+          type: string
+          example: je recois un code de retour {int}
+        display:
+          type: string
+          example: Vérification du code de retour
+        group:
+          type: string
+          example: REQUETE
+        keyword:
+          type: string
+          example: Alors
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/GherkinDefaultParameter'
+    GherkinPath:
+      type: object
+      properties:
+        project:
+          type: string
+          example: LoyaltyWS
+        file:
+          type: string
+          example: Cartes

@@ -1,0 +1,43 @@
+
+.example_div{
+    margin: 15vh 0vw 0vh 35vw;
+}
+
+.indent2{
+    margin: 0px 0px 50px 40px;
+}
+
+.user_message2{
+    text-align: left;
+    display: block;
+    font: italic 19px "Times New Roman", Serif;
+    width: 30vw;
+}
+
+.user_message3{
+    text-align: left;
+    display: block;
+    font: italic 18px "Times New Roman", Serif;
+    width: 40vw;
+    margin-bottom: 10vh;
+}
+
+.example_item{
+    text-align: left;
+    display: block;
+    font: italic bold 21px "Times New Roman", Serif;
+    width: 30vw;
+}
+
+.button_example{
+    margin: 0px 10px 0px 10px;
+    padding: 4px 6px 4px 6px;
+    background-color: rgb(30, 39, 205);
+    color : rgb(255,255,255);
+    border: 0px;
+    box-shadow: 2px 2px 2px rgb(82, 82, 82);
+    border-radius: 8px 8px 8px 8px;
+    font: bold 17px "Times New Roman", Serif;
+    cursor: pointer;
+    text-decoration: none;
+}

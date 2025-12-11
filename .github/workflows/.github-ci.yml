@@ -1,0 +1,23 @@
+
+
+name: Tests Unitaires
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Unit_Test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up NodeJS
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+        cache: 'npm'
+    - run: npm install
+    - name: Unit Test
+      run: npx ng test --coverage --no-watch --no-progress

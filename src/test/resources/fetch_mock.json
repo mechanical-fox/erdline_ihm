@@ -1,0 +1,38 @@
+[
+    {
+        "method": "GET",
+        "url": "/example",
+        "status": 200,
+        "data": [
+            {
+                "htmlId": "7393e5d478434e2f",
+                "name": "API Supervision",
+                "url_consultation": "/access/7393e5d478434e2f",
+                "url_download": "/download/7393e5d478434e2f"
+            },
+            {
+                "htmlId": "4372f88139164d87",
+                "name": "API FlopBox",
+                "url_consultation": "/access/4372f88139164d87",
+                "url_download": "/download/4372f88139164d87"
+            }
+        ]
+    },
+    {
+        "method": "POST",
+        "url": "/documentation/html",
+        "status": 201,
+        "data": {
+            "htmlId": "7a1fcbda8b63483e",
+            "url_consultation": "/access/7a1fcbda8b63483e",
+            "url_download": "/download/7a1fcbda8b63483e",
+            "expireIn": 180
+        }
+    },
+    {
+        "method": "GET",
+        "url": "/error",
+        "status": 500,
+        "data": null
+    }
+]
