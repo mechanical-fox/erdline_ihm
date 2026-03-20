@@ -5,6 +5,9 @@
 }
 
 <div class="banner">
+    <div class="banner-div-title">
+        <p class="banner-title">Erdline</p>
+    </div>
     <div class="banner-div">
         @for(item of items(); track item){
             @if(item == selected() || item == mouseSelect()){
@@ -15,9 +18,7 @@
             }
         }
     </div>
-    <div class="banner-div-title">
-        <p class="banner-title">Erdline</p>
-    </div>
+
 </div>
 
 @if(selected()=="Generation"){

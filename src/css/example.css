@@ -1,6 +1,6 @@
 
 .example_div{
-    margin: 15vh 0vw 0vh 35vw;
+    margin: 100px 0px 150px 200px;
 }
 
 .indent2{
@@ -11,14 +11,14 @@
     text-align: left;
     display: block;
     font: italic 19px "Times New Roman", Serif;
-    width: 30vw;
+    width: 450px;
 }
 
 .user_message3{
     text-align: left;
     display: block;
     font: italic 18px "Times New Roman", Serif;
-    width: 40vw;
+    width: 550px;
     margin-bottom: 10vh;
 }
 
