@@ -1,14 +1,4 @@
 
-# TO DO
-
-- Fait: Erdline en haut remplacer par bandeau proche mynrista
-- Fait: Etre cohérent et utiliser px comme reste erdline (enfin vw pour bandeau) 
-- Fait: test ordi uniquement car le site ne gère pas le mobile
-- déployer via OVH
-- test rapidos version déployée
-- BIEN changer le N° de version
-- prévoir de merge / verif action / tag / release
-- Supprimer TO DO
 
 # Projet   
 
