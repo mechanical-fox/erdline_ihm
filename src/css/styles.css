@@ -12,12 +12,12 @@ body{
 }
 
 .basic_div{
-    margin: 100px 0px 300px 500px;
+    margin: 100px 0px 150px 200px;
 }
 
 .basic_title{
     color: rgb(49, 63, 170);
-    width: 500px;
+    width: 450px;
     margin: 80px 0px 65px 60px;
     text-align: center;
     display: block;
@@ -25,7 +25,7 @@ body{
 }
 
 .basic_text{
-    width: 600px;
+    width: 550px;
     text-align: justify;
     display: block;
     text-justify: inter-word;
@@ -44,10 +44,10 @@ body{
 
 
 .container_center{
+    width: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     flex-direction: column;
 }
 

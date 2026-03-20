@@ -1,9 +1,9 @@
 
 # TO DO
 
-- Erdline en haut remplacer par bandeau proche mynrista
-- Etre cohérent et utiliser px comme reste erdline (enfin vw pour bandeau) 
-- test ordi uniquement car le site ne gère pas le mobile
+- Fait: Erdline en haut remplacer par bandeau proche mynrista
+- Fait: Etre cohérent et utiliser px comme reste erdline (enfin vw pour bandeau) 
+- Fait: test ordi uniquement car le site ne gère pas le mobile
 - déployer via OVH
 - test rapidos version déployée
 - BIEN changer le N° de version
