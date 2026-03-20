@@ -1,0 +1,20 @@
+
+/* This file contains the styles to apply for all the pages */
+
+body{
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
+}
+
+.flex-line{
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.basic_div{
+    margin: 5.5rem 0rem 0rem 12rem;
+    width: 40vw;
+}

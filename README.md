@@ -1,20 +1,40 @@
 
+# TO DO
+
+Etape 1: Fait: Banière + comme mynrista niveau CSS 
+histoire d'être bien compatible mobile
+Etape 2: Pour l'onglet Création prévoir les onglets à gauche.
+Faire des onglets avec background carré.
+Etape 3 : Synthétiser mon projet, je crois que cela est faisable 
+Etape 3 bis: Continuer le projet
+
+Fin: 
+- Ai je bien gérer le fait d'appeler une url health à la connexion + d'afficher
+toute une page entière si serveur down ? Voir le site mynrista
+- Tester le comportement si serveur down. Voir si le message apparait
+- Tester les cercles de chargement si réponse lente. Mettre des sleep au niveau API.
+- Faire attention à ce que la partis "A propos" soit à jour
+- Changer les fichiers de doc pour idée amélioration + tests manuels.
+- tester manuellement
+- tester vue mobile via mobiles firefox + ATTENTION tel
+comme honor10 sont très mince, donc vraiment il va falloir 
+jouer au F12 sur la largeur fenêtre pour vérifier.
+- écrire les tests unitaires
+- préparer portfolio les nouvelles images ihm et API
+- retester les tests unitaire 
+- vérifier % couverture ok
+- déployer
+- tester VUE MOBILE SUR TEL une fois déployé + cela AVANT
+de valider merge request
+- test version déployée
+- changer en portfolio les images pour ihm + API
+- changer N° version
+- Faire merge request / check github action / release
+- supprimer TO DO
 
 # Projet   
 
-Ce projet contient le code du site internet Erdline, qui se connecte à l'API Erdline. Le
-site internet réalise actuellement les fonctionnalités suivantes.
-
-- Génération d'une documentation API depuis une interface graphique
-- Génération de la documentation API en format Html
-- Une page d'exemple de documentations déjà créées
-- Une page d'accueil
-- Une page "A propos"
-
-
-Il est prévu dans le futur de pouvoir importer et exporter, depuis un format spécifique au
-site Erdline. Ce qui fera le rôle de sauvegarde, pour pouvoir reprendre la création d'une
-documentation API. Et cela, sans avoir à créer de comptes.
+TO DO
 
 
 # Tests unitaires   
