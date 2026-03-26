@@ -24,7 +24,7 @@ export class NavComponent {
 
 
 
-    /** Function called when someone click on a item like "Accueil"  */
+    /** Function called when someone click on a item such as "Accueil"  */
     select(item : string) : void {
         this.selected.set(item);
     }

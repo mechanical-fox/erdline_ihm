@@ -1,7 +1,54 @@
-<div class="basic_div">
 
-    <p>
-       Page Edition
-    </p>
+<div class="edition-flexbox">
 
+
+    <div class="edition-menu">
+        @for(item of items; track item){
+            @if(selected() == item){
+                @if(focus_on() == item){
+                    <p class="edition-menu-item-activated-focus" (mouseout)="mouse_out(item)"> {{item}}</p>
+                }
+                @else{
+                    <p class="edition-menu-item-activated" (mouseover)="mouse_over(item)"> {{item}}</p>
+                }
+            }
+            @else{
+                @if(focus_on() == item){
+                    <p class="edition-menu-item-desactivated-focus" (click)="select(item)" (mouseout)="mouse_out(item)"> {{item}}</p>
+                }
+                @else{
+                    <p class="edition-menu-item-desactivated" (click)="select(item)" (mouseover)="mouse_over(item)"> {{item}}</p>
+                }
+            }
+        }
+    </div>
+
+
+    <div class="edition-div">
+
+        @if(selected() == "Décors"){
+            <p class="edition-decor-title">
+                Paramètres
+            </p>
+            <p class="edition-decor-input-name">
+                Nom
+            </p>
+            <input class="edition-decor-input" type="text"/>
+            <input type="color" class="edition-decor-input-color" value="#3b19d1">
+            <p class="edition-decor-color-text"> Première couleur de gradient </p>
+            <input type="color" class="edition-decor-input-color" value="#3b19d1">
+            <p class="edition-decor-color-text"> Seconde couleur de gradient </p>
+            <p class="edition-decor-title">
+                Preview
+            </p>
+            <p> TO DO + Utiliser style binding cf https://angular.fr/components/style </p>
+        }
+        @else{
+            <p>
+                Page Edition
+            </p>
+        }
+        
+
+    </div>
 </div>

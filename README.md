@@ -1,12 +1,32 @@
 
 # TO DO
 
-Etape 1: Fait: Banière + comme mynrista niveau CSS 
-histoire d'être bien compatible mobile
-Etape 2: Pour l'onglet Création prévoir les onglets à gauche.
-Faire des onglets avec background carré.
-Etape 3 : Synthétiser mon projet, je crois que cela est faisable 
-Etape 3 bis: Continuer le projet
+Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
+
+Actuellement faire les onglets à gauche, dans l'onglet édition
+Après:
+
+1. NOW: Gérer ajout / suppression de décor dans l'onglet approprié
+    - Après reflexion pour la liste cela doit être en haut, et cela doit être 100% du texte aucune image (texte sera nom du décor) +
+        cela permettra de réutiliser ce style de liste pour les personnages, et pour les scènes
+    - Les décors sont par défaut nommés #1, #2... Le nom peut être changé
+    - Les décors sont visibles en bas, et on peut les selectionner
+    - Les décors cela est juste un background à 2 couleurs, et on choisit les 2 couleurs
+    - Il apparait la preview du décor
+2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser des rectangles actuellement.
+    - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions
+3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.
+    Je dois pouvoir à la fois choisir un personnage, et une expression.
+    Mon idée est de faire un peu comme en jeu gatcha, des genres de "bulle texte". Et de faire en sorte que
+    en cliquant dessus cela soit modifiable. Et voir à tester comment présenter l'édition / création.
+    Mon idée cela est des checkbox pour les personnages, checkbox pour l'expression.
+    Et le texte, dans un text-area qui aura la même largeur que celui affiché une fois validé (voir comment faire).
+    Et pas de bouton ajouter. Cela sera juste quand l'on clique en dehors du text-area.
+4. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
+    des sprites ?
+5. Prendre document de base, et voir le plus urgent. Mais bref, penser à un moment à faire une vrai API.
+    Et des tests unitaires aussi. Et la sauvegarde.
+    
 
 Fin: 
 - Ai je bien gérer le fait d'appeler une url health à la connexion + d'afficher

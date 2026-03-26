@@ -1,0 +1,107 @@
+
+.edition-flexbox{
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.edition-menu{
+    margin: 5.5rem 0rem 0rem 4vw;
+    display: inline-block;
+}
+
+.edition-menu-item-activated{
+    margin: 0.6rem 0rem 0rem 0rem;
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(0,0,0);
+    color: rgb(255,255,255);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.edition-menu-item-activated-focus{
+    margin: 0.6rem 0rem 0rem 0rem;
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(0,0,0);
+    color: rgb(255,255,255);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.edition-menu-item-desactivated-focus{
+    margin: 0.6rem 0rem 0rem 0rem;
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(46, 46, 46);
+    color: rgb(255, 255, 255);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.edition-menu-item-desactivated{
+    margin: 0.6rem 0rem 0rem 0rem;
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(46, 46, 46);
+    color: rgb(184, 184, 184);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.edition-menu-item-selected{
+    margin: 0.6rem 0rem 0rem 0rem;
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(46, 46, 46);
+    color: rgb(216, 216, 216);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.edition-div{
+    margin: 5.5rem 0rem 0rem 6rem;
+    display: inline-block;
+}
+
+.edition-decor-title{
+    color: rgb(32, 59, 209);
+    font: bold 1.3rem Serif;
+}
+
+.edition-decor-input-name{
+    margin: 0.3rem 0rem 0.8rem 1rem;
+    display: block;
+    color: rgb(58, 58, 58);
+    font: italic 1.0rem Serif;
+}
+
+.edition-decor-input{
+    margin: 0.3rem 0rem 0.8rem 2rem;
+    border: 0.1rem solid rgb(43, 43, 43);
+    display: block;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    font: 1.0rem Serif;
+    border-radius: 0.4rem;
+    width: 10rem;
+}
