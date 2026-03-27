@@ -31,17 +31,24 @@
                 Paramètres
             </p>
             <p class="edition-decor-input-name">
-                Nom
+                Nom Décor
             </p>
-            <input class="edition-decor-input" type="text"/>
-            <input type="color" class="edition-decor-input-color" value="#3b19d1">
-            <p class="edition-decor-color-text"> Première couleur de gradient </p>
-            <input type="color" class="edition-decor-input-color" value="#3b19d1">
-            <p class="edition-decor-color-text"> Seconde couleur de gradient </p>
+            <input class="edition-decor-input" type="text" [(ngModel)]="backgroundName"/>
+            <p class="edition-decor-input-name">
+                Couleur
+            </p>
+            <div class="edition-decor-color-div">
+                @for(color of colors; track color.value){
+                    <div class="edition-decor-color-div-item">
+                        <input [id]="color.id" type="radio" name="1" [value]="color.value"  [checked]="color.defaultChecked" (change)="colorChange(color.id,$event)"/>
+                        <p class="edition-decor-color-div-item-text">{{color.value}} </p>
+                    </div>
+                }
+            </div>
             <p class="edition-decor-title">
                 Preview
             </p>
-            <p> TO DO + Utiliser style binding cf https://angular.fr/components/style </p>
+            <div class="edition-preview" [style.background]="gradient()"></div>
         }
         @else{
             <p>

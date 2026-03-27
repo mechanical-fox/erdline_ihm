@@ -105,3 +105,49 @@
     border-radius: 0.4rem;
     width: 10rem;
 }
+
+
+.edition-preview{
+    margin: 0rem 0rem 0rem 2rem;
+    width: 10rem;
+    height: 6rem;
+    background: linear-gradient(180deg, rgb(0,0,0), rgb(65,65,65));
+}
+
+.edition-decor-color-div{
+    margin: 0rem 0rem 0rem 2rem;
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 0.4rem 0.4rem 0.4rem 0.4rem;
+    width: 25rem;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.edition-decor-color-div-item{
+    display: inline-block;
+    width: 10rem;
+}
+
+.edition-decor-color-div-item-button{
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+    padding: 0.15rem 0.15rem 0.15rem 0.15rem;
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 30%;
+    border: 1px solid rgb(0,0,0);
+    background-color: rgb(90, 247, 17);
+    background-clip: content-box;
+    cursor: pointer;
+}
+
+.edition-decor-color-div-item-text{
+    margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+    display: inline-block;
+    font: 1.0rem Serif;
+}

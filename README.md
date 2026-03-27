@@ -7,12 +7,11 @@ Actuellement faire les onglets à gauche, dans l'onglet édition
 Après:
 
 1. NOW: Gérer ajout / suppression de décor dans l'onglet approprié
-    - Après reflexion pour la liste cela doit être en haut, et cela doit être 100% du texte aucune image (texte sera nom du décor) +
+    - Faire en haut la liste des décors, et cela doit être 100% du texte aucune image (texte sera nom du décor) +
         cela permettra de réutiliser ce style de liste pour les personnages, et pour les scènes
-    - Les décors sont par défaut nommés #1, #2... Le nom peut être changé
-    - Les décors sont visibles en bas, et on peut les selectionner
-    - Les décors cela est juste un background à 2 couleurs, et on choisit les 2 couleurs
-    - Il apparait la preview du décor
+    - Les décors devront par défaut être nommés #1, #2... Le nom peut être changé
+2. Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
+     Refactoriser.
 2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser des rectangles actuellement.
     - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions
 3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.

@@ -14,6 +14,14 @@ body{
     justify-content: flex-start;
 }
 
+.flex-line-center{
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .basic-div{
     margin: 5.5rem 0rem 0rem 12rem;
     width: 40vw;
