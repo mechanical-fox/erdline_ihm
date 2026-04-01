@@ -5,7 +5,7 @@ Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
 
 A faire:
 
-1. NOW: Gérer une liste pour gérer plusieurs décors, avec ajouter / modifier / supprimer
+1. Fait: Gérer une liste pour gérer plusieurs décors, avec ajouter / modifier / supprimer
 2. Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
      Refactoriser.
 2. Faire séparer au niveau du code la petite liste en haut des décors, car je vais réutiliser le composant pour les
