@@ -3,17 +3,16 @@
 
 Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
 
-Actuellement faire les onglets à gauche, dans l'onglet édition
-Après:
+A faire:
 
-1. NOW: Gérer ajout / suppression de décor dans l'onglet approprié
-    - Faire en haut la liste des décors, et cela doit être 100% du texte aucune image (texte sera nom du décor) +
-        cela permettra de réutiliser ce style de liste pour les personnages, et pour les scènes
-    - Les décors devront par défaut être nommés #1, #2... Le nom peut être changé
+1. NOW: Gérer une liste pour gérer plusieurs décors, avec ajouter / modifier / supprimer
 2. Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
      Refactoriser.
-2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser des rectangles actuellement.
+2. Faire séparer au niveau du code la petite liste en haut des décors, car je vais réutiliser le composant pour les
+      personnages. Bref, refactorisation. Utiliser des inputs, et output.
+2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser mon unique sprite créé pour l'instant.
     - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions
+2 bis. Gérer la vue mobile pour les 2 onglets précédents
 3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.
     Je dois pouvoir à la fois choisir un personnage, et une expression.
     Mon idée est de faire un peu comme en jeu gatcha, des genres de "bulle texte". Et de faire en sorte que
@@ -21,9 +20,14 @@ Après:
     Mon idée cela est des checkbox pour les personnages, checkbox pour l'expression.
     Et le texte, dans un text-area qui aura la même largeur que celui affiché une fois validé (voir comment faire).
     Et pas de bouton ajouter. Cela sera juste quand l'on clique en dehors du text-area.
+3. Gérer la création des scènes en vue mobile. Au besoin, faire que le paramètre nombre de colonne soit généré dynamiquement
+    et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet.
+4. Gérer le bug que si l'on remplie par exemple décor name, et que l'on va en page tutoriel... l'on perd les informations.
+    Cela était lié au fait que tout était stocké dans Edition Component, et non pas NavComponent. Donc changer l'item affiché
+    par NavComponent, fait perdre les données.
 4. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
-    des sprites ?
-5. Prendre document de base, et voir le plus urgent. Mais bref, penser à un moment à faire une vrai API.
+    plus de sprites ?
+5. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser à un moment à faire une vrai API.
     Et des tests unitaires aussi. Et la sauvegarde.
     
 
