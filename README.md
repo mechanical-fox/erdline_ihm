@@ -6,13 +6,16 @@ Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
 A faire:
 
 1. Fait: Gérer une liste pour gérer plusieurs décors, avec ajouter / modifier / supprimer
-2. Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
+2. Fait: Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
      Refactoriser.
 2. Faire séparer au niveau du code la petite liste en haut des décors, car je vais réutiliser le composant pour les
       personnages. Bref, refactorisation. Utiliser des inputs, et output.
 2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser mon unique sprite créé pour l'instant.
     - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions
 2 bis. Gérer la vue mobile pour les 2 onglets précédents
+3 before. Voir à gérer la création des scènes SANS CHOIX pour la 1er version. Histoire d'envoyer rapidement.
+    Donc on peut juste faire scène 1 -> scène 2. + Prévoir en idée d'amélioration le fait de pouvoir
+    justement mettre des choix.
 3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.
     Je dois pouvoir à la fois choisir un personnage, et une expression.
     Mon idée est de faire un peu comme en jeu gatcha, des genres de "bulle texte". Et de faire en sorte que

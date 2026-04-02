@@ -28,57 +28,7 @@
 
  
         @if(selected() == "Décors"){
-            <div class="edition-decor-list">
-
-                @for(background of backgrounds();track background.name){
-                    @if(background.name == backgroundSelected()){
-                        <p class="edition-decor-list-item-selected"> {{background.name}} </p>
-                    }
-                    @else{
-                        <p class="edition-decor-list-item" (click)="selectBackground(background.name)"> {{background.name}} </p>
-                    }
-                }
-
-                <p class="edition-decor-list-item-button-add" (click)="addBackground()"> <b> + </b> &nbsp; Décor </p>
-            </div>
-
-            <!-- Check if the user has deleted all backgrounds. If so, the user will need to create a 
-             background to see this interface -->
-            @if(backgroundSelected() != null){
-                <p class="edition-decor-title">
-                    Paramètres
-                </p>
-                <p class="edition-decor-input-name">
-                    Nom Décor
-                </p>
-                <input class="edition-decor-input" type="text" [(ngModel)]="backgroundName" (input)="updateBackgroungName($event)"/>
-                <p class="edition-decor-input-name">
-                    Couleur
-                </p>
-                <div class="edition-decor-color-div">
-                    @for(color of colors; track color.value){
-                        <div class="edition-decor-color-div-item">
-                        
-                            @if(color.id == colorSelected()){
-                                <input [id]="color.id" type="radio" name="color-list" [value]="color.value"  checked (change)="colorChange(color.id, $event)"/>     
-                            }
-                            @else{
-                                <input [id]="color.id" type="radio" name="color-list" [value]="color.value"  unchecked (change)="colorChange(color.id, $event)"/>
-                            }
-
-                            <p class="edition-decor-color-div-item-text">{{color.value}}</p>
-                        
-                        
-                        
-                        </div>
-                    }
-                </div>
-                <p class="edition-decor-title">
-                    Preview
-                </p>
-                <div class="edition-preview" [style.background]="gradient()"></div>
-                <button class="edition-decor-button-delete" (click)="deleteCurrentBackground()"> Supprimer Décor</button>
-            }
+            <Background/>
         }
         @else{
             <p>
