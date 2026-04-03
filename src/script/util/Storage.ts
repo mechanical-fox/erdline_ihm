@@ -8,18 +8,13 @@ export class Storage{
     items : WritableSignal<string[]>;
 
     constructor(){
-        this.counter = 2;
-        this.selected = signal("#1");
-        this.items = signal(["#1"])
-    }
-
-    /** Return the name given to the first item, if you have just created a new storage. So by default, a list of one item.*/
-    static getDefaultName() : string{
-        return "#1";
+        this.counter = 1;
+        this.selected = signal(null);
+        this.items = signal([])
     }
 
     /** Create a new item in the storage, and returns the name of the new item created. If the storage was empty, the new 
-     * item is selected. Else, the previous item selected remains selected */
+     * item is selected. Else, the previous item selected remains selected. */
     add() : string{
         let name = `#${this.counter}`;
         this.counter++;

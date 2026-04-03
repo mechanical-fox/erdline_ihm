@@ -7,7 +7,7 @@
 <div class="background-list">
                 
     @for(background of backgrounds();track background.name){
-        @if(background.name == backgroundSelected()){
+        @if(background.name == storage.selected()){
             <p class="background-list-item-selected"> {{background.name}} </p>
         }
         @else{
@@ -20,7 +20,7 @@
 
 <!-- Check if the user has deleted all backgrounds. If so, the user will need to create a 
 background to see this interface -->
-@if(backgroundSelected() != null){
+@if( storage.selected() != null){
           
     <p class="background-title">
         Paramètres

@@ -1,7 +1,9 @@
 import { Component, WritableSignal, signal, Signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../util/Util';
-import {StorageUtil} from '../util/StorageUtil';
+import {Storage} from '../util/Storage';
+
+
 
 @Component({
     selector: 'Background',
@@ -16,7 +18,7 @@ export class BackgroundComponent {
     colorSelected: WritableSignal<string>;
     gradient : WritableSignal<string>;
     backgrounds : WritableSignal<any>;
-    backgroundSelected : Signal<string | null>;
+    storage : Storage;
 
     constructor(){
 
@@ -24,21 +26,18 @@ export class BackgroundComponent {
         this.backgroundName = signal("");
         this.colorSelected = signal("");
         this.gradient = signal("");
-        this.backgroundSelected =  StorageUtil.getSelected("storage-background");
 
         if(Util.getVariable("backgrounds") != null){
             this.backgrounds = signal(Util.getVariable("backgrounds"));
+            this.storage = Util.getVariable("backgrounds-storage");
+            this.flushAndSave();
         }
         else{
-            this.backgrounds = signal([
-                {
-                    "name": StorageUtil.getDefaultName(),
-                    "color-id" : "radio-orange"
-                }
-            ]);
+            this.backgrounds = signal([]);
+            this.storage = new Storage();
+            this.addBackground();
         }
-
-        this.flushAndSave();
+ 
     }
 
 
@@ -46,7 +45,7 @@ export class BackgroundComponent {
      * save the state of the component. This allow to quit the tab, return to the tab, and don't lost data beetween this actions.*/
     flushAndSave(){
 
-        let selected = this.backgroundSelected();
+        let selected = this.storage.selected();
 
         for(let background of this.backgrounds()){
             if(background.name == selected && selected != null){
@@ -62,13 +61,14 @@ export class BackgroundComponent {
         }
 
         Util.setVariable("backgrounds", this.backgrounds());
+        Util.setVariable("backgrounds-storage", this.storage);
     }
 
     /** Add a new background, with a generic name like #1, #2... And if the number of actual background is 0, will select 
      * the new background.*/
     addBackground(){
         let backgroundsValue = this.backgrounds();
-        let newName  = StorageUtil.add("storage-background");
+        let newName  = this.storage.add();
 
         backgroundsValue.push({
             "name" : newName,
@@ -82,7 +82,7 @@ export class BackgroundComponent {
     /** Select the background with the name indicated */
     selectBackground(name : string){
 
-        StorageUtil.select("storage-background", name);
+        this.storage.select(name);
         this.flushAndSave();
         
     }
@@ -92,10 +92,10 @@ export class BackgroundComponent {
         let backgroundsValue = this.backgrounds();
 
         for(let background of backgroundsValue){
-            if(background.name == this.backgroundSelected() && event.target.value.trim().length > 0){
+            if(background.name == this.storage.selected() && event.target.value.trim().length > 0){
                 background.name = event.target.value;
                 this.backgrounds.set(backgroundsValue);
-                StorageUtil.updateSelected("storage-background", event.target.value);
+                this.storage.updateSelected(event.target.value);
             }
         }
 
@@ -109,11 +109,11 @@ export class BackgroundComponent {
         let newBackgroundsValue = [];
 
         for(let item of this.backgrounds()){
-            if(item.name != this.backgroundSelected())
+            if(item.name != this.storage.selected())
                 newBackgroundsValue.push(item);
         }
 
-        StorageUtil.deleteSelected("storage-background");//change the item selected
+        this.storage.deleteSelected();//change the item selected
         this.backgrounds.set(newBackgroundsValue);
         this.flushAndSave();
     }
@@ -126,7 +126,7 @@ export class BackgroundComponent {
         let backgroundsValue = this.backgrounds();
 
         for(let i in backgroundsValue){
-            if(event.target.checked && backgroundsValue[i].name == this.backgroundSelected()){
+            if(event.target.checked && backgroundsValue[i].name == this.storage.selected()){
                 ind = parseInt(i);
                 backgroundsValue[ind]["color-id"] = id;
                 this.backgrounds.set(backgroundsValue);
