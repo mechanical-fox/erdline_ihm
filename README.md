@@ -8,12 +8,10 @@ A faire:
 1. Fait: Gérer une liste pour gérer plusieurs décors, avec ajouter / modifier / supprimer
 2. Fait: Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
      Refactoriser.
-2. ATTENTION après test la petite liste en haut est assez dur à factoriser à cause de... Update du name, ce qui demande
-     message parent -> enfant, et n'est PAS POSSIBLE avec Input et Output Angular.
-     Du coup, je vais plutôt passer par un composant Util qui stocke des liste avec un nom donné, et renvoit des 
-     signaux, et à des méthodes ajouter, supprimer, update... Methode qui à la fois prennent des inputs, et renvoient
-     des Output. + il va falloir aussi mettre un css commun list.css pour la liste quelque part. Bref, pas de parents,
-     pas d'enfants, et voila.
+2. Fait: Essayer de factoriser les listes en haut. Et ne PAS utiliser de input/output, car malheureusement lors de l'update de
+     nom, il n'y avait rien qui pouvait être fait.
+2. Je pense pour les listes je vais devoir donner à Storage utile une fonction pour "add" et pour "select" (utilisé lors du delete).
+     Ou alors juste une fonction pour le select... cela aiderait déjà. Car la je n'ai pas trop réussit à réduire la taille.
 2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser mon unique sprite créé pour l'instant.
     - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions
 2 bis. Gérer la vue mobile pour les 2 onglets précédents

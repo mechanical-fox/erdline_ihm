@@ -1,6 +1,7 @@
-import { Component, WritableSignal, signal} from '@angular/core';
+import { Component, WritableSignal, signal, Signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../util/Util';
+import {StorageUtil} from '../util/StorageUtil';
 
 @Component({
     selector: 'Background',
@@ -12,32 +13,28 @@ export class BackgroundComponent {
 
     colors : any[];
     backgroundName: WritableSignal<string>;
-    backgroundSelected: WritableSignal<string | null>;
     colorSelected: WritableSignal<string>;
     gradient : WritableSignal<string>;
-    counterBackground : number;
     backgrounds : WritableSignal<any>;
+    backgroundSelected : Signal<string |null>;
 
     constructor(){
 
         if(Util.getVariable("backgrounds") != null){
-            this.backgroundSelected = signal(Util.getVariable("backgroundSelected"));
             this.colorSelected = signal(Util.getVariable("colorSelected"));
-            this.counterBackground = Util.getVariable("counterBackground");
             this.backgrounds = signal(Util.getVariable("backgrounds"));
         }
         else{
-            this.backgroundSelected = signal("#1");
             this.colorSelected = signal("radio-orange");
-            this.counterBackground = 2;
             this.backgrounds = signal([
                 {
-                    "name": "#1",
+                    "name": StorageUtil.getDefaultName(),
                     "color-id" : "radio-orange"
                 }
             ]);
         }
 
+        this.backgroundSelected = StorageUtil.getSelected("storage-background");
         let value = this.backgroundSelected();
         value = value != null ? value : ""; 
         this.backgroundName = signal(value);
@@ -54,9 +51,7 @@ export class BackgroundComponent {
     /** A function to save the state of the component. This function allow to quit the tab, return to the tab, and don't lost
      * data beetween this actions. */
     saveState(){
-        Util.setVariable("backgroundSelected", this.backgroundSelected());
         Util.setVariable("colorSelected", this.colorSelected());
-        Util.setVariable("counterBackground", this.counterBackground);
         Util.setVariable("backgrounds", this.backgrounds());
     }
 
@@ -64,29 +59,25 @@ export class BackgroundComponent {
      * the new background.*/
     addBackground(){
         let backgroundsValue = this.backgrounds();
-        let defaultName = `#${this.counterBackground}`;
+        let newName  = StorageUtil.add("storage-background");
 
         backgroundsValue.push({
-            "name" : defaultName,
+            "name" : newName,
             "color-id" : "radio-orange"
         });
 
-        this.counterBackground++;
         this.backgrounds.set(backgroundsValue);
-
-        if(this.backgroundSelected() == null)
-            this.selectBackground(defaultName);
-
         this.saveState();
     }
 
     /** Select the background with the name indicated */
     selectBackground(name : string){
 
+        StorageUtil.select("storage-background", name);
+
         for(let background of this.backgrounds()){
             if(background.name == name){
                 this.backgroundName.set(name);
-                this.backgroundSelected.set(name);
                 
                 for(let color of this.colors){
                     if(color.id == background["color-id"]){
@@ -109,7 +100,7 @@ export class BackgroundComponent {
             if(background.name == this.backgroundSelected() && event.target.value.trim().length > 0){
                 background.name = event.target.value;
                 this.backgrounds.set(backgroundsValue);
-                this.backgroundSelected.set(event.target.value);
+                StorageUtil.updateSelected("storage-background", event.target.value);
             }
         }
 
@@ -120,32 +111,29 @@ export class BackgroundComponent {
      * the background selected will be null.*/
     deleteCurrentBackground(){
 
-        let backgroundsValue = this.backgrounds();
         let newBackgroundsValue = [];
-        let newSelected = null;
 
-        for(let i in backgroundsValue){
-            if(backgroundsValue[i].name == this.backgroundSelected()){
-                let ind = parseInt(i);
+        for(let item of this.backgrounds()){
+            if(item.name != this.backgroundSelected())
+                newBackgroundsValue.push(item);
+        }
 
-                if(ind + 1 < backgroundsValue.length)
-                    newSelected = backgroundsValue[ind + 1].name;
-                else if(ind - 1 >= 0)
-                    newSelected = backgroundsValue[ind -1].name;
-                else //if the user is deleting the last background
-                    newSelected = null;
+        StorageUtil.deleteSelected("storage-background");//change the item selected
+
+        for(let item of this.backgrounds()){
+            if(item.name == this.backgroundSelected()){
+                this.backgroundName.set(item.name);
+
+                for(let color of this.colors){
+                    if(color.id == item["color-id"]){
+                        this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
+                        this.colorSelected.set(color.id);
+                    }
+                }
             }
-            else
-                newBackgroundsValue.push(backgroundsValue[i]);
         }
 
         this.backgrounds.set(newBackgroundsValue);
-
-        if(newSelected == null)
-            this.backgroundSelected.set(null);
-        else
-            this.selectBackground(newSelected);
-        
         this.saveState();
     }
 
