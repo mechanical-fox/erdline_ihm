@@ -1,11 +1,11 @@
-import API_Response from "../data/util/API_Response";
-import Fetch_Options from "../data/util/Fetch_Options";
-import Fetch_Response from "../data/util/Fetch_Response";
+import {API_Response} from "../data/util/API_Response";
+import {Fetch_Options} from "../data/util/Fetch_Options";
+import {Fetch_Response} from "../data/util/Fetch_Response";
 import {Provider} from "../app/Provider";
 import {environment} from "../../environments/environment";
 
 
-export default class API_Util {
+export class API_Util {
 
     static BASE_URL : string = environment.BASE_URL;
 

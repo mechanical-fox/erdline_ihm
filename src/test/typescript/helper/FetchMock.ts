@@ -1,6 +1,6 @@
 import fs from 'fs';
-import Fetch_Options from '../../../script/data/util/Fetch_Options'
-import Fetch_Response from '../../../script/data/util/Fetch_Response';
+import {Fetch_Options} from '../../../script/data/util/Fetch_Options'
+import {Fetch_Response} from '../../../script/data/util/Fetch_Response';
 import Fetch_Response_Impl from './Fetch_Response_Impl';
 
 export class FetchMock {

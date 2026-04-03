@@ -1,7 +1,7 @@
 
 
 
-export default class API_Response<T> {
+export class API_Response<T> {
 
     url: string;
     status: number | undefined;

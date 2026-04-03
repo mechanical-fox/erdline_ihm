@@ -1,5 +1,5 @@
-import Fetch_Options from '../data/util/Fetch_Options';
-import Fetch_Response from '../data/util/Fetch_Response';
+import {Fetch_Options} from '../data/util/Fetch_Options';
+import {Fetch_Response} from '../data/util/Fetch_Response';
 
 
 /**

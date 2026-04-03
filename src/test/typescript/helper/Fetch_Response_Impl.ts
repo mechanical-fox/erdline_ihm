@@ -1,5 +1,5 @@
 
-import Fetch_Response from '../../../script/data/util/Fetch_Response';
+import {Fetch_Response} from '../../../script/data/util/Fetch_Response';
 
 export default class Fetch_Response_Impl implements Fetch_Response {
 

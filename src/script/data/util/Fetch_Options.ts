@@ -1,6 +1,6 @@
 
 
-export default class Fetch_Options {
+export class Fetch_Options {
 
     method: string;
     headers: Record<string, string>;

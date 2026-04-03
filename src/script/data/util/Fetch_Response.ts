@@ -1,6 +1,7 @@
 
 
-type Fetch_Response = {
+
+export type Fetch_Response = {
 
     status: number | undefined;
     ok: boolean;
@@ -8,5 +9,3 @@ type Fetch_Response = {
     text(): Promise<string>;
 
 };
-
-export default Fetch_Response;
