@@ -10,7 +10,10 @@ A faire:
      Refactoriser.
 2. Fait: Essayer de factoriser les listes en haut. Et ne PAS utiliser de input/output, car malheureusement lors de l'update de
      nom, il n'y avait rien qui pouvait être fait.
-2. Je pense pour les listes je vais devoir donner à Storage utile une fonction pour "add" et pour "select" (utilisé lors du delete).
+2. 
+ATTENTION A FAIRE car actuellement en plus j'ai bug si j'ajoute et qu'il n'y avait rien avant (tout supprimé), car il n'y aura
+pas réinitialisation des champs -->
+   Je pense pour les listes je vais devoir donner à Storage utile une fonction pour "add" et pour "select" (utilisé lors du delete).
      Ou alors juste une fonction pour le select... cela aiderait déjà. Car la je n'ai pas trop réussit à réduire la taille.
 2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser mon unique sprite créé pour l'instant.
     - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions

@@ -16,16 +16,20 @@ export class BackgroundComponent {
     colorSelected: WritableSignal<string>;
     gradient : WritableSignal<string>;
     backgrounds : WritableSignal<any>;
-    backgroundSelected : Signal<string |null>;
+    backgroundSelected : Signal<string | null>;
 
     constructor(){
 
+        this.colors = this.listColor();
+        this.backgroundName = signal("");
+        this.colorSelected = signal("");
+        this.gradient = signal("");
+        this.backgroundSelected =  StorageUtil.getSelected("storage-background");
+
         if(Util.getVariable("backgrounds") != null){
-            this.colorSelected = signal(Util.getVariable("colorSelected"));
             this.backgrounds = signal(Util.getVariable("backgrounds"));
         }
         else{
-            this.colorSelected = signal("radio-orange");
             this.backgrounds = signal([
                 {
                     "name": StorageUtil.getDefaultName(),
@@ -34,24 +38,29 @@ export class BackgroundComponent {
             ]);
         }
 
-        this.backgroundSelected = StorageUtil.getSelected("storage-background");
-        let value = this.backgroundSelected();
-        value = value != null ? value : ""; 
-        this.backgroundName = signal(value);
-        this.colors = this.listColor();
-        this.gradient = signal(`linear-gradient(180deg, rgb(7, 6, 4), rgb(231, 195, 36))`);
-
-        for(let color of this.colors){
-            if(color.id == this.colorSelected()){
-                this.gradient.set(`linear-gradient(180deg, ${color.firstGradient},  ${color.secondGradient}`);
-            }
-        }
+        this.flushAndSave();
     }
 
-    /** A function to save the state of the component. This function allow to quit the tab, return to the tab, and don't lost
-     * data beetween this actions. */
-    saveState(){
-        Util.setVariable("colorSelected", this.colorSelected());
+
+    /** Update the informations on screen, with the information matching the item currently selected. After this the function will 
+     * save the state of the component. This allow to quit the tab, return to the tab, and don't lost data beetween this actions.*/
+    flushAndSave(){
+
+        let selected = this.backgroundSelected();
+
+        for(let background of this.backgrounds()){
+            if(background.name == selected && selected != null){
+                this.backgroundName.set(selected);
+                
+                for(let color of this.colors){
+                    if(color.id == background["color-id"]){
+                        this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
+                        this.colorSelected.set(color.id);
+                    }
+                }
+            }
+        }
+
         Util.setVariable("backgrounds", this.backgrounds());
     }
 
@@ -67,28 +76,14 @@ export class BackgroundComponent {
         });
 
         this.backgrounds.set(backgroundsValue);
-        this.saveState();
+        this.flushAndSave();
     }
 
     /** Select the background with the name indicated */
     selectBackground(name : string){
 
         StorageUtil.select("storage-background", name);
-
-        for(let background of this.backgrounds()){
-            if(background.name == name){
-                this.backgroundName.set(name);
-                
-                for(let color of this.colors){
-                    if(color.id == background["color-id"]){
-                        this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
-                        this.colorSelected.set(color.id);
-                    }
-                }
-            }
-        }
-
-        this.saveState();
+        this.flushAndSave();
         
     }
 
@@ -104,7 +99,7 @@ export class BackgroundComponent {
             }
         }
 
-        this.saveState();
+        this.flushAndSave();
     }
 
     /** Delete the current Background, and switch the background selected. If the user happen to delete all the backgrounds,
@@ -119,22 +114,8 @@ export class BackgroundComponent {
         }
 
         StorageUtil.deleteSelected("storage-background");//change the item selected
-
-        for(let item of this.backgrounds()){
-            if(item.name == this.backgroundSelected()){
-                this.backgroundName.set(item.name);
-
-                for(let color of this.colors){
-                    if(color.id == item["color-id"]){
-                        this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
-                        this.colorSelected.set(color.id);
-                    }
-                }
-            }
-        }
-
         this.backgrounds.set(newBackgroundsValue);
-        this.saveState();
+        this.flushAndSave();
     }
 
     /** Change the color of the color preview, by the color with the color id given, if the target of the event 
@@ -145,20 +126,13 @@ export class BackgroundComponent {
         let backgroundsValue = this.backgrounds();
 
         for(let i in backgroundsValue){
-            if(backgroundsValue[i].name == this.backgroundSelected())
+            if(event.target.checked && backgroundsValue[i].name == this.backgroundSelected()){
                 ind = parseInt(i);
-        }
-
-        for(let color of this.colors){
-            if(color.id == id && event.target.checked){
-                this.colorSelected.set(color.id);
-                this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
-                backgroundsValue[ind]["color-id"] = color.id;
+                backgroundsValue[ind]["color-id"] = id;
                 this.backgrounds.set(backgroundsValue);
+                this.flushAndSave();
             }       
         }
-
-        this.saveState();
     }
 
     /** Returns a list of all the available colors*/
