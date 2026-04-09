@@ -9,7 +9,7 @@ import {Storage} from '../util/Storage';
     selector: 'Background',
     imports : [FormsModule],
     templateUrl: '../../html/background.html',
-    styleUrl: '../../css/background.css'
+    styleUrls: ['../../css/background.css', '../../css/viewList.css']
 })
 export class BackgroundComponent {
 
@@ -22,7 +22,7 @@ export class BackgroundComponent {
 
     constructor(){
 
-        this.colors = this.listColor();
+        this.colors = this.listColors();
         this.backgroundName = signal("");
         this.colorSelected = signal("");
         this.gradient = signal("");
@@ -113,7 +113,7 @@ export class BackgroundComponent {
                 newBackgroundsValue.push(item);
         }
 
-        this.storage.deleteSelected();//change the item selected
+        this.storage.deleteSelected();
         this.backgrounds.set(newBackgroundsValue);
         this.flushAndSave();
     }
@@ -136,7 +136,7 @@ export class BackgroundComponent {
     }
 
     /** Returns a list of all the available colors*/
-    listColor() : any[]{
+    listColors() : any[]{
 
         let colors = [
             {

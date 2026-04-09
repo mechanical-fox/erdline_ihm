@@ -1,0 +1,73 @@
+
+<div class="view-list">
+    <p class="view-list-item-button" (click)="addCharacter()"> <b> + </b> &nbsp; Personnage </p>
+    <p class="view-list-item-button" (click)="deleteCurrentCharacter()"> Supprimer </p>
+</div>
+
+<div class="view-list">
+                
+    @for(character of characters();track character.name){
+        @if(character.name == storage.selected()){
+            <p class="view-list-item-selected"> {{character.name}} </p>
+        }
+        @else{
+            <p class="view-list-item" (click)="selectCharacter(character.name)"> {{character.name}} </p>
+        }
+    }
+
+</div>
+
+
+<!-- Check if the user has deleted all characters. If so, the user will need to create a new
+character to see this part of the page -->
+@if( storage.selected() != null){
+          
+    <p class="character-title">
+        Paramètres
+    </p>
+    <p class="character-input-name">
+        Nom Personnage
+    </p>
+    <input class="character-input" type="text" [(ngModel)]="characterName" (input)="updateCharacterName($event)"/>
+    <p class="character-title">
+        Sprites
+    </p>
+
+    @for(character of characters();track character.name){
+        @if(character.name == storage.selected()){
+            <div class="character-sprite-div">
+            @for(expression of character.expressions; track expression.counter){
+                <div class="character-sprite-div-item">
+                    <p class="character-input-name">
+                        Expression {{expression.counter}}
+                    </p>
+                    <p class="character-expression-text"> Nom </p>
+                    <input class="character-input-2" type="text"/> 
+                    <br/>
+                    <p class="character-expression-text"> Sprite </p>
+                    <select class="character-select">
+                        <option value=""> -- Choix à effectuer -- </option>
+                        <option value="dog">Adrien</option>
+                        <option value="dog">Grace</option>
+                    </select>
+                </div>
+            }
+            </div>
+        }
+        
+    }
+
+
+    <p class="character-title">
+        Preview
+    </p>
+    <p class="character-input-name">
+        Sprite
+    </p>
+    <select>
+        <option value=""> -- En attente de sélection -- </option>
+        <option value="dog">Adrien</option>
+        <option value="dog">Grace</option>
+    </select>
+        
+}

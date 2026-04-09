@@ -9,11 +9,14 @@ A faire:
 2. Fait: Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
      Refactoriser.
 2. Fait: Factorisation de la liste d'item de l'onglet décor. Comme on va utiliser des listes proches pour les personnages.
-2. Gérer ajout / suppression de personnages dans l'onglet approprié. Utiliser mon unique sprite créé pour l'instant.
-    - Attention, l'on doit pouvoir gérer un personnage, et plusieurs expressions
+2. Ecran personnage je dois encore binder pour chaque expression nom et sprite + aussi gérer le preview
+2. Ecran personnage à tester y compris en changeant d'onglet, pour tout ce qui est binder en expression le nom et le sprite
+   de chacune des 3 expressions entre autre
 2 bis. Gérer la vue mobile pour les 2 onglets précédents
-3 before. Voir à gérer la création des scènes SANS CHOIX pour la 1er version. Histoire d'envoyer rapidement.
-    Donc on peut juste faire scène 1 -> scène 2. + Prévoir en idée d'amélioration le fait de pouvoir
+3 before. En étape 3 décrite après, voir à gérer la création des scènes SANS CHOIX pour la 1er version. Histoire d'envoyer 
+    rapidement. + aussi faire gérer perso SANS EXPRESSION cela étant mis dans une des étapes 4 à faire. Après avoir réussi
+    à faire le 1er affichage de jeu.
+    Donc on peut juste faire scène 1 -> scène 2. + Ecrire en doc en idée d'amélioration le fait de pouvoir
     justement mettre des choix.
 3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.
     Je dois pouvoir à la fois choisir un personnage, et une expression.
@@ -29,6 +32,8 @@ A faire:
     par NavComponent, fait perdre les données.
 4. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
     plus de sprites ?
+4. Maintenant faire le jeu en train de jouer, mais gérer en plus les différentes expressions d'un personnage. L'idée est que
+    même sans gérer les choix, gérer les différentes expression cela peut être utile.
 5. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser à un moment à faire une vrai API.
     Et des tests unitaires aussi. Et la sauvegarde.
     

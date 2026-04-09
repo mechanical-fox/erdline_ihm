@@ -1,25 +1,25 @@
 
-<div class="background-list">
-    <p class="background-list-item-button" (click)="addBackground()"> <b> + </b> &nbsp; Décor </p>
-    <p class="background-list-item-button" (click)="deleteCurrentBackground()"> Supprimer Décor </p>
+<div class="view-list">
+    <p class="view-list-item-button" (click)="addBackground()"> <b> + </b> &nbsp; Décor </p>
+    <p class="view-list-item-button" (click)="deleteCurrentBackground()"> Supprimer </p>
 </div>
 
-<div class="background-list">
+<div class="view-list">
                 
     @for(background of backgrounds();track background.name){
         @if(background.name == storage.selected()){
-            <p class="background-list-item-selected"> {{background.name}} </p>
+            <p class="view-list-item-selected"> {{background.name}} </p>
         }
         @else{
-            <p class="background-list-item" (click)="selectBackground(background.name)"> {{background.name}} </p>
+            <p class="view-list-item" (click)="selectBackground(background.name)"> {{background.name}} </p>
         }
     }
 
 </div>
 
 
-<!-- Check if the user has deleted all backgrounds. If so, the user will need to create a 
-background to see this interface -->
+<!-- Check if the user has deleted all backgrounds. If so, the user will need to create a new
+background to see this part of the page -->
 @if( storage.selected() != null){
           
     <p class="background-title">

@@ -1,11 +1,11 @@
 
 import { Component, WritableSignal, signal} from '@angular/core';
 import { BackgroundComponent } from './BackgroundComponent';
-
+import { CharacterComponent } from './CharacterComponent';
 
 @Component({
     selector: 'Edition',
-    imports: [BackgroundComponent],
+    imports: [BackgroundComponent, CharacterComponent],
     templateUrl: '../../html/edition.html',
     styleUrl: '../../css/edition.css'
 })

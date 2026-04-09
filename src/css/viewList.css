@@ -1,0 +1,53 @@
+
+
+.view-list{
+    padding: 0rem 0rem 1rem 0rem;
+    width: 40rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-wrap: anywhere;
+}
+
+.view-list-item{
+    margin: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+    text-align: center;
+    width: 9rem;
+    display: inline-block;
+    background-color:rgb(202, 202, 202);
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0,0,0);
+    cursor: pointer;
+    font: 1.0rem Serif;
+    overflow-wrap: anywhere;
+}
+
+.view-list-item-selected{
+    margin: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+    text-align: center;
+    width: 9rem;
+    display: inline-block;
+    background-color:rgb(55, 212, 233);
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0,0,0);
+    cursor: pointer;
+    font: 1.0rem Serif;
+}
+
+.view-list-item-button{
+    margin: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+    text-align: center;
+    width: 9rem;
+    display: inline-block;
+    background-color:rgb(55, 212, 233);
+    color: rgb(8, 8, 8);
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0,0,0);
+    cursor: pointer;
+    font: 1.0rem Serif;
+}

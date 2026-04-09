@@ -28,10 +28,12 @@ export class Storage{
         return name;
     }
 
+    
     /** Select the item given in the storage*/
     select(name: string) : void{
         this.selected.set(name);
     }
+
 
     /** Replace the name of the item currently selected, by the name given. */
     updateSelected(name: string ) : void{
@@ -46,6 +48,7 @@ export class Storage{
             } 
         }
     }
+
 
     /** Delete the item currently selected from the storage. A new item adjacent to the previous item, will 
      * be selected. If the storage is now empty, the item selected will be set to null. */

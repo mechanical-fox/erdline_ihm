@@ -30,7 +30,10 @@
         @if(selected() == "Décors"){
             <Background/>
         }
-        @else{
+        @if(selected() == "Personnages"){
+            <Character/>
+        }
+        @if(selected() != "Décors" && selected() != "Personnages"){
             <p>
                 Page Edition
             </p>
