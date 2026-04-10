@@ -45,11 +45,8 @@ export class CharacterComponent {
 
         let selected = this.storage.selected();
 
-        for(let character of this.characters()){
-            if(character.name == selected && selected != null){
-                this.characterName.set(selected);
-            }
-        }
+        if(selected != null)
+            this.characterName.set(selected);
 
         Util.setVariable("characters", this.characters());
         Util.setVariable("characters-storage", this.storage);

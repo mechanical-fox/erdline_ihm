@@ -33,7 +33,10 @@
         @if(selected() == "Personnages"){
             <Character/>
         }
-        @if(selected() != "Décors" && selected() != "Personnages"){
+        @if(selected() == "Scènes"){
+            <Scene/>
+        }
+        @if(selected() != "Décors" && selected() != "Personnages" && selected() != "Scènes"){
             <p>
                 Page Edition
             </p>

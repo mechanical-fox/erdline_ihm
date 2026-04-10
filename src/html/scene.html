@@ -1,0 +1,33 @@
+
+<div class="view-list">
+    <p class="view-list-item-button" (click)="addScene()"> <b> + </b> &nbsp; Scène </p>
+    <p class="view-list-item-button" (click)="deleteCurrentScene()"> Supprimer </p>
+</div>
+
+<div class="view-list">
+                
+    @for(scene of scenes();track scene.name){
+        @if(scene.name == storage.selected()){
+            <p class="view-list-item-selected"> {{scene.name}} </p>
+        }
+        @else{
+            <p class="view-list-item" (click)="selectScene(scene.name)"> {{scene.name}} </p>
+        }
+    }
+
+</div>
+
+
+<!-- Check if the user has deleted all scenes. If so, the user will need to create a new
+scene to see this part of the page -->
+@if( storage.selected() != null){
+          
+    <p class="scene-title">
+        Paramètres
+    </p>
+    <p class="scene-input-name">
+        Nom Scène
+    </p>
+    <input class="scene-input" type="text" [(ngModel)]="sceneName" (input)="updateSceneName($event)"/>
+        
+}

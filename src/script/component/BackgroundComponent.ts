@@ -1,4 +1,4 @@
-import { Component, WritableSignal, signal, Signal} from '@angular/core';
+import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../util/Util';
 import {Storage} from '../util/Storage';

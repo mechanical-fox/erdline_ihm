@@ -12,11 +12,7 @@ A faire:
 2. Fait: Finir ecran personnages
 
 
-3 before. En étape 3 décrite après, voir à gérer la création des scènes SANS CHOIX pour la 1er version. Histoire d'envoyer 
-    rapidement. + aussi faire gérer perso SANS EXPRESSION cela étant mis dans une des étapes 4 à faire. Après avoir réussi
-    à faire le 1er affichage de jeu.
-    Donc on peut juste faire scène 1 -> scène 2. + Ecrire en doc en idée d'amélioration le fait de pouvoir
-    justement mettre des choix.
+3 before. En étape 3 décrite après, voir à gérer la création des scènes SANS CHOIX 
 3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.
     Je dois pouvoir à la fois choisir un personnage, et une expression.
     Mon idée est de faire un peu comme en jeu gatcha, des genres de "bulle texte". Et de faire en sorte que
