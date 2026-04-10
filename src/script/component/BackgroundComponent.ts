@@ -87,7 +87,7 @@ export class BackgroundComponent {
         
     }
 
-    /** Update the name of the background, in the list of backgrounds.*/
+    /** Update the name of the current background.*/
     updateBackgroungName(event : any){
         let backgroundsValue = this.backgrounds();
 

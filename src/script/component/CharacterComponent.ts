@@ -13,19 +13,17 @@ import {Storage} from '../util/Storage';
 })
 export class CharacterComponent {
 
+    spritePreview : WritableSignal<string | null>;
     sprites : any[];
     characterName: WritableSignal<string>;
-    spriteSelectedName : WritableSignal<string>;
-    spriteSelectedImage : WritableSignal<string>;
     characters : WritableSignal<any>;
     storage : Storage;
 
     constructor(){
 
         this.sprites = this.listSprites();
+        this.spritePreview = signal("images/default.png");
         this.characterName = signal("");
-        this.spriteSelectedName = signal("");
-        this.spriteSelectedImage = signal("");
 
         if(Util.getVariable("characters") != null){
             this.characters = signal(Util.getVariable("characters"));
@@ -50,13 +48,6 @@ export class CharacterComponent {
         for(let character of this.characters()){
             if(character.name == selected && selected != null){
                 this.characterName.set(selected);
-                
-                for(let sprite of this.sprites){
-                    if(sprite.id == character["sprite-id"]){
-                        this.spriteSelectedName.set(character.name);
-                        this.spriteSelectedImage.set(sprite.image);
-                    }
-                }
             }
         }
 
@@ -74,21 +65,21 @@ export class CharacterComponent {
             "name" : newName,
             "expressions" : [
                 {
+                    "id" : "expr-1",
                     "counter" : 1,
                     "name" : "",
-                    "nullAvailable" : false,
-                    "sprite-id" : "sprite-adrien"
-                },
-                {
-                    "counter" : 2,
-                    "name" : "",
-                    "nullAvailable" : true,
                     "sprite-id" : null
                 },
                 {
+                    "id" : "expr-2",
+                    "counter" : 2,
+                    "name" : "",
+                    "sprite-id" : null
+                },
+                {
+                    "id" : "expr-3",
                     "counter" : 3,
                     "name" : "",
-                    "nullAvailable" : true,
                     "sprite-id" : null
                 }
             ]
@@ -106,7 +97,7 @@ export class CharacterComponent {
         
     }
 
-    /** Update the name of the character, in the list of characters.*/
+    /** Update the name of the current character.*/
     updateCharacterName(event : any){
         let charactersValue = this.characters();
 
@@ -115,6 +106,45 @@ export class CharacterComponent {
                 character.name = event.target.value;
                 this.characters.set(charactersValue);
                 this.storage.updateSelected(event.target.value);
+            }
+        }
+
+        this.flushAndSave();
+    }
+
+    /** Update the name of an expression, for the current character.*/
+    updateExpressionName(expression_id : string, event : any){
+        let charactersValue = this.characters();
+
+        for(let character of charactersValue){
+            if(character.name == this.storage.selected() && event.target.value.trim().length > 0){
+
+                for(let expression of character.expressions){
+                    if(expression.id == expression_id){
+                        expression.name =  event.target.value;
+                        this.characters.set(charactersValue);
+                    }
+                }
+            }
+        }
+
+        this.flushAndSave();
+    }
+
+    /** Update the sprite of an expression, for the current character.*/
+    updateExpressionSprite(expression_id : string, event : any){
+        let charactersValue = this.characters();
+
+        for(let character of charactersValue){
+            if(character.name == this.storage.selected() && event.target.value.trim().length > 0){
+
+                for(let expression of character.expressions){
+                    if(expression.id == expression_id){
+                        let value = event.target.value == "empty" ? null : event.target.value;
+                        expression["sprite-id"] =  value;
+                        this.characters.set(charactersValue);
+                    }
+                }
             }
         }
 
@@ -137,30 +167,21 @@ export class CharacterComponent {
         this.flushAndSave();
     }
 
-    /** Change the color of the color preview, by the color with the color id given, if the target of the event 
-     * indicate "checked".  */
-    /*colorChange(id: string, event : any){
+    /** Change the preview of the sprite, by the sprite indicated. */
+    updateSpritePreview(event : any){
 
-        let ind = -1;
-        let backgroundsValue = this.backgrounds();
-
-        for(let i in backgroundsValue){
-            if(event.target.checked && backgroundsValue[i].name == this.storage.selected()){
-                ind = parseInt(i);
-                backgroundsValue[ind]["color-id"] = id;
-                this.backgrounds.set(backgroundsValue);
-                this.flushAndSave();
-            }       
+        if(event.target.value == "empty")
+            this.spritePreview.set("images/default.png");
+        else{
+            for(let sprite of this.sprites){
+                if(sprite.id == event.target.value){
+                    this.spritePreview.set(sprite.image);
+                }
+            }
         }
-    }*/
-
-    /** Returns a list of all the available expressions*/
-    listExpressions() : string[]{
-
-        let expressions = ["Expression 1", "Expression 2"];
-
-        return expressions;
+            
     }
+
 
     /** Returns a list of all the available sprites*/
     listSprites() : any[]{
@@ -168,11 +189,13 @@ export class CharacterComponent {
         let sprites = [
             {
                 id: "sprite-adrien",
+                name : "Adrien",
                 image: "images/Adrien.png",
                 defaultChecked : true
             },
             {
                 id: "sprite-grace",
+                name : "Grace",
                 image: "images/Grace.png",
                 defaultChecked : false
             }

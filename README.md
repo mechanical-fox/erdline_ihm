@@ -9,10 +9,9 @@ A faire:
 2. Fait: Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
      Refactoriser.
 2. Fait: Factorisation de la liste d'item de l'onglet décor. Comme on va utiliser des listes proches pour les personnages.
-2. Ecran personnage je dois encore binder pour chaque expression nom et sprite + aussi gérer le preview
-2. Ecran personnage à tester y compris en changeant d'onglet, pour tout ce qui est binder en expression le nom et le sprite
-   de chacune des 3 expressions entre autre
-2 bis. Gérer la vue mobile pour les 2 onglets précédents
+2. Fait: Finir ecran personnages
+
+
 3 before. En étape 3 décrite après, voir à gérer la création des scènes SANS CHOIX pour la 1er version. Histoire d'envoyer 
     rapidement. + aussi faire gérer perso SANS EXPRESSION cela étant mis dans une des étapes 4 à faire. Après avoir réussi
     à faire le 1er affichage de jeu.
@@ -25,8 +24,8 @@ A faire:
     Mon idée cela est des checkbox pour les personnages, checkbox pour l'expression.
     Et le texte, dans un text-area qui aura la même largeur que celui affiché une fois validé (voir comment faire).
     Et pas de bouton ajouter. Cela sera juste quand l'on clique en dehors du text-area.
-3. Gérer la création des scènes en vue mobile. Au besoin, faire que le paramètre nombre de colonne soit généré dynamiquement
-    et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet.
+3. Gérer la création des scènes en vue mobile. Au besoin, pour le text-area en scene faire que le paramètre nombre de colonne soit 
+    généré dynamiquement et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet.
 4. Gérer le bug que si l'on remplie par exemple décor name, et que l'on va en page tutoriel... l'on perd les informations.
     Cela était lié au fait que tout était stocké dans Edition Component, et non pas NavComponent. Donc changer l'item affiché
     par NavComponent, fait perdre les données.

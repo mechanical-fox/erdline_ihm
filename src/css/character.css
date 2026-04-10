@@ -12,6 +12,13 @@
     font: italic 1.0rem Serif;
 }
 
+.character-input-name-2{
+    margin: 0.3rem 0rem 0.8rem 1rem;
+    display: inline-block;
+    color: rgb(58, 58, 58);
+    font: italic 1.0rem Serif;
+}
+
 .character-expression-text{
     margin: 0.3rem 0rem 0.8rem 2rem;
     display: block;
@@ -51,6 +58,16 @@
     font: 0.9rem Serif;
 }
 
+.character-select-2{
+    margin: 0.3rem 0rem 0.8rem 2.5rem;
+    display: inline-block;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    border : 0.1rem solid rgb(41, 41, 41);
+    border-radius: 0.4rem;
+    background-color: rgb(170, 170, 170);
+    font: 0.9rem Serif;
+}
+
 .character-sprite-div{
     flex-direction: row;
     flex-wrap: wrap;
@@ -63,5 +80,15 @@
 .character-sprite-div-item{
     margin: 0.3rem 1.3rem 0.3rem 1.3rem;
     width: 20rem;
+}
+
+.character-sprite-preview{
+    margin: 1rem 0rem 0rem 5rem;
+    display: block;
+    object-fit: cover;
+    width:8.43rem;
+    height:10rem;
+    border-radius: 0.3rem;
+    background: rgb(185, 185, 185);
 }
 
