@@ -25,9 +25,69 @@ scene to see this part of the page -->
     <p class="scene-title">
         Paramètres
     </p>
-    <p class="scene-input-name">
-        Nom Scène
-    </p>
-    <input class="scene-input" type="text" [(ngModel)]="sceneName" (input)="updateSceneName($event)"/>
+
+    <div class="scene-parameter-div">
+
+        <div class="scene-parameter-sub-div">
+            <p class="scene-input-name">
+                Décor
+            </p>
+            <select class="scene-select">
+                <option selected value="empty"> -- Choix à effectuer -- </option>
+                <option value="id-1">Parc</option>
+                <option value="id-2">Bar</option>
+                <option value="id-3">Scène musique</option>
+            </select>
+        </div>
+        <div class="scene-parameter-sub-div">
+                <p class="scene-input-name">
+                    Nom Scène
+                </p>
+                <input class="scene-input" type="text" [(ngModel)]="sceneName" (input)="updateSceneName($event)"/>
+        </div>
+    </div>
+
+    <p class="scene-title">
+        Texte
+    </p> 
+
+    <div class="scene-new-message-background">
+        <div class="scene-new-message-div">
+            <div class="scene-new-message-sub-div">
+                <p class="scene-input-name-2">
+                    Personnage
+                </p>
+                <select [(ngModel)]="newMessageCharacter" class="scene-select-2" (change)="updateAvailableExpressions($event)">
+                    <option value="empty"> -- Choix à effectuer -- </option>
+                    @for(character of characters; track character.id){
+                        <option [value]="character.id">{{character.name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="scene-new-message-sub-div">
+                <p class="scene-input-name-2">
+                    Emotion
+                </p>
+                <select [(ngModel)]="newMessageExpression" class="scene-select-2">
+                    <option value="empty"> -- Choix à effectuer -- </option>
+
+                    @for(expression of availableExpressions(); track expression.id){
+                        <option [value]="expression.id">{{expression.name}}</option>    
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="scene-new-message-div">
+            <div class="scene-new-message-sub-div">
+                <p class="scene-input-name-2">
+                    Message
+                </p>
+                <textarea [(ngModel)]="newMessageText" class="scene-new-message-textarea" rows="6" cols="60">  </textarea>
+            </div>
+        </div>
+        <div class="scene-new-message-div-2">
+            <button class="scene-new-message-button">Ajouter</button>
+        </div>
         
+    </div>
 }

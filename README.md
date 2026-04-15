@@ -11,20 +11,32 @@ A faire:
 2. Fait: Factorisation de la liste d'item de l'onglet décor. Comme on va utiliser des listes proches pour les personnages.
 2. Fait: Finir ecran personnages
 
-
-3 before. En étape 3 décrite après, voir à gérer la création des scènes SANS CHOIX 
-3. Gérer la création des scènes. Donc ajout ET SURTOUT édition, et suppression.
-    Je dois pouvoir à la fois choisir un personnage, et une expression.
-    Mon idée est de faire un peu comme en jeu gatcha, des genres de "bulle texte". Et de faire en sorte que
-    en cliquant dessus cela soit modifiable. Et voir à tester comment présenter l'édition / création.
-    Mon idée cela est des checkbox pour les personnages, checkbox pour l'expression.
-    Et le texte, dans un text-area qui aura la même largeur que celui affiché une fois validé (voir comment faire).
-    Et pas de bouton ajouter. Cela sera juste quand l'on clique en dehors du text-area.
-3. Gérer la création des scènes en vue mobile. Au besoin, pour le text-area en scene faire que le paramètre nombre de colonne soit 
+3. 
+   - Fait: Proposer le décor à mettre
+   - Permettre ajouter un texte : Personnage, expression, texte
+        -> Actuel: Compléter la fonction addMessage + faire affichage en écran des message
+        -> Ensuite gérer les affichages messages "A gauche" et "A droite". Et avec eventuellement 2 couleurs.
+           Enfin, après cela n'est pas le plus important si finalement je ne gère pas cela... J'ai déjà perdu
+           pas mal de temps sur bien selectionner les personnages créés, et leurs bonnes expressions.
+   - Gérer l'ajout des textes sans personnage. Ajouter le choix "Narration", et alors afficher le texte
+        en italique.
+   - Gérer le fait d'afficher les messages soit à droite, soit à gauche
+   - Permettre modifier un texte (Eventuel au clic d'un texte, mais non sur)
+         + l'ajout de texte en bas disparait alors
+   - Permettre de supprimer un texte (Eventuel au clic d'un texte comme pour modifier, 
+         l'option apparait)
+   - Faire que l'affichage des messages soit à droite, soit à gauche, reste cohérent après la suppression.
+        Mon idée est de gérer cela dans "flushAndSave", et de l'appeller après la méthode delete.
+   - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE ONGLETS
+   - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE SCENE #1, #2
+   - Permettre en fin de faire un GOTO vers une autre scène
+   - Permettre de mettre des choix, et AVEC event. Finalement, si l'on a déjà fait le travail précédent...
+        Cela sera rapide.
+   - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE ONGLETS
+   - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE SCENE #1, #2
+   
+3. Gérer tout ce que j'ai fait avant en vue mobile. Au besoin, pour le text-area en scene faire que le paramètre nombre de colonne soit 
     généré dynamiquement et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet.
-4. Gérer le bug que si l'on remplie par exemple décor name, et que l'on va en page tutoriel... l'on perd les informations.
-    Cela était lié au fait que tout était stocké dans Edition Component, et non pas NavComponent. Donc changer l'item affiché
-    par NavComponent, fait perdre les données.
 4. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
     plus de sprites ?
 4. Maintenant faire le jeu en train de jouer, mais gérer en plus les différentes expressions d'un personnage. L'idée est que

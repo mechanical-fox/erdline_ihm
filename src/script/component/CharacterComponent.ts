@@ -13,11 +13,13 @@ import {Storage} from '../util/Storage';
 })
 export class CharacterComponent {
 
+    
     spritePreview : WritableSignal<string | null>;
     sprites : any[];
     characterName: WritableSignal<string>;
     characters : WritableSignal<any>;
     storage : Storage;
+    counter : number;
 
     constructor(){
 
@@ -26,13 +28,16 @@ export class CharacterComponent {
         this.characterName = signal("");
 
         if(Util.getVariable("characters") != null){
+            
             this.characters = signal(Util.getVariable("characters"));
             this.storage = Util.getVariable("characters-storage");
+            this.counter = Util.getVariable("characters-counter");
             this.flushAndSave();
         }
         else{
             this.characters = signal([]);
             this.storage = new Storage();
+            this.counter = 1;
             this.addCharacter();
         }
  
@@ -50,6 +55,7 @@ export class CharacterComponent {
 
         Util.setVariable("characters", this.characters());
         Util.setVariable("characters-storage", this.storage);
+        Util.setVariable("characters-counter", this.counter);
     }
 
     /** Add a new character, with a generic name like #1, #2... And if the number of actual character is 0, will select 
@@ -57,8 +63,10 @@ export class CharacterComponent {
     addCharacter(){
         let charactersValue = this.characters();
         let newName  = this.storage.add();
+        let id = `character-${this.counter}`;
 
         charactersValue.push({
+            "id" : id,
             "name" : newName,
             "expressions" : [
                 {
@@ -83,6 +91,7 @@ export class CharacterComponent {
         });
 
         this.characters.set(charactersValue);
+        this.counter++;
         this.flushAndSave();
     }
 

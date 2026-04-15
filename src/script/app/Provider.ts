@@ -10,7 +10,7 @@ import {Fetch_Response} from '../data/util/Fetch_Response';
  */
 export class Provider {
     
-    private static functionOpenEnabled : boolean = true;
+
     private static mockForFetch: ((url: string, options: Fetch_Options) => Promise<Fetch_Response>) | null = null;
 
     /** Perform the function fetch, like performed in the browser, or use a mock if a mock was declared.*/
@@ -22,20 +22,9 @@ export class Provider {
         return this.mockForFetch(url, options);
     }
 
-    /** Perform the function open, like performed in the browser, or perform nothing if the function is disabled.
-     * The function will be disabled if unit test are in progress. */
-    static open(url : string){
-        if(this.functionOpenEnabled)
-            open(url);
-    }
-
     /** Replace the use of fetch, by the mock given */
     static mockFetch(mock: (url: string, options: Fetch_Options) => Promise<Fetch_Response>): void {
         this.mockForFetch = mock;
     }
 
-    /** Ask for disable the function open.*/
-    static disableFunctionOpen(){
-        this.functionOpenEnabled = false;
-    }
 }
