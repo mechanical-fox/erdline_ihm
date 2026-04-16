@@ -17,12 +17,15 @@ A faire:
    - Fait: Message d'erreur à l'ajout d'un texte si Personnage, ou expression, est non-renseigné
    - Fait: Gérer l'ajout des textes sans personnage. Ajouter le choix "Narration", et alors afficher le texte
         en italique.
-   - Les fonctions select, saveAndFlush, delete... sont à modifier, à cause de tous les attributs ajoutés.
-       Bref, tout ce qui a un lien avec la liste en haut quoi.
+   - Fait: Pour permettre modification d'un texte plus facile --> Séparer le composant "Ajout Message"
+
+
    - Permettre modifier un texte (Eventuel au clic d'un texte, mais non sur)
-         + l'ajout de texte en bas disparait alors
-   - Permettre de supprimer un texte (Eventuel au clic d'un texte comme pour modifier, 
-         l'option apparait)
+         + l'ajout de texte en bas disparait alors + utiliser des champs INPUT pour passer au composant enfant, l'id du composant
+         à modifier + idem INPUT pour indiquer à l'enfant de rentrer en mode modification. Donc event de sortie à modifier aussi.
+   - git push
+   - Permettre de supprimer un texte + Pour éviter de faire trop d'icones, réutiliser l'icone d'edition, et juste
+          ajouter un bouton suppression. Ce bouton n'apparait que si l'on est dans une édition.
    - Faire que l'affichage des messages soit à droite, soit à gauche, reste cohérent après la suppression.
         Mon idée est de gérer cela dans "flushAndSave", et de l'appeller après la méthode delete.
    - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE ONGLETS

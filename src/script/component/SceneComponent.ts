@@ -1,42 +1,32 @@
 
-import { Component, WritableSignal, signal} from '@angular/core';
+import { Component, WritableSignal, signal, output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../util/Util';
 import {Storage} from '../util/Storage';
 import { Message } from '../data/ihm/Message';
 import { DisplayMessage } from '../data/ihm/DisplayMessage';
-import { EPosition } from '../data/ihm/EPosition';
+import { MessageBoxComponent } from './MessageBoxComponent';
 
 
 @Component({
     selector: 'Scene',
-    imports : [FormsModule],
+    imports : [FormsModule, MessageBoxComponent],
     templateUrl: '../../html/scene.html',
     styleUrls: ['../../css/scene.css', '../../css/viewList.css']
 })
 export class SceneComponent {
 
     counter : number;
-    errorMessage : WritableSignal<string | null>;
-    newMessageCharacter: WritableSignal<string>;
-    newMessageExpression: WritableSignal<string>;
-    newMessageText: WritableSignal<string>;
     sceneName: WritableSignal<string>;
     messages: WritableSignal<Message[]>;
     messagesIHM : WritableSignal<DisplayMessage[]>;
     scenes : WritableSignal<any>;
     characters : any[];
-    availableExpressions : WritableSignal<any[]>;
     storage : Storage;
 
     constructor(){
-
-        this.errorMessage = signal(null);
+        
         this.characters = this.getCharacters();
-        this.availableExpressions = signal([]);
-        this.newMessageCharacter = signal("empty");
-        this.newMessageExpression = signal("empty");
-        this.newMessageText = signal("");
         this.sceneName = signal("");
 
         if(Util.getVariable("scenes") != null){
@@ -158,48 +148,18 @@ export class SceneComponent {
         return result;
     }
 
-    /** Update the list of available expressions, for the current character + reset the expression list. This function is 
-     * called, when the character used to write a new text, is changed.*/
-    updateAvailableExpressions(event : any){
-
-        this.newMessageExpression.set("empty");
-        let found = false;
-
-        for(let character of this.characters){
-            
-            if(character.id == event.target.value){
-                let expressions = character.expressions;
-                this.availableExpressions.set(expressions);
-                found = true;
-            }
-        }
-
-        if(found == false)
-            this.availableExpressions.set([]);
-    }
 
 
-    /** Add a new Message to the scene.*/
-    addMessage(){
-        let text = this.newMessageText();
-        let character = this.newMessageCharacter();
-        let expression = this.newMessageExpression();
 
-        if(character == "empty")
-            this.errorMessage.set("Le champ Personnage est obligatoire");
-        else if(character != "narration" && expression == "empty")
-            this.errorMessage.set("Le champ Expression est obligatoire");
-        else if(text.trim() == "")
-            this.errorMessage.set("Le champ Message est obligatoire");
-        else{
-            let convertedExpression = character == "narration" ? null : expression;
-            let message : Message = new Message(character, convertedExpression, text);
-            let valueMessage = this.messages();
-            valueMessage.push(message);
-            this.messages.set(valueMessage);
-            this.messagesIHM.set(this.convertMessage(this.messages()));
-            this.flushAndSave();
-        }
+    /** Add the message given as parameter into the scene.*/
+    addMessage(message : any){
+
+        let valueMessage = this.messages();
+        valueMessage.push(message);
+        this.messages.set(valueMessage);
+        this.messagesIHM.set(this.convertMessage(this.messages()));
+        this.flushAndSave();
+        
     }
 
     /** Convert a list of Message, in a list of DisplayMessage. Will convert the identifiers of the character, in the actual
@@ -234,10 +194,6 @@ export class SceneComponent {
             messageLeft = !messageLeft;
             let displayMessage = new DisplayMessage(id, style, character, expression, message.text);
             displayMessages.push(displayMessage);
-            this.newMessageCharacter.set("empty");
-            this.newMessageExpression.set("empty");
-            this.newMessageText.set("");
-            this.errorMessage.set(null);
         }
 
         return displayMessages;

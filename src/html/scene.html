@@ -54,63 +54,26 @@ scene to see this part of the page -->
     @for(message of messagesIHM(); track message.id){
         <div [class]="message.style">
             @if(message.characterName != null){
-                <p class="scene-message-title">{{message.characterName}} - {{message.expressionName}}</p>
+                <div class="message-title-div"> 
+                    <div class="message-title-sub-div"> 
+                        <p class="scene-message-title">{{message.characterName}} - {{message.expressionName}}</p>
+                    </div>
+                    <img class="message-edit-image" src="/images/edit.svg">
+                </div>
+                
                 <p class="scene-message-text">{{message.text}}</p>
             }
             @else{
-                <p class="scene-message-narration">{{message.text}}</p>
+                <div class="message-title-div"> 
+                    <div class="message-title-sub-div"> 
+                        <p class="scene-message-narration">{{message.text}}</p>
+                    </div>
+                    <img class="message-edit-image" src="/images/edit.svg">
+                </div>
             }
         </div>
     }
 
-
-    <div class="scene-new-message-background">
-        <div class="scene-new-message-div">
-            <div class="scene-new-message-sub-div">
-                <p class="scene-input-name-2">
-                    Personnage
-                </p>
-                <select [(ngModel)]="newMessageCharacter" class="scene-select-2" (change)="updateAvailableExpressions($event)">
-                    <option value="empty"> -- Choix à effectuer -- </option>
-                    <option value="narration"> Narration </option>
-                    @for(character of characters; track character.id){
-                        <option [value]="character.id">{{character.name}}</option>
-                    }
-                </select>
-            </div>
-            @if(newMessageCharacter() != "narration"){
-                <div class="scene-new-message-sub-div">
-                    <p class="scene-input-name-2">
-                        Expression
-                    </p>
-                    <select [(ngModel)]="newMessageExpression" class="scene-select-2">
-                        <option value="empty"> -- Choix à effectuer -- </option>
-
-                        @for(expression of availableExpressions(); track expression.id){
-                            <option [value]="expression.id">{{expression.name}}</option>    
-                        }
-                    </select>
-                </div>
-            }
-        </div>
-
-        <div class="scene-new-message-div">
-            <div class="scene-new-message-sub-div">
-                <p class="scene-input-name-2">
-                    Message
-                </p>
-                <textarea [(ngModel)]="newMessageText" class="scene-new-message-textarea" rows="6" cols="60">  </textarea>
-            </div>
-        </div>
-        <div class="scene-new-message-div-2">
-            <button class="scene-new-message-button" (click)="addMessage()">Ajouter</button>
-        </div>
-
-        @if(errorMessage() != null){
-            <div class="scene-new-message-div-2">
-                <p class="scene-error-message">{{errorMessage()}}</p>
-            </div>
-        }
-        
-    </div>
+    <MessageBox (createdMessage)="addMessage($event)"/>
+ 
 }

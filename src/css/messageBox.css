@@ -1,0 +1,81 @@
+
+
+
+.messageBox-background{
+    margin: 0.7rem 0rem 0.7rem 3.0rem;
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    background-color: rgb(32, 32, 32);
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.messageBox-div{
+    width: 35rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.messageBox-div-2{
+    width: 35rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.messageBox-sub-div{
+    margin: 0rem 1rem 0rem 1rem;
+}
+
+.messageBox-input-name{
+    margin: 0.3rem 0rem 0.8rem 1rem;
+    display: block;
+    color: rgb(224, 224, 224);
+    font: italic 1.0rem Serif;
+}
+
+
+.messageBox-select{
+    margin: 0.3rem 0rem 0.8rem 1.8rem;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    border : 0rem solid rgb(41, 41, 41);
+    border-radius: 0.4rem;
+    color: rgb(37, 37, 37);
+    background-color: rgb(244, 244, 244);
+    font: 0.9rem Serif;
+}
+
+
+.messageBox-textarea{
+    margin: 0.3rem 0rem 0.8rem 2rem;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    border-radius: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: 0px solid rgb(0,0,0);
+    font: 0.9rem Serif;
+    resize: none;
+}
+
+.messageBox-button{
+    margin: 0.5rem 0.0rem 0.5rem 0.0rem;
+    padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+    border-radius: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: 0px solid rgb(34, 95, 228);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(8, 8, 8);
+    font: 0.9rem Serif;
+    background-color: rgb(156, 223, 228);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+
+.messageBox-error-message{
+    margin: 0.5rem 0.0rem 0.5rem 0.0rem;
+    padding: 0.6rem 1.0rem 0.6rem 1.0rem;
+    background-color: rgb(228, 33, 33);
+    border-radius: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: 1px solid rgb(134, 134, 134);
+    font: 1.0rem Serif;
+}
