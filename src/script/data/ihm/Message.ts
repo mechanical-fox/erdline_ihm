@@ -1,17 +1,15 @@
-import { EPosition } from "./EPosition";
+
 
 
 export class Message{
 
-    position : EPosition;
-    character : string;
-    emotion : string;
+    characterId : string;
+    expressionId : string | null;
     text : string;
 
-    constructor(position : EPosition, character : string, emotion : string, text: string){
-        this.position = position;
-        this.character = character;
-        this.emotion = emotion;
+    constructor(characterId : string, expressionId : string | null, text: string){
+        this.characterId = characterId;
+        this.expressionId = expressionId;
         this.text = text;
     }
 }

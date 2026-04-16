@@ -13,14 +13,12 @@ A faire:
 
 3. 
    - Fait: Proposer le décor à mettre
-   - Permettre ajouter un texte : Personnage, expression, texte
-        -> Actuel: Compléter la fonction addMessage + faire affichage en écran des message
-        -> Ensuite gérer les affichages messages "A gauche" et "A droite". Et avec eventuellement 2 couleurs.
-           Enfin, après cela n'est pas le plus important si finalement je ne gère pas cela... J'ai déjà perdu
-           pas mal de temps sur bien selectionner les personnages créés, et leurs bonnes expressions.
-   - Gérer l'ajout des textes sans personnage. Ajouter le choix "Narration", et alors afficher le texte
+   - Fait: Permettre ajouter un texte : Personnage, expression, texte
+   - Fait: Message d'erreur à l'ajout d'un texte si Personnage, ou expression, est non-renseigné
+   - Fait: Gérer l'ajout des textes sans personnage. Ajouter le choix "Narration", et alors afficher le texte
         en italique.
-   - Gérer le fait d'afficher les messages soit à droite, soit à gauche
+   - Les fonctions select, saveAndFlush, delete... sont à modifier, à cause de tous les attributs ajoutés.
+       Bref, tout ce qui a un lien avec la liste en haut quoi.
    - Permettre modifier un texte (Eventuel au clic d'un texte, mais non sur)
          + l'ajout de texte en bas disparait alors
    - Permettre de supprimer un texte (Eventuel au clic d'un texte comme pour modifier, 
@@ -34,6 +32,10 @@ A faire:
         Cela sera rapide.
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE ONGLETS
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE SCENE #1, #2
+   - Ajouter en amélioration futur >  Faire que si l'on veut supprimer un décor ou personnage déjà utilisé dans une
+        scene, un message d'erreur s'affiche pour l'utilisateur ? + actuellement si l'on se contente à la récupération
+        de supprimer les messages, avec des utilisateurs qui ne sont plus connus, cela me va aussi. + car cela est
+        la 1er version. Et eventuellement la dernière aussi.
    
 3. Gérer tout ce que j'ai fait avant en vue mobile. Au besoin, pour le text-area en scene faire que le paramètre nombre de colonne soit 
     généré dynamiquement et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet.

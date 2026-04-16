@@ -111,3 +111,44 @@
     color: rgb(0, 0, 0);
     cursor: pointer;
 }
+
+
+.scene-error-message{
+    margin: 0.5rem 0.0rem 0.5rem 0.0rem;
+    padding: 0.6rem 1.0rem 0.6rem 1.0rem;
+    background-color: rgb(228, 33, 33);
+    border-radius: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border: 1px solid rgb(134, 134, 134);
+    font: 1.0rem Serif;
+}
+
+.scene-message-background-left{
+    margin: 0.6rem 0rem 2.0rem 1.0rem;
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+    width: 25rem;
+    background-color: rgb(118, 234, 255);
+    border-radius : 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.scene-message-background-right{
+    margin: 0.6rem 0rem 2.0rem 7.0rem;
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+    width: 25rem;
+    background-color: rgb(118, 234, 255);
+    border-radius : 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.scene-message-title{
+    margin: 0.4rem 0rem 1.0rem 0rem;
+    font: bold 1.2rem Serif; 
+}
+
+.scene-message-text{
+    margin: 0.6rem 0rem 0.6rem 2rem;
+    font: 1.0rem Serif; 
+}
+
+.scene-message-narration{
+    margin: 0.6rem 0rem 0.6rem 2rem;
+    font: italic 1.0rem Serif; 
+}

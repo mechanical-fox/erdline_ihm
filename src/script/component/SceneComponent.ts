@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {Util} from '../util/Util';
 import {Storage} from '../util/Storage';
 import { Message } from '../data/ihm/Message';
+import { DisplayMessage } from '../data/ihm/DisplayMessage';
 import { EPosition } from '../data/ihm/EPosition';
 
 
@@ -15,11 +16,14 @@ import { EPosition } from '../data/ihm/EPosition';
 })
 export class SceneComponent {
 
+    counter : number;
+    errorMessage : WritableSignal<string | null>;
     newMessageCharacter: WritableSignal<string>;
     newMessageExpression: WritableSignal<string>;
     newMessageText: WritableSignal<string>;
     sceneName: WritableSignal<string>;
     messages: WritableSignal<Message[]>;
+    messagesIHM : WritableSignal<DisplayMessage[]>;
     scenes : WritableSignal<any>;
     characters : any[];
     availableExpressions : WritableSignal<any[]>;
@@ -27,24 +31,28 @@ export class SceneComponent {
 
     constructor(){
 
+        this.errorMessage = signal(null);
         this.characters = this.getCharacters();
         this.availableExpressions = signal([]);
         this.newMessageCharacter = signal("empty");
         this.newMessageExpression = signal("empty");
         this.newMessageText = signal("");
         this.sceneName = signal("");
-        this.messages = signal([]);
-
-        console.log(`characters: ${JSON.stringify(this.characters, null, 4)}`);
 
         if(Util.getVariable("scenes") != null){
             this.scenes = signal(Util.getVariable("scenes"));
             this.storage = Util.getVariable("scenes-storage");
+            this.counter = Util.getVariable("scenes-counter");
+            this.messages = signal(Util.getVariable("scenes-messages"));
+            this.messagesIHM = signal(Util.getVariable("scenes-messagesIHM"));
             this.flushAndSave();
         }
         else{
             this.scenes = signal([]);
             this.storage = new Storage();
+            this.counter = 1;
+            this.messages = signal([]);
+            this.messagesIHM = signal([]);
             this.addScene();
         }
  
@@ -62,6 +70,9 @@ export class SceneComponent {
 
         Util.setVariable("scenes", this.scenes());
         Util.setVariable("scenes-storage", this.storage);
+        Util.setVariable("scenes-counter", this.counter);
+        Util.setVariable("scenes-messages", this.messages());
+        Util.setVariable("scenes-messagesIHM", this.messagesIHM());
     }
 
     /** Add a new scene, with a generic name like #1, #2... And if the number of actual scene is 0, will select 
@@ -156,8 +167,6 @@ export class SceneComponent {
 
         for(let character of this.characters){
             
-            console.log(`event.target.value: ${JSON.stringify(event.target.value)}, character.id : ${JSON.stringify(character.id)}`);
-            console.log(`Egalité:  ${character.id == event.target.value}`);
             if(character.id == event.target.value){
                 let expressions = character.expressions;
                 this.availableExpressions.set(expressions);
@@ -176,8 +185,62 @@ export class SceneComponent {
         let character = this.newMessageCharacter();
         let expression = this.newMessageExpression();
 
-        /** Character et expression selectionné sont fait par id. Donc ici, récupérer les valeurs non d'id, mais
-         * la valeur texte correspondante.*/
+        if(character == "empty")
+            this.errorMessage.set("Le champ Personnage est obligatoire");
+        else if(character != "narration" && expression == "empty")
+            this.errorMessage.set("Le champ Expression est obligatoire");
+        else if(text.trim() == "")
+            this.errorMessage.set("Le champ Message est obligatoire");
+        else{
+            let convertedExpression = character == "narration" ? null : expression;
+            let message : Message = new Message(character, convertedExpression, text);
+            let valueMessage = this.messages();
+            valueMessage.push(message);
+            this.messages.set(valueMessage);
+            this.messagesIHM.set(this.convertMessage(this.messages()));
+            this.flushAndSave();
+        }
+    }
+
+    /** Convert a list of Message, in a list of DisplayMessage. Will convert the identifiers of the character, in the actual
+     * names characters by example. It's necessary to retain the identifier of each character, because the name of the character
+     * could be changed. And it must be managed in a non-connected way. Because a client has no obligation to be connected to
+     * a session, to use the website. */
+    convertMessage(messages : Message[]) : DisplayMessage[]{
+        let displayMessages : DisplayMessage[] = [];
+        let messageLeft : boolean = true;
+
+        for(let message of messages){
+
+            let character : string | null = null;
+            let expression : string | null = null
+
+            if(message.characterId != "narration"){
+                for(let c of this.characters){
+                    if(message.characterId == c.id){
+                        for(let e of c.expressions){
+                            if(message.expressionId == e.id){
+                                character = c.name;
+                                expression = e.name; 
+                            }
+                        }
+                    }
+                }
+            }
+
+            let id = `message-${this.counter}`;
+            this.counter++;
+            let style = messageLeft ? "scene-message-background-left" : "scene-message-background-right";
+            messageLeft = !messageLeft;
+            let displayMessage = new DisplayMessage(id, style, character, expression, message.text);
+            displayMessages.push(displayMessage);
+            this.newMessageCharacter.set("empty");
+            this.newMessageExpression.set("empty");
+            this.newMessageText.set("");
+            this.errorMessage.set(null);
+        }
+
+        return displayMessages;
     }
 
 }
