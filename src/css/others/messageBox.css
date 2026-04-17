@@ -2,6 +2,7 @@
 
 
 .messageBox-background{
+    width: 30rem;
     margin: 0.7rem 0rem 0.7rem 3.0rem;
     padding: 0.7rem 0.7rem 0.7rem 0.7rem;
     background-color: rgb(32, 32, 32);
@@ -9,7 +10,7 @@
 }
 
 .messageBox-div{
-    width: 35rem;
+    width: 29rem;
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
@@ -18,7 +19,7 @@
 }
 
 .messageBox-div-2{
-    width: 35rem;
+    width: 29rem;
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
@@ -27,7 +28,7 @@
 }
 
 .messageBox-sub-div{
-    margin: 0rem 1rem 0rem 1rem;
+    margin: 0rem 0.5rem 0rem 0.5rem;
 }
 
 .messageBox-input-name{

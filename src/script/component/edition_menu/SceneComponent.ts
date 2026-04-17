@@ -1,18 +1,18 @@
 
 import { Component, WritableSignal, signal, output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Util} from '../util/Util';
-import {Storage} from '../util/Storage';
-import { Message } from '../data/ihm/Message';
-import { DisplayMessage } from '../data/ihm/DisplayMessage';
-import { MessageBoxComponent } from './MessageBoxComponent';
+import {Util} from '../../util/Util';
+import {Storage} from '../../util/Storage';
+import { Message } from '../../data/ihm/Message';
+import { DisplayMessage } from '../../data/ihm/DisplayMessage';
+import { MessageBoxComponent } from '../others/MessageBoxComponent';
 
 
 @Component({
     selector: 'Scene',
     imports : [FormsModule, MessageBoxComponent],
-    templateUrl: '../../html/scene.html',
-    styleUrls: ['../../css/scene.css', '../../css/viewList.css']
+    templateUrl: '../../../html/edition_menu/scene.html',
+    styleUrls: ['../../../css/edition_menu/scene.css', '../../../css/others/viewList.css']
 })
 export class SceneComponent {
 

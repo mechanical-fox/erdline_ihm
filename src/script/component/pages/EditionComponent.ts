@@ -1,15 +1,15 @@
 
 import { Component, WritableSignal, signal} from '@angular/core';
-import { BackgroundComponent } from './BackgroundComponent';
-import { CharacterComponent } from './CharacterComponent';
-import { SceneComponent } from './SceneComponent';
-import { Util } from '../util/Util';
+import { BackgroundComponent } from '../edition_menu/BackgroundComponent';
+import { CharacterComponent } from '../edition_menu/CharacterComponent';
+import { SceneComponent } from '../edition_menu/SceneComponent';
+import { Util } from '../../util/Util';
 
 @Component({
     selector: 'Edition',
     imports: [BackgroundComponent, CharacterComponent, SceneComponent],
-    templateUrl: '../../html/edition.html',
-    styleUrl: '../../css/edition.css'
+    templateUrl: '../../../html/pages/edition.html',
+    styleUrl: '../../../css/pages/edition.css'
 })
 export class EditionComponent {
 

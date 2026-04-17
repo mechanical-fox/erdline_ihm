@@ -1,14 +1,14 @@
 import { Component, signal, WritableSignal} from '@angular/core';
-import {ExampleComponent} from './ExampleComponent';
-import { AboutComponent } from './AboutComponent';
-import { TutorialComponent } from './Tutorial';
-import { EditionComponent } from './EditionComponent';
+import {ExampleComponent} from '../pages/ExampleComponent';
+import { AboutComponent } from '../pages/AboutComponent';
+import { TutorialComponent } from '../pages/Tutorial';
+import { EditionComponent } from '../pages/EditionComponent';
  
 @Component({
     selector: 'Nav',
     imports : [ExampleComponent, AboutComponent, TutorialComponent, EditionComponent],
-    templateUrl: '../../html/nav.html',
-    styleUrl: '../../css/nav.css'
+    templateUrl: '../../../html/global/nav.html',
+    styleUrl: '../../../css/global/nav.css'
 })
 export class NavComponent {
 

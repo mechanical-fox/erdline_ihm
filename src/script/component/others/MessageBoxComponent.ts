@@ -2,15 +2,15 @@
 
 import { Component, WritableSignal, signal, output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Util} from '../util/Util';
-import {Message} from '../data/ihm/Message';
+import {Util} from '../../util/Util';
+import {Message} from '../../data/ihm/Message';
 
 
 @Component({
     selector: 'MessageBox',
     imports : [FormsModule],
-    templateUrl: '../../html/messageBox.html',
-    styleUrl: '../../css/messageBox.css'
+    templateUrl: '../../../html/others/messageBox.html',
+    styleUrl: '../../../css/others/messageBox.css'
 })
 export class MessageBoxComponent {
 

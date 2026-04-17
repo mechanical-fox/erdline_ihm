@@ -26,6 +26,7 @@ A faire:
    - git push
    - Permettre de supprimer un texte + Pour éviter de faire trop d'icones, réutiliser l'icone d'edition, et juste
           ajouter un bouton suppression. Ce bouton n'apparait que si l'on est dans une édition.
+   - Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...
    - Faire que l'affichage des messages soit à droite, soit à gauche, reste cohérent après la suppression.
         Mon idée est de gérer cela dans "flushAndSave", et de l'appeller après la méthode delete.
    - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE ONGLETS

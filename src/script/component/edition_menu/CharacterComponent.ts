@@ -1,15 +1,15 @@
 import { Component, WritableSignal, signal, Signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Util} from '../util/Util';
-import {Storage} from '../util/Storage';
+import {Util} from '../../util/Util';
+import {Storage} from '../../util/Storage';
 
 
 
 @Component({
     selector: 'Character',
     imports : [FormsModule],
-    templateUrl: '../../html/character.html',
-    styleUrls: ['../../css/character.css', '../../css/viewList.css']
+    templateUrl: '../../../html/edition_menu/character.html',
+    styleUrls: ['../../../css/edition_menu/character.css', '../../../css/others/viewList.css']
 })
 export class CharacterComponent {
 

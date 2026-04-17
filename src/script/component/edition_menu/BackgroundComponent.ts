@@ -1,15 +1,15 @@
 import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Util} from '../util/Util';
-import {Storage} from '../util/Storage';
+import {Util} from '../../util/Util';
+import {Storage} from '../../util/Storage';
 
 
 
 @Component({
     selector: 'Background',
     imports : [FormsModule],
-    templateUrl: '../../html/background.html',
-    styleUrls: ['../../css/background.css', '../../css/viewList.css']
+    templateUrl: '../../../html/edition_menu/background.html',
+    styleUrls: ['../../../css/edition_menu/background.css', '../../../css/others/viewList.css']
 })
 export class BackgroundComponent {
 
