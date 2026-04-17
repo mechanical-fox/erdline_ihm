@@ -20,8 +20,8 @@ A faire:
    - Fait: Pour permettre modification d'un texte plus facile --> Séparer le composant "Ajout Message"
    - Fait: Permettre modifier un texte
    - Fait: Permettre de supprimer un texte
+   - Fait: Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...
 
-   - Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...
    - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE SCENE #1, #2 + si on change d'onglet,
         l'on doit retomber sur la bonne scène
    - Permettre en fin de faire un GOTO vers une autre scène

@@ -16,23 +16,28 @@ import { MessageBoxComponent } from '../others/MessageBoxComponent';
 })
 export class SceneComponent {
 
+    backgroundSelected : WritableSignal<string>;
     sceneName: WritableSignal<string>;
     messages: WritableSignal<Message[]>;
     messagesIHM : WritableSignal<DisplayMessage[]>;
     scenes : WritableSignal<any>;
     messageToEdit : WritableSignal<number>;
     characters : any[];
+    backgrounds : any[];
     storage : Storage;
 
     constructor(){
         
         this.messageToEdit = signal(-1);
         this.characters = this.getCharacters();
+        this.backgrounds = Util.getVariable("backgrounds");
+        this.backgroundSelected = signal("empty");
         this.sceneName = signal("");
 
         if(Util.getVariable("scenes") != null){
             this.scenes = signal(Util.getVariable("scenes"));
             this.storage = Util.getVariable("scenes-storage");
+            this.backgroundSelected = signal(Util.getVariable("scenes-background"));
             this.messages = signal(Util.getVariable("scenes-messages"));
             this.messagesIHM = signal(this.convertMessage(this.messages()));
             this.flushAndSave();
@@ -40,6 +45,7 @@ export class SceneComponent {
         else{
             this.scenes = signal([]);
             this.storage = new Storage();
+            this.backgroundSelected = signal("empty");
             this.messages = signal([]);
             this.messagesIHM = signal([]);
             this.addScene();
@@ -47,6 +53,10 @@ export class SceneComponent {
  
     }
 
+    /** Save the informations related to the background selected, in case the user change the tab currently selected.*/
+    backgroundChanged(event : any){
+        Util.setVariable("scenes-background", event.target.value);
+    }
 
     /** Update the informations on screen, with the information matching the item currently selected. After this the function will 
      * save the state of the component. This allow to quit the tab, return to the tab, and don't lost data beetween this actions.*/
@@ -60,6 +70,7 @@ export class SceneComponent {
         Util.setVariable("scenes", this.scenes());
         Util.setVariable("scenes-storage", this.storage);
         Util.setVariable("scenes-messages", this.messages());
+        Util.setVariable("scenes-background", this.backgroundSelected());
     }
 
     /** Add a new scene, with a generic name like #1, #2... And if the number of actual scene is 0, will select 
@@ -84,6 +95,7 @@ export class SceneComponent {
         this.flushAndSave();
         
     }
+
 
     /** Update the name of the current scene.*/
     updateSceneName(event : any){

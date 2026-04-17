@@ -19,6 +19,7 @@ export class BackgroundComponent {
     gradient : WritableSignal<string>;
     backgrounds : WritableSignal<any>;
     storage : Storage;
+    counter : number;
 
     constructor(){
 
@@ -30,11 +31,13 @@ export class BackgroundComponent {
         if(Util.getVariable("backgrounds") != null){
             this.backgrounds = signal(Util.getVariable("backgrounds"));
             this.storage = Util.getVariable("backgrounds-storage");
+            this.counter = Util.getVariable("backgrounds-counter");
             this.flushAndSave();
         }
         else{
             this.backgrounds = signal([]);
             this.storage = new Storage();
+            this.counter = 1;
             this.addBackground();
         }
  
@@ -62,6 +65,7 @@ export class BackgroundComponent {
 
         Util.setVariable("backgrounds", this.backgrounds());
         Util.setVariable("backgrounds-storage", this.storage);
+        Util.setVariable("backgrounds-counter", this.counter);
     }
 
     /** Add a new background, with a generic name like #1, #2... And if the number of actual background is 0, will select 
@@ -69,8 +73,11 @@ export class BackgroundComponent {
     addBackground(){
         let backgroundsValue = this.backgrounds();
         let newName  = this.storage.add();
+        let id = `background-${this.counter}`;
+        this.counter++;
 
         backgroundsValue.push({
+            "id" : id,
             "name" : newName,
             "color-id" : "radio-orange"
         });

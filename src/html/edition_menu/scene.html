@@ -32,11 +32,11 @@ scene to see this part of the page -->
             <p class="scene-input-name">
                 Décor
             </p>
-            <select class="scene-select">
-                <option selected value="empty"> -- Choix à effectuer -- </option>
-                <option value="id-1">Parc</option>
-                <option value="id-2">Bar</option>
-                <option value="id-3">Scène musique</option>
+            <select [(ngModel)]="backgroundSelected" class="scene-select" (change)="backgroundChanged($event)">
+                <option value="empty"> -- Choix à effectuer -- </option>
+                @for(background of backgrounds; track background.id){
+                    <option [value]="background.id">{{background.name}}</option>
+                }
             </select>
         </div>
         <div class="scene-parameter-sub-div">
