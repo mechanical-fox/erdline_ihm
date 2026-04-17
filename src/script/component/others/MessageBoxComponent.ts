@@ -17,6 +17,7 @@ export class MessageBoxComponent {
     indMessageToEdit = input<number>(-1);
     editedMessage = output<Message>();
     createdMessage = output<Message>();
+    deletedMessage = output<undefined>();
     initialized : WritableSignal<boolean>;
     errorMessage : WritableSignal<string | null>;
     newMessageCharacter: WritableSignal<string>;
@@ -51,7 +52,13 @@ export class MessageBoxComponent {
         this.initialized.set(true);
     }
 
-    /** Add a new Message to the scene.*/
+    /** Transmit to the parent component, the command to delete the message currently under edition. */
+    deleteMessage(){
+        this.deletedMessage.emit(undefined);
+    }
+
+    /** Add a new Message to the scene, or edit the current message. It depends, if the messageBox is used in edition mode, or
+     * not.*/
     validateMessage(){
         let text = this.newMessageText();
         let character = this.newMessageCharacter();

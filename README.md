@@ -19,15 +19,11 @@ A faire:
         en italique.
    - Fait: Pour permettre modification d'un texte plus facile --> Séparer le composant "Ajout Message"
    - Fait: Permettre modifier un texte
+   - Fait: Permettre de supprimer un texte
 
-
-   - Permettre de supprimer un texte + Pour éviter de faire trop d'icones, réutiliser l'icone d'edition, et juste
-          ajouter un bouton suppression. Ce bouton n'apparait que si l'on est dans une édition.
    - Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...
-   - Faire que l'affichage des messages soit à droite, soit à gauche, reste cohérent après la suppression.
-        Mon idée est de gérer cela dans "flushAndSave", et de l'appeller après la méthode delete.
-   - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE ONGLETS
-   - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE SCENE #1, #2
+   - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE SCENE #1, #2 + si on change d'onglet,
+        l'on doit retomber sur la bonne scène
    - Permettre en fin de faire un GOTO vers une autre scène
    - Permettre de mettre des choix, et AVEC event. Finalement, si l'on a déjà fait le travail précédent...
         Cela sera rapide.

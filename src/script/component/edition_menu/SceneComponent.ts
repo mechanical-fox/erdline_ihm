@@ -180,6 +180,26 @@ export class SceneComponent {
         
     }
 
+    /** Delete the message currently in edition mode */
+    deleteCurrentMessage(){
+        let valueMessage = this.messages();
+        let ind = this.messageToEdit();
+
+        if(ind != null){
+            let newValueMessage =  [];
+
+            for(let i in valueMessage){
+                if(parseInt(i) != ind)
+                    newValueMessage.push(valueMessage[i]);
+            }
+
+            this.messages.set(newValueMessage);
+            this.messagesIHM.set(this.convertMessage(this.messages()));
+            this.flushAndSave();
+            this.messageToEdit.set(-1);
+        }
+    }
+
     /** Convert a list of Message, in a list of DisplayMessage. Will convert the identifiers of the character, in the actual
      * names characters by example. It's necessary to retain the identifier of each character, because the name of the character
      * could be changed. And it must be managed in a non-connected way. Because a client has no obligation to be connected to

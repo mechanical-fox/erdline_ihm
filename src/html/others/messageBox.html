@@ -40,10 +40,11 @@
         </div>
         <div class="messageBox-div-2">
             @if(indMessageToEdit() == -1){
-                <button class="messageBox-button" (click)="validateMessage()">Ajouter </button>
+                <button class="messageBox-button" (click)="validateMessage()"> Ajouter </button>
             }
             @else{
-                <button class="messageBox-button" (click)="validateMessage()">Modifier </button>
+                <button class="messageBox-button" (click)="validateMessage()"> Modifier </button>
+                <button class="messageBox-button" (click)="deleteMessage()"> Supprimer </button>
             }
         </div>
 
