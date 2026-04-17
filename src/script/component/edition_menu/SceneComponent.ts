@@ -1,5 +1,5 @@
 
-import { Component, WritableSignal, signal, output} from '@angular/core';
+import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Storage} from '../../util/Storage';
@@ -16,31 +16,30 @@ import { MessageBoxComponent } from '../others/MessageBoxComponent';
 })
 export class SceneComponent {
 
-    counter : number;
     sceneName: WritableSignal<string>;
     messages: WritableSignal<Message[]>;
     messagesIHM : WritableSignal<DisplayMessage[]>;
     scenes : WritableSignal<any>;
+    messageToEdit : WritableSignal<number>;
     characters : any[];
     storage : Storage;
 
     constructor(){
         
+        this.messageToEdit = signal(-1);
         this.characters = this.getCharacters();
         this.sceneName = signal("");
 
         if(Util.getVariable("scenes") != null){
             this.scenes = signal(Util.getVariable("scenes"));
             this.storage = Util.getVariable("scenes-storage");
-            this.counter = Util.getVariable("scenes-counter");
             this.messages = signal(Util.getVariable("scenes-messages"));
-            this.messagesIHM = signal(Util.getVariable("scenes-messagesIHM"));
+            this.messagesIHM = signal(this.convertMessage(this.messages()));
             this.flushAndSave();
         }
         else{
             this.scenes = signal([]);
             this.storage = new Storage();
-            this.counter = 1;
             this.messages = signal([]);
             this.messagesIHM = signal([]);
             this.addScene();
@@ -60,9 +59,7 @@ export class SceneComponent {
 
         Util.setVariable("scenes", this.scenes());
         Util.setVariable("scenes-storage", this.storage);
-        Util.setVariable("scenes-counter", this.counter);
         Util.setVariable("scenes-messages", this.messages());
-        Util.setVariable("scenes-messagesIHM", this.messagesIHM());
     }
 
     /** Add a new scene, with a generic name like #1, #2... And if the number of actual scene is 0, will select 
@@ -162,6 +159,27 @@ export class SceneComponent {
         
     }
 
+    /** Open the edition box, for the message with the position given. The first message is at position 0, the second message
+     * is at position 0...*/
+    openEditionBox(position : number){
+        this.messageToEdit.set(position);
+    }
+
+    /** Change the message currently in edition mode, by the message given */
+    editCurrentMessage(message : Message){
+        let valueMessage = this.messages();
+        let ind = this.messageToEdit();
+
+        if(ind != null){
+            valueMessage[ind] = message;
+            this.messages.set(valueMessage);
+            this.messagesIHM.set(this.convertMessage(this.messages()));
+            this.flushAndSave();
+            this.messageToEdit.set(-1);
+        }
+        
+    }
+
     /** Convert a list of Message, in a list of DisplayMessage. Will convert the identifiers of the character, in the actual
      * names characters by example. It's necessary to retain the identifier of each character, because the name of the character
      * could be changed. And it must be managed in a non-connected way. Because a client has no obligation to be connected to
@@ -169,6 +187,7 @@ export class SceneComponent {
     convertMessage(messages : Message[]) : DisplayMessage[]{
         let displayMessages : DisplayMessage[] = [];
         let messageLeft : boolean = true;
+        let position = 0;
 
         for(let message of messages){
 
@@ -188,11 +207,10 @@ export class SceneComponent {
                 }
             }
 
-            let id = `message-${this.counter}`;
-            this.counter++;
             let style = messageLeft ? "scene-message-background-left" : "scene-message-background-right";
             messageLeft = !messageLeft;
-            let displayMessage = new DisplayMessage(id, style, character, expression, message.text);
+            let displayMessage = new DisplayMessage(position, style, character, expression, message.text);
+            position++;
             displayMessages.push(displayMessage);
         }
 

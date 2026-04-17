@@ -18,12 +18,9 @@ A faire:
    - Fait: Gérer l'ajout des textes sans personnage. Ajouter le choix "Narration", et alors afficher le texte
         en italique.
    - Fait: Pour permettre modification d'un texte plus facile --> Séparer le composant "Ajout Message"
+   - Fait: Permettre modifier un texte
 
 
-   - Permettre modifier un texte (Eventuel au clic d'un texte, mais non sur)
-         + l'ajout de texte en bas disparait alors + utiliser des champs INPUT pour passer au composant enfant, l'id du composant
-         à modifier + idem INPUT pour indiquer à l'enfant de rentrer en mode modification. Donc event de sortie à modifier aussi.
-   - git push
    - Permettre de supprimer un texte + Pour éviter de faire trop d'icones, réutiliser l'icone d'edition, et juste
           ajouter un bouton suppression. Ce bouton n'apparait que si l'on est dans une édition.
    - Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...

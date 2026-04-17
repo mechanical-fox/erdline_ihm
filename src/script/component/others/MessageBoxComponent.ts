@@ -1,6 +1,6 @@
 
 
-import { Component, WritableSignal, signal, output} from '@angular/core';
+import { Component, WritableSignal, signal, input, output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Message} from '../../data/ihm/Message';
@@ -14,7 +14,10 @@ import {Message} from '../../data/ihm/Message';
 })
 export class MessageBoxComponent {
 
+    indMessageToEdit = input<number>(-1);
+    editedMessage = output<Message>();
     createdMessage = output<Message>();
+    initialized : WritableSignal<boolean>;
     errorMessage : WritableSignal<string | null>;
     newMessageCharacter: WritableSignal<string>;
     newMessageExpression: WritableSignal<string>;
@@ -23,16 +26,33 @@ export class MessageBoxComponent {
     characters : any[];
 
     constructor(){
+
         this.errorMessage = signal(null);
+        this.initialized = signal(false);
+        this.characters = this.getCharacters();
         this.availableExpressions = signal([]);
         this.newMessageCharacter = signal("empty");
         this.newMessageExpression = signal("empty");
         this.newMessageText = signal("");
-        this.characters = this.getCharacters();
+    }
+
+    /** This method is used to initialize the composant after the constructor. All initialization can't be done in the constructor, 
+     * because the input attributes aren't initialized by angular when the constructor is called.  */
+    ngOnInit(){
+        if(this.indMessageToEdit() != -1){
+            let messages = Util.getVariable("scenes-messages");
+            let message = messages[this.indMessageToEdit()];
+            this.updateAvailableExpressions(message.characterId);
+            this.newMessageCharacter = signal(message.characterId);
+            this.newMessageExpression = signal(message.expressionId);
+            this.newMessageText = signal(message.text);
+        }
+
+        this.initialized.set(true);
     }
 
     /** Add a new Message to the scene.*/
-    addMessage(){
+    validateMessage(){
         let text = this.newMessageText();
         let character = this.newMessageCharacter();
         let expression = this.newMessageExpression();
@@ -46,24 +66,35 @@ export class MessageBoxComponent {
         else{
             let convertedExpression = character == "narration" ? null : expression;
             let message : Message = new Message(character, convertedExpression, text);
-            this.createdMessage.emit(message);
             this.newMessageCharacter.set("empty");
             this.newMessageExpression.set("empty");
             this.newMessageText.set("");
             this.errorMessage.set(null);
+
+            if(this.indMessageToEdit() == -1)
+                this.createdMessage.emit(message);
+            else
+                this.editedMessage.emit(message);
         }
     }
 
-    /** Update the list of available expressions, for the current character + reset the expression list. This function is 
-     * called, when the character used to write a new text, is changed.*/
-    updateAvailableExpressions(event : any){
+    /** A function called when the character is changed. This function will update the list of available expressions, to match the 
+     * expressions accessible to the new character. */
+    characterChanged(event : any){
+
+        this.updateAvailableExpressions(event.target.value);
+    }
+
+    /** Update the list of available expressions, to be the expressions of the character with the Id given.
+     * Will also reset the expression list.*/
+    updateAvailableExpressions(characterId : string){
 
         this.newMessageExpression.set("empty");
         let found = false;
 
         for(let character of this.characters){
             
-            if(character.id == event.target.value){
+            if(character.id == characterId){
                 let expressions = character.expressions;
                 this.availableExpressions.set(expressions);
                 found = true;

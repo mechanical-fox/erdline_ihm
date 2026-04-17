@@ -51,29 +51,37 @@ scene to see this part of the page -->
         Texte
     </p> 
 
-    @for(message of messagesIHM(); track message.id){
-        <div [class]="message.style">
-            @if(message.characterName != null){
-                <div class="message-title-div"> 
-                    <div class="message-title-sub-div"> 
-                        <p class="scene-message-title">{{message.characterName}} - {{message.expressionName}}</p>
+    @for(message of messagesIHM(); track message.position){
+        @if(message.position == messageToEdit()){
+            <MessageBox [indMessageToEdit]="messageToEdit()" (editedMessage)="editCurrentMessage($event)"/>
+        }
+        @else{
+            <div [class]="message.style">
+                @if(message.characterName != null){
+                    <div class="message-title-div"> 
+                        <div class="message-title-sub-div"> 
+                            <p class="scene-message-title">{{message.characterName}} - {{message.expressionName}}</p>
+                        </div>
+                        <img class="message-edit-image" (click)="openEditionBox(message.position)" src="/images/edit.svg">
                     </div>
-                    <img class="message-edit-image" src="/images/edit.svg">
-                </div>
                 
-                <p class="scene-message-text">{{message.text}}</p>
-            }
-            @else{
-                <div class="message-title-div"> 
-                    <div class="message-title-sub-div"> 
-                        <p class="scene-message-narration">{{message.text}}</p>
+                    <p class="scene-message-text">{{message.text}}</p>
+                }
+                @else{
+                    <div class="message-title-div"> 
+                        <div class="message-title-sub-div"> 
+                            <p class="scene-message-narration">{{message.text}}</p>
+                        </div>
+                        <img class="message-edit-image" (click)="openEditionBox(message.position)" src="/images/edit.svg">
                     </div>
-                    <img class="message-edit-image" src="/images/edit.svg">
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
     }
 
-    <MessageBox (createdMessage)="addMessage($event)"/>
+    @if(messageToEdit() == -1){
+        <MessageBox (createdMessage)="addMessage($event)"/>
+    }
+    
  
 }
