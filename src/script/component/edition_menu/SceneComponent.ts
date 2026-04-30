@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Storage} from '../../util/Storage';
 import { Message } from '../../data/ihm/Message';
+import {Scene} from '../../data/ihm/Scene';
 import { DisplayMessage } from '../../data/ihm/DisplayMessage';
 import { MessageBoxComponent } from '../others/MessageBoxComponent';
 
@@ -18,13 +19,13 @@ export class SceneComponent {
 
     backgroundSelected : WritableSignal<string>;
     sceneName: WritableSignal<string>;
-    messages: WritableSignal<Message[]>;
     messagesIHM : WritableSignal<DisplayMessage[]>;
-    scenes : WritableSignal<any>;
+    scenes : WritableSignal<Scene[]>;
     messageToEdit : WritableSignal<number>;
     characters : any[];
     backgrounds : any[];
     storage : Storage;
+    counter : number;
 
     constructor(){
         
@@ -32,22 +33,19 @@ export class SceneComponent {
         this.characters = this.getCharacters();
         this.backgrounds = Util.getVariable("backgrounds");
         this.backgroundSelected = signal("empty");
+        this.messagesIHM = signal([]);
         this.sceneName = signal("");
 
         if(Util.getVariable("scenes") != null){
             this.scenes = signal(Util.getVariable("scenes"));
             this.storage = Util.getVariable("scenes-storage");
-            this.backgroundSelected = signal(Util.getVariable("scenes-background"));
-            this.messages = signal(Util.getVariable("scenes-messages"));
-            this.messagesIHM = signal(this.convertMessage(this.messages()));
+            this.counter = Util.getVariable("scenes-counter");
             this.flushAndSave();
         }
         else{
             this.scenes = signal([]);
+            this.counter = 1;
             this.storage = new Storage();
-            this.backgroundSelected = signal("empty");
-            this.messages = signal([]);
-            this.messagesIHM = signal([]);
             this.addScene();
         }
  
@@ -55,7 +53,15 @@ export class SceneComponent {
 
     /** Save the informations related to the background selected, in case the user change the tab currently selected.*/
     backgroundChanged(event : any){
-        Util.setVariable("scenes-background", event.target.value);
+        let scenesValue = this.scenes();
+
+        for(let scene of scenesValue){
+            if(scene.name == this.storage.selected())
+                scene.backgroundId = event.target.value;
+        }
+
+        this.scenes.set(scenesValue);
+        this.flushAndSave();
     }
 
     /** Update the informations on screen, with the information matching the item currently selected. After this the function will 
@@ -63,14 +69,24 @@ export class SceneComponent {
     flushAndSave(){
 
         let selected = this.storage.selected();
+        let sceneValue = this.scenes();
 
-        if(selected != null)
+        if(selected != null){
+            for(let scene of sceneValue){
+                if(scene.name == selected){
+                    this.backgroundSelected.set(scene.backgroundId);
+                    this.sceneName.set(scene.name);
+                    this.messagesIHM.set(this.convertMessage(scene.messages));
+                }
+            }
+
             this.sceneName.set(selected);
+        }
+            
 
         Util.setVariable("scenes", this.scenes());
         Util.setVariable("scenes-storage", this.storage);
-        Util.setVariable("scenes-messages", this.messages());
-        Util.setVariable("scenes-background", this.backgroundSelected());
+        Util.setVariable("scenes-counter", this.counter);
     }
 
     /** Add a new scene, with a generic name like #1, #2... And if the number of actual scene is 0, will select 
@@ -78,11 +94,11 @@ export class SceneComponent {
     addScene(){
         let scenesValue = this.scenes();
         let newName  = this.storage.add();
+        let newId = `scene-${this.counter}`;
+        this.counter++;
+        let newScene = new Scene(newId, newName, "empty");
 
-        scenesValue.push({
-            "name" : newName,
-            "color-id" : "radio-orange"
-        });
+        scenesValue.push(newScene);
 
         this.scenes.set(scenesValue);
         this.flushAndSave();
@@ -101,9 +117,9 @@ export class SceneComponent {
     updateSceneName(event : any){
         let scenesValue = this.scenes();
 
-        for(let background of scenesValue){
-            if(background.name == this.storage.selected() && event.target.value.trim().length > 0){
-                background.name = event.target.value;
+        for(let scene of scenesValue){
+            if(scene.name == this.storage.selected() && event.target.value.trim().length > 0){
+                scene.name = event.target.value;
                 this.scenes.set(scenesValue);
                 this.storage.updateSelected(event.target.value);
             }
@@ -163,10 +179,14 @@ export class SceneComponent {
     /** Add the message given as parameter into the scene.*/
     addMessage(message : any){
 
-        let valueMessage = this.messages();
-        valueMessage.push(message);
-        this.messages.set(valueMessage);
-        this.messagesIHM.set(this.convertMessage(this.messages()));
+        let scenesValue = this.scenes();
+
+        for(let scene of scenesValue){
+            if(scene.name == this.storage.selected())
+                scene.messages.push(message);
+        }
+
+        this.scenes.set(scenesValue);
         this.flushAndSave();
         
     }
@@ -179,36 +199,43 @@ export class SceneComponent {
 
     /** Change the message currently in edition mode, by the message given */
     editCurrentMessage(message : Message){
-        let valueMessage = this.messages();
+
+        let scenesValue = this.scenes();
         let ind = this.messageToEdit();
 
         if(ind != null){
-            valueMessage[ind] = message;
-            this.messages.set(valueMessage);
-            this.messagesIHM.set(this.convertMessage(this.messages()));
-            this.flushAndSave();
-            this.messageToEdit.set(-1);
+            for(let scene of scenesValue){
+                if(scene.name == this.storage.selected()){
+                    scene.messages[ind] = message;
+                    this.flushAndSave();
+                    this.messageToEdit.set(-1);
+                }
+            }
         }
         
     }
 
     /** Delete the message currently in edition mode */
     deleteCurrentMessage(){
-        let valueMessage = this.messages();
+
+        let scenesValue = this.scenes();
         let ind = this.messageToEdit();
 
         if(ind != null){
-            let newValueMessage =  [];
+            for(let scene of scenesValue){
+                if(scene.name == this.storage.selected()){
+                    let newValueMessage =  [];
 
-            for(let i in valueMessage){
-                if(parseInt(i) != ind)
-                    newValueMessage.push(valueMessage[i]);
+                    for(let i in scene.messages){
+                        if(parseInt(i) != ind)
+                            newValueMessage.push(scene.messages[i]);
+                    }
+
+                    scene.messages = newValueMessage;
+                    this.flushAndSave();
+                    this.messageToEdit.set(-1);
+                }
             }
-
-            this.messages.set(newValueMessage);
-            this.messagesIHM.set(this.convertMessage(this.messages()));
-            this.flushAndSave();
-            this.messageToEdit.set(-1);
         }
     }
 

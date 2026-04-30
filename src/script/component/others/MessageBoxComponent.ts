@@ -41,12 +41,20 @@ export class MessageBoxComponent {
      * because the input attributes aren't initialized by angular when the constructor is called.  */
     ngOnInit(){
         if(this.indMessageToEdit() != -1){
-            let messages = Util.getVariable("scenes-messages");
-            let message = messages[this.indMessageToEdit()];
-            this.updateAvailableExpressions(message.characterId);
-            this.newMessageCharacter = signal(message.characterId);
-            this.newMessageExpression = signal(message.expressionId);
-            this.newMessageText = signal(message.text);
+
+            let scenes = Util.getVariable("scenes");
+            let storage = Util.getVariable("scenes-storage");
+
+            for(let scene of scenes){
+                if(scene.name == storage.selected()){
+                    let messages = scene.messages;
+                    let message = messages[this.indMessageToEdit()];
+                    this.updateAvailableExpressions(message.characterId);
+                    this.newMessageCharacter = signal(message.characterId);
+                    this.newMessageExpression = signal(message.expressionId);
+                    this.newMessageText = signal(message.text);
+                }
+            }
         }
 
         this.initialized.set(true);

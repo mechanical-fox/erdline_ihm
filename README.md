@@ -21,10 +21,13 @@ A faire:
    - Fait: Permettre modifier un texte
    - Fait: Permettre de supprimer un texte
    - Fait: Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...
+   - Fait: Gestion switch ENTRE SCENE #1, #2
 
-   - Gérer la sauvegarde du décor + du texte, avec les switch onglets ENTRE SCENE #1, #2 + si on change d'onglet,
-        l'on doit retomber sur la bonne scène
-   - Permettre en fin de faire un GOTO vers une autre scène
+
+   - Permettre en fin de faire un GOTO vers une autre scène + je vais surement ajouter dans la message box un champ "type"
+        qui est soit message, soit changement scène, soit choix. Et par défaut cela sera Message + ATTENTION
+        le champ type n'est pas affiché en mode édition si l'on est dans un message mais EST MARQUE en mode édition si l'on
+        est dans un GO TO ou un choix.
    - Permettre de mettre des choix, et AVEC event. Finalement, si l'on a déjà fait le travail précédent...
         Cela sera rapide.
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE ONGLETS
