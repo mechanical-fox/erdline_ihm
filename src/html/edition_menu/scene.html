@@ -53,7 +53,7 @@ scene to see this part of the page -->
 
     @for(message of messagesIHM(); track message.position){
         @if(message.position == messageToEdit()){
-            <MessageBox [indMessageToEdit]="messageToEdit()" (editedMessage)="editCurrentMessage($event)" (deletedMessage)="deleteCurrentMessage()"/>
+            <MessageBox [indMessageToEdit]="messageToEdit()" [fastLoad]="messageBoxFastLoad()" (editedMessage)="editCurrentMessage($event)" (deletedMessage)="deleteCurrentMessage()"/>
         }
         @else{
             <div [class]="message.style">
@@ -68,19 +68,32 @@ scene to see this part of the page -->
                     <p class="scene-message-text">{{message.text}}</p>
                 }
                 @else{
-                    <div class="message-title-div"> 
-                        <div class="message-title-sub-div"> 
-                            <p class="scene-message-narration">{{message.text}}</p>
+                    @if(message.isTransition){
+                        <div class="message-title-div"> 
+                            <div class="message-title-sub-div"> 
+                                <p class="scene-message-title">Transition</p>
+                            </div>
+                            <img class="message-edit-image" (click)="openEditionBox(message.position)" src="/images/edit.svg">
                         </div>
-                        <img class="message-edit-image" (click)="openEditionBox(message.position)" src="/images/edit.svg">
-                    </div>
+                
+                        <p class="scene-message-transition">{{message.text}}</p>
+                    }
+                    @else{
+                        <div class="message-title-div"> 
+                            <div class="message-title-sub-div"> 
+                                <p class="scene-message-narration">{{message.text}}</p>
+                            </div>
+                            <img class="message-edit-image" (click)="openEditionBox(message.position)" src="/images/edit.svg">
+                        </div>
+                    }
+                    
                 }
             </div>
         }
     }
 
     @if(messageToEdit() == -1){
-        <MessageBox (createdMessage)="addMessage($event)"/>
+        <MessageBox (createdMessage)="addMessage($event)" [fastLoad]="messageBoxFastLoad()"/>
     }
     
  

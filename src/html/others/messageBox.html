@@ -9,17 +9,20 @@
                 <select [(ngModel)]="newMessageCharacter" class="messageBox-select" (change)="characterChanged($event)">
                     <option value="empty"> -- Choix à effectuer -- </option>
                     <option value="narration"> Narration </option>
+                    @if(indMessageToEdit() == -1 || editingTransition()){
+                        <option value="transition"> Transition </option>
+                    }
                     @for(character of characters; track character.id){
                         <option [value]="character.id">{{character.name}}</option>
                     }
                 </select>
             </div>
-            @if(newMessageCharacter() != "narration"){
+            @if(newMessageCharacter() != "narration" && newMessageCharacter() != "transition"){
                 <div class="messageBox-sub-div">
                     <p class="messageBox-input-name">
                         Expression
                     </p>
-                    <select [(ngModel)]="newMessageExpression" class="messageBox-select">
+                    <select [(ngModel)]="newMessageExpression" class="messageBox-select" (change)="expressionChanged($event)">
                         <option value="empty"> -- Choix à effectuer -- </option>
 
                         @for(expression of availableExpressions(); track expression.id){
@@ -30,14 +33,33 @@
             }
         </div>
 
-        <div class="messageBox-div">
-            <div class="messageBox-sub-div">
-                <p class="messageBox-input-name">
-                    Message
-                </p>
-                <textarea [(ngModel)]="newMessageText" spellcheck="false" class="messageBox-textarea" rows="6" cols="50">  </textarea>
+        @if(newMessageCharacter() != "transition"){
+            <div class="messageBox-div">
+                <div class="messageBox-sub-div">
+                    <p class="messageBox-input-name">
+                        Message
+                    </p>
+                    <textarea [(ngModel)]="newMessageText" spellcheck="false" class="messageBox-textarea" rows="6" cols="50" (input)="textChanged($event)">  </textarea>
+                </div>
             </div>
-        </div>
+        }
+        @else{
+            <div class="messageBox-div">
+                <div class="messageBox-sub-div">
+                    <p class="messageBox-input-name">
+                        Transition vers la scène
+                    </p>
+                    <select  [(ngModel)]="newMessageNextScene" class="messageBox-select" (change)="transitionChanged($event)">
+                        <option value="empty"> -- Choix à effectuer -- </option>
+                        @for(scene of availableNextScenes();track scene.id){
+                            <option [value]="scene.id"> {{scene.name}} </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        }
+
+
         <div class="messageBox-div-2">
             @if(indMessageToEdit() == -1){
                 <button class="messageBox-button" (click)="validateMessage()"> Ajouter </button>

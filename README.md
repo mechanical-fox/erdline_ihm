@@ -24,12 +24,34 @@ A faire:
    - Fait: Gestion switch ENTRE SCENE #1, #2
 
 
-   - Permettre en fin de faire un GOTO vers une autre scène + je vais surement ajouter dans la message box un champ "type"
-        qui est soit message, soit changement scène, soit choix. Et par défaut cela sera Message + ATTENTION
-        le champ type n'est pas affiché en mode édition si l'on est dans un message mais EST MARQUE en mode édition si l'on
-        est dans un GO TO ou un choix.
+   - Je suis au GOTO (voir après), entre autre l'aspect graphique.
+        Hum... déjà ne permettra d'ajouter que des scènes, qui existent et qui sont autre que nous.
+        1. Fait (Hors bug): Faire aspect graphique avec pour GO TO un select qui ne permet d'ajouter que des scènes autres que notre scène
+        2. Fait: Faire que à chaque sélection de scene dans messageBox l'on reset la box (mise à jour transition) + l'on reset les élements
+        3. Fait: Faire que à chaque création de scène dans messageBox l'on reset la box (mise à jour transition) + l'on RELOAD les élements
+        4. Fait: Faire que à chaque suppresion de scene dans messageBox l'on reset la box (mise à jour transition) + l'on reset les élements
+        5. Fait: Faire affichage dans la liste de message (hors box)
+        6. Fait: Faire que l'edition des transition soit fonctionnelle, car actuellement cela n'est pas le cas
+        6. Fait: Vérifier que les éditions hors transitions soient toujours fonctionnelles
+        7. Suite à bug, j'ai perdu fonctionnalité, Faire que en édition de message de type != transition il soit impossible de choisir transition
+        8. Faire que si message final = GOTO alors l'on ne propose plus d'ajouter des messages + l'on repropose si l'on supprime ce dernier
+            message, ou si on l'edite pour être de type différent à GOTO 
+
+   - faire un GIT PUSH
+
+   - IDEE SERIEUSE CAR RETARD --> 
+          Ajouter l'idée "choix" en idée d'amélioration pour ne pas oublier + 
+          Prendre texte d'avant car sans choix pour l'exemple. Et juste faire une version sans choix.
+          Car la j'ai l'impression de passer beaucoup trop de temps, et que je vais avoir du retard...
+          Juste il faudra modifier Alicia en le nom Nathaniel. Et je vais devoir faire un sprite de Nathaniel, avec une expression plus
+          renfermé, et moins joyeuse.
    - Permettre de mettre des choix, et AVEC event. Finalement, si l'on a déjà fait le travail précédent...
-        Cela sera rapide.
+        Cela sera rapide. + juste dans les messages, ajouter un champ "Choix", qui aura -> Condition event present, condition event absent, 
+         ajouter event, n° scene goto, bref voir mon scénario visual novel + mince, penser comment afficher cela
+   - Faire qu'il est impossible en édition de choisir "Choix" (pour éviter un Choix avant le final) + faire que si message
+        final = Choix, alors l'on ne propose PAS d'ajouter de nouveaux messages + faire que Choix enleve le champ expression, comme narration
+   - faire un GIT PUSH
+
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE ONGLETS
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE SCENE #1, #2
    - Ajouter en amélioration futur >  Faire que si l'on veut supprimer un décor ou personnage déjà utilisé dans une

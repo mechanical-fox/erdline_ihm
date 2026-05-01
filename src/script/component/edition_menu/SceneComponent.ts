@@ -22,6 +22,7 @@ export class SceneComponent {
     messagesIHM : WritableSignal<DisplayMessage[]>;
     scenes : WritableSignal<Scene[]>;
     messageToEdit : WritableSignal<number>;
+    messageBoxFastLoad : WritableSignal<boolean>;
     characters : any[];
     backgrounds : any[];
     storage : Storage;
@@ -35,6 +36,7 @@ export class SceneComponent {
         this.backgroundSelected = signal("empty");
         this.messagesIHM = signal([]);
         this.sceneName = signal("");
+        this.messageBoxFastLoad = signal(false);
 
         if(Util.getVariable("scenes") != null){
             this.scenes = signal(Util.getVariable("scenes"));
@@ -83,7 +85,7 @@ export class SceneComponent {
             this.sceneName.set(selected);
         }
             
-
+        this.messageBoxFastLoad.set(false);
         Util.setVariable("scenes", this.scenes());
         Util.setVariable("scenes-storage", this.storage);
         Util.setVariable("scenes-counter", this.counter);
@@ -102,13 +104,27 @@ export class SceneComponent {
 
         this.scenes.set(scenesValue);
         this.flushAndSave();
+
+        if(this.messageToEdit() == -1)
+            this.refreshMessageBox(false);
     }
 
     /** Select the scene with the name indicated */
-    selectScene(name : string){
+    async selectScene(name : string){
 
         this.storage.select(name);
         this.flushAndSave();
+        this.refreshMessageBox(true);
+    }
+
+    /** Force to recreate the composant messageBox. There is two goal. First, if precised the content of the messageBox is erased.
+     * Second, the new messageBox will have the available scenes refreshed for the messages of type transition. */
+    async refreshMessageBox(resetContent : boolean){
+
+        this.messageBoxFastLoad.set(!resetContent);
+        this.messageToEdit.set(999);
+        await Util.sleep(100);
+        this.messageToEdit.set(-1);
         
     }
 
@@ -139,9 +155,13 @@ export class SceneComponent {
                 newScenesValue.push(item);
         }
 
-        this.storage.deleteSelected();
         this.scenes.set(newScenesValue);
+        this.storage.deleteSelected();
+
+        if(this.storage.selected() != null)
+
         this.flushAndSave();
+        this.refreshMessageBox(true);
     }
 
     /** Return the list of all the characters, and their expressions. If a character have an expression where the name is "",
@@ -194,6 +214,7 @@ export class SceneComponent {
     /** Open the edition box, for the message with the position given. The first message is at position 0, the second message
      * is at position 0...*/
     openEditionBox(position : number){
+        this.messageBoxFastLoad.set(false);
         this.messageToEdit.set(position);
     }
 
@@ -208,6 +229,7 @@ export class SceneComponent {
                 if(scene.name == this.storage.selected()){
                     scene.messages[ind] = message;
                     this.flushAndSave();
+                    this.messageBoxFastLoad.set(false);
                     this.messageToEdit.set(-1);
                 }
             }
@@ -233,6 +255,7 @@ export class SceneComponent {
 
                     scene.messages = newValueMessage;
                     this.flushAndSave();
+                    this.messageBoxFastLoad.set(false);
                     this.messageToEdit.set(-1);
                 }
             }
@@ -268,7 +291,18 @@ export class SceneComponent {
 
             let style = messageLeft ? "scene-message-background-left" : "scene-message-background-right";
             messageLeft = !messageLeft;
-            let displayMessage = new DisplayMessage(position, style, character, expression, message.text);
+            let isTransition = (message.characterId == "transition");
+            let text = message.text;
+
+            if(isTransition){
+                for(let scene of this.scenes()){
+                    console.log(`scene.id : ${scene.id}, message.nextSceneId : ${message.nextSceneId}, égalité: ${scene.id == message.nextSceneId}`);
+                    if(scene.id == message.nextSceneId)
+                        text = `Transition vers la scene ${scene.name}`;
+                }
+            }
+
+            let displayMessage = new DisplayMessage(position, style, character, expression, text, isTransition);
             position++;
             displayMessages.push(displayMessage);
         }

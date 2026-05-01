@@ -100,6 +100,11 @@
     font: 1.0rem Serif; 
 }
 
+.scene-message-transition{
+    margin: 0.6rem 0rem 0.6rem 2rem;
+    font: italic 1.0rem Serif; 
+}
+
 .scene-message-narration{
     margin: 0.6rem 2rem 0.6rem 1rem;
     font: italic 1.0rem Serif; 
