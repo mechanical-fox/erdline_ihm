@@ -63,11 +63,14 @@ export class MessageBoxComponent {
 
         if(this.indMessageToEdit() != -1 && !(this.fastLoad() && fastLoadExist)){
 
-            this.editingTransition.set(true);
             for(let scene of scenes){
                 if(scene.name == storage.selected()){
                     let messages = scene.messages;
                     let message = messages[this.indMessageToEdit()];
+
+                    if(message.nextSceneId != null)
+                        this.editingTransition.set(true);
+
                     this.updateAvailableExpressions(message.characterId);
                     this.newMessageCharacter.set(message.characterId);
                     this.newMessageExpression.set(message.expressionId);
@@ -127,7 +130,11 @@ export class MessageBoxComponent {
             this.errorMessage.set("Le champ Transition vers la scène est obligatoire");
         else{
             let convertedExpression = (character == "narration" || character == "transition") ? null : expression;
-            let convertedTransition = (nextScene == "empty") ? null : nextScene; 
+            let convertedTransition = (character != "transition" || nextScene == "empty") ? null : nextScene; 
+
+            if(character == "transition")
+                text = "";
+
             let message : Message = new Message(character, convertedExpression, text, convertedTransition);
             this.newMessageCharacter.set("empty");
             this.newMessageExpression.set("empty");

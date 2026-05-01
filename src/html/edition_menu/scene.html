@@ -53,7 +53,7 @@ scene to see this part of the page -->
 
     @for(message of messagesIHM(); track message.position){
         @if(message.position == messageToEdit()){
-            <MessageBox [indMessageToEdit]="messageToEdit()" [fastLoad]="messageBoxFastLoad()" (editedMessage)="editCurrentMessage($event)" (deletedMessage)="deleteCurrentMessage()"/>
+            <MessageBox [indMessageToEdit]="messageToEdit()" [fastLoad]="false" (editedMessage)="editCurrentMessage($event)" (deletedMessage)="deleteCurrentMessage()"/>
         }
         @else{
             <div [class]="message.style">

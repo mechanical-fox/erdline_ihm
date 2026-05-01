@@ -33,11 +33,12 @@ A faire:
         5. Fait: Faire affichage dans la liste de message (hors box)
         6. Fait: Faire que l'edition des transition soit fonctionnelle, car actuellement cela n'est pas le cas
         6. Fait: Vérifier que les éditions hors transitions soient toujours fonctionnelles
-        7. Suite à bug, j'ai perdu fonctionnalité, Faire que en édition de message de type != transition il soit impossible de choisir transition
+        7. Fait: Faire que en édition de message de type != transition il soit impossible de choisir transition
+
         8. Faire que si message final = GOTO alors l'on ne propose plus d'ajouter des messages + l'on repropose si l'on supprime ce dernier
             message, ou si on l'edite pour être de type différent à GOTO 
 
-   - faire un GIT PUSH
+         - faire un GIT PUSH
 
    - IDEE SERIEUSE CAR RETARD --> 
           Ajouter l'idée "choix" en idée d'amélioration pour ne pas oublier + 
