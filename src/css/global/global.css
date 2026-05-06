@@ -1,6 +1,45 @@
 
 /* This file contains the styles to apply for all the pages */
 
+@media (min-width: 1000px) { 
+
+    .edition-menu{
+        margin: 2.5rem 0rem 0rem 4vw;
+        display: inline-block;
+    }
+
+    :root{
+        --edition-flexbox-direction: row;
+        --edition-item-display: block;
+        --edition-item-margin: 0.6rem 0.5rem 0rem 0.5rem;
+        --edition-div-margin: 3.0rem 0rem 4rem 6rem;
+        --background-color-div-width: 25rem;
+        --view-list-width: 40rem;
+    }
+
+}
+
+@media (max-width: 1000px) { 
+
+    .edition-menu{
+        width: 90vw;
+        margin: 2.5rem 0rem 0rem 4vw;
+    }
+
+    :root{
+        --edition-flexbox-direction: column;
+        --edition-item-display: inline-block;
+        --edition-item-margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+        --edition-div-margin: 3.0rem 0rem 4rem 4vw;
+        --background-color-div-width: 50vw;
+        --view-list-width: 70vw;
+    }
+
+}
+
+
+
+
 body{
     margin: 0rem 0rem 0rem 0rem;
     padding: 0rem 0rem 0rem 0rem;

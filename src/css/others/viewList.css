@@ -2,7 +2,7 @@
 
 .view-list{
     padding: 0rem 0rem 1rem 0rem;
-    width: 40rem;
+    width: var(--view-list-width);
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;

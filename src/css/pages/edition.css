@@ -1,19 +1,21 @@
 
+
+/* Si mobile : edition flexbox passe de row à column, plus d'espace entre les items,
+les items ont un display dit inline-block, 
+Fait: edition menu se met à avoir une width (Sinon le menu va "pousser" et créer du blanc) */
+
 .edition-flexbox{
-    flex-direction: row;
+    flex-direction: var(--edition-flexbox-direction);
     flex-wrap: wrap;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.edition-menu{
-    margin: 5.5rem 0rem 0rem 4vw;
-    display: inline-block;
-}
 
 .edition-menu-item-activated{
-    margin: 0.6rem 0rem 0rem 0rem;
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
     padding: 0.4rem 0rem 0.4rem 0rem;
     width: 10rem;
     background-color: rgb(0,0,0);
@@ -26,7 +28,8 @@
 }
 
 .edition-menu-item-activated-focus{
-    margin: 0.6rem 0rem 0rem 0rem;
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
     padding: 0.4rem 0rem 0.4rem 0rem;
     width: 10rem;
     background-color: rgb(0,0,0);
@@ -40,7 +43,8 @@
 }
 
 .edition-menu-item-desactivated-focus{
-    margin: 0.6rem 0rem 0rem 0rem;
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
     padding: 0.4rem 0rem 0.4rem 0rem;
     width: 10rem;
     background-color: rgb(46, 46, 46);
@@ -54,7 +58,8 @@
 }
 
 .edition-menu-item-desactivated{
-    margin: 0.6rem 0rem 0rem 0rem;
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
     padding: 0.4rem 0rem 0.4rem 0rem;
     width: 10rem;
     background-color: rgb(46, 46, 46);
@@ -67,7 +72,8 @@
 }
 
 .edition-menu-item-selected{
-    margin: 0.6rem 0rem 0rem 0rem;
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
     padding: 0.4rem 0rem 0.4rem 0rem;
     width: 10rem;
     background-color: rgb(46, 46, 46);
@@ -80,6 +86,6 @@
 }
 
 .edition-div{
-    margin: 3.0rem 0rem 4rem 6rem;
+    margin: var(--edition-div-margin);
     display: inline-block;
 }
