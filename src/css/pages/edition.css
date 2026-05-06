@@ -87,5 +87,6 @@ Fait: edition menu se met à avoir une width (Sinon le menu va "pousser" et cré
 
 .edition-div{
     margin: var(--edition-div-margin);
+    width: 50vw;
     display: inline-block;
 }

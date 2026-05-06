@@ -14,6 +14,7 @@
         --edition-item-margin: 0.6rem 0.5rem 0rem 0.5rem;
         --edition-div-margin: 3.0rem 0rem 4rem 6rem;
         --background-color-div-width: 25rem;
+        --character-sprite-div-width: 50rem;
         --view-list-width: 40rem;
     }
 
@@ -31,7 +32,8 @@
         --edition-item-display: inline-block;
         --edition-item-margin: 0.5rem 0.5rem 0.5rem 0.5rem;
         --edition-div-margin: 3.0rem 0rem 4rem 4vw;
-        --background-color-div-width: 50vw;
+        --background-color-div-width: 40vw;
+        --character-sprite-div-width: 50vw;
         --view-list-width: 70vw;
     }
 

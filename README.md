@@ -39,14 +39,17 @@ A faire:
    - Fait: Faire que l'icone édition soit incluse dans le html afin d'être chargé plus vite
    
 
-3. Gérer tout ce que j'ai fait avant en vue mobile. Au besoin, pour le text-area en messageBox faire que le paramètre nombre de colonne soit 
+3. Fait: Vue responsive onglet décor
+4. Fait: Vue responsive onglet personnage
+
+5. Vue responsive onglet scene +  Au besoin, pour le text-area en messageBox faire que le paramètre nombre de colonne soit 
     généré dynamiquement et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet. + ATTENTION à vérifier
     les messages en édition rapport au padding qui risque de faire déborder.
-4. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
+6. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
     plus de sprites ?
-4. Maintenant faire le jeu en train de jouer, mais gérer en plus les différentes expressions d'un personnage. L'idée est que
+7. Maintenant faire le jeu en train de jouer, mais gérer en plus les différentes expressions d'un personnage. L'idée est que
     même sans gérer les choix, gérer les différentes expression cela peut être utile.
-5. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
+8. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
     Et des tests unitaires aussi. Et la sauvegarde. Et vue mobile sur les nouveaux écrans... Bref, ce genre de choses.
     
 
