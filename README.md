@@ -34,29 +34,12 @@ A faire:
         6. Fait: Faire que l'edition des transition soit fonctionnelle, car actuellement cela n'est pas le cas
         6. Fait: Vérifier que les éditions hors transitions soient toujours fonctionnelles
         7. Fait: Faire que en édition de message de type != transition il soit impossible de choisir transition
-
-        8. Faire que si message final = transition alors l'on ne propose plus d'ajouter des messages. Cela doit être effectif
+        8. Fait: Faire que si message final = transition alors l'on ne propose plus d'ajouter des messages. Cela doit être effectif
              après l'ajout de messages, l'édition de message, la suppression de messages.
 
-   - IDEE SERIEUSE CAR RETARD --> 
-          Ajouter l'idée "choix" en idée d'amélioration pour ne pas oublier + 
-          Prendre texte d'avant car sans choix pour l'exemple. Et juste faire une version sans choix.
-          Car la j'ai l'impression de passer beaucoup trop de temps, et que je vais avoir du retard...
-          Juste il faudra modifier Alicia en le nom Nathaniel. Et je vais devoir faire un sprite de Nathaniel, avec une expression plus
-          renfermé, et moins joyeuse.
-   - Permettre de mettre des choix, et AVEC event. Finalement, si l'on a déjà fait le travail précédent...
-        Cela sera rapide. + juste dans les messages, ajouter un champ "Choix", qui aura -> Condition event present, condition event absent, 
-         ajouter event, n° scene goto, bref voir mon scénario visual novel + mince, penser comment afficher cela
-   - Faire qu'il est impossible en édition de choisir "Choix" (pour éviter un Choix avant le final) + faire que si message
-        final = Choix, alors l'on ne propose PAS d'ajouter de nouveaux messages + faire que Choix enleve le champ expression, comme narration
-   - faire un GIT PUSH
-
+   - Faire que l'icone édition soit incluse dans le html afin d'être chargé plus vite
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE ONGLETS
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE SCENE #1, #2
-   - Ajouter en amélioration futur >  Faire que si l'on veut supprimer un décor ou personnage déjà utilisé dans une
-        scene, un message d'erreur s'affiche pour l'utilisateur ? + actuellement si l'on se contente à la récupération
-        de supprimer les messages, avec des utilisateurs qui ne sont plus connus, cela me va aussi. + car cela est
-        la 1er version. Et eventuellement la dernière aussi.
    
 3. Gérer tout ce que j'ai fait avant en vue mobile. Au besoin, pour le text-area en scene faire que le paramètre nombre de colonne soit 
     généré dynamiquement et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet.
@@ -178,10 +161,10 @@ Les fichiers à placer en serveur seront générés en dossier
 # Documentations Supplémentaires
 
 
-Afin de faciliter les mises à jours futures du projet, il est inclus un peu de documentation.
-Il s'agit pour l'instant d'une liste de tests manuels, ainsi que de plusieurs idées 
-d'améliorations.
+Afin de faciliter les mises à jours futures du projet, il est inclus dans le projet une liste de 
+tests manuel afin de pouvoir facilement vérifier le bon fonctionnement du projet.
 
+De plus, il est aussi inclus une liste de futures idées d'améliorations.
 
 **Tests Manuels:** [doc/tests.md](./doc/tests.md)    
 **Idées d'améliorations:** [doc/amelioration_ideas.md](./doc/amelioration_ideas.md)      

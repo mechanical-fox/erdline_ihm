@@ -3,35 +3,33 @@
 # Idées d'amélioration
 
 
-Voici ci-dessous quelques idées d'améliorations pour le futur.   
+Voici ci-dessous quelques idées d'améliorations pour le futur.
 
-**Idée 0:** Réaliser un bouton "Annuler" au niveau de la création d'un endpoint
+## Idée 1 - Edition Message Bouton Annuler
 
-**Idée 1:** Pouvoir importer et exporter depuis un modèle de fichier spécifique au site Erdline.    
-Ce qui permettra de réaliser des sauvegardes.   
+Dans l'onglet scène, lors de l'édition des messages, faire apparaitre un bouton
+"annuler".
 
-**Idée 2:** Pouvoir exporter depuis un fichier OpenAI. Et ne PAS faire l'importation après réflexion.   
-Histoire de simplifier le processus.   
+## Idée 2 - Ajout de choix
 
-**Idee 3:** Permettre d'editer, même après avoir ajouté une url. L'idée est de modifier totalement    
-la vue. Au lieu de faire des onglets, faire juste "tag" - "indentation" - "methode url" et à côté
-des boutons éditer et supprimer.
+Actuellement, la seule façon de finir une scène est de faire une transition vers une autre scène.
+Prévoir dans le futur, de permettre aussi d'ajouter des choix. Ce qui est une fonctionnalité courante
+des visuals novel.
 
-**Idee 4:** Ajouter en base de donnée une table "log" qui sera remplie à chaque appel de 
-l'API. Elle devra indiquer l'action effectué, mais pas l'IP de la personne qui l'a effectué.
-L'idée est de suivre l'utilisation de l'API
+Il faudra prévoir les fonctionnalitées suivantes:
+1. Un choix qui n'apparait que si un ou plusieurs evenements sont présents
+2. Un choix qui n'apparait que si un ou plusieurs evenements sont absents
+3. Cliquer sur un choix doit envoyer vers une nouvelle scène
+4. Cliquer sur un choix pourra ajouter un évènement
+5. Un évènement sera simplement défini par un nom
 
-**Idée 5:** Pouvoir ajouter des descriptions aux urls, paramètres, ainsi que une description sur 
-la totalité de l'API. Ce qui est fait par Swagger. Aussi au niveau url, permettre à la fois de
-remplir les summary, et la description longue. 
+## Idée 3 - Transition conditionnelles
 
-**Idée 6:** Ajouter le type de sorties, et autoriser XML, JSON, texte simple, octet, html.    
+Après l'ajout des choix, et donc des évènements, ajouter des transitions conditionelles.
+Cela seront des transitions qui renverront vers différentes scènes, selon la présence, ou l'absence
+de différents évènements.
 
-**Idée 7:** Envoyer une erreur si le type XML, JSON ou HTML est choisie, mais que le type n'est 
-pas respecté. Pour l'html concrétement, vérifier en passant dans un parseur XML.    
- 
-**Idée 8:** Indenter et colorer pour les types JSOn et XML. A faire assez logiquement uniquement
-si l'on a vérifier le type. Eventuel Aussi colorer l'html si comme je le pense l'html est juste 
-du xml.  
+Actuellement, il est codé des transitions pour aller d'une scène à l'autre. Mais il n'est pas codé
+de transition conditionnelles.
 
-**Idée 9:** Ajouter eslint + indiquer en README   
+
