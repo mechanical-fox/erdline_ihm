@@ -79,15 +79,20 @@
     display: inline-block;
 }
 
-.message-edit-image{
-    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+.message-edit-image-div{
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
     background-color: rgb(0,0,0);
     display: inline-block;
-    object-fit: cover;
-    width:1.2rem;
-    height:1.2rem;
     border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+}
+
+.message-edit-image-icon{
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
 .scene-message-title{

@@ -37,7 +37,7 @@ A faire:
         8. Fait: Faire que si message final = transition alors l'on ne propose plus d'ajouter des messages. Cela doit être effectif
              après l'ajout de messages, l'édition de message, la suppression de messages.
 
-   - Faire que l'icone édition soit incluse dans le html afin d'être chargé plus vite
+   - Fait: Faire que l'icone édition soit incluse dans le html afin d'être chargé plus vite
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE ONGLETS
    - Gérer la gestion des GO TO, et des choix, avec les switchs d'onglets ENTRE SCENE #1, #2
    

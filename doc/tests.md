@@ -13,3 +13,10 @@ rapide sur les fonctionnalités les plus importantes.
 
 
 Contenu à mettre
+
+Quelques tests à faire: 
+
+-> Vérifier sauvegarde du contenu si l'on change d'onglet dans l'édition + aussi si l'on change l'onglet via
+la barre en haut.
+-> Vérifier que le contenu change, lorsque l'on change de personnage / décor / scène. Et que les informations fournies 
+soient correctes.
