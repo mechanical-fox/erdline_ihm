@@ -23,6 +23,7 @@ export class SceneComponent {
     scenes : WritableSignal<Scene[]>;
     messageToEdit : WritableSignal<number>;
     messageBoxFastLoad : WritableSignal<boolean>;
+    newMessagesAllowed : WritableSignal<boolean>;
     characters : any[];
     backgrounds : any[];
     storage : Storage;
@@ -37,6 +38,7 @@ export class SceneComponent {
         this.messagesIHM = signal([]);
         this.sceneName = signal("");
         this.messageBoxFastLoad = signal(false);
+        this.newMessagesAllowed = signal(true);
 
         if(Util.getVariable("scenes") != null){
             this.scenes = signal(Util.getVariable("scenes"));
@@ -66,8 +68,11 @@ export class SceneComponent {
         this.flushAndSave();
     }
 
-    /** Update the informations on screen, with the information matching the item currently selected. After this the function will 
-     * save the state of the component. This allow to quit the tab, return to the tab, and don't lost data beetween this actions.*/
+    /** Update the messages, sceneName, backgroundName displayed on screen, with the informations stored in the attribute this.scenes.
+     *  Update the screen, to let appear the box to add a new message, only if the scene isn't finished.
+     * A scene is finished, when a message of type transition appear, because you can't continuous to play a scene, if
+     * you have jumped to an other scene. After this the function will save the state of the component. Save the state of the composant
+     * allow to quit the tab, return to the tab, and don't lost data beetween this actions.*/
     flushAndSave(){
 
         let selected = this.storage.selected();
@@ -79,6 +84,13 @@ export class SceneComponent {
                     this.backgroundSelected.set(scene.backgroundId);
                     this.sceneName.set(scene.name);
                     this.messagesIHM.set(this.convertMessage(scene.messages));
+
+                    if(scene.messages.length == 0)
+                        this.newMessagesAllowed.set(true);
+                    else if(scene.messages[scene.messages.length - 1].characterId == "transition")
+                        this.newMessagesAllowed.set(false);
+                    else
+                        this.newMessagesAllowed.set(true);
                 }
             }
 
@@ -298,7 +310,7 @@ export class SceneComponent {
                 for(let scene of this.scenes()){
                     console.log(`scene.id : ${scene.id}, message.nextSceneId : ${message.nextSceneId}, égalité: ${scene.id == message.nextSceneId}`);
                     if(scene.id == message.nextSceneId)
-                        text = `Transition vers la scene ${scene.name}`;
+                        text = `Transition vers ${scene.name}`;
                 }
             }
 

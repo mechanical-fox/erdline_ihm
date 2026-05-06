@@ -92,7 +92,7 @@ scene to see this part of the page -->
         }
     }
 
-    @if(messageToEdit() == -1){
+    @if(messageToEdit() == -1 && newMessagesAllowed()){
         <MessageBox (createdMessage)="addMessage($event)" [fastLoad]="messageBoxFastLoad()"/>
     }
     
