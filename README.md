@@ -51,12 +51,16 @@ A faire:
     -> Fait: Charger un personnage hardcodé à droite, ici ne pas encore lire les messages
     -> Fait: Charger un personnage hardcodé à gauche + AUSSI EFFET MIRROIR, ici ne pas encore lire les messages
 
-    -> Charger un message hardcodé, ici ne pas encore lire les messages + ATTENTION fillText ne fait qu'une ligne, donc il va falloir "couper"
+    -> Fait: Charger un message hardcodé, ici ne pas encore lire les messages + ATTENTION fillText ne fait qu'une ligne, donc il va falloir "couper"
         au "\n" + après regarder si l'on dépasse x caractère et alors ajouter des "\n" + après aussi ajouter un nombre de ligne maximale.
+
+
+    -> Faire un affichage du nom Personne nom personne, en permettant soit à droite, soit à gauche, soit rien (ex: narration).
     -> Détermination de la 1er scène à charger: Si pas de scène afficher "En attente de création d'un script", sinon
         regarder toutes les scènes qui ne sont PAS pointés par des transitions, et prendre la 1er, dans le cas ou il y en a plusieurs.
     -> gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
     genre 3 personnages. A chaque fois, un seul personnage à gauche, un seul personnage à droite.
+    -> gérer le entrée en écoutant à keyup ou keydown, je ne me rapelle plus + en vérifiant la touche appuyé
     -> gérer les transitions entre scènes
 
 
