@@ -12,6 +12,12 @@ Fait: edition menu se met à avoir une width (Sinon le menu va "pousser" et cré
     justify-content: flex-start;
 }
 
+.edition-menu{
+    margin: 2.5rem 0rem 0rem 4vw;
+    display: inline-block;
+    width: var(--edition-menu-width);
+}
+
 
 .edition-menu-item-activated{
     display: var(--edition-item-display);

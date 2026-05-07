@@ -39,17 +39,15 @@ A faire:
    - Fait: Faire que l'icone édition soit incluse dans le html afin d'être chargé plus vite
    
 
-3. Fait: Vue responsive onglet décor
-4. Fait: Vue responsive onglet personnage
+    3. Fait: Vue responsive onglet décor
+    4. Fait: Vue responsive onglet personnage
+    5. Fait: Vue responsive onglet scène, y compris si plusieurs message, y compris lors de l'édition des messages.
 
-5. Vue responsive onglet scene +  Au besoin, pour le text-area en messageBox faire que le paramètre nombre de colonne soit 
-    généré dynamiquement et utiliser quelque chose genre windows.width ou autre. Chercher le nom sur internet. + ATTENTION à vérifier
-    les messages en édition rapport au padding qui risque de faire déborder.
-6. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
-    plus de sprites ?
-7. Maintenant faire le jeu en train de jouer, mais gérer en plus les différentes expressions d'un personnage. L'idée est que
-    même sans gérer les choix, gérer les différentes expression cela peut être utile.
-8. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
+    6. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
+         plus de sprites ?
+    7. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
+    Et appel url health ou message d'erreur. Voir si je fais des cercles de chargement ou non... cela dépend des temps de réponse.
+    Cela pourrait être mis en idée d'amélioration plutôt ? Genre si j'ai réussi à faire le site assez vite ?
     Et des tests unitaires aussi. Et la sauvegarde. Et vue mobile sur les nouveaux écrans... Bref, ce genre de choses.
     
 
@@ -58,6 +56,7 @@ Fin:
 toute une page entière si serveur down ? Voir le site mynrista
 - Tester le comportement si serveur down. Voir si le message apparait
 - Tester les cercles de chargement si réponse lente. Mettre des sleep au niveau API.
+    Ou alors... Juste ne pas en faire, car il n'est pas censé en apparaitre.
 - Faire attention à ce que la partis "A propos" soit à jour
 - Changer les fichiers de doc pour idée amélioration + tests manuels.
 - tester manuellement

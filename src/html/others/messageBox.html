@@ -39,7 +39,7 @@
                     <p class="messageBox-input-name">
                         Message
                     </p>
-                    <textarea [(ngModel)]="newMessageText" spellcheck="false" class="messageBox-textarea" rows="6" cols="50" (input)="textChanged($event)">  </textarea>
+                    <textarea [(ngModel)]="newMessageText" spellcheck="false" class="messageBox-textarea" (input)="textChanged($event)">  </textarea>
                 </div>
             </div>
         }

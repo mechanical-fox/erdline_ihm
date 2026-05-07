@@ -35,7 +35,7 @@
 
 
 .scene-parameter-div{
-    width: 35rem;
+    width: var(--scene-parameter-div-width);
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
@@ -50,23 +50,23 @@
 
 
 .scene-message-background-left{
-    margin: 0.6rem 0rem 2.0rem 1.0rem;
+    margin: var(--scene-message-background-left-margin);
     padding: 0.6rem 0.8rem 0.6rem 0.8rem;
-    width: 25rem;
+    width: var(--scene-message-width);
     background-color: rgb(118, 234, 255);
     border-radius : 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .scene-message-background-right{
-    margin: 0.6rem 0rem 2.0rem 7.0rem;
+    margin: var(--scene-message-background-right-margin);
     padding: 0.6rem 0.8rem 0.6rem 0.8rem;
-    width: 25rem;
+    width: var(--scene-message-width);
     background-color: rgb(118, 234, 255);
     border-radius : 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-.message-title-div{
-    width: 23rem;  
+.scene-message-title-div{
+    width: var(--scene-message-title-div-width);
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
@@ -74,12 +74,12 @@
     justify-content: center;
 }
 
-.message-title-sub-div{
-    width: 21rem;
+.scene-message-title-sub-div{
+    width: var(--scene-message-title-sub-div-width);
     display: inline-block;
 }
 
-.message-edit-image-div{
+.scene-message-edit-image-div{
     padding: 0.4rem 0.4rem 0.4rem 0.4rem;
     background-color: rgb(0,0,0);
     display: inline-block;
@@ -90,7 +90,7 @@
     cursor: pointer;
 }
 
-.message-edit-image-icon{
+.scene-message-edit-image-icon{
     width: 1.2rem;
     height: 1.2rem;
 }
