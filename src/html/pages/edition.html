@@ -36,7 +36,10 @@
         @if(selected() == "Scènes"){
             <Scene/>
         }
-        @if(selected() != "Décors" && selected() != "Personnages" && selected() != "Scènes"){
+        @if(selected() == "Jouer"){
+            <Game/>
+        }
+        @if(selected() == "Sauvegarde"){
             <p>
                 Page Edition
             </p>

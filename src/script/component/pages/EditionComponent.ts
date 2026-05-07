@@ -3,11 +3,12 @@ import { Component, WritableSignal, signal} from '@angular/core';
 import { BackgroundComponent } from '../edition_menu/BackgroundComponent';
 import { CharacterComponent } from '../edition_menu/CharacterComponent';
 import { SceneComponent } from '../edition_menu/SceneComponent';
+import { GameComponent } from '../edition_menu/GameComponent';
 import { Util } from '../../util/Util';
 
 @Component({
     selector: 'Edition',
-    imports: [BackgroundComponent, CharacterComponent, SceneComponent],
+    imports: [BackgroundComponent, CharacterComponent, SceneComponent, GameComponent],
     templateUrl: '../../../html/pages/edition.html',
     styleUrl: '../../../css/pages/edition.css'
 })

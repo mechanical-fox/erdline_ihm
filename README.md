@@ -44,7 +44,25 @@ A faire:
     5. Fait: Vue responsive onglet scène, y compris si plusieurs message, y compris lors de l'édition des messages.
 
     6. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
-         plus de sprites ?
+        plus de sprites ?
+
+    First- Commencer avec une taille fixe (est l'étape d'après le reste)
+    -> Fait: Charger un décor hardcodé
+    -> Fait: Charger un personnage hardcodé à droite, ici ne pas encore lire les messages
+    -> Fait: Charger un personnage hardcodé à gauche + AUSSI EFFET MIRROIR, ici ne pas encore lire les messages
+
+    -> Charger un message hardcodé, ici ne pas encore lire les messages + ATTENTION fillText ne fait qu'une ligne, donc il va falloir "couper"
+        au "\n" + après regarder si l'on dépasse x caractère et alors ajouter des "\n" + après aussi ajouter un nombre de ligne maximale.
+    -> Détermination de la 1er scène à charger: Si pas de scène afficher "En attente de création d'un script", sinon
+        regarder toutes les scènes qui ne sont PAS pointés par des transitions, et prendre la 1er, dans le cas ou il y en a plusieurs.
+    -> gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
+    genre 3 personnages. A chaque fois, un seul personnage à gauche, un seul personnage à droite.
+    -> gérer les transitions entre scènes
+
+
+    6. Vue Jouer en responsive... Ou alors afficher un message comme quoi l'on ne fait pas en dessous de x pixels / l'on ne fait pas
+        pour les mobiles. + idée est lorsque l'on récupère l'élément canvas, de demander quel sont width, et height si je veux un truc
+        responsive... mais je ne suis pas sur, que cela en vaille la peine.
     7. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
     Et appel url health ou message d'erreur. Voir si je fais des cercles de chargement ou non... cela dépend des temps de réponse.
     Cela pourrait être mis en idée d'amélioration plutôt ? Genre si j'ai réussi à faire le site assez vite ?
