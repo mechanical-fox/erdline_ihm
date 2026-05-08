@@ -23,7 +23,7 @@ export class BackgroundComponent {
 
     constructor(){
 
-        this.colors = this.listColors();
+        this.colors = BackgroundComponent.listColors();
         this.backgroundName = signal("");
         this.colorSelected = signal("");
         this.gradient = signal("");
@@ -140,7 +140,7 @@ export class BackgroundComponent {
     }
 
     /** Returns a list of all the available colors*/
-    listColors() : any[]{
+    static listColors() : any[]{
 
         let color1 = new Color("radio-orange", "Orange", "rgb(240, 138, 22)", "rgb(231, 195, 36)");
         let color2 = new Color("radio-noir", "Noir", "rgb(32, 32, 32)", "rgb(97, 97, 97)");

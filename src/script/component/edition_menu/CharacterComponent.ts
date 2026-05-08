@@ -24,7 +24,7 @@ export class CharacterComponent {
 
     constructor(){
 
-        this.sprites = this.listSprites();
+        this.sprites = CharacterComponent.listSprites();
         this.spritePreview = signal("images/default.png");
         this.characterName = signal("");
 
@@ -171,7 +171,7 @@ export class CharacterComponent {
 
 
     /** Returns a list of all the available sprites*/
-    listSprites() : any[]{
+    static listSprites() : Sprite[]{
 
         let spriteAdrien = new Sprite("sprite-adrien", "Adrien", "images/Adrien.png");
         let spriteGrace = new Sprite("sprite-grace", "Grace", "images/Grace.png");

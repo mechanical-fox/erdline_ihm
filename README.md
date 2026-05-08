@@ -59,14 +59,20 @@ A faire:
         Sinon regarder toutes les scènes qui ne sont PAS pointés par des transitions, et prendre la 1er, dans le cas ou il y en a 
         plusieurs.
     -> Fait: Si pas de 1er scène écrire en fenêtre en gros:  "En attente de création d'un script"
-    -> Fait : Refactorisation pour éviter de mettre "any" dans background et character.
+    -> Fait: Si il y a première scene, récupérer BackgroundId + message + si pas de background, mettre un background par défaut.
+    -> Fait: Gérer transformer les messages depuis des id, à des noms, texte, contenu sprite (Un seul sprite dans les messages)...
+    -> Fait: Faire un loader pour les sprites, afin d'éviter de recharger 2 fois les mêmes données, et afin de pouvoir gérer
+        un prétéléchargement.
+    -> Fait: Afficher la scène correspondant au tout 1er message avec 1 personnages en scène + ne pas oublier de faire apparaitre le pseudo si vrai perso
+                    (!= narration) + gérer si l'on est sur un message narration + transition on gère plus tard
+    -> Fait: Afficher la scène correspondant au tout 1er message avec 2 personnages en scène, les deux doivent apparaitrent  + ne pas oublier de faire 
+                    apparaitre le pseudo si vrai perso (!= narration) + gérer si l'on est sur un message narration + transition on gère plus tard
 
-    -> Si il y a première scene, récupérer BackgroundId + message + si pas de background, mettre un background par défaut.
-    -> Gérer transformer les messages depuis des id, à des noms, prenoms, texte, contenu sprite (1 ou 2)...
+
     -> gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
     genre 3 personnages. A chaque fois, un seul personnage à gauche, un seul personnage à droite.
     -> gérer le entrée en écoutant à keyup ou keydown, je ne me rapelle plus + en vérifiant la touche appuyé
-    -> gérer les transitions entre scènes
+    -> gérer les transitions entre scènes. On doit changer de scène + revenir au numéro 0.
 
 
     6. Vue Jouer en responsive... Ou alors afficher un message comme quoi l'on ne fait pas en dessous de x pixels / l'on ne fait pas

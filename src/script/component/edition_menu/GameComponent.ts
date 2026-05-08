@@ -2,6 +2,17 @@ import { Component, signal, WritableSignal} from '@angular/core';
 import { Util } from '../../util/Util';
 import { Scene } from '../../data/ihm/Scene';
 import { Message } from '../../data/ihm/Message';
+import { GameMessage } from '../../data/ihm/GameMessage';
+import { Background } from '../../data/ihm/Background';
+import { GameBackground } from '../../data/ihm/GameBackground';
+import { BackgroundComponent } from './BackgroundComponent';
+import { CharacterComponent } from './CharacterComponent';
+import { Color } from '../../data/ihm/Color';
+import { Character } from '../../data/ihm/Character';
+import { Sprite } from '../../data/ihm/Sprite';
+import { GameSprite } from '../../data/ihm/GameSprite';
+import { GameFirstSprites } from '../../data/ihm/GameFirstSprites';
+import { SpriteLoader } from '../../util/SpriteLoader';
 
 @Component({
     selector: 'Game',
@@ -16,63 +27,200 @@ export class GameComponent {
     static USER_MESSAGE_MAX_CHARACTER_BY_LINE = 40;
     static USER_MESSAGE_FONT = "bold 30px serif"
     static USER_MESSAGE_LINE_HEIGHT = 33;
-    messages : Message[];
+    messages : GameMessage[];
+    gameBackground : GameBackground | null;
+    leftSprite : GameSprite | null;
+    rightSprite : GameSprite | null;
+    messageNumber : number;
 
     constructor(){
         this.messages = [];
+        this.gameBackground = null;
+        this.leftSprite = null;
+        this.rightSprite = null;
+        this.messageNumber = -1;
     }
 
     /** A lifecycle happening after the content has been initialized. For this component, the goal is to 
      * initiate the first image of the canvas. */
     async ngAfterContentInit(){
+
+        let firstScene : Scene | null = this.returnFirstScene();
+
+        if(firstScene == null || firstScene.messages.length == 0){
+            let message = "En attente de création d'une scène";
+            this.drawUserMessage(message);
+        }else{
+            this.gameBackground = this.getBackground(firstScene.backgroundId);
+            this.messages = this.convertMessage(firstScene.messages);
+            this.messageNumber = 0;
+            let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
+            this.leftSprite = firstSprites.leftSprite;
+            this.rightSprite = firstSprites.rightSprite;
+            // initialize the loading of the future sprites, and in the same we don't stop, so we don't use await
+            // to be faster. The Sprite Loader use a cache, to explain.
+            SpriteLoader.initLoading(this.messages);
+            this.drawSceneAt(0);
+        }   
+    }
+
+    /** Draw the scene, for the message of indice given */
+    async drawSceneAt( indMessage : number){
+        let message = this.messages[indMessage];
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
-        let firstGradient = "rgb(21, 59, 226)";
-        let secondGradient = "rgb(44, 141, 206)";
         let heightCharacter = 420;
         let widthCharacter = 330;
 
-        if(canvas != null){
-            let ctx = canvas.getContext('2d');
+        if(indMessage > this.messages.length || message.characterName == "transition"){
+            let message = "Fin du jeu";
+            this.drawUserMessage(message);
+        }
+        else{
+        
+            let drawNameInLeft : boolean | null = null;
+            let replaceLeftCharacter : boolean | null = null;
+            let replaceRightCharacter : boolean | null = null;
 
-            if(ctx != null){
-                let promiseImage1 : Promise<HTMLVideoElement | null> = this.getSpriteData('images/Grace.png');
-                let promiseImage2 : Promise<HTMLVideoElement | null> = this.getSpriteData('images/Adrien.png');
-                let image1 = await promiseImage1;
-                let image2 = await promiseImage2;
+            if(message.characterName != "narration" && message.characterName != "transition"){
 
-                /** How to render a background */
-                let gradient = ctx.createLinearGradient(0,0,0,450);
-                gradient.addColorStop(0, firstGradient);
-                gradient.addColorStop(1, secondGradient);
-                ctx.fillStyle = gradient;
-                ctx.roundRect(0,0,800,450,[15,15,15,15]);
-                ctx.fill();
-
-                if(image1 && image2){
-                    this.drawSprite(image1, widthCharacter, heightCharacter, false);
-                    this.drawSprite(image2, widthCharacter, heightCharacter, true);
+                if(this.leftSprite?.character == message.characterName){
+                    drawNameInLeft = true;
+                    replaceLeftCharacter = true;
+                    replaceRightCharacter = false;
                 }
-                
-                let message = "Grace et moi marchons en silence, pendant une quinzaine de minutes, jusqu'a rejoindre les autres" +
-                " agents de sécurité. Ceux-ci forment une équipe assez diverse, avec juste en commun un petit blouson, et un insigne"
-                + " en forme de croissant de lune. Il s'agit sans doute de leur uniforme, pour être identifiés.";
-                this.drawText(message, true);
-                this.drawCharacterName("Adrien", true);
-
-                let firstScene : Scene | null = this.returnFirstScene();
-
-                if(firstScene == null){
-                    let message = "En attente de création d'une scène";
-                    this.drawUserMessage(message);
-                }else{
-                    let backgroundId = firstScene.backgroundId;
-                    this.messages = firstScene.messages;
-
-                    // gérer cas si backgroundId = "empty";
+                else if(this.rightSprite?.character == message.characterName){
+                    drawNameInLeft = false;
+                    replaceLeftCharacter = false;
+                    replaceRightCharacter = true;
                 }
-                    
+                else{
+                    let lastCharacterWithDialogInLeft : boolean | null = null;
+
+                    for(let i = indMessage - 1; i >= 0 && lastCharacterWithDialogInLeft == null; i--){
+                        if(this.messages[i].characterName != "narration" && message.characterName != "transition"){
+                            if(this.messages[i].characterName == this.leftSprite?.character){
+                                lastCharacterWithDialogInLeft = true;
+                                drawNameInLeft = false;
+                                replaceLeftCharacter = false;
+                                replaceRightCharacter = true;
+                            }
+                            else{
+                                lastCharacterWithDialogInLeft = false;
+                                drawNameInLeft = true;
+                                replaceLeftCharacter = true;
+                                replaceRightCharacter = false;
+                            }  
+                        }
+                    }
+                } 
+            }
+            else{
+                drawNameInLeft = null;
+                replaceLeftCharacter = false;
+                replaceRightCharacter = false;
+            }
+
+            if(message.characterName != "narration" && message.characterName != "transition"){
+                if(message.spriteFilename && (replaceLeftCharacter || replaceRightCharacter)){
+                    let data = await SpriteLoader.loadSpriteData(message.spriteFilename);
+                    let sprite = new GameSprite(message.characterName, message.spriteFilename, data);
+                            
+                    if(replaceLeftCharacter)
+                        this.leftSprite = sprite;
+                    if(replaceRightCharacter)
+                        this.rightSprite = sprite;
+                }
+            }
+
+            if(canvas != null){
+                let ctx = canvas.getContext('2d');
+
+                if(ctx != null && this.gameBackground){
+                    let gradient = ctx.createLinearGradient(0,0,0,450);
+                    gradient.addColorStop(0, this.gameBackground.firstGradient);
+                    gradient.addColorStop(1, this.gameBackground.secondGradient);
+                    ctx.fillStyle = gradient;
+                    ctx.roundRect(0,0,800,450,[15,15,15,15]);
+                    ctx.fill();
+
+                    if(this.leftSprite && this.leftSprite.data)
+                        this.drawSprite(this.leftSprite.data, widthCharacter, heightCharacter, true);
+                    if(this.rightSprite && this.rightSprite.data)
+                        this.drawSprite(this.rightSprite.data, widthCharacter, heightCharacter, false);
+
+                    if(message.characterName == "narration")
+                        this.drawText(message.text, true);
+                    else{
+                        if(drawNameInLeft != null && drawNameInLeft == true)
+                            this.drawCharacterName(message.characterName, true);
+                        else if(drawNameInLeft != null && drawNameInLeft == false)
+                            this.drawCharacterName(message.characterName, false);
+
+                        this.drawText(message.text, false);
+                    }
+                }
+            }    
+        }
+    }
+
+
+    /** Transform the messages, in GameMessage. The messages received by the GameComponent have id not resolved (characterId, 
+     * expressionId), because it's necessary to impact the changes, if we change the name of a character by example. But...
+     * here to play, we will resolve all the information, like search for the sprite for this character, and expression. We 
+     * will keep only the informations necessary to play. And this informations, will be returned in the form of a GameMessage. */
+    convertMessage(messages : Message[]) : GameMessage[]{
+        let convertedMessages : GameMessage[] = [];
+        let characters : Character[] = Util.getVariable("characters") ? Util.getVariable("characters") : [];
+        let sprites : Sprite[] = CharacterComponent.listSprites();
+
+        for(let message of messages){
+
+            if(message.characterId == "narration"){
+                let newConvertedMessage = new GameMessage(null, "narration", message.text, null);
+                convertedMessages.push(newConvertedMessage); 
+            }
+            else if(message.characterId == "transition"){
+                let newConvertedMessage = new GameMessage(null, "transition", "", message.nextSceneId);
+                convertedMessages.push(newConvertedMessage); 
+            }
+            else{
+                for(let character of characters){
+                    if(character.id == message.characterId){
+                        for(let expression of character.expressions){
+                            if(expression.id == message.expressionId){
+                                for(let sprite of sprites){
+                                    if(sprite.id == expression.sprite_id){
+                                        let newConvertedMessage = new GameMessage(sprite.image, character.name, message.text, message.nextSceneId);
+                                        convertedMessages.push(newConvertedMessage); 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        return convertedMessages;
+    }
+
+    /** Return the background matching the id. If no id is matching, like if the id is "empty", a default background 
+     * will be returned. */
+    getBackground(backgroundId : string) : GameBackground{
+        let backgrounds : Background[] = Util.getVariable("backgrounds") ? Util.getVariable("backgrounds") : [];
+        let colors : Color[] = BackgroundComponent.listColors();
+        
+        for(let background of backgrounds){
+            if(background.id == backgroundId){
+                for(let color of colors){
+                    if(color.id == background.color_id){
+                        return new GameBackground(background.name, color.firstGradient, color.secondGradient);
+                    }
+                }
+            }
+        }
+
+        return new GameBackground("defaultBackground", "rgb(21, 59, 226)", "rgb(44, 141, 206)");
     }
 
     /** On the Game draw a message to the user, like by example "Game finished" */
@@ -254,36 +402,6 @@ export class GameComponent {
         }
 
         return result;
-    }
-
-    /** For a source, return the data of the image asked in the form of a HTMLVideoElement. Returns null if an error is 
-    * encounter. You need to use await, to retrieve the data.*/
-    async getSpriteData(source : string) : Promise<HTMLVideoElement | null>{
-        let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
-        let data : HTMLVideoElement | null = null;
-
-        if(canvas){
-            let ctx = canvas.getContext('2d');
-
-            if(ctx){
-                let image = new Image(); 
-                let imageLoaded : boolean = false;
-                image.src = source;
-
-                // This function is called when the image is loaded
-                image.onload = function() {
-                    data = this as HTMLVideoElement;
-                    imageLoaded = true;
-                };
-
-                while(!imageLoaded)
-                    await Util.sleep(200);
-                
-                return data;
-            }
-        }
-        
-        return null;
     }
 
     /** Draw in screen the sprite given into parameter. If drawLeft is true, the sprite will be draw at the left of 
