@@ -2,8 +2,8 @@ import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Storage} from '../../util/Storage';
-
-
+import { Background } from '../../data/ihm/Background';
+import { Color } from '../../data/ihm/Color';
 
 @Component({
     selector: 'Background',
@@ -13,11 +13,11 @@ import {Storage} from '../../util/Storage';
 })
 export class BackgroundComponent {
 
-    colors : any[];
+    colors : Color[];
     backgroundName: WritableSignal<string>;
     colorSelected: WritableSignal<string>;
     gradient : WritableSignal<string>;
-    backgrounds : WritableSignal<any>;
+    backgrounds : WritableSignal<Background[]>;
     storage : Storage;
     counter : number;
 
@@ -55,7 +55,7 @@ export class BackgroundComponent {
                 this.backgroundName.set(selected);
                 
                 for(let color of this.colors){
-                    if(color.id == background["color-id"]){
+                    if(color.id == background.color_id){
                         this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
                         this.colorSelected.set(color.id);
                     }
@@ -76,11 +76,8 @@ export class BackgroundComponent {
         let id = `background-${this.counter}`;
         this.counter++;
 
-        backgroundsValue.push({
-            "id" : id,
-            "name" : newName,
-            "color-id" : "radio-orange"
-        });
+        let newBackground = new Background(id, newName,"radio-orange");
+        backgroundsValue.push(newBackground);
 
         this.backgrounds.set(backgroundsValue);
         this.flushAndSave();
@@ -135,7 +132,7 @@ export class BackgroundComponent {
         for(let i in backgroundsValue){
             if(event.target.checked && backgroundsValue[i].name == this.storage.selected()){
                 ind = parseInt(i);
-                backgroundsValue[ind]["color-id"] = id;
+                backgroundsValue[ind].color_id = id;
                 this.backgrounds.set(backgroundsValue);
                 this.flushAndSave();
             }       
@@ -145,29 +142,10 @@ export class BackgroundComponent {
     /** Returns a list of all the available colors*/
     listColors() : any[]{
 
-        let colors = [
-            {
-                id: "radio-orange",
-                value: "Orange",
-                firstGradient: "rgb(240, 138, 22)",
-                secondGradient: "rgb(231, 195, 36)",
-                defaultChecked : true
-            },
-            {
-                id: "radio-noir",
-                value: "Noir",
-                firstGradient: "rgb(32, 32, 32)",
-                secondGradient: "rgb(97, 97, 97)",
-                defaultChecked : false
-            },
-            {
-                id: "radio-blue",
-                value: "Bleu",
-                firstGradient: "rgb(21, 59, 226)",
-                secondGradient: "rgb(44, 141, 206)",
-                defaultChecked : false
-            }
-        ];
+        let color1 = new Color("radio-orange", "Orange", "rgb(240, 138, 22)", "rgb(231, 195, 36)");
+        let color2 = new Color("radio-noir", "Noir", "rgb(32, 32, 32)", "rgb(97, 97, 97)");
+        let color3 = new Color("radio-blue", "Bleu", "rgb(21, 59, 226)", "rgb(44, 141, 206)");
+        let colors = [color1, color2,color3];
 
         return colors;
     }

@@ -54,10 +54,15 @@ A faire:
     -> Fait: Charger un message hardcodé, ici ne pas encore lire les messages + ATTENTION fillText ne fait qu'une ligne, donc il va falloir "couper"
         au "\n" + après regarder si l'on dépasse x caractère et alors ajouter des "\n" + après aussi ajouter un nombre de ligne maximale.
 
+    -> Fait: Faire un affichage du nom Personne nom personne, en permettant soit à droite, soit à gauche, soit rien (ex: narration).
+    -> Fait: Détermination de la 1er scène à charger: Si pas de scène, ou si toutes scenes ont 0 messages, retourner null.
+        Sinon regarder toutes les scènes qui ne sont PAS pointés par des transitions, et prendre la 1er, dans le cas ou il y en a 
+        plusieurs.
+    -> Fait: Si pas de 1er scène écrire en fenêtre en gros:  "En attente de création d'un script"
+    -> Fait : Refactorisation pour éviter de mettre "any" dans background et character.
 
-    -> Faire un affichage du nom Personne nom personne, en permettant soit à droite, soit à gauche, soit rien (ex: narration).
-    -> Détermination de la 1er scène à charger: Si pas de scène afficher "En attente de création d'un script", sinon
-        regarder toutes les scènes qui ne sont PAS pointés par des transitions, et prendre la 1er, dans le cas ou il y en a plusieurs.
+    -> Si il y a première scene, récupérer BackgroundId + message + si pas de background, mettre un background par défaut.
+    -> Gérer transformer les messages depuis des id, à des noms, prenoms, texte, contenu sprite (1 ou 2)...
     -> gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
     genre 3 personnages. A chaque fois, un seul personnage à gauche, un seul personnage à droite.
     -> gérer le entrée en écoutant à keyup ou keydown, je ne me rapelle plus + en vérifiant la touche appuyé

@@ -1,9 +1,10 @@
 import { Component, WritableSignal, signal, Signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Util} from '../../util/Util';
-import {Storage} from '../../util/Storage';
-
-
+import { Util } from '../../util/Util';
+import { Storage } from '../../util/Storage';
+import { Sprite } from '../../data/ihm/Sprite';
+import { Character } from '../../data/ihm/Character';
+import { Expression } from '../../data/ihm/Expression';
 
 @Component({
     selector: 'Character',
@@ -15,9 +16,9 @@ export class CharacterComponent {
 
     
     spritePreview : WritableSignal<string | null>;
-    sprites : any[];
+    sprites : Sprite[];
     characterName: WritableSignal<string>;
-    characters : WritableSignal<any>;
+    characters : WritableSignal<Character[]>;
     storage : Storage;
     counter : number;
 
@@ -65,31 +66,11 @@ export class CharacterComponent {
         let newName  = this.storage.add();
         let id = `character-${this.counter}`;
 
-        charactersValue.push({
-            "id" : id,
-            "name" : newName,
-            "expressions" : [
-                {
-                    "id" : "expr-1",
-                    "counter" : 1,
-                    "name" : "",
-                    "sprite-id" : null
-                },
-                {
-                    "id" : "expr-2",
-                    "counter" : 2,
-                    "name" : "",
-                    "sprite-id" : null
-                },
-                {
-                    "id" : "expr-3",
-                    "counter" : 3,
-                    "name" : "",
-                    "sprite-id" : null
-                }
-            ]
-        });
-
+        let expr1 = new Expression("expr-1", 1, "", null);
+        let expr2 = new Expression("expr-2", 2, "", null);
+        let expr3 = new Expression("expr-3", 3, "", null);
+        let newCharacter = new Character(id,newName,[expr1, expr2, expr3]); 
+        charactersValue.push(newCharacter);
         this.characters.set(charactersValue);
         this.counter++;
         this.flushAndSave();
@@ -147,7 +128,7 @@ export class CharacterComponent {
                 for(let expression of character.expressions){
                     if(expression.id == expression_id){
                         let value = event.target.value == "empty" ? null : event.target.value;
-                        expression["sprite-id"] =  value;
+                        expression.sprite_id =  value;
                         this.characters.set(charactersValue);
                     }
                 }
@@ -161,7 +142,7 @@ export class CharacterComponent {
      * the character selected will be null.*/
     deleteCurrentCharacter(){
 
-        let newCharactersValue = [];
+        let newCharactersValue : Character[] = [];
 
         for(let item of this.characters()){
             if(item.name != this.storage.selected())
@@ -192,20 +173,9 @@ export class CharacterComponent {
     /** Returns a list of all the available sprites*/
     listSprites() : any[]{
 
-        let sprites = [
-            {
-                id: "sprite-adrien",
-                name : "Adrien",
-                image: "images/Adrien.png",
-                defaultChecked : true
-            },
-            {
-                id: "sprite-grace",
-                name : "Grace",
-                image: "images/Grace.png",
-                defaultChecked : false
-            }
-        ];
+        let spriteAdrien = new Sprite("sprite-adrien", "Adrien", "images/Adrien.png");
+        let spriteGrace = new Sprite("sprite-grace", "Grace", "images/Grace.png");
+        let sprites = [spriteAdrien, spriteGrace];
 
         return sprites;
     }

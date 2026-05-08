@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Message} from '../../data/ihm/Message';
 import {Scene} from '../../data/ihm/Scene';
+import { Character } from '../../data/ihm/Character';
 
 @Component({
     selector: 'MessageBox',
@@ -195,7 +196,7 @@ export class MessageBoxComponent {
     /** Return the list of all the characters, and their expressions. If a character have an expression where the name is "",
      * or if the expression has no sprite, the expression isn't included. If a character has no expression, the character isn't
      * included. */
-    getCharacters() : any[]{
+    getCharacters() : Character[]{
         let characters = Util.getVariable("characters");
         let result = [];
 
@@ -210,7 +211,7 @@ export class MessageBoxComponent {
             };
 
             for(let expression of character.expressions){
-                if(expression.name.trim() != "" && expression["sprite-id"] != null)
+                if(expression.name.trim() != "" && expression.sprite_id != null)
                     added.expressions.push(expression);
             }
 

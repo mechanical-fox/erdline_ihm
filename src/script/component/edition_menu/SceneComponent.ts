@@ -7,7 +7,8 @@ import { Message } from '../../data/ihm/Message';
 import {Scene} from '../../data/ihm/Scene';
 import { DisplayMessage } from '../../data/ihm/DisplayMessage';
 import { MessageBoxComponent } from '../others/MessageBoxComponent';
-
+import { Character } from '../../data/ihm/Character';
+import { Background } from '../../data/ihm/Background';
 
 @Component({
     selector: 'Scene',
@@ -24,8 +25,8 @@ export class SceneComponent {
     messageToEdit : WritableSignal<number>;
     messageBoxFastLoad : WritableSignal<boolean>;
     newMessagesAllowed : WritableSignal<boolean>;
-    characters : any[];
-    backgrounds : any[];
+    characters : Character[];
+    backgrounds : Background[];
     storage : Storage;
     counter : number;
 
@@ -179,8 +180,8 @@ export class SceneComponent {
     /** Return the list of all the characters, and their expressions. If a character have an expression where the name is "",
      * or if the expression has no sprite, the expression isn't included. If a character has no expression, the character isn't
      * included. */
-    getCharacters() : any[]{
-        let characters = Util.getVariable("characters");
+    getCharacters() : Character[]{
+        let characters : Character[] = Util.getVariable("characters");
         let result = [];
 
         if(characters == null)
@@ -194,7 +195,7 @@ export class SceneComponent {
             };
 
             for(let expression of character.expressions){
-                if(expression.name.trim() != "" && expression["sprite-id"] != null)
+                if(expression.name.trim() != "" && expression.sprite_id != null)
                     added.expressions.push(expression);
             }
 
