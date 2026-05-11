@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal} from '@angular/core';
+import { Component} from '@angular/core';
 import { Util } from '../../util/Util';
 import { Scene } from '../../data/ihm/Scene';
 import { Message } from '../../data/ihm/Message';
@@ -57,25 +57,60 @@ export class GameComponent {
             let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
             this.leftSprite = firstSprites.leftSprite;
             this.rightSprite = firstSprites.rightSprite;
-            // initialize the loading of the future sprites, and in the same we don't stop, so we don't use await
-            // to be faster. The Sprite Loader use a cache, to explain.
             SpriteLoader.initLoading(this.messages);
             this.drawSceneAt(0);
         }   
     }
 
+
+
+    /** Go to the next message into the scene, and if necessary will change the background, or the sprites  */
+    async nextMessage(){
+
+        if(this.messages.length == 0){
+            let message = "En attente de création d'une scène";
+            this.drawUserMessage(message);
+        }
+        else if (this.messageNumber >= this.messages.length - 1){
+            let message = "Fin du jeu";
+            this.drawUserMessage(message);       
+        }
+        else{
+            this.messageNumber++;
+            this.drawSceneAt(this.messageNumber);
+        }
+            
+    }
+
     /** Draw the scene, for the message of indice given */
     async drawSceneAt( indMessage : number){
-        let message = this.messages[indMessage];
-        let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
-        let heightCharacter = 420;
-        let widthCharacter = 330;
 
-        if(indMessage > this.messages.length || message.characterName == "transition"){
+        if(indMessage >= this.messages.length){
             let message = "Fin du jeu";
             this.drawUserMessage(message);
         }
+        else if(this.messages[indMessage].characterName == "transition"){
+            let nextSceneId = this.messages[indMessage].nextSceneId;
+            let scenes = Util.getVariable("scenes") ? Util.getVariable("scenes") : [];
+
+            for(let scene of scenes){
+                if(scene.id == nextSceneId){
+                    this.gameBackground = this.getBackground(scene.backgroundId);
+                    this.messages = this.convertMessage(scene.messages);
+                    this.messageNumber = 0;
+                    let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
+                    this.leftSprite = firstSprites.leftSprite;
+                    this.rightSprite = firstSprites.rightSprite;
+                    SpriteLoader.initLoading(this.messages);
+                    this.drawSceneAt(0);
+                }
+            }
+        }
         else{
+            let message : GameMessage = this.messages[indMessage];
+            let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
+            let heightCharacter = 420;
+            let widthCharacter = 330;
         
             let drawNameInLeft : boolean | null = null;
             let replaceLeftCharacter : boolean | null = null;
@@ -112,6 +147,10 @@ export class GameComponent {
                             }  
                         }
                     }
+
+                    // lastCharacterWithDialogInLeft will never be null, because if message isn't a narration / transition,
+                    // the message must match the left sprite, or match the left sprite, or ... there was at least 2 messages before
+                    // Reasons: The sprites at left, and at right,  are the sprites matching the first messages
                 } 
             }
             else{

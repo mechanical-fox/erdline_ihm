@@ -53,10 +53,10 @@ export class SpriteLoader{
         return new GameFirstSprites(leftSprite, rightSprite);
     }
 
-    /** This function will begin to download all sprites needed, because they are referenced in the messages given into parameter. It's not 
-     * necessary to use await, because you can call loadSpriteData, even if this function isn't finished. Like this function will not be
+    /** This function will begin to download all sprites needed, because they are referenced in the messages given into parameter. It's often
+     * better to not use await, because you can call loadSpriteData, even if this function isn't finished. Like this function will not be
      * finished, if there is really a lot of sprites to download.*/
-    static async initLoading(messages : GameMessage[]){
+    static async initLoading(messages : GameMessage[]) : Promise<void>{
 
         let treated : string[] = [];
         let names : string[] = [];

@@ -67,12 +67,16 @@ A faire:
                     (!= narration) + gérer si l'on est sur un message narration + transition on gère plus tard
     -> Fait: Afficher la scène correspondant au tout 1er message avec 2 personnages en scène, les deux doivent apparaitrent  + ne pas oublier de faire 
                     apparaitre le pseudo si vrai perso (!= narration) + gérer si l'on est sur un message narration + transition on gère plus tard
+    -> Fait: gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
+    genre 3 personnages (--> Cela fait, on remplace le personnage qui n'a pas parlé ). A chaque fois, un seul personnage à gauche, un seul personnage à droite.
+    -> Fait: Gérer les transitions entre scènes. On doit changer de scène + revenir au numéro 0.
 
 
-    -> gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
-    genre 3 personnages. A chaque fois, un seul personnage à gauche, un seul personnage à droite.
-    -> gérer le entrée en écoutant à keyup ou keydown, je ne me rapelle plus + en vérifiant la touche appuyé
-    -> gérer les transitions entre scènes. On doit changer de scène + revenir au numéro 0.
+    -> Refactoring  de Game Component ??
+    -> Faire gestion modification taille en indicant sur le canvas l'évenement (window:resize)="onResize($event)" ce qui est une syntaxe
+        spécifique à angular. On pourra récupérer l'event de windows, ou alors de l'event avec event.target.innerWidth
+        Aussi... Il pourrait être nécessaire plutôt de récupérer la largeur du canvas, si je mets du CSS et tout. En récupérant avec
+        l'id.
 
 
     6. Vue Jouer en responsive... Ou alors afficher un message comme quoi l'on ne fait pas en dessous de x pixels / l'on ne fait pas
