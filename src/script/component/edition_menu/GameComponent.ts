@@ -1,18 +1,19 @@
 import { Component} from '@angular/core';
 import { Util } from '../../util/Util';
-import { Scene } from '../../data/ihm/Scene';
-import { Message } from '../../data/ihm/Message';
-import { GameMessage } from '../../data/ihm/GameMessage';
-import { Background } from '../../data/ihm/Background';
-import { GameBackground } from '../../data/ihm/GameBackground';
+import { Scene } from '../../data/edition/Scene';
+import { Message } from '../../data/edition/Message';
+import { GameMessage } from '../../data/game/GameMessage';
+import { Background } from '../../data/edition/Background';
+import { GameBackground } from '../../data/game/GameBackground';
 import { BackgroundComponent } from './BackgroundComponent';
 import { CharacterComponent } from './CharacterComponent';
-import { Color } from '../../data/ihm/Color';
-import { Character } from '../../data/ihm/Character';
-import { Sprite } from '../../data/ihm/Sprite';
-import { GameSprite } from '../../data/ihm/GameSprite';
-import { GameFirstSprites } from '../../data/ihm/GameFirstSprites';
+import { Color } from '../../data/edition/Color';
+import { Character } from '../../data/edition/Character';
+import { Sprite } from '../../data/edition/Sprite';
+import { GameSprite } from '../../data/game/GameSprite';
+import { GameFirstSprites } from '../../data/game/GameFirstSprites';
 import { SpriteLoader } from '../../util/SpriteLoader';
+import { GameInformation } from '../../data/game/GameInformation';
 
 @Component({
     selector: 'Game',
@@ -82,124 +83,129 @@ export class GameComponent {
             
     }
 
-    /** Draw the scene, for the message of indice given */
-    async drawSceneAt( indMessage : number){
-
-        if(indMessage >= this.messages.length){
-            let message = "Fin du jeu";
-            this.drawUserMessage(message);
+    /** Return the name of the last character with a dialog, in the messages given. Will return null, if no character had dialogs. */
+    getLastCharacterWithDialog(messages : GameMessage[]) : string | null{
+        for(let i = messages.length - 1; i >= 0; i--){
+            if(messages[i].characterName != "narration" && messages[i].characterName != "transition")
+                return messages[i].characterName;
         }
-        else if(this.messages[indMessage].characterName == "transition"){
-            let nextSceneId = this.messages[indMessage].nextSceneId;
+
+        return null;
+    }
+
+
+    /** Return the new game informations, for the message number given. This will allow to update the informations on screen, and
+     * in memory.*/
+    async CalculateSceneAt(leftSprite : GameSprite | null, rightSprite : GameSprite | null, gameBackground : GameBackground | null, 
+    messages : GameMessage[], messageNumber : number) : Promise<GameInformation>{
+
+        if(messageNumber >= messages.length){
+            let text = "Fin du jeu";
+            return new GameInformation(leftSprite, rightSprite, gameBackground, messages, messageNumber, text, true, false, null, null);
+        }
+        else if(messages[messageNumber].characterName == "transition"){
+            let nextSceneId = this.messages[messageNumber].nextSceneId;
             let scenes = Util.getVariable("scenes") ? Util.getVariable("scenes") : [];
 
             for(let scene of scenes){
                 if(scene.id == nextSceneId){
-                    this.gameBackground = this.getBackground(scene.backgroundId);
-                    this.messages = this.convertMessage(scene.messages);
-                    this.messageNumber = 0;
+                    let nextGameBackground = gameBackground = this.getBackground(scene.backgroundId);
+                    let nextMessages = this.convertMessage(scene.messages);
+                    let nextMessageNumber = 0;
                     let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
-                    this.leftSprite = firstSprites.leftSprite;
-                    this.rightSprite = firstSprites.rightSprite;
-                    SpriteLoader.initLoading(this.messages);
-                    this.drawSceneAt(0);
+                    let nextLeftSprite = firstSprites.leftSprite;
+                    let nextRightSprite = firstSprites.rightSprite;
+
+                    let informations = await this.CalculateSceneAt(nextLeftSprite,nextRightSprite, nextGameBackground, nextMessages, nextMessageNumber);
+                    return informations;
                 }
             }
+
+            let text = "Fin du jeu";
+            return new GameInformation(leftSprite, rightSprite, gameBackground, messages, messageNumber, text, true, false, null, null);
+        }
+        else if(messages[messageNumber].characterName == "narration"){
+            let text = messages[messageNumber].text;
+            return new GameInformation(leftSprite, rightSprite, gameBackground, messages, messageNumber, text, false, true, null, null);
         }
         else{
-            let message : GameMessage = this.messages[indMessage];
-            let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
-            let heightCharacter = 420;
-            let widthCharacter = 330;
-        
-            let drawNameInLeft : boolean | null = null;
-            let replaceLeftCharacter : boolean | null = null;
-            let replaceRightCharacter : boolean | null = null;
+            let message : GameMessage = messages[messageNumber];
+            let replaceLeftCharacter : boolean = false;
+            let previousMessages = messages.slice(0, messageNumber);
+            let lastCharacterWithDialog = this.getLastCharacterWithDialog(previousMessages);
 
-            if(message.characterName != "narration" && message.characterName != "transition"){
+            if(this.leftSprite?.character == message.characterName)
+                replaceLeftCharacter = true;
+            else if(this.rightSprite?.character == message.characterName)
+                replaceLeftCharacter = false;
+            else if(lastCharacterWithDialog == null || lastCharacterWithDialog == rightSprite?.character)
+                replaceLeftCharacter = true;
+            else
+                replaceLeftCharacter = false;
 
-                if(this.leftSprite?.character == message.characterName){
-                    drawNameInLeft = true;
-                    replaceLeftCharacter = true;
-                    replaceRightCharacter = false;
-                }
-                else if(this.rightSprite?.character == message.characterName){
-                    drawNameInLeft = false;
-                    replaceLeftCharacter = false;
-                    replaceRightCharacter = true;
-                }
-                else{
-                    let lastCharacterWithDialogInLeft : boolean | null = null;
+            if(message.spriteFilename){
+                let data = await SpriteLoader.loadSpriteData(message.spriteFilename);
+                let sprite = new GameSprite(message.characterName, message.spriteFilename, data);
+                let nextLeftSprite = leftSprite;
+                let nextRightSprite = rightSprite;
+                            
+                if(replaceLeftCharacter)
+                    nextLeftSprite = sprite;
+                else
+                    nextRightSprite = sprite;
 
-                    for(let i = indMessage - 1; i >= 0 && lastCharacterWithDialogInLeft == null; i--){
-                        if(this.messages[i].characterName != "narration" && message.characterName != "transition"){
-                            if(this.messages[i].characterName == this.leftSprite?.character){
-                                lastCharacterWithDialogInLeft = true;
-                                drawNameInLeft = false;
-                                replaceLeftCharacter = false;
-                                replaceRightCharacter = true;
-                            }
-                            else{
-                                lastCharacterWithDialogInLeft = false;
-                                drawNameInLeft = true;
-                                replaceLeftCharacter = true;
-                                replaceRightCharacter = false;
-                            }  
-                        }
-                    }
-
-                    // lastCharacterWithDialogInLeft will never be null, because if message isn't a narration / transition,
-                    // the message must match the left sprite, or match the left sprite, or ... there was at least 2 messages before
-                    // Reasons: The sprites at left, and at right,  are the sprites matching the first messages
-                } 
+                return new GameInformation(nextLeftSprite, nextRightSprite, gameBackground, messages, messageNumber, 
+                    message.text, false, false, message.characterName, replaceLeftCharacter);
             }
             else{
-                drawNameInLeft = null;
-                replaceLeftCharacter = false;
-                replaceRightCharacter = false;
+                return new GameInformation(leftSprite, rightSprite, gameBackground, messages, messageNumber, 
+                    message.text, false, false, message.characterName, replaceLeftCharacter);
             }
-
-            if(message.characterName != "narration" && message.characterName != "transition"){
-                if(message.spriteFilename && (replaceLeftCharacter || replaceRightCharacter)){
-                    let data = await SpriteLoader.loadSpriteData(message.spriteFilename);
-                    let sprite = new GameSprite(message.characterName, message.spriteFilename, data);
-                            
-                    if(replaceLeftCharacter)
-                        this.leftSprite = sprite;
-                    if(replaceRightCharacter)
-                        this.rightSprite = sprite;
-                }
-            }
-
-            if(canvas != null){
-                let ctx = canvas.getContext('2d');
-
-                if(ctx != null && this.gameBackground){
-                    let gradient = ctx.createLinearGradient(0,0,0,450);
-                    gradient.addColorStop(0, this.gameBackground.firstGradient);
-                    gradient.addColorStop(1, this.gameBackground.secondGradient);
-                    ctx.fillStyle = gradient;
-                    ctx.roundRect(0,0,800,450,[15,15,15,15]);
-                    ctx.fill();
-
-                    if(this.leftSprite && this.leftSprite.data)
-                        this.drawSprite(this.leftSprite.data, widthCharacter, heightCharacter, true);
-                    if(this.rightSprite && this.rightSprite.data)
-                        this.drawSprite(this.rightSprite.data, widthCharacter, heightCharacter, false);
-
-                    if(message.characterName == "narration")
-                        this.drawText(message.text, true);
-                    else{
-                        if(drawNameInLeft != null && drawNameInLeft == true)
-                            this.drawCharacterName(message.characterName, true);
-                        else if(drawNameInLeft != null && drawNameInLeft == false)
-                            this.drawCharacterName(message.characterName, false);
-
-                        this.drawText(message.text, false);
-                    }
-                }
-            }    
         }
+    }
+
+    /** Draw the scene, for the message of indice given */
+    async drawSceneAt( indMessage : number){
+
+        let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
+        let heightCharacter = 420;
+        let widthCharacter = 330;
+
+        let informations : GameInformation = await this.CalculateSceneAt(this.leftSprite, this.rightSprite, 
+                                                    this.gameBackground, this.messages, indMessage);
+        this.leftSprite = informations.leftSprite;
+        this.rightSprite = informations.rightSprite;
+        this.gameBackground = informations.gameBackground;
+        this.messages = informations.messages;
+        this.messageNumber = informations.messageNumber;
+
+        if(informations.isUserMessage)
+            this.drawUserMessage(informations.text);
+        else if(canvas != null){
+            let ctx = canvas.getContext('2d');
+
+            if(ctx != null && this.gameBackground){
+                let gradient = ctx.createLinearGradient(0,0,0,450);
+                gradient.addColorStop(0, this.gameBackground.firstGradient);
+                gradient.addColorStop(1, this.gameBackground.secondGradient);
+                ctx.fillStyle = gradient;
+                ctx.roundRect(0,0,800,450,[15,15,15,15]);
+                ctx.fill();
+
+                if(this.leftSprite && this.leftSprite.data)
+                    this.drawSprite(this.leftSprite.data, widthCharacter, heightCharacter, true);
+                if(this.rightSprite && this.rightSprite.data)
+                    this.drawSprite(this.rightSprite.data, widthCharacter, heightCharacter, false);
+
+                this.drawText(informations.text, informations.isNarration);
+
+                if(informations.drawNameInLeft != null && informations.drawNameInLeft == true && informations.characterName)
+                    this.drawCharacterName(informations.characterName, true);
+                else if(informations.drawNameInLeft != null && informations.drawNameInLeft == false && informations.characterName)
+                    this.drawCharacterName(informations.characterName, false);
+
+            }
+        }    
     }
 
 

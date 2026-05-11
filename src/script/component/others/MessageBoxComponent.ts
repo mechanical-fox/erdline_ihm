@@ -3,9 +3,9 @@
 import { Component, WritableSignal, signal, input, output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
-import {Message} from '../../data/ihm/Message';
-import {Scene} from '../../data/ihm/Scene';
-import { Character } from '../../data/ihm/Character';
+import {Message} from '../../data/edition/Message';
+import {Scene} from '../../data/edition/Scene';
+import { Character } from '../../data/edition/Character';
 
 @Component({
     selector: 'MessageBox',

@@ -2,8 +2,8 @@ import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Storage} from '../../util/Storage';
-import { Background } from '../../data/ihm/Background';
-import { Color } from '../../data/ihm/Color';
+import { Background } from '../../data/edition/Background';
+import { Color } from '../../data/edition/Color';
 
 @Component({
     selector: 'Background',

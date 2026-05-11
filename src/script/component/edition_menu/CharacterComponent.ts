@@ -2,9 +2,9 @@ import { Component, WritableSignal, signal, Signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Util } from '../../util/Util';
 import { Storage } from '../../util/Storage';
-import { Sprite } from '../../data/ihm/Sprite';
-import { Character } from '../../data/ihm/Character';
-import { Expression } from '../../data/ihm/Expression';
+import { Sprite } from '../../data/edition/Sprite';
+import { Character } from '../../data/edition/Character';
+import { Expression } from '../../data/edition/Expression';
 
 @Component({
     selector: 'Character',

@@ -3,12 +3,12 @@ import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Storage} from '../../util/Storage';
-import { Message } from '../../data/ihm/Message';
-import {Scene} from '../../data/ihm/Scene';
-import { DisplayMessage } from '../../data/ihm/DisplayMessage';
+import { Message } from '../../data/edition/Message';
+import {Scene} from '../../data/edition/Scene';
+import { DisplayMessage } from '../../data/edition/DisplayMessage';
 import { MessageBoxComponent } from '../others/MessageBoxComponent';
-import { Character } from '../../data/ihm/Character';
-import { Background } from '../../data/ihm/Background';
+import { Character } from '../../data/edition/Character';
+import { Background } from '../../data/edition/Background';
 
 @Component({
     selector: 'Scene',

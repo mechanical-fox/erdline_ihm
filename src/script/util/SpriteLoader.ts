@@ -1,7 +1,7 @@
 
-import { GameFirstSprites } from "../data/ihm/GameFirstSprites";
-import { GameMessage } from "../data/ihm/GameMessage";
-import { GameSprite } from "../data/ihm/GameSprite";
+import { GameFirstSprites } from "../data/game/GameFirstSprites";
+import { GameMessage } from "../data/game/GameMessage";
+import { GameSprite } from "../data/game/GameSprite";
 import { Util } from "./Util";
 
 export class SpriteLoader{
