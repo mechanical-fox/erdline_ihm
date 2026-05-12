@@ -6,6 +6,6 @@
     </div>
 }
 
-<canvas id="game_screen" width = "800" height = "450" (click)="nextMessage()">
+<canvas id="game_screen" class="game-screen-style" width="800" height="450" (click)="nextMessage()" (window:resize)="onResize($event)">
 
 </canvas>

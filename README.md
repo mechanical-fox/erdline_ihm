@@ -74,21 +74,12 @@ A faire:
 
     -> Fait: Refactoring de drawSceneAt pour éviter d'avoir une fonction de 117 lignes (refactoring: 1er fonction 65 lignes + 2ème fonction 41 lignes).
     -> Fait: Faire un cercle de chargement lors du 1er chargement des sprites, qui apparait si temps > 2s
-
-
-    -> Refactoring de GameComponent juste en cassant entre les fonctions "logiques" et les fonctions "draw". Eventuellement avec une nouvelle 
+    -> Fait: Refactoring de GameComponent juste en cassant entre les fonctions "logiques" et les fonctions "draw". Eventuellement avec une nouvelle 
          classe genre "Dessinateur" qui prend en argument un contexte, eventuellement une configuration pour configurer la taille du canvas. 
          A voir.
-
-    -> Faire gestion modification taille en indicant sur le canvas l'évenement (window:resize)="onResize($event)" ce qui est une syntaxe
-        spécifique à angular. On pourra récupérer l'event de windows, ou alors de l'event avec event.target.innerWidth
-        Aussi... Il pourrait être nécessaire plutôt de récupérer la largeur du canvas, si je mets du CSS et tout. En récupérant avec
-        l'id.
+    -> Fait: Faire gestion modification taille en indicant sur le canvas l'évenement (window:resize)="onResize($event)"
 
 
-    6. Vue Jouer en responsive... Ou alors afficher un message comme quoi l'on ne fait pas en dessous de x pixels / l'on ne fait pas
-        pour les mobiles. + idée est lorsque l'on récupère l'élément canvas, de demander quel sont width, et height si je veux un truc
-        responsive... mais je ne suis pas sur, que cela en vaille la peine.
     7. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
     Et appel url health ou message d'erreur. Voir si je fais des cercles de chargement ou non... cela dépend des temps de réponse.
     Cela pourrait être mis en idée d'amélioration plutôt ? Genre si j'ai réussi à faire le site assez vite ?
