@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, WritableSignal, signal} from '@angular/core';
 import { Util } from '../../util/Util';
 import { Scene } from '../../data/edition/Scene';
 import { Message } from '../../data/edition/Message';
@@ -21,6 +21,7 @@ import { GameInformation } from '../../data/game/GameInformation';
 })
 export class GameComponent {
 
+    static TIME_BEFORE_LOADING_CIRCLE = 2000;
     static MAX_CHARACTER_BY_LINE = 85;
     static LINE_HEIGHT = 20;
     static LINE_FONT = "18px serif";
@@ -33,6 +34,8 @@ export class GameComponent {
     leftSprite : GameSprite | null;
     rightSprite : GameSprite | null;
     messageNumber : number;
+    loaded : WritableSignal<boolean>;
+    slowLoading : WritableSignal<boolean>;
 
     constructor(){
         this.messages = [];
@@ -40,6 +43,8 @@ export class GameComponent {
         this.leftSprite = null;
         this.rightSprite = null;
         this.messageNumber = -1;
+        this.loaded = signal(false);
+        this.slowLoading = Util.createTimer('slowLoading', GameComponent.TIME_BEFORE_LOADING_CIRCLE);
     }
 
     /** A lifecycle happening after the content has been initialized. For this component, the goal is to 
@@ -49,6 +54,7 @@ export class GameComponent {
         let firstScene : Scene | null = this.returnFirstScene();
 
         if(firstScene == null || firstScene.messages.length == 0){
+            this.loaded.set(true);
             let message = "En attente de création d'une scène";
             this.drawUserMessage(message);
         }else{
@@ -58,6 +64,7 @@ export class GameComponent {
             let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
             this.leftSprite = firstSprites.leftSprite;
             this.rightSprite = firstSprites.rightSprite;
+            this.loaded.set(true);
             SpriteLoader.initLoading(this.messages);
             this.drawSceneAt(0);
         }   

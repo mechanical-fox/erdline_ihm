@@ -73,6 +73,8 @@ A faire:
 
 
     -> Fait: Refactoring de drawSceneAt pour éviter d'avoir une fonction de 117 lignes (refactoring: 1er fonction 65 lignes + 2ème fonction 41 lignes).
+    -> Fait: Faire un cercle de chargement lors du 1er chargement des sprites, qui apparait si temps > 2s
+
 
     -> Refactoring de GameComponent juste en cassant entre les fonctions "logiques" et les fonctions "draw". Eventuellement avec une nouvelle 
          classe genre "Dessinateur" qui prend en argument un contexte, eventuellement une configuration pour configurer la taille du canvas. 

@@ -24,6 +24,7 @@ export class SpriteLoader{
         let leftSprite : GameSprite | null = null;
         let rightSprite : GameSprite | null = null;
 
+
         for(let i = 0; i < messages.length; i++){
             if(leftCharacter == null){
                 if(messages[i].spriteFilename != null){
