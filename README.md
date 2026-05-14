@@ -8,9 +8,10 @@ passe en développement... Je vais modifier le mot de passe après en déploieme
 1. Fait: Faire la partie API sur health
 2. Fait: Faire la partie API sur color
 3. Fait: Faire la partie API sur Sprite
+3. Fait: IHM check Url Health au démarrage, dire 2s maximum, PAS de cercle de chargement. Et afficher message 
+d'erreur si test raté.
 
-3. IHM check Url Health au démarrage, dire 2s maximum, pas de cercle de chargment. Et afficher cercle de chargement si test raté.
-3. Faire récupération des couleurs et sprites via API
+3. Faire récupération des couleurs et sprites via API + utiliser celles-ci en menu
 3. Faire la partie IHMsur configuration des couleurs background, et sprite. Donner accès à tous.
 4. faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
 de passe. Aucun email.

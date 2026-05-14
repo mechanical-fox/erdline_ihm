@@ -50,3 +50,18 @@
     cursor: pointer;
 }
 
+.nav-server-down-div{
+    margin: var(--nav-server-down-div-margin);
+    width: var(--nav-server-down-div-width);
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-server-down-text{
+    margin: var(--nav-server-down-text-margin);
+    font: 1.2rem Serif;
+    width: var(--nav-server-down-text-width);
+}

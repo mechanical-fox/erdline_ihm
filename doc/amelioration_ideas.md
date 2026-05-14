@@ -7,13 +7,13 @@ Voici ci-dessous quelques idées d'améliorations pour le futur.
 
 ## Idée 1 - Optimisation des images
 
-Voir si les images peuvent oui ou non être transmises plus rapidement à l'aide de 2
+Voir si les images peuvent oui ou non être transmises plus rapidement à l'aide de 3
 façons.
 
 1. Reduction de la taille des images. Car celles ci sont de tailles supérieurs au besoin
 (600 de hauteur, contre 420 maximum en Drawer).
-2. Une fois que l'API est mise, voir si l'on effectue des conversions base64 et binaire
-de façon intenpestive, ou non. Mais attendre d'avoir l'API, car actuellement il est un
+2. Une fois que l'API est mise, voir si l'on effectue des conversions en base64 et binaire
+de façon intempestive, ou non. Mais attendre d'avoir l'API, car actuellement il est un
 peu dur d'être absolument certain de ou vient le problème, avec tout ce que fait Angular.
 3. Revérifier si le Sprite Loader à bien un cache fonctionnel, et s'il est bien capable 
 de charger 2 images en même temps.

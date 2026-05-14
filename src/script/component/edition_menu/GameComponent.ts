@@ -44,16 +44,7 @@ export class GameComponent {
         this.drawer = new Drawer(800,450);//temporary drawer (Object canvas not accesible)
     }
 
-    async onResize(event : any){
-        let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
-        if(canvas != null){
-            let ctx = canvas.getContext('2d');
-
-            if(ctx != null)
-                this.drawer.resizeWidth(canvas.width, ctx);
-        }
-    }
 
     /** A lifecycle happening after the content has been initialized. For this component, the goal is to 
      * initiate the first image of the canvas. */
@@ -95,6 +86,17 @@ export class GameComponent {
         }
     }
 
+    /** A function used to resize the game screen */
+    async onResize(event : any){
+        let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
+
+        if(canvas != null){
+            let ctx = canvas.getContext('2d');
+
+            if(ctx != null)
+                this.drawer.resizeWidth(canvas.width, ctx);
+        }
+    }
 
 
     /** Go to the next message into the scene, and if necessary will change the background, or the sprites  */

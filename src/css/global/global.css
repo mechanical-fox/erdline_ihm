@@ -5,6 +5,10 @@
 
 
     :root{
+        --nav-server-down-div-margin: 8rem 0.7rem 0.7rem 8rem; 
+        --nav-server-down-div-width: 50rem; 
+        --nav-server-down-text-margin : 1.4rem 0.7rem 0.7rem 4.2rem;
+        --nav-server-down-text-width : 30rem;
         --game-width: 800px;
         --game-height: 450px;
         --edition-flexbox-direction: row;
@@ -33,6 +37,10 @@
 
 
     :root{
+        --nav-server-down-div-margin: 6rem 0.7rem 0.7rem 4rem; 
+        --nav-server-down-div-width: 32rem; 
+        --nav-server-down-text-margin : 1.4rem 0.7rem 0.7rem 4.2rem;
+        --nav-server-down-text-width : 20rem;
         --game-width: 75vw;
         --game-height: 42vw;
         --edition-flexbox-direction: column;
@@ -61,6 +69,10 @@
 
 
     :root{
+        --nav-server-down-div-margin: 6rem 0.7rem 0.7rem 0rem; 
+        --nav-server-down-text-margin : 1.4rem 0.7rem 0.7rem 2.1rem;
+        --nav-server-down-div-width: 80vw; 
+        --nav-server-down-text-width : 70vw;
         --game-width: 80vw;
         --game-height: 45vw;
         --edition-flexbox-direction: column;
