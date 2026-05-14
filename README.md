@@ -3,101 +3,45 @@
 
 Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
 
-A faire:
+0. Fait: Création database avec mot de passe PASSWORD et cela CAR je ne peux pas stocker de vrai mot de 
+passe en développement... Je vais modifier le mot de passe après en déploiement.
+1. Fait: Faire la partie API sur health
+2. Fait: Faire la partie API sur color
+3. Fait: Faire la partie API sur Sprite
 
-1. Fait: Gérer une liste pour gérer plusieurs décors, avec ajouter / modifier / supprimer
-2. Fait: Faire séparer au niveau du code, tout ce qui est la partie décor, du reste. Bref, créer un composant en plus.
-     Refactoriser.
-2. Fait: Factorisation de la liste d'item de l'onglet décor. Comme on va utiliser des listes proches pour les personnages.
-2. Fait: Finir ecran personnages
-
-3. 
-   - Fait: Proposer le décor à mettre
-   - Fait: Permettre ajouter un texte : Personnage, expression, texte
-   - Fait: Message d'erreur à l'ajout d'un texte si Personnage, ou expression, est non-renseigné
-   - Fait: Gérer l'ajout des textes sans personnage. Ajouter le choix "Narration", et alors afficher le texte
-        en italique.
-   - Fait: Pour permettre modification d'un texte plus facile --> Séparer le composant "Ajout Message"
-   - Fait: Permettre modifier un texte
-   - Fait: Permettre de supprimer un texte
-   - Fait: Faire que les seuls décors selectionnables en scène, soient ceux crées plutôt que Parc, Bar, Scène musique...
-   - Fait: Gestion switch ENTRE SCENE #1, #2
-
-   - Je suis au GOTO (voir après), entre autre l'aspect graphique.
-        Hum... déjà ne permettra d'ajouter que des scènes, qui existent et qui sont autre que nous.
-        1. Fait (Hors bug): Faire aspect graphique avec pour GO TO un select qui ne permet d'ajouter que des scènes autres que notre scène
-        2. Fait: Faire que à chaque sélection de scene dans messageBox l'on reset la box (mise à jour transition) + l'on reset les élements
-        3. Fait: Faire que à chaque création de scène dans messageBox l'on reset la box (mise à jour transition) + l'on RELOAD les élements
-        4. Fait: Faire que à chaque suppresion de scene dans messageBox l'on reset la box (mise à jour transition) + l'on reset les élements
-        5. Fait: Faire affichage dans la liste de message (hors box)
-        6. Fait: Faire que l'edition des transition soit fonctionnelle, car actuellement cela n'est pas le cas
-        6. Fait: Vérifier que les éditions hors transitions soient toujours fonctionnelles
-        7. Fait: Faire que en édition de message de type != transition il soit impossible de choisir transition
-        8. Fait: Faire que si message final = transition alors l'on ne propose plus d'ajouter des messages. Cela doit être effectif
-             après l'ajout de messages, l'édition de message, la suppression de messages.
-
-   - Fait: Faire que l'icone édition soit incluse dans le html afin d'être chargé plus vite
-   
-
-    3. Fait: Vue responsive onglet décor
-    4. Fait: Vue responsive onglet personnage
-    5. Fait: Vue responsive onglet scène, y compris si plusieurs message, y compris lors de l'édition des messages.
-
-    6. Débuter le fait de montrer un Jeu en train de Jouer. Bref l'onglet "jouer". Ou alors, peut être avant me faut il
-        plus de sprites ?
-
-    First- Commencer avec une taille fixe (est l'étape d'après le reste)
-    -> Fait: Charger un décor hardcodé
-    -> Fait: Charger un personnage hardcodé à droite, ici ne pas encore lire les messages
-    -> Fait: Charger un personnage hardcodé à gauche + AUSSI EFFET MIRROIR, ici ne pas encore lire les messages
-
-    -> Fait: Charger un message hardcodé, ici ne pas encore lire les messages + ATTENTION fillText ne fait qu'une ligne, donc il va falloir "couper"
-        au "\n" + après regarder si l'on dépasse x caractère et alors ajouter des "\n" + après aussi ajouter un nombre de ligne maximale.
-
-    -> Fait: Faire un affichage du nom Personne nom personne, en permettant soit à droite, soit à gauche, soit rien (ex: narration).
-    -> Fait: Détermination de la 1er scène à charger: Si pas de scène, ou si toutes scenes ont 0 messages, retourner null.
-        Sinon regarder toutes les scènes qui ne sont PAS pointés par des transitions, et prendre la 1er, dans le cas ou il y en a 
-        plusieurs.
-    -> Fait: Si pas de 1er scène écrire en fenêtre en gros:  "En attente de création d'un script"
-    -> Fait: Si il y a première scene, récupérer BackgroundId + message + si pas de background, mettre un background par défaut.
-    -> Fait: Gérer transformer les messages depuis des id, à des noms, texte, contenu sprite (Un seul sprite dans les messages)...
-    -> Fait: Faire un loader pour les sprites, afin d'éviter de recharger 2 fois les mêmes données, et afin de pouvoir gérer
-        un prétéléchargement.
-    -> Fait: Afficher la scène correspondant au tout 1er message avec 1 personnages en scène + ne pas oublier de faire apparaitre le pseudo si vrai perso
-                    (!= narration) + gérer si l'on est sur un message narration + transition on gère plus tard
-    -> Fait: Afficher la scène correspondant au tout 1er message avec 2 personnages en scène, les deux doivent apparaitrent  + ne pas oublier de faire 
-                    apparaitre le pseudo si vrai perso (!= narration) + gérer si l'on est sur un message narration + transition on gère plus tard
-    -> Fait: gérer le clic pour faire une scène entière sans transition, qui ne soit pas harcodé + gérer changement des personnages s'il y a 
-    genre 3 personnages (--> Cela fait, on remplace le personnage qui n'a pas parlé ). A chaque fois, un seul personnage à gauche, un seul personnage à droite.
-    -> Fait: Gérer les transitions entre scènes. On doit changer de scène + revenir au numéro 0.
-
-
-    -> Fait: Refactoring de drawSceneAt pour éviter d'avoir une fonction de 117 lignes (refactoring: 1er fonction 65 lignes + 2ème fonction 41 lignes).
-    -> Fait: Faire un cercle de chargement lors du 1er chargement des sprites, qui apparait si temps > 2s
-    -> Fait: Refactoring de GameComponent juste en cassant entre les fonctions "logiques" et les fonctions "draw". Eventuellement avec une nouvelle 
-         classe genre "Dessinateur" qui prend en argument un contexte, eventuellement une configuration pour configurer la taille du canvas. 
-         A voir.
-    -> Fait: Faire gestion modification taille en indicant sur le canvas l'évenement (window:resize)="onResize($event)"
-
-
-    7. Prendre document de base à note > emploi > idée projet, et voir le plus urgent. Mais bref, penser en first à faire une vrai API.
-    Et appel url health ou message d'erreur. Voir si je fais des cercles de chargement ou non... cela dépend des temps de réponse.
-    Cela pourrait être mis en idée d'amélioration plutôt ? Genre si j'ai réussi à faire le site assez vite ?
-    Et des tests unitaires aussi. Et la sauvegarde. Et vue mobile sur les nouveaux écrans... Bref, ce genre de choses.
+3. IHM check Url Health au démarrage, dire 2s maximum, pas de cercle de chargment. Et afficher cercle de chargement si test raté.
+3. Faire récupération des couleurs et sprites via API
+3. Faire la partie IHMsur configuration des couleurs background, et sprite. Donner accès à tous.
+4. faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
+de passe. Aucun email.
+5. Faire la partie IHM sur les sessions: inscription + connexion.
+5. Faire que les urls POST pour color et sprite deviennent des URL authentifiés + à indiquer en Swagger aussi
+6. Faire API sur sauvegarde si on est connecté
+7. Gérer via IHM sur la sauvegarde si connecté
+8. Faire en sorte que les parties sur Configuration Background et sprite ne soient accesible que si 
+admin (doit être mis à la main en base de donnée)
+9. Faire en README une documentation sur comment créer un admin
+10. Vérifier que l'on a la vue mobile compatible sur configuration Background et sprite + partie sauvegarde.
+11. Faire les tests unitaires
+12. Faire les pages Tutoriel, Exemples, A propos
+13. Mise à jour du README
+14. Déployer AVANT de faire la merge request pour pouvoir tester. Au cas où il y a des soucis.
+15. Déployer base donné avec scp et changer password avec exemple => ALTER ROLE davide WITH PASSWORD 'hu8jmn3';
+16. Déployer API et tester
+17. Déployer IHM et tester
+18. Faire deploiement AVANT les merge request. Voir si pas de soucis.
     
 
 Fin: 
 - Ai je bien gérer le fait d'appeler une url health à la connexion + d'afficher
 toute une page entière si serveur down ? Voir le site mynrista
+- READ à modifier
 - Tester le comportement si serveur down. Voir si le message apparait
-- Tester les cercles de chargement si réponse lente. Mettre des sleep au niveau API.
-    Ou alors... Juste ne pas en faire, car il n'est pas censé en apparaitre.
+- Faire des tests pour la vue mobile
+- après déploiement tester avec mon VRAI mobile aussi
 - Faire attention à ce que la partis "A propos" soit à jour
 - Changer les fichiers de doc pour idée amélioration + tests manuels.
 - tester manuellement
-- tester vue mobile via mobiles firefox + ATTENTION tel
-comme honor10 sont très mince, donc vraiment il va falloir 
-jouer au F12 sur la largeur fenêtre pour vérifier.
 - écrire les tests unitaires
 - préparer portfolio les nouvelles images ihm et API
 - retester les tests unitaire 
@@ -105,7 +49,7 @@ jouer au F12 sur la largeur fenêtre pour vérifier.
 - déployer
 - tester VUE MOBILE SUR TEL une fois déployé + cela AVANT
 de valider merge request
-- test version déployée
+- test version déployée + avec TEL aussi
 - changer en portfolio les images pour ihm + API
 - changer N° version
 - Faire merge request / check github action / release
@@ -194,14 +138,13 @@ Les fichiers à placer en serveur seront générés en dossier
 **dist/erdline-ihm/browser**
 
 
-# Documentations Supplémentaires
+# Idées d'améliorations
 
 
-Afin de faciliter les mises à jours futures du projet, il est inclus dans le projet une liste de 
-tests manuel afin de pouvoir facilement vérifier le bon fonctionnement du projet.
+Afin de faciliter les mises à jours futures du projet, il est inclus dans le projet une liste d'idées
+d'amélioration. Ces idées d'améliorations pourront servir de bases pour de futures mises à jours, et
+être soient reprises telles quelles, soit servir d'inspirations pour des idées à implémenter.
 
-De plus, il est aussi inclus une liste de futures idées d'améliorations.
 
-**Tests Manuels:** [doc/tests.md](./doc/tests.md)    
-**Idées d'améliorations:** [doc/amelioration_ideas.md](./doc/amelioration_ideas.md)      
+[doc/amelioration_ideas.md](./doc/amelioration_ideas.md)      
 
