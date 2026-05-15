@@ -25,7 +25,7 @@ export class FetchMock {
         for (const mock of FetchMock.mocks) {
 
             if (url.endsWith(mock.url) && mock.method == options.method) {
-                const answer = new Fetch_Response_Impl(mock.status, JSON.stringify(mock.data));
+                const answer = new Fetch_Response_Impl(mock.status, JSON.stringify(mock.data), {});
                 return answer;
             }
         }

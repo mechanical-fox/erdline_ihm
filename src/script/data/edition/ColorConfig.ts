@@ -4,7 +4,7 @@ import { ColorIHM } from "./ColorIHM";
 export class ColorConfig{
 
     counter : number;
-    databaseID: string;
+    databaseID: string | null;
     name : string;
     firstGradient : string;
     secondGradient : string;

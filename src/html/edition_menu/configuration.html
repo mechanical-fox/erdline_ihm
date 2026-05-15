@@ -26,3 +26,13 @@
     <button class="configuration-save-button" (click)="save()"> Enregistrer</button>
 </div>
 
+@if(showMessage() && message() != ""){
+    @if(isErrorMessage()){
+        <p class="configuration-error-message"> {{message()}}</p>
+    }
+    @else{
+        <p class="configuration-confirmation-message"> {{message()}}</p>
+    }
+}
+
+

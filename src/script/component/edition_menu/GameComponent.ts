@@ -40,7 +40,8 @@ export class GameComponent {
         this.rightSprite = null;
         this.messageNumber = -1;
         this.loaded = signal(false);
-        this.slowLoading = Util.createTimer('slowLoading', GameComponent.TIME_BEFORE_LOADING_CIRCLE);
+        this.slowLoading = Util.createTimer('slowLoading', false);
+        Util.startTimer('slowLoading', GameComponent.TIME_BEFORE_LOADING_CIRCLE);
         this.drawer = new Drawer(800,450);//temporary drawer (Object canvas not accesible)
     }
 
@@ -54,7 +55,7 @@ export class GameComponent {
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
-
+            await Util.sleep(3000);
             this.drawer = new Drawer(canvas.width, canvas.height);
             let ctx = canvas.getContext('2d');
 

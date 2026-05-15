@@ -68,15 +68,23 @@ export class API_Util {
                 const textData: string = await response.text();
                 let hasFailed: boolean = response && response.ok ? false : true;
 
+                if(method == "POST" && response.headers){
+                    console.log(`headers: ${response.headers}`);
+
+                    for(let key of response.headers.keys())
+                        console.log(`key: ${key} value: ${response.headers.get(key)}`)
+                }
+                    
+
                 if (!hasFailed && textData && textData.trim() != "")
-                    return new API_Response<V>(newUrl, response.status, hasFailed, textData, JSON.parse(textData));
+                    return new API_Response<V>(newUrl, response.status, hasFailed, textData, response.headers, JSON.parse(textData));
                 else
-                    return new API_Response<V>(newUrl, response.status, hasFailed, textData, null);
+                    return new API_Response<V>(newUrl, response.status, hasFailed, textData, response.headers, null);
             }
             else
-                return new API_Response<V>(newUrl, undefined, true, null, null);
+                return new API_Response<V>(newUrl, undefined, true, null, undefined, null);
         } catch {
-            return new API_Response<V>(newUrl, undefined, true, null, null);
+            return new API_Response<V>(newUrl, undefined, true, null, undefined, null);
         }
 
     }

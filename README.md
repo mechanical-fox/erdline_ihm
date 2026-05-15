@@ -16,14 +16,13 @@ passe en développement... Je vais modifier le mot de passe après en déploieme
     - valeur par défaut avec du rgb(153,153,153)
 
 3. Fait: Faire création des couleurs via IHM, sans message confirmation, et sans compléter à 5
-
-3. Faire un message quand on enregistre + il doit être compatible mobile + après avoir vérifié compatible mobile, faire timer pour qu'il disparaisse 
+3. Fait: Faire un message quand on enregistre + il doit être compatible mobile + après avoir vérifié compatible mobile, faire timer pour qu'il disparaisse 
 après x second
-3. Permettre que interface complete à 5 couleur + que alors fait PUT si est null + alors on doit RECUPERER id en base, à l'aide du header reponse
-ou aura soucis + modifier reprsentation intern (inutile pour les représentations non internes)
+3. Fait: Permettre que interface complete à 4 couleur + que alors fait POST si est null + alors on doit RECUPERER id en base, à l'aide du header reponse
+ou aura soucis + modifier reprsentation intern 
+
 3. Faire création des sprites via IHM, accessible à tous actuellement
 3. Faire récupération des Sprites via API
-
 4. faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
 de passe. Aucun email.
 5. Faire la partie IHM sur les sessions: inscription + connexion.

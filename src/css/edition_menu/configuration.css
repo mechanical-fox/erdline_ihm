@@ -76,3 +76,29 @@
     cursor: pointer;
     box-shadow: 0.1rem 0.1rem 0.2rem rgb(59, 59, 59);
 }
+
+.configuration-confirmation-message{
+    position: fixed;
+    inset-inline-end: 5rem;
+    inset-block-start: 2rem;
+    margin:0rem 0rem 0rem 0rem;
+    padding: 0.8rem 0.9rem 0.8rem 0.9rem;
+    width: 7rem;
+    background: rgb(73, 226, 53);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0, 0, 0);
+    font: bold 1.0rem Serif;
+    border-radius: 0.4rem;
+}
+
+.configuration-error-message{
+    position: fixed;
+    inset-inline-end: 5rem;
+    inset-block-start: 2rem;
+    margin:0rem 0rem 0rem 0rem;
+    padding: 0.8rem 0.9rem 0.8rem 0.9rem;
+    width: 7rem;
+    background: rgb(226, 37, 37);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0, 0, 0);
+    font: bold 1.0rem Serif;
+    border-radius: 0.4rem;
+}
