@@ -7,7 +7,7 @@ import { Background } from '../../data/edition/Background';
 import { GameBackground } from '../../data/game/GameBackground';
 import { BackgroundComponent } from './BackgroundComponent';
 import { CharacterComponent } from './CharacterComponent';
-import { Color } from '../../data/edition/Color';
+import { ColorIHM } from '../../data/edition/ColorIHM';
 import { Character } from '../../data/edition/Character';
 import { Sprite } from '../../data/edition/Sprite';
 import { GameSprite } from '../../data/game/GameSprite';
@@ -64,7 +64,7 @@ export class GameComponent {
                     let message = "En attente de création d'une scène";
                     this.drawer.drawUserMessage(message, ctx);
                 }else{
-                    this.gameBackground = this.getBackground(firstScene.backgroundId);
+                    this.gameBackground = await this.getBackground(firstScene.backgroundId);
                     this.messages = this.convertMessage(firstScene.messages);
                     this.messageNumber = 0;
                     let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
@@ -158,7 +158,7 @@ export class GameComponent {
 
             for(let scene of scenes){
                 if(scene.id == nextSceneId){
-                    let nextGameBackground = gameBackground = this.getBackground(scene.backgroundId);
+                    let nextGameBackground : GameBackground = await this.getBackground(scene.backgroundId);
                     let nextMessages = this.convertMessage(scene.messages);
                     let nextMessageNumber = 0;
                     let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
@@ -259,14 +259,14 @@ export class GameComponent {
 
     /** Return the background matching the id. If no id is matching, like if the id is "empty", a default background 
      * will be returned. */
-    getBackground(backgroundId : string) : GameBackground{
+    async getBackground(backgroundId : string) : Promise<GameBackground>{
         let backgrounds : Background[] = Util.getVariable("backgrounds") ? Util.getVariable("backgrounds") : [];
-        let colors : Color[] = BackgroundComponent.listColors();
+        let colors : ColorIHM[] = await BackgroundComponent.listColors();
         
         for(let background of backgrounds){
             if(background.id == backgroundId){
                 for(let color of colors){
-                    if(color.id == background.color_id){
+                    if(color.databaseID == background.color_id){
                         return new GameBackground(background.name, color.firstGradient, color.secondGradient);
                     }
                 }

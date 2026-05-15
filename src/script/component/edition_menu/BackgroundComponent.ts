@@ -3,7 +3,10 @@ import { FormsModule } from '@angular/forms';
 import {Util} from '../../util/Util';
 import {Storage} from '../../util/Storage';
 import { Background } from '../../data/edition/Background';
-import { Color } from '../../data/edition/Color';
+import { ColorIHM } from '../../data/edition/ColorIHM';
+import { API_Util } from '../../util/APIUtil';
+import { Color } from '../../data/api/Color';
+import { API_Response } from '../../data/util/API_Response';
 
 @Component({
     selector: 'Background',
@@ -13,17 +16,18 @@ import { Color } from '../../data/edition/Color';
 })
 export class BackgroundComponent {
 
-    colors : Color[];
+    colors : WritableSignal<ColorIHM[]>;
     backgroundName: WritableSignal<string>;
     colorSelected: WritableSignal<string>;
     gradient : WritableSignal<string>;
     backgrounds : WritableSignal<Background[]>;
     storage : Storage;
     counter : number;
+    isLoaded : WritableSignal<boolean>;
 
     constructor(){
 
-        this.colors = BackgroundComponent.listColors();
+        this.colors = signal([]);
         this.backgroundName = signal("");
         this.colorSelected = signal("");
         this.gradient = signal("");
@@ -32,15 +36,31 @@ export class BackgroundComponent {
             this.backgrounds = signal(Util.getVariable("backgrounds"));
             this.storage = Util.getVariable("backgrounds-storage");
             this.counter = Util.getVariable("backgrounds-counter");
+            this.colors = signal(Util.getVariable("backgrounds-colors"));
+            this.isLoaded = signal(true);
             this.flushAndSave();
         }
         else{
             this.backgrounds = signal([]);
             this.storage = new Storage();
             this.counter = 1;
-            this.addBackground();
+            this.isLoaded = signal(false);
+            
         }
  
+    }
+
+    /** A lifecycle happening after the content has been initialized. For this component, the goal is to 
+     * initiate what colors display to the client.*/
+    async ngAfterContentInit(){
+
+        if(!this.isLoaded()){
+            let colors : ColorIHM[] = await BackgroundComponent.listColors();
+            this.colors.set(colors);
+            this.addBackground();
+            this.isLoaded.set(true);
+        }
+        
     }
 
 
@@ -54,10 +74,10 @@ export class BackgroundComponent {
             if(background.name == selected && selected != null){
                 this.backgroundName.set(selected);
                 
-                for(let color of this.colors){
-                    if(color.id == background.color_id){
+                for(let color of this.colors()){
+                    if(color.databaseID == background.color_id){
                         this.gradient.set(`linear-gradient(180deg, ${color.firstGradient}, ${color.secondGradient})`);
-                        this.colorSelected.set(color.id);
+                        this.colorSelected.set(color.databaseID);
                     }
                 }
             }
@@ -66,18 +86,26 @@ export class BackgroundComponent {
         Util.setVariable("backgrounds", this.backgrounds());
         Util.setVariable("backgrounds-storage", this.storage);
         Util.setVariable("backgrounds-counter", this.counter);
+        Util.setVariable("backgrounds-colors", this.colors());
     }
 
     /** Add a new background, with a generic name like #1, #2... And if the number of actual background is 0, will select 
      * the new background.*/
-    addBackground(){
+    async addBackground(){
         let backgroundsValue = this.backgrounds();
+        let colors = await BackgroundComponent.listColors();
         let newName  = this.storage.add();
         let id = `background-${this.counter}`;
         this.counter++;
 
-        let newBackground = new Background(id, newName,"radio-orange");
-        backgroundsValue.push(newBackground);
+        if(colors.length > 0){
+            let newBackground = new Background(id, newName,colors[0].databaseID);
+            backgroundsValue.push(newBackground);
+        }
+        else{
+            let newBackground = new Background(id, newName, "1");
+            backgroundsValue.push(newBackground);
+        }
 
         this.backgrounds.set(backgroundsValue);
         this.flushAndSave();
@@ -124,7 +152,7 @@ export class BackgroundComponent {
 
     /** Change the color of the color preview, by the color with the color id given, if the target of the event 
      * indicate "checked".  */
-    colorChange(id: string, event : any){
+    colorChange(databaseID: string, event : any){
 
         let ind = -1;
         let backgroundsValue = this.backgrounds();
@@ -132,7 +160,7 @@ export class BackgroundComponent {
         for(let i in backgroundsValue){
             if(event.target.checked && backgroundsValue[i].name == this.storage.selected()){
                 ind = parseInt(i);
-                backgroundsValue[ind].color_id = id;
+                backgroundsValue[ind].color_id = databaseID;
                 this.backgrounds.set(backgroundsValue);
                 this.flushAndSave();
             }       
@@ -140,14 +168,27 @@ export class BackgroundComponent {
     }
 
     /** Returns a list of all the available colors*/
-    static listColors() : any[]{
+    static async listColors() : Promise<ColorIHM[]>{
 
-        let color1 = new Color("radio-orange", "Orange", "rgb(240, 138, 22)", "rgb(231, 195, 36)");
-        let color2 = new Color("radio-noir", "Noir", "rgb(32, 32, 32)", "rgb(97, 97, 97)");
-        let color3 = new Color("radio-blue", "Bleu", "rgb(21, 59, 226)", "rgb(44, 141, 206)");
-        let colors = [color1, color2,color3];
 
-        return colors;
+        if(Util.getVariable("backgrounds-colors") != null && Util.getVariable("backgrounds-colors").length > 0)
+            return Util.getVariable("backgrounds-colors");
+        else{
+            let answer : API_Response<Color[]> = await API_Util.get<Color[]>("/color");
+
+            if(!answer.hasFailed && answer.data){
+                let result = [];
+
+                for(let color of answer.data)
+                    result.push(new ColorIHM(color));
+
+                Util.setVariable("backgrounds-colors", result);
+                return result;
+            }
+            else
+                return [];
+        }
+        
     }
 
 }

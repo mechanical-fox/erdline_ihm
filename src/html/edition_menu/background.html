@@ -33,14 +33,14 @@ background to see this part of the page -->
         Couleur
     </p>
     <div class="background-color-div">
-        @for(color of colors; track color.name){
+        @for(color of colors(); track color.databaseID){
             <div class="background-color-div-item">
                         
-                @if(color.id == colorSelected()){
-                    <input [id]="color.id" type="radio" name="color-list" [value]="color.name"  checked (change)="colorChange(color.id, $event)"/>     
+                @if(color.databaseID == colorSelected()){
+                    <input type="radio" name="color-list" [value]="color.ihmID"  checked (change)="colorChange(color.databaseID, $event)"/>     
                 }
                 @else{
-                    <input [id]="color.id" type="radio" name="color-list" [value]="color.name"  unchecked (change)="colorChange(color.id, $event)"/>
+                    <input type="radio" name="color-list" [value]="color.ihmID"  unchecked (change)="colorChange(color.databaseID, $event)"/>
                 }
                 <p class="background-color-div-item-text">{{color.name}}</p>
                          
