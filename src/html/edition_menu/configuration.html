@@ -1,0 +1,28 @@
+
+@if(isLoaded()){}
+<p class="configuration-title">
+    Couleurs
+</p>
+
+<div class="configuration-color-div">
+
+    @for(color of initialColors();track color.counter){
+        <div class="configuration-color-div-item">
+            <p class="configuration-input-name">
+                Couleur {{color.counter}}
+            </p>
+            <p class="configuration-label-text"> Nom </p>
+            <input class="configuration-input" [value]="color.name" (change)="nameColorChange(color.counter, $event)"/>
+            <p class="configuration-label-text"> 1er Gradient </p>
+            <input type="color" class="configuration-input-color" [value]="color.firstGradient" (change)="firstColorChange(color.counter, $event)">
+            <br/>
+            <p class="configuration-label-text"> 2ème Gradient </p>
+            <input type="color" class="configuration-input-color" [value]="color.secondGradient" (change)="secondColorChange(color.counter, $event)">
+        </div>
+    }
+    
+</div>
+<div class="configuration-center-div">
+    <button class="configuration-save-button" (click)="save()"> Enregistrer</button>
+</div>
+

@@ -8,18 +8,29 @@ passe en développement... Je vais modifier le mot de passe après en déploieme
 1. Fait: Faire la partie API sur health
 2. Fait: Faire la partie API sur color
 3. Fait: Faire la partie API sur Sprite
-3. Fait: IHM check Url Health au démarrage, dire 2s maximum, PAS de cercle de chargement. Et afficher message 
-d'erreur si test raté.
+3. Fait: IHM check Url Health au démarrage, dire 2s maximum, PAS de cercle de chargement. Et afficher message d'erreur si test raté.
 
-3. Faire récupération des couleurs et sprites via API + utiliser celles-ci en menu
-3. Faire la partie IHMsur configuration des couleurs background, et sprite. Donner accès à tous.
+3. Fait: Faire récupération des couleurs via API + FAIRE MESSAGE CONFIRMATION QUAND ENREGISTRE
+    - fait : Présentation s'inspirer de sprite avec Expression 1, Expression 2 ...
+    - now : voir à set la valeur au début via value + voir récupérer les valeurs via un event change... debut voir les value via un event change
+    - valeur par défaut avec du rgb(153,153,153)
+
+3. Fait: Faire création des couleurs via IHM, sans message confirmation, et sans compléter à 5
+
+3. Faire un message quand on enregistre + il doit être compatible mobile + après avoir vérifié compatible mobile, faire timer pour qu'il disparaisse 
+après x second
+3. Permettre que interface complete à 5 couleur + que alors fait PUT si est null + alors on doit RECUPERER id en base, à l'aide du header reponse
+ou aura soucis + modifier reprsentation intern (inutile pour les représentations non internes)
+3. Faire création des sprites via IHM, accessible à tous actuellement
+3. Faire récupération des Sprites via API
+
 4. faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
 de passe. Aucun email.
 5. Faire la partie IHM sur les sessions: inscription + connexion.
 5. Faire que les urls POST pour color et sprite deviennent des URL authentifiés + à indiquer en Swagger aussi
 6. Faire API sur sauvegarde si on est connecté
 7. Gérer via IHM sur la sauvegarde si connecté
-8. Faire en sorte que les parties sur Configuration Background et sprite ne soient accesible que si 
+8. Faire en sorte que les parties sur Configuration Background et sprite ne soient accesibles que si 
 admin (doit être mis à la main en base de donnée)
 9. Faire en README une documentation sur comment créer un admin
 10. Vérifier que l'on a la vue mobile compatible sur configuration Background et sprite + partie sauvegarde.

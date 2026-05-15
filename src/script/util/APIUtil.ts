@@ -21,6 +21,17 @@ export class API_Util {
         return API_Util.request<T, V>(url, 'POST', headers, body, API_Util.DEFAULT_TIMEOUT);
     }
 
+    /** A function to send a PUT call, and return the response immediatly. The keyword await is necessary to 
+     * retrieve the answer. */
+    static async put<T, V>(url: string, body: T): Promise<API_Response<V>> {
+        let headers: Record<string, string> = {};
+
+        if (body) 
+            headers['Content-Type'] = 'application/json';
+
+        return API_Util.request<T, V>(url, 'PUT', headers, body, API_Util.DEFAULT_TIMEOUT);
+    }
+
 
     /** A function to send a GET call, and return the response immediatly. The keyword await is necessary to 
      * retrieve the answer.*/

@@ -36,8 +36,7 @@ export class BackgroundComponent {
             this.backgrounds = signal(Util.getVariable("backgrounds"));
             this.storage = Util.getVariable("backgrounds-storage");
             this.counter = Util.getVariable("backgrounds-counter");
-            this.colors = signal(Util.getVariable("backgrounds-colors"));
-            this.isLoaded = signal(true);
+            this.isLoaded = signal(false);
             this.flushAndSave();
         }
         else{
@@ -54,12 +53,15 @@ export class BackgroundComponent {
      * initiate what colors display to the client.*/
     async ngAfterContentInit(){
 
-        if(!this.isLoaded()){
-            let colors : ColorIHM[] = await BackgroundComponent.listColors();
-            this.colors.set(colors);
+        let colors : ColorIHM[] = await BackgroundComponent.listColors();
+        this.colors.set(colors);
+
+        if(Util.getVariable("backgrounds") != null)
+            this.flushAndSave();
+        else
             this.addBackground();
-            this.isLoaded.set(true);
-        }
+
+        this.isLoaded.set(true);
         
     }
 
@@ -86,7 +88,6 @@ export class BackgroundComponent {
         Util.setVariable("backgrounds", this.backgrounds());
         Util.setVariable("backgrounds-storage", this.storage);
         Util.setVariable("backgrounds-counter", this.counter);
-        Util.setVariable("backgrounds-colors", this.colors());
     }
 
     /** Add a new background, with a generic name like #1, #2... And if the number of actual background is 0, will select 
@@ -167,28 +168,26 @@ export class BackgroundComponent {
         }
     }
 
-    /** Returns a list of all the available colors*/
+    /** Returns a list of all the available colors. The answer isn't cached, because the admin users can configure the colors. And a admin can 
+     * configure the color, and go to this page just after, to see if the change was taked into account... */
     static async listColors() : Promise<ColorIHM[]>{
 
 
-        if(Util.getVariable("backgrounds-colors") != null && Util.getVariable("backgrounds-colors").length > 0)
-            return Util.getVariable("backgrounds-colors");
-        else{
-            let answer : API_Response<Color[]> = await API_Util.get<Color[]>("/color");
+        let answer : API_Response<Color[]> = await API_Util.get<Color[]>("/color");
 
-            if(!answer.hasFailed && answer.data){
-                let result = [];
+        if(!answer.hasFailed && answer.data){
+            let result = [];
 
-                for(let color of answer.data)
-                    result.push(new ColorIHM(color));
+            for(let color of answer.data)
+                result.push(new ColorIHM(color));
 
-                Util.setVariable("backgrounds-colors", result);
-                return result;
-            }
-            else
-                return [];
+            Util.setVariable("backgrounds-colors", result);
+            return result;
         }
+        else
+            return [];
         
+    
     }
 
 }

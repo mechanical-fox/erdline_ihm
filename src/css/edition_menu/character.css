@@ -21,7 +21,6 @@
 
 .character-expression-text{
     margin: 0.3rem 0rem 0.8rem 2rem;
-    display: block;
     color: rgb(0, 0, 0);
     font: 1.0rem Serif;
     display: inline-block;
@@ -40,7 +39,6 @@
 .character-input-2{
     margin: 0.3rem 0rem 0.8rem 2rem;
     border: 0.1rem solid rgb(95, 95, 95);
-    display: block;
     padding: 0.2rem 0.4rem 0.2rem 0.4rem;
     font: 0.9rem Serif;
     border-radius: 0.4rem;

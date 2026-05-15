@@ -4,11 +4,12 @@ import { BackgroundComponent } from '../edition_menu/BackgroundComponent';
 import { CharacterComponent } from '../edition_menu/CharacterComponent';
 import { SceneComponent } from '../edition_menu/SceneComponent';
 import { GameComponent } from '../edition_menu/GameComponent';
+import { ConfigurationComponent } from '../edition_menu/ConfigurationComponent';
 import { Util } from '../../util/Util';
 
 @Component({
     selector: 'Edition',
-    imports: [BackgroundComponent, CharacterComponent, SceneComponent, GameComponent],
+    imports: [BackgroundComponent, CharacterComponent, SceneComponent, GameComponent, ConfigurationComponent],
     templateUrl: '../../../html/pages/edition.html',
     styleUrl: '../../../css/pages/edition.css'
 })
@@ -28,7 +29,7 @@ export class EditionComponent {
             this.selected = signal(Util.getVariable("edition-selected"));
 
         this.focus_on = signal(null);
-        this.items = ["Décors", "Personnages", "Scènes", "Jouer", "Sauvegarde"];
+        this.items = ["Décors", "Personnages", "Scènes", "Jouer", "Sauvegarde", "Configuration"];
     }
 
     /** Function called when someone click on a item such as "Décors" */
