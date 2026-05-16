@@ -4,10 +4,10 @@ export class Expression{
     id :string;
     counter : number;
     name : string; 
-    sprite_id : string | null;
+    sprite_id : number | null;
     
 
-    constructor(id : string, counter : number, name : string, sprite_id : string | null){
+    constructor(id : string, counter : number, name : string, sprite_id : number | null){
         this.id = id;
         this.counter = counter;
         this.name = name;

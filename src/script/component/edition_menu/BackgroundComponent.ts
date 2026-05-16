@@ -169,7 +169,7 @@ export class BackgroundComponent {
     }
 
     /** Returns a list of all the available colors. The answer isn't cached, because the admin users can configure the colors. And a admin can 
-     * configure the color, and go to this page just after, to see if the change was taked into account... */
+     * configure the colors, and go to this page just after, to see if the change was taked into account... */
     static async listColors() : Promise<ColorIHM[]>{
 
 
@@ -181,7 +181,6 @@ export class BackgroundComponent {
             for(let color of answer.data)
                 result.push(new ColorIHM(color));
 
-            Util.setVariable("backgrounds-colors", result);
             return result;
         }
         else

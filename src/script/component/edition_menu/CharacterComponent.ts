@@ -2,7 +2,7 @@ import { Component, WritableSignal, signal, Signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Util } from '../../util/Util';
 import { Storage } from '../../util/Storage';
-import { Sprite } from '../../data/edition/Sprite';
+import { Sprite } from '../../data/api/Sprite';
 import { Character } from '../../data/edition/Character';
 import { Expression } from '../../data/edition/Expression';
 
@@ -162,7 +162,7 @@ export class CharacterComponent {
         else{
             for(let sprite of this.sprites){
                 if(sprite.id == event.target.value){
-                    this.spritePreview.set(sprite.image);
+                    this.spritePreview.set(sprite.filename);
                 }
             }
         }
@@ -173,8 +173,8 @@ export class CharacterComponent {
     /** Returns a list of all the available sprites*/
     static listSprites() : Sprite[]{
 
-        let spriteAdrien = new Sprite("sprite-adrien", "Adrien", "images/Adrien.png");
-        let spriteGrace = new Sprite("sprite-grace", "Grace", "images/Grace.png");
+        let spriteAdrien = new Sprite(1, "Adrien", "images/Adrien.png", "images/Adrien.png");
+        let spriteGrace = new Sprite(2, "Grace", "images/Grace.png", "images/Grace.png");
         let sprites = [spriteAdrien, spriteGrace];
 
         return sprites;

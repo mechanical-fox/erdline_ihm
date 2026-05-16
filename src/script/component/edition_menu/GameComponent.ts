@@ -9,7 +9,7 @@ import { BackgroundComponent } from './BackgroundComponent';
 import { CharacterComponent } from './CharacterComponent';
 import { ColorIHM } from '../../data/edition/ColorIHM';
 import { Character } from '../../data/edition/Character';
-import { Sprite } from '../../data/edition/Sprite';
+import { Sprite } from '../../data/api/Sprite';
 import { GameSprite } from '../../data/game/GameSprite';
 import { GameFirstSprites } from '../../data/game/GameFirstSprites';
 import { SpriteLoader } from '../../util/SpriteLoader';
@@ -55,7 +55,6 @@ export class GameComponent {
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
-            await Util.sleep(3000);
             this.drawer = new Drawer(canvas.width, canvas.height);
             let ctx = canvas.getContext('2d');
 
@@ -243,7 +242,7 @@ export class GameComponent {
                             if(expression.id == message.expressionId){
                                 for(let sprite of sprites){
                                     if(sprite.id == expression.sprite_id){
-                                        let newConvertedMessage = new GameMessage(sprite.image, character.name, message.text, message.nextSceneId);
+                                        let newConvertedMessage = new GameMessage(sprite.filename, character.name, message.text, message.nextSceneId);
                                         convertedMessages.push(newConvertedMessage); 
                                     }
                                 }

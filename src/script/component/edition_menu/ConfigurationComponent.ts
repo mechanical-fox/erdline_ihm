@@ -6,6 +6,10 @@ import { ColorIHM } from '../../data/edition/ColorIHM';
 import { ColorBody } from '../../data/api/ColorBody';
 import { API_Util } from '../../util/APIUtil';
 import { Util } from '../../util/Util';
+import { API_Response } from '../../data/util/API_Response';
+import { Sprite } from '../../data/api/Sprite';
+import { SpriteConfig } from '../../data/edition/SpriteConfig';
+import { SpriteBody } from '../../data/api/SpriteBody';
 
 
 @Component({
@@ -21,6 +25,9 @@ export class ConfigurationComponent {
     initialColors  : WritableSignal<ColorConfig[]>;
     internColors : ColorConfig[];
     modifiedColors : boolean[];
+    initialSprites : WritableSignal<SpriteConfig[]>;
+    internSprites : SpriteConfig[];
+    modifiedSprites : boolean[];
     message : WritableSignal<string>;
     showMessage : WritableSignal<boolean>;
     isErrorMessage : WritableSignal<boolean>;
@@ -30,16 +37,19 @@ export class ConfigurationComponent {
         this.initialColors = signal([]);
         this.internColors = [];
         this.modifiedColors = [];
+        this.initialSprites = signal([]);
+        this.internSprites = [];
+        this.modifiedSprites = [];
         this.message = signal("");
         this.showMessage = Util.createTimer("showMessage", true);
         this.isErrorMessage = signal(false);
     }
 
-    /** A lifecycle happening after the content has been initialized. Will initialize the colors to display, and the colors 
-     * in intern. */
-    async ngAfterContentInit(){
+    /** Initialiaze the colors in the configuration component, with a ColorIHM array. In the configuration component, some
+     * "empty" colors are added, to let create colors. And a counter is added, to display in the graphic interface "Couleur 1",
+     * "Couleur 2", ....*/
+    initColors(colors : ColorIHM[]) : void{
 
-        let colors : ColorIHM[] = await BackgroundComponent.listColors();
         let parsedColors : ColorConfig[] = [];
         let i = 1;
 
@@ -61,18 +71,74 @@ export class ConfigurationComponent {
             parsedColors.push(newColor); 
         }
 
-        for(let color of parsedColors)
-            this.modifiedColors.push(false);
-
+        this.initialColors.set(parsedColors);
         let copy = JSON.parse(JSON.stringify(parsedColors));
-        this.initialColors.set(copy);
-        this.internColors = parsedColors;
+        this.internColors = copy;
+    }
+
+    /** Initialiaze the sprites in the configuration component, with a Sprite array. In the configuration component, some
+     * "empty" sprites are added, to let create sprites. And a counter is added, to display in the graphic interface "Sprite 1",
+     * "Sprite 2", ....*/
+    initSprites(sprites : Sprite[]) : void{
+
+        let parsedSprites : SpriteConfig[] = [];
+        let i = 1;
+
+        for(let sprite of sprites){
+            let parsedSprite = new SpriteConfig(sprite, i);
+            i++;
+            parsedSprites .push(parsedSprite);
+        }
+
+        while(i <= 4){
+            let newSprite : SpriteConfig= {
+                counter : i, 
+                databaseID : null, 
+                name : "", 
+                filename : signal(" -- en attente --"), 
+                data : null
+            };
+            let copy : SpriteConfig= {
+                counter : i, 
+                databaseID : null, 
+                name : "", 
+                filename : signal(" -- en attente --"), 
+                data : null
+            };
+            i++;
+            parsedSprites.push(newSprite); 
+            this.internSprites.push(copy);
+        }
+
+        this.initialSprites.set(parsedSprites);
+    }
+
+    /** A lifecycle happening after the content has been initialized. Will initialize the colors to display, the sprites to display,
+     * and the datas in intern. */
+    async ngAfterContentInit(){
+
+        let colors : ColorIHM[] = await BackgroundComponent.listColors();
+        let sprites : Sprite[] = await ConfigurationComponent.listSprites();
+        this.initColors(colors);
+        this.initSprites(sprites);
+
+        let i = 0, x = 0;
+
+        while(i < this.initialColors.length){
+            this.modifiedColors.push(false);
+            i++;
+        }
+
+        while(x < this.initialSprites.length){
+            this.modifiedSprites.push(false);
+            x++;
+        }
+            
         this.isLoaded.set(true);
-        
     }
 
 
-    /** Change the data "firstGradient" about the color matching the counter in intern. Will be saved in the database, if the
+    /** Change the attribute "firstGradient" about the color matching the counter in intern. Will be saved in the database, if the
      * user click on the button "Enregistrer". */
     firstColorChange(counter : number, event : any){
 
@@ -84,7 +150,7 @@ export class ConfigurationComponent {
         this.modifiedColors[counter - 1] = true;
     }
 
-    /** Change the data "secondGradient" about the color matching the counter in intern. Will be saved in the database, if the
+    /** Change the attribute "secondGradient" about the color matching the counter in intern. Will be saved in the database, if the
      * user click on the button "Enregistrer". */
     secondColorChange(counter : number, event : any){
 
@@ -96,7 +162,7 @@ export class ConfigurationComponent {
         this.modifiedColors[counter - 1] = true;
     }
 
-    /** Change the data "name" about the color matching the counter in intern. Will be saved in the database, if the
+    /** Change the attribute "name" about the color matching the counter in intern. Will be saved in the database, if the
      * user click on the button "Enregistrer". */
     nameColorChange(counter : number, event : any){
 
@@ -108,47 +174,118 @@ export class ConfigurationComponent {
         this.modifiedColors[counter - 1] = true;
     }
 
+    /** Change the attribute "name" about the sprite matching the counter in intern. Will be saved in the database, if the
+     * user click on the button "Enregistrer". */
+    nameSpriteChange(counter : number, event : any){
 
-    /**Save the change performed by the client, by calling the API */
-    async save(){
+        for(let sprite of this.internSprites){
+            if(sprite.counter == counter)
+                sprite.name = event.target.value;
+        }
 
+        this.modifiedSprites[counter - 1] = true;
+    }
+
+    /** Change the attributes "filename" and data, about the sprite matching the counter in intern. Will be saved in the database, if the
+    * user click on the button "Enregistrer". */
+    async fileSpriteChange(counter : number, event : any){
+        let sleepTime = 0;
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+
+        while(reader.readyState != FileReader.DONE && sleepTime < 1000){
+            await Util.sleep(200);
+            sleepTime += 200;
+        }
+
+        let filename = event.target.files[0].name;
+        let data =`${reader.result}`;
+
+        let value = this.initialSprites();
+        value[counter - 1].filename.set(filename);
+        this.initialSprites.set(value);
+        this.internSprites[counter - 1].filename.set(filename);
+        this.internSprites[counter - 1].data = data;
+        this.modifiedSprites[counter - 1] = true;
+    }
+
+
+    /** Check if the field filled by the users are correct or not. Return true, if the fields are correctly filled, and false
+    * in the others case. Each time at least one field is incorrectly filled, this function will directly display a message to
+    * the user.*/
+    validate() : boolean{
         let emptyNameField : boolean = false;
+        let emptyFileField : boolean = false;
 
         for(let color of this.internColors){
             
             if(color.databaseID != null && color.name.trim() == "")
                 emptyNameField = true;
         }
+        for(let sprite of this.internSprites){
+            if(sprite.databaseID != null && sprite.name.trim() == "")
+                emptyNameField = true;
+            if(sprite.databaseID == null && sprite.data != null && sprite.name.trim() == "")
+                emptyNameField = true;
+            if(sprite.databaseID == null && sprite.data == null && sprite.name.trim() != "")
+                emptyFileField = true;
+        }
 
         if(emptyNameField){
             this.message.set("Le champ Nom est obligatoire");
             this.isErrorMessage.set(true);
             Util.startTimer("showMessage", ConfigurationComponent.MESSAGE_DURATION_MS);
+            return false;
         }
-        else{
+        else if(emptyFileField){
+            this.message.set("Choisir un Fichier est obligatoire");
+            this.isErrorMessage.set(true);
+            Util.startTimer("showMessage", ConfigurationComponent.MESSAGE_DURATION_MS);
+            return false;
+        }
+        else
+            return true;
+    }
+
+    /**Save the change performed by the client, by calling the API */
+    async save(){
+
+        let isValid = this.validate();
+        
+        if(isValid){
             for(let i = 0; i < this.internColors.length; i++){
                 let color = this.internColors[i];
 
                 if(this.modifiedColors[i]){
-                    if(color.databaseID != null){
-                        let body = new ColorBody(color.name, color.firstGradient, color.secondGradient);
+                    let body = new ColorBody(color.name, color.firstGradient, color.secondGradient);
+
+                    if(color.databaseID != null)
                         API_Util.put(`/color/${color.databaseID}`, body);
-                    }
                     else{
-                        let body = new ColorBody(color.name, color.firstGradient, color.secondGradient);
                         let response = await API_Util.post(`/color`, body);
-
-                        if(!response.hasFailed && response.responseHeaders){
-                            let location = response.responseHeaders.get("Location");
-
-                            if(location && location.includes("/")){
-                                let parts = location.split("/");
-                                let idCreated = parts[parts.length - 1].trim();
-                                this.internColors[i].databaseID = idCreated;
-                            }
-                        }
+                        this.internColors[i].databaseID = ConfigurationComponent.retriveIdFromLocation(response);
                     }
                     this.modifiedColors[i] = false;
+                }
+            }
+
+            for(let i = 0; i < this.internSprites.length; i++){
+                let sprite = this.internSprites[i];
+
+                if(this.modifiedSprites[i] && sprite.data){
+                    let body = new SpriteBody(sprite.name, sprite.filename(), sprite.data);
+
+                    if(sprite.databaseID != null)
+                        API_Util.put(`/sprite/${sprite.databaseID}`, body);
+                    else{
+                        let response = await API_Util.post(`/sprite`, body);
+                        let idCreated = ConfigurationComponent.retriveIdFromLocation(response);
+
+                        if(idCreated)
+                            this.internSprites[i].databaseID = parseInt(idCreated);
+                        
+                    }
+                    this.modifiedSprites[i] = false;
                 }
             }
 
@@ -156,6 +293,39 @@ export class ConfigurationComponent {
             this.isErrorMessage.set(false);
             Util.startTimer("showMessage", ConfigurationComponent.MESSAGE_DURATION_MS);
         }
+    }
+
+    /** When receving a response from the API, search for the header "Location", and return the id in this header if present. By example
+    * if after a POST call the header Location has for value ".../color/4", this function will return "4". This functions returns null, 
+    * when the id can't be retrieved.*/
+    static retriveIdFromLocation(response : API_Response<unknown>) : string | null {
+
+        if(response.hasFailed || !response.responseHeaders)
+            return null;
+        
+        let location = response.responseHeaders.get("Location");
+
+        if(location && location.includes("/")){
+            let parts = location.split("/");
+            let id = parts[parts.length - 1].trim();
+            return id;
+        }
+        else
+            return null;
+                     
+    }
+
+    /** Returns a list of all the available sprites. The answer isn't cached, because the admin users can configure the sprites. And a admin can 
+     * configure the sprites, and go to this page just after, to see if the change was taked into account... */
+    static async listSprites() : Promise<Sprite[]>{
+
+        let answer : API_Response<Sprite[]> = await API_Util.get<Sprite[]>("/sprite");
+
+        if(!answer.hasFailed && answer.data)
+            return answer.data;
+        else
+            return [];
+        
     }
 
 }
