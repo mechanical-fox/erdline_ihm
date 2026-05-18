@@ -24,6 +24,7 @@ export class BackgroundComponent {
     storage : Storage;
     counter : number;
     isLoaded : WritableSignal<boolean>;
+    defaultColorId : string | null;
 
     constructor(){
 
@@ -31,6 +32,7 @@ export class BackgroundComponent {
         this.backgroundName = signal("");
         this.colorSelected = signal("");
         this.gradient = signal("");
+        this.defaultColorId = null;
 
         if(Util.getVariable("backgrounds") != null){
             this.backgrounds = signal(Util.getVariable("backgrounds"));
@@ -55,6 +57,9 @@ export class BackgroundComponent {
 
         let colors : ColorIHM[] = await BackgroundComponent.listColors();
         this.colors.set(colors);
+
+        if(colors.length > 0)
+            this.defaultColorId = colors[0].databaseID;
 
         if(Util.getVariable("backgrounds") != null)
             this.flushAndSave();
@@ -94,13 +99,13 @@ export class BackgroundComponent {
      * the new background.*/
     async addBackground(){
         let backgroundsValue = this.backgrounds();
-        let colors = await BackgroundComponent.listColors();
         let newName  = this.storage.add();
         let id = `background-${this.counter}`;
         this.counter++;
 
-        if(colors.length > 0){
-            let newBackground = new Background(id, newName,colors[0].databaseID);
+
+        if(this.defaultColorId){
+            let newBackground = new Background(id, newName, this.defaultColorId);
             backgroundsValue.push(newBackground);
         }
         else{
