@@ -178,11 +178,7 @@ export class ConfigurationComponent {
      * user click on the button "Enregistrer". */
     nameSpriteChange(counter : number, event : any){
 
-        for(let sprite of this.internSprites){
-            if(sprite.counter == counter)
-                sprite.name = event.target.value;
-        }
-
+        this.internSprites[counter - 1].name = event.target.value;
         this.modifiedSprites[counter - 1] = true;
     }
 
@@ -225,10 +221,14 @@ export class ConfigurationComponent {
         for(let sprite of this.internSprites){
             if(sprite.databaseID != null && sprite.name.trim() == "")
                 emptyNameField = true;
-            if(sprite.databaseID == null && sprite.data != null && sprite.name.trim() == "")
+            if(sprite.databaseID == null && sprite.data != null && sprite.name.trim() == ""){
+                console.log("here 55");
                 emptyNameField = true;
-            if(sprite.databaseID == null && sprite.data == null && sprite.name.trim() != "")
+            }
+            if(sprite.databaseID == null && sprite.data == null && sprite.name.trim() != ""){
+                console.log("here 56");
                 emptyFileField = true;
+            }
         }
 
         if(emptyNameField){

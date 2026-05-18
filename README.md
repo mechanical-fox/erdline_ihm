@@ -20,8 +20,8 @@ passe en développement... Je vais modifier le mot de passe après en déploieme
 après x second
 3. Fait: Permettre que interface complete à 4 couleur + que alors fait POST si est null + alors on doit RECUPERER id en base, à l'aide du header reponse
 ou aura soucis + modifier reprsentation intern 
-
 3. Fait: Faire création des sprites via IHM
+
 
 3. Rapport au truc d'après... Voir qu'API peut eventuellement repondre vite, et que le soucis serait genre construction de HTML_Video.
 Auquel cas, inutile de faire une url par sprite en base 64 à récupérer.
