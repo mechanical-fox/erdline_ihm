@@ -1,10 +1,12 @@
-import { Component, WritableSignal, signal, Signal} from '@angular/core';
+import { Component, WritableSignal, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Util } from '../../util/Util';
 import { Storage } from '../../util/Storage';
 import { Sprite } from '../../data/api/Sprite';
 import { Character } from '../../data/edition/Character';
 import { Expression } from '../../data/edition/Expression';
+import { API_Response } from '../../data/util/API_Response';
+import { API_Util } from '../../util/APIUtil';
 
 @Component({
     selector: 'Character',
@@ -16,17 +18,19 @@ export class CharacterComponent {
 
     
     spritePreview : WritableSignal<string | null>;
-    sprites : Sprite[];
+    sprites : WritableSignal<Sprite[]>;
     characterName: WritableSignal<string>;
     characters : WritableSignal<Character[]>;
+    isLoaded : WritableSignal<boolean>;
     storage : Storage;
     counter : number;
 
     constructor(){
 
-        this.sprites = CharacterComponent.listSprites();
+        this.sprites = signal([]);
         this.spritePreview = signal("images/default.png");
         this.characterName = signal("");
+        this.isLoaded = signal(false);
 
         if(Util.getVariable("characters") != null){
             
@@ -42,6 +46,16 @@ export class CharacterComponent {
             this.addCharacter();
         }
  
+    }
+
+    /** A lifecycle happening after the content has been initialized. For this component, the goal is to 
+     * initiate what sprites are available.*/
+    async ngAfterContentInit(){
+
+        let spritesValue = await CharacterComponent.listSprites();
+        this.sprites.set(spritesValue);
+        this.isLoaded.set(true);
+        
     }
 
 
@@ -160,24 +174,26 @@ export class CharacterComponent {
         if(event.target.value == "empty")
             this.spritePreview.set("images/default.png");
         else{
-            for(let sprite of this.sprites){
-                if(sprite.id == event.target.value){
-                    this.spritePreview.set(sprite.filename);
-                }
+            for(let sprite of this.sprites()){
+                if(sprite.id == event.target.value)
+                    this.spritePreview.set(sprite.data);
             }
         }
             
     }
 
 
-    /** Returns a list of all the available sprites*/
-    static listSprites() : Sprite[]{
+    /** Returns a list of all the available sprites. The answer isn't cached, because the admin users can configure the sprites. And a admin can 
+     * configure the sprites, and go to this page just after, to see if the change was taked into account... */
+    static async listSprites() : Promise<Sprite[]>{
 
-        let spriteAdrien = new Sprite(1, "Adrien", "images/Adrien.png", "images/Adrien.png");
-        let spriteGrace = new Sprite(2, "Grace", "images/Grace.png", "images/Grace.png");
-        let sprites = [spriteAdrien, spriteGrace];
+        let answer : API_Response<Sprite[]> = await API_Util.get<Sprite[]>("/sprite");
 
-        return sprites;
+        if(!answer.hasFailed && answer.data)
+            return answer.data;
+        else
+            return [];
+        
     }
 
 }

@@ -309,7 +309,7 @@ export class SceneComponent {
 
             if(isTransition){
                 for(let scene of this.scenes()){
-                    console.log(`scene.id : ${scene.id}, message.nextSceneId : ${message.nextSceneId}, égalité: ${scene.id == message.nextSceneId}`);
+
                     if(scene.id == message.nextSceneId)
                         text = `Transition vers ${scene.name}`;
                 }

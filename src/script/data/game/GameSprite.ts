@@ -2,12 +2,12 @@
 export class GameSprite{
 
     character : string;
-    source : string;
-    data : HTMLVideoElement | null;
+    expression :string;
+    htmlElement : HTMLVideoElement | null;
 
-    constructor(character : string, source : string, data : HTMLVideoElement | null){
+    constructor(character : string, expression : string, htmlElement : HTMLVideoElement | null){
         this.character = character;
-        this.source = source;
-        this.data = data;
+        this.expression = expression;
+        this.htmlElement = htmlElement;
     }
 }

@@ -65,8 +65,9 @@ export class GameComponent {
                     this.drawer.drawUserMessage(message, ctx);
                 }else{
                     this.gameBackground = await this.getBackground(firstScene.backgroundId);
-                    this.messages = this.convertMessage(firstScene.messages);
+                    this.messages = await this.convertMessage(firstScene.messages);
                     this.messageNumber = 0;
+                    SpriteLoader.resetCache();
                     let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
                     this.leftSprite = firstSprites.leftSprite;
                     this.rightSprite = firstSprites.rightSprite;
@@ -159,7 +160,7 @@ export class GameComponent {
             for(let scene of scenes){
                 if(scene.id == nextSceneId){
                     let nextGameBackground : GameBackground = await this.getBackground(scene.backgroundId);
-                    let nextMessages = this.convertMessage(scene.messages);
+                    let nextMessages = await this.convertMessage(scene.messages);
                     let nextMessageNumber = 0;
                     let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
                     let nextLeftSprite = firstSprites.leftSprite;
@@ -192,9 +193,9 @@ export class GameComponent {
             else
                 replaceLeftCharacter = false;
 
-            if(message.spriteFilename){
-                let data = await SpriteLoader.loadSpriteData(message.spriteFilename);
-                let sprite = new GameSprite(message.characterName, message.spriteFilename, data);
+            if(message.expressionName && message.dataBase64){
+                let data = await SpriteLoader.loadSpriteData(message.characterName, message.expressionName, message.dataBase64);
+                let sprite = new GameSprite(message.characterName, message.expressionName, data);
                 let nextLeftSprite = leftSprite;
                 let nextRightSprite = rightSprite;
                             
@@ -220,19 +221,19 @@ export class GameComponent {
      * expressionId), because it's necessary to impact the changes, if we change the name of a character by example. But...
      * here to play, we will resolve all the information, like search for the sprite for this character, and expression. We 
      * will keep only the informations necessary to play. And this informations, will be returned in the form of a GameMessage. */
-    convertMessage(messages : Message[]) : GameMessage[]{
+    async convertMessage(messages : Message[]) : Promise<GameMessage[]>{
         let convertedMessages : GameMessage[] = [];
         let characters : Character[] = Util.getVariable("characters") ? Util.getVariable("characters") : [];
-        let sprites : Sprite[] = CharacterComponent.listSprites();
+        let sprites : Sprite[] = await CharacterComponent.listSprites();
 
         for(let message of messages){
 
             if(message.characterId == "narration"){
-                let newConvertedMessage = new GameMessage(null, "narration", message.text, null);
+                let newConvertedMessage = new GameMessage("narration", null, null, message.text, null);
                 convertedMessages.push(newConvertedMessage); 
             }
             else if(message.characterId == "transition"){
-                let newConvertedMessage = new GameMessage(null, "transition", "", message.nextSceneId);
+                let newConvertedMessage = new GameMessage("transition", null, null, "", message.nextSceneId);
                 convertedMessages.push(newConvertedMessage); 
             }
             else{
@@ -242,7 +243,7 @@ export class GameComponent {
                             if(expression.id == message.expressionId){
                                 for(let sprite of sprites){
                                     if(sprite.id == expression.sprite_id){
-                                        let newConvertedMessage = new GameMessage(sprite.filename, character.name, message.text, message.nextSceneId);
+                                        let newConvertedMessage = new GameMessage(character.name, expression.name, sprite.data, message.text, message.nextSceneId);
                                         convertedMessages.push(newConvertedMessage); 
                                     }
                                 }

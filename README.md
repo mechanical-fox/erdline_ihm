@@ -25,9 +25,12 @@ ou aura soucis + modifier reprsentation intern
 
 3. Rapport au truc d'après... Voir qu'API peut eventuellement repondre vite, et que le soucis serait genre construction de HTML_Video.
 Auquel cas, inutile de faire une url par sprite en base 64 à récupérer.
-3. POUR SPRITE Loader + POUR PREVIEW + POUR JEU + Faire récupération des Sprites via API + ATTENTION RECUPERER listSprite DEPUIS ConfigurationCOmponent, 
-et ATTENTION du coup je vais devoir modifier éventuellement les onglets "preview" ou bien "jeux", c'est les 2 ou je vois ou cela est appellé... Bref, 
-regarder aussi les autres onglets.
+
+3. Fait: Récupérer les sprites avec API pour partie character et PREVIEW
+3. Fait: Récupérer les sprites avec API au niveau JEU
+
+
+3. BUG DECOUVERT - Au niveau des décors ajouter un décor est très lent, car à chaque fois l'on refait un appel à /color
 3. Vérifier le temps de chargement des sprites, s'il est plus ou moins rapide qu'avant
 4. faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
 de passe. Aucun email.

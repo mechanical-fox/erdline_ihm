@@ -64,10 +64,10 @@ export class Drawer{
             context.roundRect(0,0,this.actualWidth,this.actualHeight,[radius,radius,radius,radius]);
             context.fill();
 
-            if(informations.leftSprite && informations.leftSprite.data)
-                this.drawSprite(informations.leftSprite.data, widthCharacter, heightCharacter, true, context);
-            if(informations.rightSprite && informations.rightSprite.data)
-                this.drawSprite(informations.rightSprite.data, widthCharacter, heightCharacter, false, context);
+            if(informations.leftSprite && informations.leftSprite.htmlElement)
+                this.drawSprite(informations.leftSprite.htmlElement, widthCharacter, heightCharacter, true, context);
+            if(informations.rightSprite && informations.rightSprite.htmlElement)
+                this.drawSprite(informations.rightSprite.htmlElement, widthCharacter, heightCharacter, false, context);
 
             this.drawText(informations.text, informations.isNarration, context);
 

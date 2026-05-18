@@ -1,14 +1,17 @@
 
 
 export class GameMessage{
-    spriteFilename: string | null;
+    
     characterName: string;
+    expressionName : string | null;
+    dataBase64: string | null;
     text : string;
     nextSceneId : string | null;
 
-    constructor(spriteFilename : string | null, characterName : string, text  : string, nextSceneId : string | null){
-        this.spriteFilename = spriteFilename;
+    constructor(characterName : string, expressionName : string | null, dataBase64: string | null, text  : string, nextSceneId : string | null){
         this.characterName = characterName;
+        this.expressionName = expressionName;
+        this.dataBase64 = dataBase64;
         this.text = text;
         this.nextSceneId = nextSceneId;
     }
