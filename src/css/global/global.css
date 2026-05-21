@@ -33,6 +33,7 @@
         --message-box-textarea-width: 24rem;
         --view-list-width: 40rem;
         --loading-circle-margin: 10vh 0vw 4vh 8vw;
+        --saving-mesage-width: 12rem;
     }
 
 }
@@ -69,6 +70,7 @@
         --message-box-textarea-width: 20rem;
         --view-list-width: 70vw;
         --loading-circle-margin: 5vh 0vw 4vh 8vw;
+        --saving-mesage-width: 11rem;
     }
 
 }
@@ -105,6 +107,7 @@
         --message-box-textarea-width: 50vw;
         --view-list-width: 70vw;
         --loading-circle-margin: 5vh 0vw 4vh 8vw;
+        --saving-mesage-width: 10rem;
     }
 
 }

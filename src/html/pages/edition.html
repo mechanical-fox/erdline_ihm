@@ -40,9 +40,7 @@
             <Game/>
         }
         @if(selected() == "Sauvegarde"){
-            <p>
-                Page Edition
-            </p>
+            <Saving (connection)="connectionReceived($event)"/>
         }
         @if(selected() == "Configuration"){
             <Configuration/>

@@ -1,0 +1,22 @@
+
+
+<p class="saving-title">
+    Session
+</p>
+<p class="saving-input-name">
+    Session
+</p>
+<input class="saving-input" type="text" [(ngModel)]="sessionName"/>
+<p class="saving-input-name">
+    Mot de passe
+</p>
+<input class="saving-input" type="password" [(ngModel)]="password"/>
+
+<button class="saving-button"(click)="connect()">Connexion</button>
+<button class="saving-button">Création</button>
+
+@if(errorMessage() != null){
+    <p class="saving-message-failure"> {{errorMessage()}} </p>
+}
+
+

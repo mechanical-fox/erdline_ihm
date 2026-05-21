@@ -1,5 +1,12 @@
 
 <div class="banner">
+    <div class="flex-line-end">
+        @if(sessionName() != null){
+            <p class="nav-connection-text"> Session: {{sessionName()}}</p>
+        }
+        <!--<p class="nav-connection-text"> Session: GreenAshes</p>-->
+        <!--<p class="nav-connection-text"> Mode Visiteur </p>-->
+    </div>
     <div class="flex-line-align-top">
         <div class="nav-div-1">
             <p class="title">Erdline</p>
@@ -21,7 +28,7 @@
 
 @if(connectionTested() && connectionHealthy()){
     @if(selected()=="Edition"){
-        <Edition />
+        <Edition (connection)="connect($event)"/>
     }
 
     @if(selected()=="Exemples"){

@@ -18,6 +18,7 @@ export class NavComponent {
     static HEALTH_URL_TIMEOUT_MS = 2000;
     static MESSAGE_DURATION_MS : number = 7000;
 
+    sessionName : WritableSignal<string | null>;
     selected : WritableSignal<string>;
     items : WritableSignal<string[]>;
     connectionTested : WritableSignal<boolean>;
@@ -28,6 +29,7 @@ export class NavComponent {
         this.selected = signal(this.items()[0]);
         this.connectionTested = signal(false);
         this.connectionHealthy = signal(false);
+        this.sessionName = signal(null);
     }
 
    /** A lifecycle happening after the content has been initialized. For this component, the goal is to 
@@ -43,6 +45,11 @@ export class NavComponent {
     /** Function called when someone click on a item such as "Accueil"  */
     select(item : string) : void {
         this.selected.set(item);
+    }
+
+    /** Display the name of the session connected, in the banner */
+    connect(session : string){
+        this.sessionName.set(session);
     }
 
 }

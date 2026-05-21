@@ -3,6 +3,8 @@
 
 Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
 
+
+
 0. Fait: Création database avec mot de passe PASSWORD et cela CAR je ne peux pas stocker de vrai mot de 
 passe en développement... Je vais modifier le mot de passe après en déploiement.
 1. Fait: Faire la partie API sur health
@@ -27,17 +29,27 @@ ou aura soucis + modifier reprsentation intern
 3. Fait: Vérifier le temps de chargement des sprites, s'il est plus ou moins rapide qu'avant
 
 
-4. faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
+4. Fait: faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
 de passe. Aucun email.
-5. Faire la partie IHM sur les sessions: inscription + connexion.
-5. Faire que les urls POST pour color et sprite deviennent des URL authentifiés + à indiquer en Swagger aussi
+
+5. Fait: Faire IHM connection HORMIS l'encart bleu + Pseudo en haut à droite !!
+5. Faire inscription + APPEL URL VERIFICATION pour pseudo + autres erreurs gérer directement en ihm + GERER ERREURS 
+    A L'INSCRIPTION + gérer connection immédiat.
+5. Faire affichage d'un en-cart en onglet sauvegarde si réussie. Avec par exemple, "Etat: connecté, Session : ..., 
+                Est Admin : Non " + fond en bleu ciel. Et ne PAS faire de message de réussite, juste faire cela + CHANGEMENT en haut à droite.   
+
+
+6. Faire en sorte que les parties sur Configuration Background et sprite ne soient accesibles que si 
+admin (doit être mis à la main en base de donnée) en IHM
+6. Faire que les urls POST pour color et sprite deviennent des URL authentifiés + à indiquer en Swagger aussi
++ tester via Swagger
 6. Faire API sur sauvegarde si on est connecté
 7. Gérer via IHM sur la sauvegarde si connecté
-8. Faire en sorte que les parties sur Configuration Background et sprite ne soient accesibles que si 
-admin (doit être mis à la main en base de donnée)
 9. Faire en README une documentation sur comment créer un admin
 10. Vérifier que l'on a la vue mobile compatible sur configuration Background et sprite + partie sauvegarde.
 11. Faire les tests unitaires
+12. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
+de Nathaniel, afin d'avoir assez de personnages
 12. Faire les pages Tutoriel, Exemples, A propos
 13. Mise à jour du README
 14. Déployer AVANT de faire la merge request pour pouvoir tester. Au cas où il y a des soucis.
@@ -45,7 +57,8 @@ admin (doit être mis à la main en base de donnée)
 16. Déployer API et tester
 17. Déployer IHM et tester
 18. Faire deploiement AVANT les merge request. Voir si pas de soucis.
-    
+
+
 
 Fin: 
 - Ai je bien gérer le fait d'appeler une url health à la connexion + d'afficher

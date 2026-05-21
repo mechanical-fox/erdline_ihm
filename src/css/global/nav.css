@@ -3,7 +3,7 @@
 
 .banner{
     margin: 0rem 0rem 0rem 0rem;
-    padding: 2rem 0rem 0rem 0rem;
+    padding: 1rem 0rem 0rem 0rem;
     width: 100%;
     background-color: rgb(17, 17, 17);
 }
@@ -14,6 +14,14 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+}
+
+.flex-line-end{
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 
@@ -64,4 +72,11 @@
     margin: var(--nav-server-down-text-margin);
     font: 1.2rem Serif;
     width: var(--nav-server-down-text-width);
+}
+
+.nav-connection-text{
+    margin: 0.4rem 5rem 0rem 0rem;
+    font: bold 1.1rem Serif;
+    color: rgb(255,255,255);
+    word-wrap: break-word;
 }

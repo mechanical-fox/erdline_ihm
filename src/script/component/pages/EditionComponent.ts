@@ -1,21 +1,22 @@
 
-import { Component, WritableSignal, signal} from '@angular/core';
+import { Component, WritableSignal, signal, output} from '@angular/core';
 import { BackgroundComponent } from '../edition_menu/BackgroundComponent';
 import { CharacterComponent } from '../edition_menu/CharacterComponent';
 import { SceneComponent } from '../edition_menu/SceneComponent';
 import { GameComponent } from '../edition_menu/GameComponent';
 import { ConfigurationComponent } from '../edition_menu/ConfigurationComponent';
+import { SavingComponent } from '../edition_menu/SavingComponent';
 import { Util } from '../../util/Util';
 
 @Component({
     selector: 'Edition',
-    imports: [BackgroundComponent, CharacterComponent, SceneComponent, GameComponent, ConfigurationComponent],
+    imports: [BackgroundComponent, CharacterComponent, SceneComponent, GameComponent, ConfigurationComponent, SavingComponent],
     templateUrl: '../../../html/pages/edition.html',
     styleUrl: '../../../css/pages/edition.css'
 })
 export class EditionComponent {
 
-
+    connection = output<string>();
     selected : WritableSignal<string>;
     focus_on : WritableSignal<string | null>;
     items : string[];
@@ -46,6 +47,11 @@ export class EditionComponent {
     /** Function called when someone retrieve the mouse from an item */
     mouse_out(item : string){
         this.focus_on.set(null);
+    }
+
+    /** Transmit an event connection to the parent */
+    connectionReceived(session : string){
+        this.connection.emit(session);
     }
 
 }
