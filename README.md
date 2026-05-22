@@ -31,18 +31,26 @@ ou aura soucis + modifier reprsentation intern
 
 4. Fait: faire la partie API sur les sessions : inscription + connexion. Doit être juste nom session + mot 
 de passe. Aucun email.
-
 5. Fait: Faire IHM connection HORMIS l'encart bleu + Pseudo en haut à droite !!
-5. Faire inscription + APPEL URL VERIFICATION pour pseudo + autres erreurs gérer directement en ihm + GERER ERREURS 
-    A L'INSCRIPTION + gérer connection immédiat.
-5. Faire affichage d'un en-cart en onglet sauvegarde si réussie. Avec par exemple, "Etat: connecté, Session : ..., 
-                Est Admin : Non " + fond en bleu ciel. Et ne PAS faire de message de réussite, juste faire cela + CHANGEMENT en haut à droite.   
 
+-------------------------------
+
+
+5. Fait: Faire inscription + APPEL URL VERIFICATION pour pseudo + autres erreurs gérer directement en ihm + GERER ERREURS 
+    A L'INSCRIPTION + gérer connection immédiat.
+
+5. Fait: Faire affichage d'un en-cart en onglet sauvegarde si réussie. Avec par exemple, "Etat: connecté, Session : ..., 
+                Est Admin : Non " + fond en bleu ciel. Et ne PAS faire de message de réussite, juste faire cela + CHANGEMENT en haut à droite. 
+5. Fait: Vérifier que l'encart apparaise si connexion + si inscription aussi
+5. Fait: Vérifier que si l'on quitte et que l'on revient dans l'onglet, cela est bien enregistré (normalement je me suis arrangé pour que oui)
+5. Fait: Vérifier que l'encart marche bien en vue mobile aussi
+5. git push
 
 6. Faire en sorte que les parties sur Configuration Background et sprite ne soient accesibles que si 
-admin (doit être mis à la main en base de donnée) en IHM
+admin (doit être mis à la main en base de donnée) en IHM 
 6. Faire que les urls POST pour color et sprite deviennent des URL authentifiés + à indiquer en Swagger aussi
-+ tester via Swagger
++ tester via Swagger + mais SAUF les get car l'on doit pouvoir demander à lister les couleurs
+6. Indiquer en README mais dans celui de API le fait que les admin doivent être mis à la main dans la base de donnée
 6. Faire API sur sauvegarde si on est connecté
 7. Gérer via IHM sur la sauvegarde si connecté
 9. Faire en README une documentation sur comment créer un admin

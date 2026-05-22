@@ -39,15 +39,6 @@
     box-shadow: 0.1rem 0.1rem 0.2rem rgb(0,0,0);
 }
 
-.saving-message-success{
-    margin: 1.0rem 1.1rem 1.0rem 0.6rem;
-    padding: 0.8rem 1.2rem 0.8rem 1.2rem;
-    font : 1.0rem Serif;
-    background: rgb(73, 226, 53);
-    border-radius: 0.4rem;
-    width : var(--saving-mesage-width);
-    box-shadow: 0.1rem 0.1rem 0.2rem rgb(58, 58, 58);
-}
 
 .saving-message-failure{
     margin: 1.0rem 1.1rem 1.0rem 0.6rem;
@@ -59,5 +50,20 @@
     width : var(--saving-mesage-width);
     box-shadow: 0.1rem 0.1rem 0.2rem rgb(58, 58, 58);
 
+}
+
+.saving-connected-div{
+    margin: var(--saving-connected-div-margin);
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    background: rgb(128, 232, 250);
+    border-radius: 0.4rem;
+    width: var(--saving-connected-div-width);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(58, 58, 58);
+}
+
+.saving-connected-text{
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    font: 1.1rem Serif;
+    word-wrap: break-word;
 }
 

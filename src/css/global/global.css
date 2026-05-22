@@ -34,6 +34,8 @@
         --view-list-width: 40rem;
         --loading-circle-margin: 10vh 0vw 4vh 8vw;
         --saving-mesage-width: 12rem;
+        --saving-connected-div-width: 15rem;
+        --saving-connected-div-margin: 2rem 0rem 0rem 4rem;
     }
 
 }
@@ -71,6 +73,8 @@
         --view-list-width: 70vw;
         --loading-circle-margin: 5vh 0vw 4vh 8vw;
         --saving-mesage-width: 11rem;
+        --saving-connected-div-width: 15rem;
+        --saving-connected-div-margin: 2rem 0rem 0rem 4rem;
     }
 
 }
@@ -108,6 +112,8 @@
         --view-list-width: 70vw;
         --loading-circle-margin: 5vh 0vw 4vh 8vw;
         --saving-mesage-width: 10rem;
+        --saving-connected-div-width: 50vw;
+        --saving-connected-div-margin: 2rem 0rem 0rem 4vw;
     }
 
 }
