@@ -87,7 +87,17 @@ export class ConfigurationComponent {
         for(let sprite of sprites){
             let parsedSprite = new SpriteConfig(sprite, i);
             i++;
-            parsedSprites .push(parsedSprite);
+            parsedSprites.push(parsedSprite);
+
+            let copy : SpriteConfig= {
+                counter : i, 
+                databaseID : sprite.id,
+                name : sprite.name,
+                filename : signal(sprite.filename), 
+                data : sprite.data
+            };
+
+            this.internSprites.push(copy);
         }
 
         while(i <= 4){
@@ -221,14 +231,11 @@ export class ConfigurationComponent {
         for(let sprite of this.internSprites){
             if(sprite.databaseID != null && sprite.name.trim() == "")
                 emptyNameField = true;
-            if(sprite.databaseID == null && sprite.data != null && sprite.name.trim() == ""){
-                console.log("here 55");
+            if(sprite.databaseID == null && sprite.data != null && sprite.name.trim() == "")
                 emptyNameField = true;
-            }
-            if(sprite.databaseID == null && sprite.data == null && sprite.name.trim() != ""){
-                console.log("here 56");
+            if(sprite.databaseID == null && sprite.data == null && sprite.name.trim() != "")
                 emptyFileField = true;
-            }
+            
         }
 
         if(emptyNameField){

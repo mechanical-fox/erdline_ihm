@@ -7,8 +7,14 @@ import {environment} from "../../environments/environment";
 
 export class API_Util {
 
+    static token : string | null = null;
     static BASE_URL : string = environment.BASE_URL;
     static DEFAULT_TIMEOUT : number = 30000;
+
+    /** Indicate a token to use, for the next http calls, when the header Authorization is used*/
+    static async setToken(token : string){
+        API_Util.token = token;
+    }
 
     /** A function to send a POST call, and return the response immediatly. The keyword await is necessary to 
      * retrieve the answer. */
@@ -17,6 +23,8 @@ export class API_Util {
 
         if (body) 
             headers['Content-Type'] = 'application/json';
+        if(API_Util.token)
+            headers['Authorization'] = `Bearer ${API_Util.token}`;
 
         return API_Util.request<T, V>(url, 'POST', headers, body, API_Util.DEFAULT_TIMEOUT);
     }
@@ -28,6 +36,8 @@ export class API_Util {
 
         if (body) 
             headers['Content-Type'] = 'application/json';
+        if(API_Util.token)
+            headers['Authorization'] = `Bearer ${API_Util.token}`;
 
         return API_Util.request<T, V>(url, 'PUT', headers, body, API_Util.DEFAULT_TIMEOUT);
     }
@@ -37,6 +47,10 @@ export class API_Util {
      * retrieve the answer.*/
     static async get<V>(url: string): Promise<API_Response<V>> {
         let headers: Record<string, string> = {};
+
+        if(API_Util.token)
+            headers['Authorization'] = `Bearer ${API_Util.token}`;
+        
         return API_Util.request<undefined, V>(url, 'GET', headers, undefined, API_Util.DEFAULT_TIMEOUT);
     }
 

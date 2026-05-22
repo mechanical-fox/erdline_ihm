@@ -4,6 +4,7 @@ import { AboutComponent } from '../pages/AboutComponent';
 import { TutorialComponent } from '../pages/Tutorial';
 import { EditionComponent } from '../pages/EditionComponent';
 import { API_Util } from '../../util/APIUtil';
+import { ConnectionStatus } from '../../data/edition/ConnectionStatus';
 
  
 @Component({
@@ -48,8 +49,8 @@ export class NavComponent {
     }
 
     /** Display the name of the session connected, in the banner */
-    connect(session : string){
-        this.sessionName.set(session);
+    connect(connection : ConnectionStatus){
+        this.sessionName.set(connection.sessionName);
     }
 
 }

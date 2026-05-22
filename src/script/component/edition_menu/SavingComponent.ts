@@ -6,6 +6,7 @@ import { API_Util } from '../../util/APIUtil';
 import { AuthResponse } from '../../data/api/AuthResponse';
 import { Session } from '../../data/api/Session';
 import { ValidityResponse } from '../../data/api/ValidityResponse';
+import { ConnectionStatus } from '../../data/edition/ConnectionStatus';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { ValidityResponse } from '../../data/api/ValidityResponse';
 })
 export class SavingComponent {
 
-    connection = output<string>();
+    connection = output<ConnectionStatus>();
     isConnected : WritableSignal<boolean>;
     isAdmin : WritableSignal<boolean>;
     sessionName : WritableSignal<string>;
@@ -63,7 +64,9 @@ export class SavingComponent {
             this.isConnected.set(true);
             this.isAdmin.set(response.data.isAdmin);
             this.save();
-            this.connection.emit(body.session);
+            let connectionStatus = new ConnectionStatus(body.session, response.data.isAdmin);
+            API_Util.setToken(response.data.token);
+            this.connection.emit(connectionStatus);
         }
         
     }
@@ -104,7 +107,9 @@ export class SavingComponent {
                     this.isConnected.set(true);
                     this.isAdmin.set(response3.data.isAdmin);
                     this.save();
-                    this.connection.emit(body.session);
+                    let connectionStatus = new ConnectionStatus(body.session, response3.data.isAdmin);
+                    API_Util.setToken(response3.data.token);
+                    this.connection.emit(connectionStatus);
                 }
             }
         }
