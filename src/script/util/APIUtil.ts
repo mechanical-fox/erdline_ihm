@@ -16,6 +16,17 @@ export class API_Util {
         API_Util.token = token;
     }
 
+    /** A function to send a GET call, and return the response immediatly. The keyword await is necessary to 
+     * retrieve the answer.*/
+    static async get<V>(url: string): Promise<API_Response<V>> {
+        let headers: Record<string, string> = {};
+
+        if(API_Util.token)
+            headers['Authorization'] = `Bearer ${API_Util.token}`;
+        
+        return API_Util.request<undefined, V>(url, 'GET', headers, undefined, API_Util.DEFAULT_TIMEOUT);
+    }
+
     /** A function to send a POST call, and return the response immediatly. The keyword await is necessary to 
      * retrieve the answer. */
     static async post<T, V>(url: string, body: T): Promise<API_Response<V>> {
@@ -42,17 +53,19 @@ export class API_Util {
         return API_Util.request<T, V>(url, 'PUT', headers, body, API_Util.DEFAULT_TIMEOUT);
     }
 
-
-    /** A function to send a GET call, and return the response immediatly. The keyword await is necessary to 
-     * retrieve the answer.*/
-    static async get<V>(url: string): Promise<API_Response<V>> {
+    /** A function to send a PATCH call, and return the response immediatly. The keyword await is necessary to 
+     * retrieve the answer. */
+    static async patch<T, V>(url: string, body: T): Promise<API_Response<V>> {
         let headers: Record<string, string> = {};
 
+        if (body) 
+            headers['Content-Type'] = 'application/json';
         if(API_Util.token)
             headers['Authorization'] = `Bearer ${API_Util.token}`;
-        
-        return API_Util.request<undefined, V>(url, 'GET', headers, undefined, API_Util.DEFAULT_TIMEOUT);
+
+        return API_Util.request<T, V>(url, 'PATCH', headers, body, API_Util.DEFAULT_TIMEOUT);
     }
+
 
    /** For a url accesible in GET without authentification, return true if the url is accessible, and false in
      * others cases. It will be necessary to use await, to retrieve the result. The timeout is in millisecond. The
@@ -68,7 +81,7 @@ export class API_Util {
     /** This function perform a request to a url, and return the response of the request. The keyword await is necessary to 
      * retrieve the answer. It is necessary to indicate a timeout in milliseconds, that is the maximum time to wait before
      * consider the call like a failure. */
-    private static async request<T, V>(url: string,method: string, headers: Record<string, string>, 
+    private static async request<T, V>(url: string, method: string, headers: Record<string, string>, 
     body: T, timeout : number): Promise<API_Response<V>> {
         const newUrl = API_Util.BASE_URL + url;
         let bodyParsed = body ? JSON.stringify(body) : undefined;

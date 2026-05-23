@@ -43,21 +43,20 @@ admin (doit être mis à la main en base de donnée) en IHM
 
 6. Fait: Faire via l'ihm l'onglet background + tester manuellement SANS Tracking + ATTENTION on envoit donné en POST si inscription (sinon on pull)
 6. Fait: Faire via l'ihm l'onglet character + tester manuellement SANS Tracking + ATTENTION on envoit donné en POST si inscription (sinon on pull)
-6. Fait, et réussi !! Faire test avec MysticalAshes qui a décor (Jardin, Lac) mais pas de personnage. Créer des personnages, 
+6. Fait, et réussi: Faire test avec MysticalAshes qui a décor (Jardin, Lac) mais pas de personnage. Créer des personnages, 
 faire connexion. La connexion doit remplacer les décors, puis elle doit détruire les personnages (comme la session n'avait pas de personnage).
 
+6. Fait: Faire un SessionTrackerUtil - cf code déjà fait
+6. Fait et ok:Tester onglet background AVEC TRACKING + vérifier donnée se mettent à jour + vérifier le nombre d'appel est limité (si input nom)
+6. Fait et ok: Tester onglet character AVEC TRACKING + vérifier donnée se mettent à jour + vérifier le nombre d'appel est limité (si input nom)
 
-6. Faire un SessionTrackerUtil qui sera un Util, et qui donc ne se détruit jamais, qui récupérera les données de Util.getVariable("backgrounds")
-par exemple, ce qui ne se détruit jamais + dont le but sera de prendre une commande comme "notifyBackground()", "notifySprite()"...
-et de limiter à X appel par seconde, donc des sleep, des timers... Aussi, il y aura une fonction de départ (SessionTrackerUtil.linkSession(id)). 
-Tant que l'id n'est pas renseignée, le tracking ne sera pas effectif. Voili, voilou. Solution trouvée !!
-6. Tester onglet background AVEC TRACKING
-6. Tester onglet character AVEC TRACKING
+
 6. Faire API sauvegarde scenes
 7. Faire via l'ihm les scene + tester manuellement + ATTENTION on envoit donné en POST si inscription (sinon on pull)
 7. Faire des tests manuels sur la sauvegarde sur les TROIS onglets, si non fait... Il sera possible de faire les 3 en même temps.
 + tester en INSCRIPTION et en CONNEXION
-11. Faire les tests unitaires
+11. Faire les tests unitaires API
+12. Faire les tests unitaires IHM
 12. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
 de Nathaniel, afin d'avoir assez de personnages
 12. Faire les pages Tutoriel, Exemples, A propos

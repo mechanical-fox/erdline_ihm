@@ -7,6 +7,7 @@ import { ColorIHM } from '../../data/edition/ColorIHM';
 import { API_Util } from '../../util/APIUtil';
 import { Color } from '../../data/api/Color';
 import { API_Response } from '../../data/util/API_Response';
+import { SessionTrackerUtil } from '../../util/SessionTrackerUtil';
 
 @Component({
     selector: 'Background',
@@ -93,6 +94,7 @@ export class BackgroundComponent {
         Util.setVariable("backgrounds", this.backgrounds());
         Util.setVariable("backgrounds-storage", this.storage);
         Util.setVariable("backgrounds-counter", this.counter);
+        SessionTrackerUtil.notifyBackgroundChange();
     }
 
     /** Add a new background, with a generic name like #1, #2... And if the number of actual background is 0, will select 

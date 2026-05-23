@@ -12,6 +12,7 @@ import { PartialSession } from '../../data/api/PartialSession';
 import { Character } from '../../data/edition/Character';
 import { SessionResponse } from '../../data/api/SessionResponse';
 import { Storage } from '../../util/Storage';
+import { SessionTrackerUtil } from '../../util/SessionTrackerUtil';
 
 @Component({
     selector: 'Saving',
@@ -76,6 +77,7 @@ export class SavingComponent {
                 this.isAdmin.set(response.data.isAdmin);
                 this.save();
                 let connectionStatus = new ConnectionStatus(body.session, response.data.isAdmin);
+                SessionTrackerUtil.startTracking(sessionId);
                 this.connection.emit(connectionStatus);
             }
         }
@@ -123,6 +125,7 @@ export class SavingComponent {
                     this.save();
                     let connectionStatus = new ConnectionStatus(body.session, response3.data.isAdmin);
                     API_Util.setToken(response3.data.token);
+                    SessionTrackerUtil.startTracking(response3.data.sessionId);
                     this.connection.emit(connectionStatus);
                 }
             }
@@ -189,7 +192,7 @@ export class SavingComponent {
     }
 
     /** Return the actual backgrounds of the session in json format, or null if the backgrounds weren't configured */
-    private static getJsonBackgrounds() : string | null{
+    public static getJsonBackgrounds() : string | null{
         if(Util.getVariable("backgrounds") == null)
             return null;
         
@@ -198,7 +201,7 @@ export class SavingComponent {
     }
 
     /** Return the actual characters of the session in json format, or null if the characters weren't configured */
-    private static getJsonCharacters() : string | null{
+    public static getJsonCharacters() : string | null{
         if(Util.getVariable("characters") == null)
             return null;
         

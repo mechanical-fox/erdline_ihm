@@ -7,6 +7,7 @@ import { Character } from '../../data/edition/Character';
 import { Expression } from '../../data/edition/Expression';
 import { API_Response } from '../../data/util/API_Response';
 import { API_Util } from '../../util/APIUtil';
+import { SessionTrackerUtil } from '../../util/SessionTrackerUtil';
 
 @Component({
     selector: 'Character',
@@ -71,6 +72,7 @@ export class CharacterComponent {
         Util.setVariable("characters", this.characters());
         Util.setVariable("characters-storage", this.storage);
         Util.setVariable("characters-counter", this.counter);
+        SessionTrackerUtil.notifyCharacterChange();
     }
 
     /** Add a new character, with a generic name like #1, #2... And if the number of actual character is 0, will select 
