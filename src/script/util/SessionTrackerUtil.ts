@@ -17,7 +17,7 @@ export class SessionTrackerUtil{
     }
 
     /** Call the API, to change the backgrounds saved in database by the backgrounds actually present in the graphic interface.
-     * This function has no effect if the function, if the function startTracking(sessionId), wasn't called before.
+     * This function has no effect if the function startTracking(sessionId), wasn't called before.
      * If called very often, this function will wait a little before calling the API. To prevent calling the API, 5 time by second.*/
     static async notifyBackgroundChange(){
         
@@ -58,7 +58,7 @@ export class SessionTrackerUtil{
     }
 
     /** Call the API, to change the characters saved in database by the characters actually present in the graphic interface.
-     * This function has no effect if the function, if the function startTracking(sessionId), wasn't called before.
+     * This function has no effect if the function startTracking(sessionId), wasn't called before.
      * If called very often, this function will wait a little before calling the API. To prevent calling the API, 5 time by second.*/
     static async notifyCharacterChange(){
         
