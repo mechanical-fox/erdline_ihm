@@ -13,6 +13,18 @@ export class Storage{
         this.items = signal([])
     }
 
+    /** Create a new item in the storage, with the name given. If the storage was empty, the new item is selected. Else, 
+     * the previous item selected remains selected. */
+    addExisting(name: string) : void{
+        this.counter++;
+        let value = this.items();
+        value.push(name);
+        this.items.set(value);
+
+        if(this.selected() == null)
+            this.selected.set(name);
+    }
+
     /** Create a new item in the storage, and returns the name of the new item created. If the storage was empty, the new 
      * item is selected. Else, the previous item selected remains selected. */
     add() : string{

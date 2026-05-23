@@ -105,11 +105,11 @@ export class BackgroundComponent {
 
 
         if(this.defaultColorId){
-            let newBackground = new Background(id, newName, this.defaultColorId);
+            let newBackground = new Background(this.counter - 1, id, newName, this.defaultColorId);
             backgroundsValue.push(newBackground);
         }
         else{
-            let newBackground = new Background(id, newName, "1");
+            let newBackground = new Background(this.counter - 1, id, newName, "1");
             backgroundsValue.push(newBackground);
         }
 

@@ -83,7 +83,7 @@ export class CharacterComponent {
         let expr1 = new Expression("expr-1", 1, "", null);
         let expr2 = new Expression("expr-2", 2, "", null);
         let expr3 = new Expression("expr-3", 3, "", null);
-        let newCharacter = new Character(id,newName,[expr1, expr2, expr3]); 
+        let newCharacter = new Character(this.counter, id,newName,[expr1, expr2, expr3]); 
         charactersValue.push(newCharacter);
         this.characters.set(charactersValue);
         this.counter++;
