@@ -51,10 +51,12 @@ faire connexion. La connexion doit remplacer les décors, puis elle doit détrui
 6. Fait et ok: Tester onglet character AVEC TRACKING + vérifier donnée se mettent à jour + vérifier le nombre d'appel est limité (si input nom)
 
 
-6. Faire API sauvegarde scenes
-7. Faire via l'ihm les scene + tester manuellement + ATTENTION on envoit donné en POST si inscription (sinon on pull)
-7. Faire des tests manuels sur la sauvegarde sur les TROIS onglets, si non fait... Il sera possible de faire les 3 en même temps.
-+ tester en INSCRIPTION et en CONNEXION
+6. Fait: Faire API sauvegarde scenes
+7. Fait: Faire via l'ihm les scene + ATTENTION on envoit donné en POST si inscription (sinon on pull)
+7. Fait: Tester ihm les scenes si Inscription
+7. Fait: Tester ihm les scenes si Connexion
+7. Faire le tracking sur les scenes
+7. Faire des tests manuels pour vérifier que le tracking en scène est bien pris en compte
 11. Faire les tests unitaires API
 12. Faire les tests unitaires IHM
 12. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite

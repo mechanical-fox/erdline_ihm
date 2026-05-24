@@ -13,6 +13,7 @@ import { Character } from '../../data/edition/Character';
 import { SessionResponse } from '../../data/api/SessionResponse';
 import { Storage } from '../../util/Storage';
 import { SessionTrackerUtil } from '../../util/SessionTrackerUtil';
+import { Scene } from '../../data/edition/Scene';
 
 @Component({
     selector: 'Saving',
@@ -72,6 +73,7 @@ export class SavingComponent {
             if(!response2.hasFailed && response2.data){
                 SavingComponent.loadBackground(response2.data.json_backgrounds);
                 SavingComponent.loadCharacters(response2.data.json_characters);
+                SavingComponent.loadScenes(response2.data.json_scenes);
                 this.errorMessage.set(null);
                 this.isConnected.set(true);
                 this.isAdmin.set(response.data.isAdmin);
@@ -90,7 +92,8 @@ export class SavingComponent {
         let partialBody = new PartialSession(this.sessionName(), this.password());
         let json_backgrounds = SavingComponent.getJsonBackgrounds();
         let json_characters = SavingComponent.getJsonCharacters();
-        let body = new Session(this.sessionName(), this.password(), json_backgrounds, json_characters);
+        let json_scenes = SavingComponent.getJsonScenes();
+        let body = new Session(this.sessionName(), this.password(), json_backgrounds, json_characters, json_scenes);
         let response = await API_Util.post<PartialSession, ValidityResponse>("/session/validity", partialBody);
 
         if(!response.hasFailed && response.data){
@@ -137,13 +140,11 @@ export class SavingComponent {
     private static loadBackground(json_backgrounds : string | null | undefined){
 
         if(!json_backgrounds){
-            console.log("there is no background");
             Util.deleteVariable("backgrounds");
             Util.deleteVariable("backgrounds-storage");
             Util.deleteVariable("backgrounds-counter");
         }
         else{
-            console.log("there is background");
             let backgrounds : Background[] = JSON.parse(json_backgrounds);
             let storage : Storage = new Storage;
             let counter : number = 1;
@@ -167,13 +168,11 @@ export class SavingComponent {
     private static loadCharacters(json_characters : string | null | undefined){
 
         if(!json_characters){
-            console.log("there is no character");
             Util.deleteVariable("characters");
             Util.deleteVariable("characters-storage");
             Util.deleteVariable("characters-counter");
         }
         else{
-            console.log("there is character");
             let characters : Character[] = JSON.parse(json_characters);
             let storage : Storage = new Storage;
             let counter : number = 1;
@@ -188,6 +187,33 @@ export class SavingComponent {
             Util.setVariable("characters", characters);
             Util.setVariable("characters-storage", storage);
             Util.setVariable("characters-counter", counter);
+        }
+    }
+
+    /** For the current session, replace the scenes by the scenes given in parameter. The parameter must be a string, 
+     * in json format.*/
+    private static loadScenes(json_scenes : string | null | undefined){
+
+        if(!json_scenes){
+            Util.deleteVariable("scenes");
+            Util.deleteVariable("scenes-storage");
+            Util.deleteVariable("scenes-counter");
+        }
+        else{
+            let scenes : Scene[] = JSON.parse(json_scenes);
+            let storage : Storage = new Storage;
+            let counter : number = 1;
+
+            for(let scene of scenes){
+                storage.addExisting(scene.name);
+                if(counter <= scene.counter)
+                    counter = scene.counter + 1;
+            }
+
+            storage.counter = counter;
+            Util.setVariable("scenes", scenes);
+            Util.setVariable("scenes-storage", storage);
+            Util.setVariable("scenes-counter", counter);
         }
     }
 
@@ -207,6 +233,15 @@ export class SavingComponent {
         
         let characters : Character[] = Util.getVariable("characters");
         return JSON.stringify(characters);
+    }
+
+    /** Return the actual scenes of the session in json format, or null if the scenes weren't configured */
+    public static getJsonScenes() : string | null{
+        if(Util.getVariable("scenes") == null)
+            return null;
+        
+        let scenes : Scene[] = Util.getVariable("scenes");
+        return JSON.stringify(scenes);
     }
 
 }

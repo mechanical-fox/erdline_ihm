@@ -9,6 +9,7 @@ import { DisplayMessage } from '../../data/edition/DisplayMessage';
 import { MessageBoxComponent } from '../others/MessageBoxComponent';
 import { Character } from '../../data/edition/Character';
 import { Background } from '../../data/edition/Background';
+import { SessionTrackerUtil } from '../../util/SessionTrackerUtil';
 
 @Component({
     selector: 'Scene',
@@ -102,6 +103,7 @@ export class SceneComponent {
         Util.setVariable("scenes", this.scenes());
         Util.setVariable("scenes-storage", this.storage);
         Util.setVariable("scenes-counter", this.counter);
+        SessionTrackerUtil.notifySceneChange();
     }
 
     /** Add a new scene, with a generic name like #1, #2... And if the number of actual scene is 0, will select 
@@ -111,7 +113,7 @@ export class SceneComponent {
         let newName  = this.storage.add();
         let newId = `scene-${this.counter}`;
         this.counter++;
-        let newScene = new Scene(newId, newName, "empty");
+        let newScene = new Scene(this.counter - 1, newId, newName, "empty");
 
         scenesValue.push(newScene);
 
