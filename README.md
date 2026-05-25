@@ -1,80 +1,25 @@
 
 # TO DO
 
-Ce qu'il faut faire, est marqué en partie note > Emploi > Idée projet.
 
-
-
-0. Fait: Création database avec mot de passe PASSWORD et cela CAR je ne peux pas stocker de vrai mot de 
-passe en développement... Je vais modifier le mot de passe après en déploiement.
-1. Fait: Faire la partie API sur health
-2. Fait: Faire la partie API sur color
-3. Fait: Faire la partie API sur Sprite
-3. Fait: IHM check Url Health au démarrage, dire 2s maximum, PAS de cercle de chargement. Et afficher message d'erreur si test raté.
-
-3. Fait: Faire récupération des couleurs via API + FAIRE MESSAGE CONFIRMATION QUAND ENREGISTRE
-    - fait : Présentation s'inspirer de sprite avec Expression 1, Expression 2 ...
-    - now : voir à set la valeur au début via value + voir récupérer les valeurs via un event change... debut voir les value via un event change
-    - valeur par défaut avec du rgb(153,153,153)
-
-3. Fait: Faire création des couleurs via IHM, sans message confirmation, et sans compléter à 5
-3. Fait: Faire un message quand on enregistre + il doit être compatible mobile + après avoir vérifié compatible mobile, faire timer pour qu'il disparaisse 
-après x second
-3. Fait: Permettre que interface complete à 4 couleur + que alors fait POST si est null + alors on doit RECUPERER id en base, à l'aide du header reponse
-ou aura soucis + modifier reprsentation intern 
-3. Fait: Faire création des sprites via IHM
-3. Fait: Récupérer les sprites avec API pour partie character et PREVIEW
-3. Fait: Récupérer les sprites avec API au niveau JEU
-3. Fait: BUG DECOUVERT - Au niveau des décors ajouter un décor est très lent, car à chaque fois l'on refait un appel à /color
-3. Fait: Vérifier le temps de chargement des sprites, s'il est plus ou moins rapide qu'avant
-4. Fait: Gestion des connexion, et inscription
-6. Fait: Faire en sorte que les parties sur Configuration Background et sprite ne soient accesibles que si 
-admin (doit être mis à la main en base de donnée) en IHM 
-6. Fait: Faire que les urls POST pour color et sprite deviennent des URL authentifiés + à indiquer en Swagger aussi
-+ tester via Swagger + mais SAUF les get car l'on doit pouvoir demander à lister les couleurs
-6. Fait: Gérer code en IHM le fait de pouvoir ajouter des couleurs + des sprites, toujours si est admin et de pouvoir passer le token
-6. Fait: Tester IHM si configuration des couleurs est ok (après ajout token)
-6. Fait: Tester IHM si configuration des sprites est ok (après ajout token)
-6. Fait: Indiquer en README mais dans readme de API UNIQUEMENT le fait que les admin doivent être mis à la main dans la base de donnée
-6. Fait: Faire API sauvegarde background
-6. Fait: Faire API sauvegarde characters
-
-----------------
-
-6. Fait: Faire via l'ihm l'onglet background + tester manuellement SANS Tracking + ATTENTION on envoit donné en POST si inscription (sinon on pull)
-6. Fait: Faire via l'ihm l'onglet character + tester manuellement SANS Tracking + ATTENTION on envoit donné en POST si inscription (sinon on pull)
-6. Fait, et réussi: Faire test avec MysticalAshes qui a décor (Jardin, Lac) mais pas de personnage. Créer des personnages, 
-faire connexion. La connexion doit remplacer les décors, puis elle doit détruire les personnages (comme la session n'avait pas de personnage).
-
-6. Fait: Faire un SessionTrackerUtil - cf code déjà fait
-6. Fait et ok:Tester onglet background AVEC TRACKING + vérifier donnée se mettent à jour + vérifier le nombre d'appel est limité (si input nom)
-6. Fait et ok: Tester onglet character AVEC TRACKING + vérifier donnée se mettent à jour + vérifier le nombre d'appel est limité (si input nom)
-
-
-6. Fait: Faire API sauvegarde scenes
-7. Fait: Faire via l'ihm les scene + ATTENTION on envoit donné en POST si inscription (sinon on pull)
-7. Fait: Tester ihm les scenes si Inscription
-7. Fait: Tester ihm les scenes si Connexion
-7. Faire le tracking sur les scenes
-7. Faire des tests manuels pour vérifier que le tracking en scène est bien pris en compte
-11. Faire les tests unitaires API
-12. Faire les tests unitaires IHM
-12. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
+11. Faire les tests unitaires IHM
+    -> Changer de Component à tester. Ici tester le component scène.
+    
+12. Faire les tests unitaires API
+13. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
 de Nathaniel, afin d'avoir assez de personnages
-12. Faire les pages Tutoriel, Exemples, A propos
-13. Mise à jour du README
-14. Déployer AVANT de faire la merge request pour pouvoir tester. Au cas où il y a des soucis.
-15. Déployer base donné avec scp et changer password avec exemple => ALTER ROLE davide WITH PASSWORD 'hu8jmn3';
-16. Déployer API et tester
-17. Déployer IHM et tester
-18. Faire deploiement AVANT les merge request. Voir si pas de soucis.
-
+14. Faire les pages Tutoriel, Exemples, A propos + surtout le tutoriel qui va être long
+15. Mise à jour du README ihm
+16. Mise à jour du README api
+17. Déployer AVANT de faire la merge request pour pouvoir tester. Au cas où il y a des soucis.
+18. Déployer base donné avec scp et changer password avec exemple => ALTER ROLE davide WITH PASSWORD 'hu8jmn3';
+19. Déployer API et tester
+20. Déployer IHM et tester
+21. Faire deploiement AVANT les merge request. Voir si pas de soucis.
 
 
 Fin: 
-- Ai je bien gérer le fait d'appeler une url health à la connexion + d'afficher
-toute une page entière si serveur down ? Voir le site mynrista
-- READ à modifier
+- README à modifier
 - Tester le comportement si serveur down. Voir si le message apparait
 - Faire des tests pour la vue mobile
 - après déploiement tester avec mon VRAI mobile aussi
@@ -104,13 +49,13 @@ TO DO
 Pour lancer les tests unitaires
 
 ```sh
-npx ng test --no-watch
+npm run test
 ```
 
 Pour lancer les tests unitaires, et vérifier le taux de couverture
 
 ```sh
-npx ng test --coverage --no-watch
+npm run coverage
 ```
 
 La seconde commande échouera en cas de taux de couverture des tests insuffisant. De plus,
@@ -129,7 +74,7 @@ npm install
 Vous pouvez ensuite démarrer le site internet avec
 
 ```sh
-npx ng serve
+npm run serve
 ```
 
 Vous pourrez alors vous connecter à l'url    
@@ -169,7 +114,7 @@ Pour construire le répertoire dist
 
 ```sh
 npm install
-npx ng build
+npm run build
 ```
 
 Les fichiers à placer en serveur seront générés en dossier

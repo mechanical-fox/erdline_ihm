@@ -1,38 +1,56 @@
 [
     {
         "method": "GET",
-        "url": "/example",
+        "url": "/health",
         "status": 200,
-        "data": [
-            {
-                "htmlId": "7393e5d478434e2f",
-                "name": "API Supervision",
-                "url_consultation": "/access/7393e5d478434e2f",
-                "url_download": "/download/7393e5d478434e2f"
-            },
-            {
-                "htmlId": "4372f88139164d87",
-                "name": "API FlopBox",
-                "url_consultation": "/access/4372f88139164d87",
-                "url_download": "/download/4372f88139164d87"
-            }
-        ]
-    },
-    {
-        "method": "POST",
-        "url": "/documentation/html",
-        "status": 201,
         "data": {
-            "htmlId": "7a1fcbda8b63483e",
-            "url_consultation": "/access/7a1fcbda8b63483e",
-            "url_download": "/download/7a1fcbda8b63483e",
-            "expireIn": 180
+            "api": "Erdline",
+            "version": "1.0",
+            "status": "Running"
         }
     },
     {
         "method": "GET",
-        "url": "/error",
-        "status": 500,
-        "data": null
+        "url": "/color",
+        "status": 200,
+        "data": [
+            {
+                "id": 1,
+                "name": "Orange",
+                "firstGradient": "rgb(240, 138, 22)",
+                "secondGradient": "rgb(231, 195, 36)"
+            },
+            {
+                "id": 2,
+                "name": "Noir",
+                "firstGradient": "rgb(32, 32, 32)",
+                "secondGradient": "rgb(97, 97, 97)"
+            },
+            {
+                "id": 3,
+                "name": "Bleu",
+                "firstGradient": "rgb(21, 59, 226)",
+                "secondGradient": "rgb(44, 141, 206)"
+            }
+        ]
+    },
+    {
+        "method": "GET",
+        "url": "/sprite",
+        "status": 200,
+        "data": [
+            {
+                "id": 1,
+                "name": "Adrien",
+                "filename": "Adrien.png",
+                "data": "data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAQVQI12P4"
+            },
+            {
+                "id": 2,
+                "name": "Grace",
+                "filename": "Grace.png",
+                "data": "data:image/png;base64, w38GIAXDIBKE0DHxABJRU5ErkJggg=="
+            }
+        ]
     }
 ]

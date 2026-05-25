@@ -37,10 +37,10 @@
                 <div class="background-color-div-item">
                         
                     @if(color.databaseID == colorSelected()){
-                        <input type="radio" name="color-list" [value]="color.ihmID"  checked (change)="colorChange(color.databaseID, $event)"/>     
+                        <input [id]="color.ihmID" type="radio" name="color-list" [value]="color.ihmID"  checked (change)="colorChange(color.databaseID, $event)"/>     
                     }
                     @else{
-                        <input type="radio" name="color-list" [value]="color.ihmID"  unchecked (change)="colorChange(color.databaseID, $event)"/>
+                        <input [id]="color.ihmID" type="radio" name="color-list" [value]="color.ihmID"  unchecked (change)="colorChange(color.databaseID, $event)"/>
                     }
                     <p class="background-color-div-item-text">{{color.name}}</p>
                          

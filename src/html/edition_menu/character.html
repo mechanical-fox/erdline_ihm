@@ -1,6 +1,6 @@
 @if(isLoaded()){
     <div class="view-list">
-        <p class="view-list-item-button" (click)="addCharacter()"> <b> + </b> &nbsp; Personnage </p>
+        <p id="character-add" class="view-list-item-button" (click)="addCharacter()"> <b> + </b> &nbsp; Personnage </p>
         <p class="view-list-item-button" (click)="deleteCurrentCharacter()"> Supprimer </p>
     </div>
 
@@ -28,7 +28,7 @@
         <p class="character-input-name">
             Nom Personnage
         </p>
-        <input class="character-input" type="text" [(ngModel)]="characterName" (input)="updateCharacterName($event)"/>
+        <input id="character-name" class="character-input" type="text" [(ngModel)]="characterName" (input)="updateCharacterName($event)"/>
 
         <p class="character-title">
             Sprites
@@ -80,7 +80,7 @@
             Sprite
         </p>
 
-        <select class="character-select-2" (change)="updateSpritePreview($event)">
+        <select id="character-preview-select" class="character-select-2" (change)="updateSpritePreview($event)">
             <option value="empty" > -- En attente de sélection -- </option>
             @for(sprite of sprites();track sprite.id){
                 <option [value]="sprite.id">{{sprite.name}}</option>
