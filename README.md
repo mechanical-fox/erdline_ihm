@@ -1,12 +1,16 @@
 
 # TO DO
 
-11. Bug Coverage SavingComponent résoudre --> Cela est lié à SessionTrackerUtil et son import de
-    SavingComponent, ce qui déclenche le constructeur et tout. Toute fonction de SavingComponent utilisé ici 
-    va devoir être mis dans une autre classe, genre SavingUtil ou un nom plus jolie.
-11. Git push, en disant que bug coverage sur SavingComponent résolu, ou autre texte
+26/05/2026:
+    - début séance: 21,9 % statement et 18,07% branche
+    - 36.9 % et 30.65%
+
 11. Faire les tests unitaires IHM
-    -> Changer de Component à tester. Ici tester le component scène.
+    -> Changer de Component à tester.
+    -> Pour rappel, mon test unitaire en edit avait un bug qui n'apparaisait pas en test manuel... donc j'ai juste abandonné.
+    -> Tester GameComponent + refaire des load avec SavingUtil... Cf composant testé juste avant
+    -> Pour GameComponent, il va falloir ajouter des attributs, qui servirons uniquement au test unitaire pour suivre le test :p
+
 11. Bug Coverage SavingCOmponent résoudre --> Cela est lié à SessionTrackerUtil et son import de
     SavingComponent, ce qui déclenche le constructeur et tout. Toute fonction de SavingComponent utilisé ici 
     va devoir être mis dans une autre classe, genre SavingUtil ou un nom plus jolie.

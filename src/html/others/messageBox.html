@@ -6,7 +6,8 @@
                 <p class="messageBox-input-name">
                     Personnage
                 </p>
-                <select [(ngModel)]="newMessageCharacter" class="messageBox-select" (change)="characterChanged($event)">
+                <select id="messageBox-select-character" [(ngModel)]="newMessageCharacter" class="messageBox-select" 
+                (change)="characterChanged($event)">
                     <option value="empty"> -- Choix à effectuer -- </option>
                     <option value="narration"> Narration </option>
                     @if(indMessageToEdit() == -1 || editingTransition()){
@@ -22,7 +23,8 @@
                     <p class="messageBox-input-name">
                         Expression
                     </p>
-                    <select [(ngModel)]="newMessageExpression" class="messageBox-select" (change)="expressionChanged($event)">
+                    <select id="messageBox-select-expression" [(ngModel)]="newMessageExpression" class="messageBox-select" 
+                    (change)="expressionChanged($event)">
                         <option value="empty"> -- Choix à effectuer -- </option>
 
                         @for(expression of availableExpressions(); track expression.id){
@@ -39,7 +41,7 @@
                     <p class="messageBox-input-name">
                         Message
                     </p>
-                    <textarea [(ngModel)]="newMessageText" spellcheck="false" class="messageBox-textarea" (input)="textChanged($event)">  </textarea>
+                    <textarea id="messageBox-textarea" [(ngModel)]="newMessageText" spellcheck="false" class="messageBox-textarea" (input)="textChanged($event)">  </textarea>
                 </div>
             </div>
         }
@@ -62,10 +64,10 @@
 
         <div class="messageBox-div-2">
             @if(indMessageToEdit() == -1){
-                <button class="messageBox-button" (click)="validateMessage()"> Ajouter </button>
+                <button id="messageBox-add-button" class="messageBox-button" (click)="validateMessage()"> Ajouter </button>
             }
             @else{
-                <button class="messageBox-button" (click)="validateMessage()"> Modifier </button>
+                <button id="messageBox-modify-button" class="messageBox-button" (click)="validateMessage()"> Modifier </button>
                 <button class="messageBox-button" (click)="deleteMessage()"> Supprimer </button>
             }
         </div>
