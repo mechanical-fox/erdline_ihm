@@ -1,9 +1,16 @@
 
 # TO DO
 
-
+11. Bug Coverage SavingComponent résoudre --> Cela est lié à SessionTrackerUtil et son import de
+    SavingComponent, ce qui déclenche le constructeur et tout. Toute fonction de SavingComponent utilisé ici 
+    va devoir être mis dans une autre classe, genre SavingUtil ou un nom plus jolie.
+11. Git push, en disant que bug coverage sur SavingComponent résolu, ou autre texte
 11. Faire les tests unitaires IHM
     -> Changer de Component à tester. Ici tester le component scène.
+11. Bug Coverage SavingCOmponent résoudre --> Cela est lié à SessionTrackerUtil et son import de
+    SavingComponent, ce qui déclenche le constructeur et tout. Toute fonction de SavingComponent utilisé ici 
+    va devoir être mis dans une autre classe, genre SavingUtil ou un nom plus jolie.
+11. Git push, en disant que bug coverage sur SavingComponent résolu, ou autre texte
     
 12. Faire les tests unitaires API
 13. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
@@ -11,10 +18,13 @@ de Nathaniel, afin d'avoir assez de personnages
 14. Faire les pages Tutoriel, Exemples, A propos + surtout le tutoriel qui va être long
 15. Mise à jour du README ihm
 16. Mise à jour du README api
-17. Déployer AVANT de faire la merge request pour pouvoir tester. Au cas où il y a des soucis.
-18. Déployer base donné avec scp et changer password avec exemple => ALTER ROLE davide WITH PASSWORD 'hu8jmn3';
-19. Déployer API et tester
-20. Déployer IHM et tester
+17. Ecrire de modifier après (Genre écrire agenda) les 2 projets mynrista pour ne plus appeller mail, et passer en
+port 8081 + penser à changer n° version, et faire merge request + check les tests unitaires
+
+
+17. Déployement API -> changer le texte. Ne même plus parler certificat https. Changer l'image docker.
+Vérifier que capp pourra se connecter à cdatabase.
+17. Deploiement IHM --> Inutile de faire !! Le texte présent actuellement est bien au passage.
 21. Faire deploiement AVANT les merge request. Voir si pas de soucis.
 
 

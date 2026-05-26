@@ -1,4 +1,4 @@
 
 export const environment = {
-    BASE_URL : "https://erdline.com:8081"
+    BASE_URL : "http://localhost:8081"
 }

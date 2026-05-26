@@ -1,4 +1,4 @@
-import { SavingComponent } from "../component/edition_menu/SavingComponent";
+import { SavingUtil } from "./SavingUtil";
 import { SessionPatchBody } from "../data/api/SessionPatchBody";
 import { API_Util } from "./APIUtil";
 import { Util } from "./Util";
@@ -26,7 +26,7 @@ export class SessionTrackerUtil{
 
         if(id && (inProgressValue == undefined || !inProgressValue)){
             await SessionTrackerUtil.sleepingNotification("background");
-            let json_backgrounds = SavingComponent.getJsonBackgrounds();
+            let json_backgrounds = SavingUtil.getJsonBackgrounds();
 
             if(json_backgrounds){
                 let body = new SessionPatchBody(json_backgrounds, null, null);
@@ -46,7 +46,7 @@ export class SessionTrackerUtil{
 
         if(id && (inProgressValue == undefined || !inProgressValue)){
             await SessionTrackerUtil.sleepingNotification("characters");
-            let json_characters = SavingComponent.getJsonCharacters();
+            let json_characters = SavingUtil.getJsonCharacters();
 
             if(json_characters){
                 let body = new SessionPatchBody(null, json_characters, null);
@@ -66,7 +66,7 @@ export class SessionTrackerUtil{
 
         if(id && (inProgressValue == undefined || !inProgressValue)){
             await SessionTrackerUtil.sleepingNotification("scenes");
-            let json_scenes = SavingComponent.getJsonScenes();
+            let json_scenes = SavingUtil.getJsonScenes();
 
             if(json_scenes){
                 let body = new SessionPatchBody(null, null, json_scenes);
