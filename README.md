@@ -3,7 +3,8 @@
 
 26/05/2026:
     - début séance: 21,9 % statement et 18,07% branche
-    - 36.9 % et 30.65%
+    - fin séance, avant séance sup : 36.9 % et 30.65%
+    - Après séance sup: 54.21 % et 42.42 %
 
 11. Faire les tests unitaires IHM
     -> Changer de Component à tester.

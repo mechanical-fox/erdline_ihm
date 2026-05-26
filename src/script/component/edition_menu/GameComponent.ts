@@ -54,36 +54,36 @@ export class GameComponent {
         let firstScene : Scene | null = this.returnFirstScene();
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
+        console.log(`canvas is != null: ${canvas != null}`);
+
         if(canvas != null){
             this.drawer = new Drawer(canvas.width, canvas.height);
-            let ctx = canvas.getContext('2d');
+            let ctx = canvas.getContext ? canvas.getContext('2d') : null;
+            
+            if(firstScene == null || firstScene.messages.length == 0){
+                this.loaded.set(true);
+                let message = "En attente de création d'une scène";
+                this.drawer.drawUserMessage(message, ctx);
+            }else{
+                this.gameBackground = await this.getBackground(firstScene.backgroundId);
+                this.messages = await this.convertMessage(firstScene.messages);
+                this.messageNumber = 0;
+                SpriteLoader.resetCache();
+                let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
+                this.leftSprite = firstSprites.leftSprite;
+                this.rightSprite = firstSprites.rightSprite;
+                this.loaded.set(true);
+                SpriteLoader.initLoading(this.messages);
+                let informations : GameInformation = await this.CalculateSceneAt(this.leftSprite, this.rightSprite, 
+                                                this.gameBackground, this.messages, 0);
+                this.leftSprite = informations.leftSprite;
+                this.rightSprite = informations.rightSprite;
+                this.gameBackground = informations.gameBackground;
+                this.messages = informations.messages;
+                this.messageNumber = informations.messageNumber;
 
-            if(ctx != null){
-                if(firstScene == null || firstScene.messages.length == 0){
-                    this.loaded.set(true);
-                    let message = "En attente de création d'une scène";
-                    this.drawer.drawUserMessage(message, ctx);
-                }else{
-                    this.gameBackground = await this.getBackground(firstScene.backgroundId);
-                    this.messages = await this.convertMessage(firstScene.messages);
-                    this.messageNumber = 0;
-                    SpriteLoader.resetCache();
-                    let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
-                    this.leftSprite = firstSprites.leftSprite;
-                    this.rightSprite = firstSprites.rightSprite;
-                    this.loaded.set(true);
-                    SpriteLoader.initLoading(this.messages);
-                    let informations : GameInformation = await this.CalculateSceneAt(this.leftSprite, this.rightSprite, 
-                                                    this.gameBackground, this.messages, 0);
-                    this.leftSprite = informations.leftSprite;
-                    this.rightSprite = informations.rightSprite;
-                    this.gameBackground = informations.gameBackground;
-                    this.messages = informations.messages;
-                    this.messageNumber = informations.messageNumber;
-
-                    this.drawer.drawSceneFrom(informations, ctx);
-                }   
-            }
+                this.drawer.drawSceneFrom(informations, ctx);
+            }   
         }
     }
 
@@ -92,10 +92,8 @@ export class GameComponent {
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
-            let ctx = canvas.getContext('2d');
-
-            if(ctx != null)
-                this.drawer.resizeWidth(canvas.width, ctx);
+            let ctx = canvas.getContext ? canvas.getContext('2d') : null;
+            this.drawer.resizeWidth(canvas.width, ctx);
         }
     }
 
@@ -106,28 +104,27 @@ export class GameComponent {
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
-            let ctx = canvas.getContext('2d');
-            if(ctx != null){
-                if(this.messages.length == 0){
-                    let message = "En attente de création d'une scène";
-                    this.drawer.drawUserMessage(message, ctx);
-                }
-                else if (this.messageNumber >= this.messages.length - 1){
-                    let message = "Fin du jeu";
-                    this.drawer.drawUserMessage(message, ctx);       
-                }
-                else{
-                    this.messageNumber++;
-                    let informations : GameInformation = await this.CalculateSceneAt(this.leftSprite, this.rightSprite, 
-                                                    this.gameBackground, this.messages, this.messageNumber);
-                    this.leftSprite = informations.leftSprite;
-                    this.rightSprite = informations.rightSprite;
-                    this.gameBackground = informations.gameBackground;
-                    this.messages = informations.messages;
-                    this.messageNumber = informations.messageNumber;
-                    this.drawer.drawSceneFrom(informations, ctx);
-                    this.drawer.drawSceneFrom(informations, ctx);
-                }
+            let ctx = canvas.getContext ? canvas.getContext('2d') : null;
+
+            if(this.messages.length == 0){
+                let message = "En attente de création d'une scène";
+                this.drawer.drawUserMessage(message, ctx);
+            }
+            else if (this.messageNumber >= this.messages.length - 1){
+                let message = "Fin du jeu";
+                this.drawer.drawUserMessage(message, ctx);       
+            }
+            else{
+                this.messageNumber++;
+                let informations : GameInformation = await this.CalculateSceneAt(this.leftSprite, this.rightSprite, 
+                                                this.gameBackground, this.messages, this.messageNumber);
+                this.leftSprite = informations.leftSprite;
+                this.rightSprite = informations.rightSprite;
+                this.gameBackground = informations.gameBackground;
+                this.messages = informations.messages;
+                this.messageNumber = informations.messageNumber;
+                this.drawer.drawSceneFrom(informations, ctx);
+                this.drawer.drawSceneFrom(informations, ctx);
             }
         }  
      
