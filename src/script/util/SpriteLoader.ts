@@ -1,4 +1,5 @@
 
+import { Provider } from "../app/Provider";
 import { Sprite } from "../data/api/Sprite";
 import { GameFirstSprites } from "../data/game/GameFirstSprites";
 import { GameMessage } from "../data/game/GameMessage";
@@ -141,7 +142,7 @@ export class SpriteLoader{
             return null;
 
         if(canvas){
-            let ctx = canvas.getContext('2d');
+            let ctx = Provider.getContext(canvas, '2d');
 
             if(ctx){
                 let image = new Image(); 

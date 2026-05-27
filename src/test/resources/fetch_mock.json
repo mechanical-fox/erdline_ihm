@@ -10,6 +10,18 @@
         }
     },
     {
+        "method": "POST",
+        "url": "/color",
+        "status": 201,
+        "data": ""
+    },
+    {
+        "method": "PUT",
+        "url": "/color/3",
+        "status": 204,
+        "data": ""
+    },
+    {
         "method": "GET",
         "url": "/color",
         "status": 200,

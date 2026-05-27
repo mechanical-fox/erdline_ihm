@@ -6,17 +6,15 @@
     - fin séance, avant séance sup : 36.9 % et 30.65%
     - Après séance sup: 54.21 % et 42.42 %
 
-11. Faire les tests unitaires IHM
-    -> Changer de Component à tester.
-    -> Pour rappel, mon test unitaire en edit avait un bug qui n'apparaisait pas en test manuel... donc j'ai juste abandonné.
-    -> Tester GameComponent + refaire des load avec SavingUtil... Cf composant testé juste avant
-    -> Pour GameComponent, il va falloir ajouter des attributs, qui servirons uniquement au test unitaire pour suivre le test :p
+27/05/2026:
+    - debut: 54.21 % et 42.42 %
+    - 1 test configuration: 60.55% et 47.28%
+    - 2 test configuration sur couleur: 60.97% et 47.68 %
 
-11. Bug Coverage SavingCOmponent résoudre --> Cela est lié à SessionTrackerUtil et son import de
-    SavingComponent, ce qui déclenche le constructeur et tout. Toute fonction de SavingComponent utilisé ici 
-    va devoir être mis dans une autre classe, genre SavingUtil ou un nom plus jolie.
-11. Git push, en disant que bug coverage sur SavingComponent résolu, ou autre texte
-    
+11. Faire les tests unitaires IHM
+    -> Dans ConfigurationComponent après plusieurs essaies, le upload est impossible à simuler pour rappel.
+    -> Passer à des tests pour SavingComponent !! + Sans doute aller en mode Edition ici.
+
 12. Faire les tests unitaires API
 13. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
 de Nathaniel, afin d'avoir assez de personnages

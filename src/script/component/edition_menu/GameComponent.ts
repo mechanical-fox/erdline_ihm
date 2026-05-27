@@ -15,6 +15,7 @@ import { GameFirstSprites } from '../../data/game/GameFirstSprites';
 import { SpriteLoader } from '../../util/SpriteLoader';
 import { GameInformation } from '../../data/game/GameInformation';
 import { Drawer } from '../../util/Drawer';
+import { Provider } from '../../app/Provider';
 
 @Component({
     selector: 'Game',
@@ -54,12 +55,10 @@ export class GameComponent {
         let firstScene : Scene | null = this.returnFirstScene();
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
-        console.log(`canvas is != null: ${canvas != null}`);
-
         if(canvas != null){
             this.drawer = new Drawer(canvas.width, canvas.height);
-            let ctx = canvas.getContext ? canvas.getContext('2d') : null;
-            
+            let ctx = Provider.getContext(canvas, '2d');
+
             if(firstScene == null || firstScene.messages.length == 0){
                 this.loaded.set(true);
                 let message = "En attente de création d'une scène";
@@ -92,7 +91,7 @@ export class GameComponent {
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
-            let ctx = canvas.getContext ? canvas.getContext('2d') : null;
+            let ctx = Provider.getContext(canvas, '2d');
             this.drawer.resizeWidth(canvas.width, ctx);
         }
     }
@@ -104,7 +103,7 @@ export class GameComponent {
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
-            let ctx = canvas.getContext ? canvas.getContext('2d') : null;
+            let ctx = Provider.getContext(canvas, '2d');
 
             if(this.messages.length == 0){
                 let message = "En attente de création d'une scène";

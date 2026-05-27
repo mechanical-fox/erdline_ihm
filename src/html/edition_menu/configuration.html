@@ -12,12 +12,12 @@
                     Couleur {{color.counter}}
                 </p>
                 <p class="configuration-label-text"> Nom </p>
-                <input class="configuration-input" [value]="color.name" (change)="nameColorChange(color.counter, $event)"/>
+                <input [id]="`color-${color.counter}-name`" class="configuration-input" [value]="color.name" (change)="nameColorChange(color.counter, $event)"/>
                 <p class="configuration-label-text"> 1er Gradient </p>
-                <input type="color" class="configuration-input-color" [value]="color.firstGradient" (change)="firstColorChange(color.counter, $event)">
+                <input [id]="`color-${color.counter}-firstGradient`" type="color" class="configuration-input-color" [value]="color.firstGradient" (change)="firstColorChange(color.counter, $event)">
                 <br/>
                 <p class="configuration-label-text"> 2ème Gradient </p>
-                <input type="color" class="configuration-input-color" [value]="color.secondGradient" (change)="secondColorChange(color.counter, $event)">
+                <input [id]="`color-${color.counter}-secondGradient`" type="color" class="configuration-input-color" [value]="color.secondGradient" (change)="secondColorChange(color.counter, $event)">
             </div>
         }
     
@@ -35,10 +35,10 @@
                     Sprite {{sprite.counter}} <br/> (470 * 600)
                 </p>
                 <p class="configuration-label-text"> Nom </p>
-                <input class="configuration-input" [value]="sprite.name" (change)="nameSpriteChange(sprite.counter, $event)"/>
+                <input [id]=`sprite-${sprite.counter}-name` class="configuration-input" [value]="sprite.name" (change)="nameSpriteChange(sprite.counter, $event)"/>
                 <p class="configuration-label-text"> Fichier </p>
-                <p class="configuration-label-text"> {{sprite.filename()}} </p>
-                <input class="configuration-input-file" type="file" (change)="fileSpriteChange(sprite.counter, $event)">
+                <p [id]=`sprite-${sprite.counter}-filename` class="configuration-label-text"> {{sprite.filename()}} </p>
+                <input [id]=`sprite-${sprite.counter}-input-file` class="configuration-input-file" type="file" (change)="fileSpriteChange(sprite.counter, $event)">
             </div>
         }
     
@@ -46,7 +46,7 @@
 
 
     <div class="configuration-center-div">
-        <button class="configuration-save-button" (click)="save()"> Enregistrer </button>
+        <button id="configuration-save-button" class="configuration-save-button" (click)="save()"> Enregistrer </button>
     </div>
 
     @if(showMessage() && message() != ""){

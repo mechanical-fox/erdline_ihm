@@ -10,8 +10,17 @@ import {Fetch_Response} from '../data/util/Fetch_Response';
  */
 export class Provider {
     
-
+    private static mockForGetContext : ((contextId : string)=>(CanvasRenderingContext2D | null)) | null = null;
     private static mockForFetch: ((url: string, options: Fetch_Options) => Promise<Fetch_Response>) | null = null;
+
+    /** Perform the function canvas.getContext like performed in the browser, or use a mock if a 
+     * mock was declared */
+    static getContext(canvas : HTMLCanvasElement, contextId : string) : CanvasRenderingContext2D | null{
+        if(this.mockForGetContext == null)
+            return canvas.getContext(contextId) as CanvasRenderingContext2D | null;
+
+        return this.mockForGetContext(contextId);
+    }
 
     /** Perform the function fetch, like performed in the browser, or use a mock if a mock was declared.*/
     static fetch(url: string, options: Fetch_Options): Promise<Fetch_Response> {
@@ -25,6 +34,11 @@ export class Provider {
     /** Replace the use of fetch, by the mock given */
     static mockFetch(mock: (url: string, options: Fetch_Options) => Promise<Fetch_Response>): void {
         this.mockForFetch = mock;
+    }
+
+    /** Replace the use of canvas.getContext, by the mock given */
+    static mockGetContext(mock: (contextId : string)=>(CanvasRenderingContext2D | null)): void {
+        this.mockForGetContext = mock;
     }
 
 }

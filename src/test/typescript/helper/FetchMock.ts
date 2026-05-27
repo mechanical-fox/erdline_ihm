@@ -9,7 +9,7 @@ export class FetchMock {
 
     private static lastMethodCalled: string | null;
     private static lastUrlCalled: string | null;
-    private static lastBodyCalled: string | null;
+    private static lastBodySend: string | null;
 
     /** Mock fetch during the tests */
     static async fetch(url: string, options: Fetch_Options): Promise<Fetch_Response> {
@@ -18,9 +18,9 @@ export class FetchMock {
         FetchMock.lastUrlCalled = url;
 
         if (options.body) 
-            FetchMock.lastBodyCalled = options.body;
+            FetchMock.lastBodySend = options.body;
         else 
-            FetchMock.lastBodyCalled = null;
+            FetchMock.lastBodySend = null;
 
         for (const mock of FetchMock.mocks) {
 
@@ -46,8 +46,8 @@ export class FetchMock {
     }
 
     /** Return the body given at the last url called */
-    static getLastBodyGiven(): string | null {
-        return FetchMock.lastBodyCalled;
+    static getLastBodySend(): string | null {
+        return FetchMock.lastBodySend;
     }
 
 

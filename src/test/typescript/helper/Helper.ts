@@ -2,6 +2,16 @@
 
 export class Helper{
 
+    /** Return an array of all the nodes matching this selector  */
+    static queryAll(compiled : HTMLElement, selector : string) : HTMLElement[]{
+        let rawNodes : NodeListOf<HTMLElement> = compiled.querySelectorAll("#color-3");
+        let nodes : HTMLElement[] = [];
+
+        for(let node of rawNodes)
+            nodes.push(node);
+
+        return nodes;
+    }
 
     /** This function allow to sleep the number of milliseconds specified. But the function must be called with await to
     * function correctly.*/
@@ -28,6 +38,7 @@ export class Helper{
         if(node){
             node.value = text;
             node.dispatchEvent(new Event('input'));
+            node.dispatchEvent(new Event('change'));
         }
         else
             console.log(`\nHelper.input: The node "${selector}" doesn't exist\n`);
