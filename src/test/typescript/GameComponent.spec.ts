@@ -57,7 +57,7 @@ describe('GameComponent Tests',()=>{
 
     test(`Les messages sont mis à jour après un clic`, async()=>{
         
-        /*TestBed.configureTestingModule({imports: [GameComponent]}).compileComponents();
+        TestBed.configureTestingModule({imports: [GameComponent]}).compileComponents();
         const fixture = TestBed.createComponent(GameComponent);
         fixture.autoDetectChanges(); 
         const compiled : HTMLElement = fixture.nativeElement as HTMLElement; 
@@ -77,7 +77,7 @@ describe('GameComponent Tests',()=>{
         expect(message.expressionName).toBeNull();
         expect(message.dataBase64).toBeNull();
         expect(message.nextSceneId).toBeNull();
-        expect(message.text).toBe(expectedText);*/
+        expect(message.text).toBe(expectedText);
     });
 
 

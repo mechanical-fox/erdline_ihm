@@ -4,7 +4,7 @@ export class Helper{
 
     /** Return an array of all the nodes matching this selector  */
     static queryAll(compiled : HTMLElement, selector : string) : HTMLElement[]{
-        let rawNodes : NodeListOf<HTMLElement> = compiled.querySelectorAll("#color-3");
+        let rawNodes : NodeListOf<HTMLElement> = compiled.querySelectorAll(selector);
         let nodes : HTMLElement[] = [];
 
         for(let node of rawNodes)
@@ -27,7 +27,7 @@ export class Helper{
         if(node)
             node.click();
         else
-            console.log(`\nHelper.click: The node "${selector}" doesn't exist\n`);
+            throw new Error(`\nHelper.click: The node "${selector}" doesn't exist\n`);
     }
 
     /** If an input element with the selector given exist, this function will filled the input will the value given.
@@ -41,7 +41,7 @@ export class Helper{
             node.dispatchEvent(new Event('change'));
         }
         else
-            console.log(`\nHelper.input: The node "${selector}" doesn't exist\n`);
+            throw new Error(`\nHelper.input: The node "${selector}" doesn't exist\n`);
     }
 
     /** If a select element with the selector given exist, this function will change the value of this element. The parameter
@@ -54,7 +54,7 @@ export class Helper{
             node.dispatchEvent(new Event('change'));
         }
         else
-            console.log(`\nHelper.input: The node "${selector}" doesn't exist\n`);
+            throw new Error(`\nHelper.input: The node "${selector}" doesn't exist\n`);
     }
     
 }

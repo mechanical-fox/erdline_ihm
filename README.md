@@ -8,12 +8,11 @@
 
 27/05/2026:
     - debut: 54.21 % et 42.42 %
-    - 1 test configuration: 60.55% et 47.28%
-    - 2 test configuration sur couleur: 60.97% et 47.68 %
+    - fin: 71.81% et 56.68%
 
 11. Faire les tests unitaires IHM
-    -> Dans ConfigurationComponent après plusieurs essaies, le upload est impossible à simuler pour rappel.
-    -> Passer à des tests pour SavingComponent !! + Sans doute aller en mode Edition ici.
+    -> Il ne reste plus qu'a regarder le coverage, et voir en termes de branche ce que l'on peut tester :p
+    -> Bien en termes de branche, car pour le code cela est presque bon.
 
 12. Faire les tests unitaires API
 13. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
