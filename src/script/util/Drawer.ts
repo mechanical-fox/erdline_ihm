@@ -34,51 +34,52 @@ export class Drawer{
 
     /** Change the size used by the Drawer to draw the scene, and redraw immediatly the scene*/
     resizeWidth(width : number, context : CanvasRenderingContext2D | null){
-        if(context != null){
-            this.actualWidth = width;
-            this.actualHeight = Math.round(this.initialHeight * width / this.initialWidth);
+        
+        this.actualWidth = width;
+        this.actualHeight = Math.round(this.initialHeight * width / this.initialWidth);
 
-            if(this.displayingDialog && this.lastDialog)
-                this.drawSceneFrom(this.lastDialog, context);
-            else if(this.displayingUserMessage && this.lastUserMessage)
-                this.drawUserMessage(this.lastUserMessage, context);
-        }
+        if(this.displayingDialog && this.lastDialog)
+            this.drawSceneFrom(this.lastDialog, context);
+        else if(this.displayingUserMessage && this.lastUserMessage)
+            this.drawUserMessage(this.lastUserMessage, context);
+        
     }
 
     /** Draw in context, a scene with the informations provided */
     async drawSceneFrom(informations : GameInformation, context : CanvasRenderingContext2D | null){
 
-        if(context != null){
-            this.lastDialog = informations;
-            this.displayingDialog = true;
-            this.displayingUserMessage = false;
-            let heightCharacter = Math.round(420 * this.actualWidth / 800);
-            let widthCharacter = Math.round(330 * this.actualWidth / 800);
-            let radius = Math.round(15 * this.actualWidth / 800);
+        this.lastDialog = informations;
+        this.displayingDialog = true;
+        this.displayingUserMessage = false;
+        let heightCharacter = Math.round(420 * this.actualWidth / 800);
+        let widthCharacter = Math.round(330 * this.actualWidth / 800);
+        let radius = Math.round(15 * this.actualWidth / 800);
 
-            if(informations.isUserMessage)
-                this.drawUserMessage(informations.text, context);
+        if(informations.isUserMessage)
+            this.drawUserMessage(informations.text, context);
 
-            if(informations.gameBackground){
+        if(informations.gameBackground){
+
+            if(context != null){
                 let gradient = context.createLinearGradient(0,0,0,450);
                 gradient.addColorStop(0, informations.gameBackground.firstGradient);
                 gradient.addColorStop(1, informations.gameBackground.secondGradient);
                 context.fillStyle = gradient;
                 context.roundRect(0,0,this.actualWidth,this.actualHeight,[radius,radius,radius,radius]);
                 context.fill();
-
-                if(informations.leftSprite && informations.leftSprite.htmlElement)
-                    this.drawSprite(informations.leftSprite.htmlElement, widthCharacter, heightCharacter, true, context);
-                if(informations.rightSprite && informations.rightSprite.htmlElement)
-                    this.drawSprite(informations.rightSprite.htmlElement, widthCharacter, heightCharacter, false, context);
-
-                this.drawText(informations.text, informations.isNarration, context);
-
-                if(informations.drawNameInLeft != null && informations.drawNameInLeft == true && informations.characterName)
-                    this.drawCharacterName(informations.characterName, true, context);
-                else if(informations.drawNameInLeft != null && informations.drawNameInLeft == false && informations.characterName)
-                    this.drawCharacterName(informations.characterName, false, context);
             }
+
+            if(informations.leftSprite && informations.leftSprite.htmlElement)
+                this.drawSprite(informations.leftSprite.htmlElement, widthCharacter, heightCharacter, true, context);
+            if(informations.rightSprite && informations.rightSprite.htmlElement)
+                this.drawSprite(informations.rightSprite.htmlElement, widthCharacter, heightCharacter, false, context);
+
+            this.drawText(informations.text, informations.isNarration, context);
+
+            if(informations.drawNameInLeft != null && informations.drawNameInLeft == true && informations.characterName)
+                this.drawCharacterName(informations.characterName, true, context);
+            else if(informations.drawNameInLeft != null && informations.drawNameInLeft == false && informations.characterName)
+                this.drawCharacterName(informations.characterName, false, context);
         }
 
     }
@@ -122,19 +123,23 @@ export class Drawer{
     /** Draw in context the message to the user, like by example "Game finished" */
     drawUserMessage(message : string, context : CanvasRenderingContext2D | null){
         
+        this.lastUserMessage = message;
+        this.displayingDialog = false;
+        this.displayingUserMessage = true;
+
+        let heightScreen = Math.round(400 * this.actualWidth / 800);
+        let widthScreen = this.actualWidth;
+        let radius = Math.round(15 * this.actualWidth / 800);
+
+        let lines = Drawer.cutInLines(message, Drawer.USER_MESSAGE_MAX_CHARACTER_BY_LINE);
+        let yBegin = Math.round(220 * this.actualWidth / 800);
+        let font_size = Math.round(Drawer.USER_MESSAGE_FONT_SIZE_AT_800_WIDTH * this.actualWidth / 800);
+        let line_height = Math.round(Drawer.USER_MESSAGE_LINE_HEIGHT_AT_800_WIDTH * this.actualWidth / 800);
+
         if(context != null){
-            this.lastUserMessage = message;
-            this.displayingDialog = false;
-            this.displayingUserMessage = true;
-
             context.fillStyle = "rgb(0,0,0)";
-            context.roundRect(0,0,800,450,[15,15,15,15]);
+            context.roundRect(0,0,widthScreen,heightScreen,[radius,radius,radius,radius]);
             context.fill();
-
-            let lines = Drawer.cutInLines(message, Drawer.USER_MESSAGE_MAX_CHARACTER_BY_LINE);
-            let yBegin = Math.round(220 * this.actualWidth / 800);
-            let font_size = Math.round(Drawer.USER_MESSAGE_FONT_SIZE_AT_800_WIDTH * this.actualWidth / 800);
-            let line_height = Math.round(Drawer.USER_MESSAGE_LINE_HEIGHT_AT_800_WIDTH * this.actualWidth / 800);
 
             context.fillStyle = "rgb(255,255,255)";
             context.font = `bold ${font_size}px serif`;
@@ -149,17 +154,19 @@ export class Drawer{
     /** Draw in context, the message given. If too many lines are visibles to be displayed, the last lines won't be displayed.
      * If drawItalic is true, the text will be written in italic.*/
     drawText(message : string, drawItalic : boolean, context : CanvasRenderingContext2D | null){
-        if(context != null){
-            let lines : string[] = Drawer.cutInLines(message, Drawer.MAX_CHARACTER_BY_LINE);
+        
+        let lines : string[] = Drawer.cutInLines(message, Drawer.MAX_CHARACTER_BY_LINE);
 
-            let xDialogBox = Math.round(this.actualWidth / 16);
-            let textLeftMargin = Math.round(this.actualWidth / 20);
-            let textTopMargin = Math.round(this.actualHeight / 15);
-            let yDialogBox = Math.round(0.7 * this.actualHeight);
-            let widthDialogBox = Math.round(0.87 * this.actualWidth);
-            let heightDialogBox = Math.round(0.22 * this.actualHeight);
-            let line_height = Math.round(Drawer.LINE_HEIGHT_AT_800_WIDTH * this.actualWidth / 800);
-            let line_font_size = Math.round(Drawer.LINE_FONT_SIZE_AT_800_WIDTH * this.actualWidth / 800);
+        let xDialogBox = Math.round(this.actualWidth / 16);
+        let textLeftMargin = Math.round(this.actualWidth / 20);
+        let textTopMargin = Math.round(this.actualHeight / 15);
+        let yDialogBox = Math.round(0.7 * this.actualHeight);
+        let widthDialogBox = Math.round(0.87 * this.actualWidth);
+        let heightDialogBox = Math.round(0.22 * this.actualHeight);
+        let line_height = Math.round(Drawer.LINE_HEIGHT_AT_800_WIDTH * this.actualWidth / 800);
+        let line_font_size = Math.round(Drawer.LINE_FONT_SIZE_AT_800_WIDTH * this.actualWidth / 800);
+
+        if(context != null){
             context.strokeStyle = "rgba(0, 0, 0, 0.8)";
             context.lineWidth = 2;
             context.fillStyle = "rgba(170, 122, 226, 0.8)";
@@ -181,7 +188,7 @@ export class Drawer{
 
     /** Draw in context the sprite given into parameter. If drawLeft is true, the sprite will be draw at the left of 
      * the screen, else it will be draw at the right of the screen.*/
-    drawSprite(sprite : HTMLVideoElement, imageWidth : number, imageHeight : number, drawLeft : boolean, context : CanvasRenderingContext2D) : void{
+    drawSprite(sprite : HTMLVideoElement, imageWidth : number, imageHeight : number, drawLeft : boolean, context : CanvasRenderingContext2D | null) : void{
         let x = -1;
 
         if(drawLeft){
@@ -206,7 +213,6 @@ export class Drawer{
                 context.drawImage(sprite, x, this.actualHeight - imageHeight, imageWidth, imageHeight);
         }
 
-        
     }
 
 
