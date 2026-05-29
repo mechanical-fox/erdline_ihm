@@ -10,9 +10,18 @@
     - debut: 54.21 % et 42.42 %
     - fin: 71.81% et 56.68%
 
+29/05/2026:
+    - debut: 71.81% et 56.68%
+    - ajout édition message: 73.09% et 57.35%
+    - ajout suppression message: 74.00% et 57.74%
+
 11. Faire les tests unitaires IHM
     -> Il ne reste plus qu'a regarder le coverage, et voir en termes de branche ce que l'on peut tester :p
-    -> Bien en termes de branche, car pour le code cela est presque bon.
+    -> Bien en termes de branche, car pour la couveture en % de statement cela est bon.
+
+    -> Les plus grandes branches non couvertes sont messagesBox, et SceneComponent.
+        -> EditMessage et DeleteMessage à tester
+        -> Debuguer en console.log !!
 
 12. Faire les tests unitaires API
 13. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite

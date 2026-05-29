@@ -25,6 +25,10 @@ export class Util {
             this.memory.delete(name);
     }
 
+    static deleteAllVariables(): void{
+        this.memory = new Map<String, any>();
+    }
+
     /** Return a timer with the name associated. A timer is a signal than can be started to switch beetween 2 boolean values after a 
      * determined time. A timer must be created, and next started with the function startTimer. At creation, the timer has the Value
      * initialValue given as parameter.*/

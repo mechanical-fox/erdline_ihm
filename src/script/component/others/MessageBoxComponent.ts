@@ -147,6 +147,7 @@ export class MessageBoxComponent {
                 this.createdMessage.emit(message);
             else
                 this.editedMessage.emit(message);
+                
         }
     }
 

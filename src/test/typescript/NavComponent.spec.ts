@@ -4,11 +4,13 @@ import {Helper} from './helper/Helper';
 import { Provider } from '../../script/app/Provider';
 import { Fetch_Options } from '../../script/data/util/Fetch_Options';
 import { FetchMock } from './helper/FetchMock';
+import { Util } from '../../script/util/Util';
 
 
 describe('NavComponent Tests',()=>{
 
-    beforeAll(()=>{
+    beforeEach(()=>{
+        Util.deleteAllVariables();
         Provider.mockFetch((url : string, options : Fetch_Options)=>FetchMock.fetch(url,options));
     });
 

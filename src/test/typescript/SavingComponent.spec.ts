@@ -15,24 +15,23 @@ import { Util } from '../../script/util/Util';
 describe('SavingComponent Tests',()=>{
 
     beforeAll(()=>{
-        Provider.mockFetch((url : string, options : Fetch_Options)=>FetchMock.fetch(url,options));
+        
     });
 
     beforeEach(()=>{
         let json_backgrounds = `[{"counter":1,"id":"background-1","name":"Guilde","color_id":1},` + 
-                `{"counter":2,"id":"background-2","name":"Lac","color_id":3}]`
+                `{"counter":2,"id":"background-2","name":"Lac","color_id":3}]`;
         
         let json_characters = `[{"counter":1,"id":"character-1","name":"Adrien","expressions":` + 
         `[{"id":"expr-1","counter":1,"name":"Joie","sprite_id":"1"}]},` + 
         `{"counter":2,"id":"character-2","name":"Grace","expressions":` + 
         `[{"id":"expr-1","counter":1,"name":"Joie","sprite_id":"2"}]}]`;
         
+        Util.deleteAllVariables();
         SavingUtil.loadBackground(json_backgrounds);
         SavingUtil.loadCharacters(json_characters);
         SavingUtil.loadScenes(null);
-        Util.deleteVariable("saving-is-connected");
-        Util.deleteVariable("saving-is-admin");
-        Util.deleteVariable("saving-session-name");
+        Provider.mockFetch((url : string, options : Fetch_Options)=>FetchMock.fetch(url,options));
     });
 
 

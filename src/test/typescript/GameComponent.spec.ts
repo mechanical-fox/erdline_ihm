@@ -6,13 +6,14 @@ import { Fetch_Options } from '../../script/data/util/Fetch_Options';
 import { FetchMock } from './helper/FetchMock';
 import { SavingUtil } from '../../script/util/SavingUtil';
 import { GameMessage } from '../../script/data/game/GameMessage';
+import { Util } from '../../script/util/Util';
 
 
 describe('GameComponent Tests',()=>{
 
-    beforeAll(()=>{
+    beforeEach(()=>{
         let json_backgrounds = `[{"counter":1,"id":"background-1","name":"Guilde","color_id":1},` + 
-        `{"counter":2,"id":"background-2","name":"Lac","color_id":3}]`
+        `{"counter":2,"id":"background-2","name":"Lac","color_id":3}]`;
 
         let json_characters = `[{"counter":1,"id":"character-1","name":"Adrien","expressions":` + 
         `[{"id":"expr-1","counter":1,"name":"Joie","sprite_id":"1"}]},` + 
@@ -25,14 +26,17 @@ describe('GameComponent Tests',()=>{
         `soir.","nextSceneId":null},{"characterId":"character-2","expressionId":"expr-1","text":"Bonjour.",` + 
         `"nextSceneId":null},{"characterId":"narration","expressionId":null,"text":"Adrien regarde alors ` + 
         `autour de lui. Puis se rend compte que la Guilde des aventuriers est quelque peu déserte.",` +
-        `"nextSceneId":null}]}]`
+        `"nextSceneId":null}]}]`;
 
+        Util.deleteAllVariables();
         SavingUtil.loadBackground(json_backgrounds);
         SavingUtil.loadCharacters(json_characters);
         SavingUtil.loadScenes(json_scenes);
 
         Provider.mockFetch((url : string, options : Fetch_Options)=>FetchMock.fetch(url,options));
         Provider.mockGetContext((contextId : string)=>null);
+
+        
     });
 
 

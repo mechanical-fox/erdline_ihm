@@ -229,6 +229,7 @@ export class SceneComponent {
     /** Open the edition box, for the message with the position given. The first message is at position 0, the second message
      * is at position 0...*/
     openEditionBox(position : number){
+
         this.messageBoxFastLoad.set(false);
         this.messageToEdit.set(position);
     }
