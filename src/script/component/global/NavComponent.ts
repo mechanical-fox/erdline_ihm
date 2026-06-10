@@ -1,7 +1,6 @@
 import { Component, signal, WritableSignal} from '@angular/core';
 import {ExampleComponent} from '../pages/ExampleComponent';
 import { AboutComponent } from '../pages/AboutComponent';
-import { TutorialComponent } from '../pages/Tutorial';
 import { EditionComponent } from '../pages/EditionComponent';
 import { API_Util } from '../../util/APIUtil';
 import { ConnectionStatus } from '../../data/edition/ConnectionStatus';
@@ -9,7 +8,7 @@ import { ConnectionStatus } from '../../data/edition/ConnectionStatus';
  
 @Component({
     selector: 'Nav',
-    imports : [ExampleComponent, AboutComponent, TutorialComponent, EditionComponent],
+    imports : [ExampleComponent, AboutComponent, EditionComponent],
     templateUrl: '../../../html/global/nav.html',
     styleUrl: '../../../css/global/nav.css'
 })
@@ -26,7 +25,7 @@ export class NavComponent {
     connectionHealthy : WritableSignal<boolean>;
 
     constructor(){
-        this.items = signal(["Edition", "Tutoriel", "Exemples", "A propos"]);
+        this.items = signal(["Edition", "Exemples", "A propos"]);
         this.selected = signal(this.items()[0]);
         this.connectionTested = signal(false);
         this.connectionHealthy = signal(false);

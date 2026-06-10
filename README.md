@@ -3,11 +3,15 @@
 
 
 11. Fini: Faire les tests unitaires IHM
+12. Fini: Faire les tests unitaires API
 
-12. Faire les tests unitaires API
-13. Entrer en exemple, mon texte de départ mais sur mon AUTRE visual novel + j'aurai sans doute besoin du sprite
-de Nathaniel, afin d'avoir assez de personnages
-14. Faire les pages Tutoriel, Exemples, A propos + surtout le tutoriel qui va être long
+13. Fait: Rentrer le sprite Nathaniel
+14. Faire en API l'url PUT example, et GET example
+14. Faire la page IHM de l'exemple - au début juste mettre un truc bateau, genre mon texte de base
+14. Vérifier à nouveau les test unitaires
+14. Après reflexion ne PAS faire tutoriel, et ainsi cela va être plus rapide !! Hourra, car cela m'ennuyai !!
+Mode agile. On s'arrete après les 3 mois. L'agilité, c'est bien !!
+14. Faire les pages Exemples, A propos + ne PAS faire tutoriel
 15. Mise à jour du README ihm
 16. Mise à jour du README api
 17. Ecrire de modifier après (Genre écrire agenda) les 2 projets mynrista pour ne plus appeller mail, et passer en
