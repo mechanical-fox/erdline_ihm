@@ -1,4 +1,4 @@
-import { Component, WritableSignal, signal} from '@angular/core';
+import { Component, WritableSignal, signal, input, Signal, InputSignal} from '@angular/core';
 import { Util } from '../../util/Util';
 import { Scene } from '../../data/edition/Scene';
 import { Message } from '../../data/edition/Message';
@@ -16,6 +16,9 @@ import { SpriteLoader } from '../../util/SpriteLoader';
 import { GameInformation } from '../../data/game/GameInformation';
 import { Drawer } from '../../util/Drawer';
 import { Provider } from '../../app/Provider';
+import { Example } from '../../data/api/Example';
+import { API_Response } from '../../data/util/API_Response';
+import { API_Util } from '../../util/APIUtil';
 
 @Component({
     selector: 'Game',
@@ -31,8 +34,11 @@ export class GameComponent {
     rightSprite : GameSprite | null;
     messageNumber : number;
     loaded : WritableSignal<boolean>;
+    loadedFromExample : WritableSignal<boolean>;
     slowLoading : WritableSignal<boolean>;
     drawer : Drawer;
+    loadFromExample = input(false);
+    example : Example | null;
 
     constructor(){
         this.messages = [];
@@ -41,9 +47,11 @@ export class GameComponent {
         this.rightSprite = null;
         this.messageNumber = -1;
         this.loaded = signal(false);
+        this.loadedFromExample = signal(false);
         this.slowLoading = Util.createTimer('slowLoading', false);
         Util.startTimer('slowLoading', GameComponent.TIME_BEFORE_LOADING_CIRCLE);
         this.drawer = new Drawer(800,450);//temporary drawer (Object canvas not accesible)
+        this.example = null;
     }
 
 
@@ -52,7 +60,7 @@ export class GameComponent {
      * initiate the first image of the canvas. */
     async ngAfterContentInit(){
 
-        let firstScene : Scene | null = this.returnFirstScene();
+        let firstScene : Scene | null = await this.returnFirstScene();
         let canvas : HTMLCanvasElement = document.getElementById('game_screen') as HTMLCanvasElement;
 
         if(canvas != null){
@@ -151,7 +159,7 @@ export class GameComponent {
         }
         else if(messages[messageNumber].characterName == "transition"){
             let nextSceneId = this.messages[messageNumber].nextSceneId;
-            let scenes = Util.getVariable("scenes") ? Util.getVariable("scenes") : [];
+            let scenes = await this.accessScenes();
 
             for(let scene of scenes){
                 if(scene.id == nextSceneId){
@@ -219,7 +227,7 @@ export class GameComponent {
      * will keep only the informations necessary to play. And this informations, will be returned in the form of a GameMessage. */
     async convertMessage(messages : Message[]) : Promise<GameMessage[]>{
         let convertedMessages : GameMessage[] = [];
-        let characters : Character[] = Util.getVariable("characters") ? Util.getVariable("characters") : [];
+        let characters : Character[] = await this.accessCharacters();
         let sprites : Sprite[] = await CharacterComponent.listSprites();
 
         for(let message of messages){
@@ -255,9 +263,9 @@ export class GameComponent {
 
 
     /** Return the background matching the id. If no id is matching, like if the id is "empty", a default background 
-     * will be returned. */
+     * will be returned. The keyword await must be used.*/
     async getBackground(backgroundId : string) : Promise<GameBackground>{
-        let backgrounds : Background[] = Util.getVariable("backgrounds") ? Util.getVariable("backgrounds") : [];
+        let backgrounds : Background[] = await this.accessBackgrounds();
         let colors : ColorIHM[] = await BackgroundComponent.listColors();
         
         for(let background of backgrounds){
@@ -277,9 +285,9 @@ export class GameComponent {
     /** Return the first scene of the story, or null if no scenes exist. The first scene will be determined, because there is no
      * transitions that goes to this scene. If many scenes respect this criteria, the older scene will be returned. If all scenes 
      * can be access by transition, the older scene will be returned. Also, the scenes that are empty of all dialogues, will not be 
-     * taken into account.*/
-    returnFirstScene() : Scene | null{
-        let scenes = Util.getVariable("scenes") ? Util.getVariable("scenes") : [];
+     * taken into account. The keyword await must be used.*/
+    async returnFirstScene() : Promise<Scene | null>{
+        let scenes = await this.accessScenes();
         let mapSceneAccessibility : Map<string, boolean> = new Map<string, boolean>();
         let scenesWithMessage = [];
 
@@ -326,6 +334,84 @@ export class GameComponent {
         }
 
         return olderScene;
+    }
+
+    /** Return the example of Visual Novel available by calling the API. This function is cached.
+     * If the call to the API doesn't succeed, null is returned. The keyword await must be used.*/
+    async accessExample() : Promise<Example | null>{
+        if(this.loadedFromExample())
+            return this.example;
+        else{
+            let response = await API_Util.get<Example>("/example");
+
+            if(!response.hasFailed && response.data){
+                this.loadedFromExample.set(true);
+                this.example = response.data;
+                return response.data;
+            }
+            else{
+                this.loadedFromExample.set(true);
+                this.example = null;
+                return null;
+            }
+        }
+    }
+
+    /** Return the list of all the scenes. The scenes returned are different, depending if the html attribute
+    * "loadFromExample" is set to false, or true. The keyword await must be used.*/
+    async accessScenes() : Promise<Scene[]>{
+
+        if(this.loadFromExample()){
+            let example : Example | null = await this.accessExample();
+
+            if(example == null || example.json_scenes == null)
+                return [];
+            else{
+                let scenesInString : string = example.json_scenes;
+                let scenes = JSON.parse(scenesInString);
+                return scenes;
+            }
+        }
+        else
+            return Util.getVariable("scenes") ? Util.getVariable("scenes") : [];
+    }
+
+    /** Return the list of all the backgrounds. The backgrounds returned are different, depending if the html attribute
+    * "loadFromExample" is set to false, or true. The keyword await must be used.*/
+    async accessBackgrounds() : Promise<Background[]>{
+
+        if(this.loadFromExample()){
+            let example : Example | null = await this.accessExample();
+
+            if(example == null || example.json_backgrounds == null)
+                return [];
+            else{
+                let backgroundsInString : string = example.json_backgrounds;
+                let backgrounds = JSON.parse(backgroundsInString);
+                return backgrounds;
+            }
+        }
+        else
+            return Util.getVariable("backgrounds") ? Util.getVariable("backgrounds") : [];
+    }
+
+    /** Return the list of all the characters. The characters returned are different, depending if the html attribute
+    * "loadFromExample" is set to false, or true. The keyword await must be used.*/
+    async accessCharacters() : Promise<Character[]>{
+
+        if(this.loadFromExample()){
+            let example : Example | null = await this.accessExample();
+
+            if(example == null || example.json_characters == null)
+                return [];
+            else{
+                let charactersInString : string = example.json_characters;
+                let characters = JSON.parse(charactersInString);
+                return characters;
+            }
+        }
+        else
+            return Util.getVariable("characters") ? Util.getVariable("characters") : [];
     }
 
 

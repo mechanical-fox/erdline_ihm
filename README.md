@@ -6,12 +6,18 @@
 12. Fini: Faire les tests unitaires API
 
 13. Fait: Rentrer le sprite Nathaniel
-14. Faire en API l'url PUT example, et GET example
-14. Faire la page IHM de l'exemple - au début juste mettre un truc bateau, genre mon texte de base
-14. Vérifier à nouveau les test unitaires
+14. Fait: Faire en API l'url PUT example, et GET example
+
+14. Fait: Faire appaitre exemple en IHM
+14. Fait: Tester en IHM la page Example fonctionne même si non connecté
+14. Fait: Tester en IHM que la page "Jouer" et non pas "Example" fonctionne toujours
+
+14. Résoudre le bug... avec les premiers sprites à montrer dans mon example qui sont mal déterminés
+... cela pique les yeux
+14. Vérifier à nouveau si j'atteint le % de tests unitaires
 14. Après reflexion ne PAS faire tutoriel, et ainsi cela va être plus rapide !! Hourra, car cela m'ennuyai !!
 Mode agile. On s'arrete après les 3 mois. L'agilité, c'est bien !!
-14. Faire les pages Exemples, A propos + ne PAS faire tutoriel
+14. Faire la page A propos + ne PAS faire tutoriel
 15. Mise à jour du README ihm
 16. Mise à jour du README api
 17. Ecrire de modifier après (Genre écrire agenda) les 2 projets mynrista pour ne plus appeller mail, et passer en
@@ -28,19 +34,12 @@ Fin:
 - README à modifier
 - Tester le comportement si serveur down. Voir si le message apparait
 - Faire des tests pour la vue mobile
-- après déploiement tester avec mon VRAI mobile aussi
 - Faire attention à ce que la partis "A propos" soit à jour
 - Changer les fichiers de doc pour idée amélioration + tests manuels.
 - tester manuellement
 - écrire les tests unitaires
-- préparer portfolio les nouvelles images ihm et API
 - retester les tests unitaire 
 - vérifier % couverture ok
-- déployer
-- tester VUE MOBILE SUR TEL une fois déployé + cela AVANT
-de valider merge request
-- test version déployée + avec TEL aussi
-- changer en portfolio les images pour ihm + API
 - changer N° version
 - Faire merge request / check github action / release
 - supprimer TO DO
