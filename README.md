@@ -2,29 +2,13 @@
 # TO DO
 
 
-11. Fini: Faire les tests unitaires IHM
-12. Fini: Faire les tests unitaires API
+14. Fait: Entrer une histoire exemple en visual novel
 
-13. Fait: Rentrer le sprite Nathaniel
-14. Fait: Faire en API l'url PUT example, et GET example
+14. Fait (% couverture était encore bon): ajout tests unitaires IHM si necessaire
+14. Fait: Ajout de tests unitaires API
+14. Fait: Faire la page A propos
+14. Fait: Vérifier que la vue mobile fonctionne en page A propos (F12, et modifier la largeur)
 
-14. Fait: Faire appaitre exemple en IHM
-14. Fait: Tester en IHM la page Example fonctionne même si non connecté
-14. Fait: Tester en IHM que la page "Jouer" et non pas "Example" fonctionne toujours
-
-14. Fait: Résoudre le bug... avec les premiers sprites à montrer dans mon example qui sont mal 
-déterminés ... cela pique les yeux
-14. Fait: Bug à résoudre --> Lors d'une transition de scène, l'on ne rechange pas les 2 sprites.
-
-14. Entrer une histoire exemple en visual novel --> Prendre histoire 2, mais supprimer choix en faisant juste poser
-une seule question. Question à voir. Sinon cela posait trop de soucis avec mon histoire 1, ou les descriptions physiques,
-caractères des personnages, vêtements... ne sont pas adaptés.
-14. Vérifier à nouveau si j'atteint le % de tests unitaires
-14. ajout tests unitaires IHM si necessaire
-14. AJout tests unitaire API si necessaire
-14. Après reflexion ne PAS faire tutoriel, et ainsi cela va être plus rapide !! Hourra, car cela m'ennuyai !!
-Mode agile. On s'arrete après les 3 mois. L'agilité, c'est bien !!
-14. Faire la page A propos + ne PAS faire tutoriel
 15. Mise à jour du README ihm
 16. Mise à jour du README api
 17. Ecrire de modifier commun_database pour y mettre mes bases erdline + mynrista + indiquer mes mots de passe que

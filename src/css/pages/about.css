@@ -1,0 +1,14 @@
+
+.about-div{
+    display: block; 
+    margin: 15vh 0vw 5vh 10vw;
+    width: var(--about-div-width);
+    max-width: 700px;
+}
+
+.about-text{
+    text-align: justify;
+    display: block;
+    text-justify: inter-word;
+    font: 1.0rem Serif;
+}

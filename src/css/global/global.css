@@ -37,6 +37,7 @@
         --saving-connected-div-width: 15rem;
         --saving-connected-div-margin: 2rem 0rem 0rem 4rem;
         --example-margin: 5.5rem 0rem 0rem 12rem;
+        --about-div-width: 55vw;
     }
 
 }
@@ -77,6 +78,7 @@
         --saving-connected-div-width: 15rem;
         --saving-connected-div-margin: 2rem 0rem 0rem 4rem;
         --example-margin: 5.5rem 0rem 0rem 6rem;
+        --about-div-width: 70vw;
     }
 
 }
@@ -117,6 +119,7 @@
         --saving-connected-div-width: 50vw;
         --saving-connected-div-margin: 2rem 0rem 0rem 4vw;
         --example-margin: 5.5rem 0rem 0rem 4vw;
+        --about-div-width: 70vw;
     }
 
 }
