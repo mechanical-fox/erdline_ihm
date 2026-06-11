@@ -34,16 +34,16 @@ Fin:
 # Projet   
 
 Ce projet contient le code de la partie frontend / graphique, du site Erdline. Ce site à pour but de permettre la création de jeux de
-type Visual Novel. Afin d'aider à pouvoir plus facilement tester une idée de Visual Novel, des sprites de base sont fournis, et il 
+type Visual Novel. Afin d'aider à pouvoir plus facilement tester une idée de Visual Novel, des sprites de base sont fournis, et il
 est utilisé comme décors de simples dégradés de couleurs.
 
 Les fonctionnalités actuelles sont les suivantes:
-    Sauvegarde via le système de session
-    Possibilité de créer des Visual Novels kinetic (= sans choix)
-    Décors gérés sous formes de dégradés de couleurs
-    Gestion des Sprites des personnages 
-    Page Exemple
-    Page A propos
+- Sauvegarde via le système de session
+- Possibilité de créer des Visual Novels kinetic (= sans choix)
+- Décors gérés sous formes de dégradés de couleurs
+- Gestion des Sprites des personnages 
+- Page Exemple
+- Page A propos
 
 
 # Tests unitaires   
