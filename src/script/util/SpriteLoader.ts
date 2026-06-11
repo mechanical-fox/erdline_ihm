@@ -43,7 +43,7 @@ export class SpriteLoader{
                     promiseLeftHtmlElement = SpriteLoader.loadSpriteData(leftCharacter, leftExpression, messages[i].dataBase64 as string);
                 }
             }
-            else{
+            else if(rightCharacter == null){
                 if(messages[i].dataBase64 && messages[i].expressionName && messages[i].characterName != leftCharacter){
                     rightCharacter = messages[i].characterName;
                     rightExpression = messages[i].expressionName as string;

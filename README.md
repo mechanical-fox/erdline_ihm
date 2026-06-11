@@ -12,14 +12,20 @@
 14. Fait: Tester en IHM la page Example fonctionne même si non connecté
 14. Fait: Tester en IHM que la page "Jouer" et non pas "Example" fonctionne toujours
 
-14. Résoudre le bug... avec les premiers sprites à montrer dans mon example qui sont mal déterminés
+14. Fait: Résoudre le bug... avec les premiers sprites à montrer dans mon example qui sont mal déterminés
 ... cela pique les yeux
+14. Entrer une histoire exemple en visual novel. Surement reprendre de mon ancien projet.
+Et modifier une fille en garcon, car j'ai 2 sprites garcon. A voir.
 14. Vérifier à nouveau si j'atteint le % de tests unitaires
+14. ajout tests unitaires IHM si necessaire
+14. AJout tests unitaire API si necessaire
 14. Après reflexion ne PAS faire tutoriel, et ainsi cela va être plus rapide !! Hourra, car cela m'ennuyai !!
 Mode agile. On s'arrete après les 3 mois. L'agilité, c'est bien !!
 14. Faire la page A propos + ne PAS faire tutoriel
 15. Mise à jour du README ihm
 16. Mise à jour du README api
+17. Ecrire de modifier commun_database pour y mettre mes bases erdline + mynrista + indiquer mes mots de passe que
+j'aurai surement mis à password !! Et indiquer pourquoi. Car cela est un petit projet...
 17. Ecrire de modifier après (Genre écrire agenda) les 2 projets mynrista pour ne plus appeller mail, et passer en
 port 8081 + penser à changer n° version, et faire merge request + check les tests unitaires
 
