@@ -12,10 +12,13 @@
 14. Fait: Tester en IHM la page Example fonctionne même si non connecté
 14. Fait: Tester en IHM que la page "Jouer" et non pas "Example" fonctionne toujours
 
-14. Fait: Résoudre le bug... avec les premiers sprites à montrer dans mon example qui sont mal déterminés
-... cela pique les yeux
-14. Entrer une histoire exemple en visual novel. Surement reprendre de mon ancien projet.
-Et modifier une fille en garcon, car j'ai 2 sprites garcon. A voir.
+14. Fait: Résoudre le bug... avec les premiers sprites à montrer dans mon example qui sont mal 
+déterminés ... cela pique les yeux
+14. Fait: Bug à résoudre --> Lors d'une transition de scène, l'on ne rechange pas les 2 sprites.
+
+14. Entrer une histoire exemple en visual novel --> Prendre histoire 2, mais supprimer choix en faisant juste poser
+une seule question. Question à voir. Sinon cela posait trop de soucis avec mon histoire 1, ou les descriptions physiques,
+caractères des personnages, vêtements... ne sont pas adaptés.
 14. Vérifier à nouveau si j'atteint le % de tests unitaires
 14. ajout tests unitaires IHM si necessaire
 14. AJout tests unitaire API si necessaire

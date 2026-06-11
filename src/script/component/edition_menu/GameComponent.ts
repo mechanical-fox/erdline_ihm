@@ -166,7 +166,7 @@ export class GameComponent {
                     let nextGameBackground : GameBackground = await this.getBackground(scene.backgroundId);
                     let nextMessages = await this.convertMessage(scene.messages);
                     let nextMessageNumber = 0;
-                    let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(this.messages);
+                    let firstSprites : GameFirstSprites = await SpriteLoader.loadFirstSprites(nextMessages);
                     let nextLeftSprite = firstSprites.leftSprite;
                     let nextRightSprite = firstSprites.rightSprite;
 
