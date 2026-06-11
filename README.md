@@ -8,8 +8,8 @@
 14. Fait: Ajout de tests unitaires API
 14. Fait: Faire la page A propos
 14. Fait: Vérifier que la vue mobile fonctionne en page A propos (F12, et modifier la largeur)
+15. Fait: Mise à jour du README ihm
 
-15. Mise à jour du README ihm
 16. Mise à jour du README api
 17. Ecrire de modifier commun_database pour y mettre mes bases erdline + mynrista + indiquer mes mots de passe que
 j'aurai surement mis à password !! Et indiquer pourquoi. Car cela est un petit projet...
@@ -24,22 +24,26 @@ Vérifier que capp pourra se connecter à cdatabase.
 
 
 Fin: 
-- README à modifier
 - Tester le comportement si serveur down. Voir si le message apparait
-- Faire des tests pour la vue mobile
-- Faire attention à ce que la partis "A propos" soit à jour
-- Changer les fichiers de doc pour idée amélioration + tests manuels.
-- tester manuellement
-- écrire les tests unitaires
-- retester les tests unitaire 
-- vérifier % couverture ok
+- Changer les fichiers de doc pour idée amélioration + tests manuels. --> A été fait, ces fichiers n'étaient présent que en 
+      partie ihm
 - changer N° version
 - Faire merge request / check github action / release
 - supprimer TO DO
 
 # Projet   
 
-TO DO
+Ce projet contient le code de la partie frontend / graphique, du site Erdline. Ce site à pour but de permettre la création de jeux de
+type Visual Novel. Afin d'aider à pouvoir plus facilement tester une idée de Visual Novel, des sprites de base sont fournis, et il 
+est utilisé comme décors de simples dégradés de couleurs.
+
+Les fonctionnalités actuelles sont les suivantes:
+    Sauvegarde via le système de session
+    Possibilité de créer des Visual Novels kinetic (= sans choix)
+    Décors gérés sous formes de dégradés de couleurs
+    Gestion des Sprites des personnages 
+    Page Exemple
+    Page A propos
 
 
 # Tests unitaires   
