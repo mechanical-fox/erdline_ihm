@@ -2,7 +2,7 @@
 
 # Projet   
 
-Ce projet contient le code de la partie frontend / graphique, du site Erdline. Ce site à pour but de permettre la création de jeux de
+Ce projet contient le code de la partie frontend / graphique, du site Erdline. Ce site a pour but de permettre la création de jeux de
 type Visual Novel. Afin d'aider à pouvoir plus facilement tester une idée de Visual Novel, des sprites de base sont fournis, et il
 est utilisé comme décors de simples dégradés de couleurs.
 
@@ -56,17 +56,8 @@ http://localhost:4200
 # Profils / Environnements
 
 Ce projet dispose de deux environnements, "development" et "production". Par défaut, exécuter
-npx ng serve utilisera l'environnement "development", et exécuter npx ng build utilisera
+npm run serve utilisera l'environnement "development", et exécuter npm run build utilisera
 l'environnement "production".
-
-**Profil development:**  Utilisation d'une API localhost     
-**Profil production:**   Utilisation de l'API déployée    
-
-Vous pouvez spécifier un autre environnement avec --configuration
-
-```sh
-npx ng serve --configuration production
-```
 
 Les configurations utilisées sont décrites dans les fichiers suivants    
 [src/environments/development.ts](./src/environments/development.ts)     
