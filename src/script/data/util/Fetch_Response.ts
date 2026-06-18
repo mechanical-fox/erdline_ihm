@@ -1,12 +1,12 @@
 
 
-type Fetch_Response = {
+
+export type Fetch_Response = {
 
     status: number | undefined;
+    headers : Headers | undefined;
     ok: boolean;
 
     text(): Promise<string>;
 
 };
-
-export default Fetch_Response;

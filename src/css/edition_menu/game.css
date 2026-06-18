@@ -1,0 +1,6 @@
+
+
+.game-screen-style{
+    width: var(--game-width);
+    height: var(--game-height);
+}

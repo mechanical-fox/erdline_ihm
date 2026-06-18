@@ -1,0 +1,98 @@
+
+
+/* Si mobile : edition flexbox passe de row à column, plus d'espace entre les items,
+les items ont un display dit inline-block, 
+Fait: edition menu se met à avoir une width (Sinon le menu va "pousser" et créer du blanc) */
+
+.edition-flexbox{
+    flex-direction: var(--edition-flexbox-direction);
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.edition-menu{
+    margin: 2.5rem 0rem 0rem 4vw;
+    display: inline-block;
+    width: var(--edition-menu-width);
+}
+
+
+.edition-menu-item-activated{
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(0,0,0);
+    color: rgb(255,255,255);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.edition-menu-item-activated-focus{
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(0,0,0);
+    color: rgb(255,255,255);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.edition-menu-item-desactivated-focus{
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(46, 46, 46);
+    color: rgb(255, 255, 255);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.edition-menu-item-desactivated{
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(46, 46, 46);
+    color: rgb(184, 184, 184);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.edition-menu-item-selected{
+    display: var(--edition-item-display);
+    margin: var(--edition-item-margin);
+    padding: 0.4rem 0rem 0.4rem 0rem;
+    width: 10rem;
+    background-color: rgb(46, 46, 46);
+    color: rgb(216, 216, 216);
+    font: bold 1.2rem Serif;
+    width: 10rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.edition-div{
+    margin: var(--edition-div-margin);
+    width: 50vw;
+    display: inline-block;
+}

@@ -1,0 +1,61 @@
+@if(isLoaded()){
+    <div class="view-list">
+        <p class="view-list-item-button" (click)="addBackground()"> <b> + </b> &nbsp; Décor </p>
+        <p class="view-list-item-button" (click)="deleteCurrentBackground()"> Supprimer </p>
+    </div>
+
+    <div class="view-list">
+                
+        @for(background of backgrounds();track background.name){
+            @if(background.name == storage.selected()){
+                <p class="view-list-item-selected"> {{background.name}} </p>
+            }
+            @else{
+                <p class="view-list-item" (click)="selectBackground(background.name)"> {{background.name}} </p>
+            }
+        }
+
+    </div>
+
+
+    <!-- Check if the user has deleted all backgrounds. If so, the user will need to create a new
+    background to see this part of the page -->
+    @if( storage.selected() != null){
+          
+        <p class="background-title">
+            Paramètres
+        </p>
+        <p class="background-input-name">
+            Nom Décor
+        </p>
+        <input id="background-name" class="background-input" type="text" [(ngModel)]="backgroundName" (input)="updateBackgroungName($event)"/>
+        <p class="background-input-name">
+            Couleur
+        </p>
+        <div class="background-color-div">
+            @for(color of colors(); track color.databaseID){
+                <div class="background-color-div-item">
+                        
+                    @if(color.databaseID == colorSelected()){
+                        <input [id]="color.ihmID" type="radio" name="color-list" [value]="color.ihmID"  checked (change)="colorChange(color.databaseID, $event)"/>     
+                    }
+                    @else{
+                        <input [id]="color.ihmID" type="radio" name="color-list" [value]="color.ihmID"  unchecked (change)="colorChange(color.databaseID, $event)"/>
+                    }
+                    <p class="background-color-div-item-text">{{color.name}}</p>
+                         
+                </div>
+            }
+        </div>
+
+        <p class="background-title">
+            Preview
+        </p>
+        <div class="background-preview" [style.background]="gradient()"></div>
+        
+    }
+}
+
+
+
+    

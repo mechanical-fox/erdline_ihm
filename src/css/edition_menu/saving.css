@@ -1,0 +1,69 @@
+
+
+
+.saving-title{
+    margin: 1.3rem 0.3rem 1.3rem 0.3rem;
+    color: rgb(32, 59, 209);
+    font: bold 1.3rem Serif;
+}
+
+.saving-input-name{
+    margin: 0.3rem 0rem 0.8rem 1rem;
+    display: block;
+    color: rgb(58, 58, 58);
+    font: italic 1.0rem Serif;
+}
+
+.saving-input{
+    margin: 0.3rem 0rem 1.3rem 2rem;
+    border: 0.1rem solid rgb(43, 43, 43);
+    display: block;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    font: 1.0rem Serif;
+    border-radius: 0.4rem;
+    width: 10rem;
+    box-shadow: 0.15rem 0.15rem 0.25rem rgb(99, 99, 99);
+}
+
+.saving-button{
+    margin: 1.0rem 1.1rem 1.0rem 1.4rem;
+    padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+    border: 0.1rem solid rgb(43, 43, 43);
+    display: inline-block;
+    font: bold 1.1rem Serif;
+    border-radius: 0.4rem;
+    border: 0rem solid rgb(0,0,0);
+    background-color: rgb(0,0,0);
+    color: rgb(255,255,255);
+    cursor: pointer;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0,0,0);
+}
+
+
+.saving-message-failure{
+    margin: 1.0rem 1.1rem 1.0rem 0.6rem;
+    padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+    font : 1.0rem Serif;
+    background: rgb(255, 12, 12);
+    color: rgb(0, 0, 0);
+    border-radius: 0.4rem;
+    width : var(--saving-mesage-width);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(58, 58, 58);
+
+}
+
+.saving-connected-div{
+    margin: var(--saving-connected-div-margin);
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    background: rgb(128, 232, 250);
+    border-radius: 0.4rem;
+    width: var(--saving-connected-div-width);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(58, 58, 58);
+}
+
+.saving-connected-text{
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    font: 1.1rem Serif;
+    word-wrap: break-word;
+}
+

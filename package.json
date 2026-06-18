@@ -1,10 +1,11 @@
 {
   "name": "erdline-ihm",
-  "version": "1.1",
+  "version": "1.2",
   "scripts": {
     "serve": "ng serve",
     "build": "ng build",
-    "test": "ng test --coverage --no-watch"
+    "test": "ng test --no-watch",
+    "coverage": "ng test --coverage --no-watch"
   },
   "private": true,
   "dependencies": {

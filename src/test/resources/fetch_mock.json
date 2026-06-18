@@ -1,38 +1,113 @@
 [
     {
         "method": "GET",
-        "url": "/example",
+        "url": "/health",
+        "status": 200,
+        "data": {
+            "api": "Erdline",
+            "version": "1.0",
+            "status": "Running"
+        }
+    },
+    {
+        "method" : "POST",
+        "url" : "/session",
+        "status" : 201,
+        "data" : ""
+    },
+    {
+        "method" : "POST",
+        "url" : "/session/validity",
+        "status" : 200,
+        "data" : {
+            "sessionAlreadyExisting": false,
+            "atLeastSixCharacters": true,
+            "includeLowercaseCharacters": true,
+            "includeUppercaseCharacters": true,
+            "includeDigits": true,
+            "creationPossible": true
+        }
+    },
+    {
+        "method" : "PATCH",
+        "url" : "/session/1",
+        "status" : 204,
+        "data" : ""
+    },
+    {
+        "method" : "PATCH",
+        "url" : "/session/2",
+        "status" : 204,
+        "data" : ""
+    },
+    {
+        "method":"GET",
+        "url" : "/session/1",
+        "status" : 200,
+        "data": {
+            "id": 1,
+            "session": "MysticalAshes",
+            "password": "******",
+            "isAdmin": true,
+            "json_backgrounds": "[{\"counter\" : 1, \"id\" : \"background-1\", \"name\" : \"Jardin\", \"color_id\" : \"color-3\"}]",
+            "json_characters": "[{\"counter\" : 1, \"id\" : \"character-1\", \"name\": \"Grace\", \"expressions\": [{\"counter\" : 1, \"id\": \"expr-1\", \"name\": \"Joie\", \"sprite_id\" : 2}]}]",
+            "json_scenes": "[{\"createdAt\": 1779640052, \"counter\" : 1,\"id\" : \"scene-1\",\"name\" : \"Introduction\", \"backgroundId\" : \"background-1\", \"messages\" : []}]"
+        }
+    },
+    {
+        "method": "POST",
+        "url": "/color",
+        "status": 201,
+        "data": ""
+    },
+    {
+        "method": "PUT",
+        "url": "/color/3",
+        "status": 204,
+        "data": ""
+    },
+    {
+        "method": "GET",
+        "url": "/color",
         "status": 200,
         "data": [
             {
-                "htmlId": "7393e5d478434e2f",
-                "name": "API Supervision",
-                "url_consultation": "/access/7393e5d478434e2f",
-                "url_download": "/download/7393e5d478434e2f"
+                "id": 1,
+                "name": "Orange",
+                "firstGradient": "rgb(240, 138, 22)",
+                "secondGradient": "rgb(231, 195, 36)"
             },
             {
-                "htmlId": "4372f88139164d87",
-                "name": "API FlopBox",
-                "url_consultation": "/access/4372f88139164d87",
-                "url_download": "/download/4372f88139164d87"
+                "id": 2,
+                "name": "Noir",
+                "firstGradient": "rgb(32, 32, 32)",
+                "secondGradient": "rgb(97, 97, 97)"
+            },
+            {
+                "id": 3,
+                "name": "Bleu",
+                "firstGradient": "rgb(21, 59, 226)",
+                "secondGradient": "rgb(44, 141, 206)"
             }
         ]
     },
     {
-        "method": "POST",
-        "url": "/documentation/html",
-        "status": 201,
-        "data": {
-            "htmlId": "7a1fcbda8b63483e",
-            "url_consultation": "/access/7a1fcbda8b63483e",
-            "url_download": "/download/7a1fcbda8b63483e",
-            "expireIn": 180
-        }
-    },
-    {
         "method": "GET",
-        "url": "/error",
-        "status": 500,
-        "data": null
+        "url": "/sprite",
+        "status": 200,
+        "data": [
+            {
+                "id": 1,
+                "name": "Adrien",
+                "filename": "Adrien.png",
+                "data": "data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAQVQI12P4"
+            },
+            {
+                "id": 2,
+                "name": "Grace",
+                "filename": "Grace.png",
+                "data": "data:image/png;base64, w38GIAXDIBKE0DHxABJRU5ErkJggg=="
+            }
+        ]
     }
 ]

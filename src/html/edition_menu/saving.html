@@ -1,0 +1,37 @@
+
+@if(!isConnected()){
+    <p class="saving-title">
+        Session
+    </p>
+    <p class="saving-input-name">
+        Session
+    </p>
+    <input id="input_login" class="saving-input" type="text" [(ngModel)]="sessionName"/>
+    <p class="saving-input-name">
+        Mot de passe
+    </p>
+    <input id="input_password" class="saving-input" type="password" [(ngModel)]="password"/>
+
+    <button id="connection-button" class="saving-button" (click)="connect()">Connexion</button>
+    <button id="registration-button" class="saving-button" (click)="registerSession()">Création</button>
+
+    @if(errorMessage() != null){
+        <p id="failure-message" class="saving-message-failure"> {{errorMessage()}} </p>
+    }
+}
+@else{
+     <div id="connection-summary" class="saving-connected-div">
+        <p class="saving-connected-text"> <b>Etat:</b> &nbsp;connecté</p>
+        <p class="saving-connected-text"> <b>Session:</b> &nbsp; {{sessionName()}}</p>
+
+        @if(isAdmin()){
+            <p class="saving-connected-text"> <b>Droits Administrateur:</b> &nbsp; oui</p>
+        }
+        @else{
+            <p class="saving-connected-text"> <b>Droits Administrateur:</b> &nbsp; non</p>
+        }
+     </div>
+}
+
+
+

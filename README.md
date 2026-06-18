@@ -2,19 +2,17 @@
 
 # Projet   
 
-Ce projet contient le code du site internet Erdline, qui se connecte à l'API Erdline. Le
-site internet réalise actuellement les fonctionnalités suivantes.
+Ce projet contient le code de la partie frontend / graphique, du site Erdline. Ce site a pour but de permettre la création de jeux de
+type Visual Novel. Afin d'aider à pouvoir plus facilement tester une idée de Visual Novel, des sprites de base sont fournis, et il
+est utilisé comme décors de simples dégradés de couleurs.
 
-- Génération d'une documentation API depuis une interface graphique
-- Génération de la documentation API en format Html
-- Une page d'exemple de documentations déjà créées
-- Une page d'accueil
-- Une page "A propos"
-
-
-Il est prévu dans le futur de pouvoir importer et exporter, depuis un format spécifique au
-site Erdline. Ce qui fera le rôle de sauvegarde, pour pouvoir reprendre la création d'une
-documentation API. Et cela, sans avoir à créer de comptes.
+Les fonctionnalités actuelles sont les suivantes:
+- Sauvegarde via le système de session
+- Possibilité de créer des Visual Novels de type Kinetic
+- Décors gérés sous formes de dégradés de couleurs
+- Gestion des Sprites des personnages 
+- Page Exemple
+- Page A propos
 
 
 # Tests unitaires   
@@ -22,13 +20,13 @@ documentation API. Et cela, sans avoir à créer de comptes.
 Pour lancer les tests unitaires
 
 ```sh
-npx ng test --no-watch
+npm run test
 ```
 
 Pour lancer les tests unitaires, et vérifier le taux de couverture
 
 ```sh
-npx ng test --coverage --no-watch
+npm run coverage
 ```
 
 La seconde commande échouera en cas de taux de couverture des tests insuffisant. De plus,
@@ -47,7 +45,7 @@ npm install
 Vous pouvez ensuite démarrer le site internet avec
 
 ```sh
-npx ng serve
+npm run serve
 ```
 
 Vous pourrez alors vous connecter à l'url    
@@ -58,17 +56,8 @@ http://localhost:4200
 # Profils / Environnements
 
 Ce projet dispose de deux environnements, "development" et "production". Par défaut, exécuter
-npx ng serve utilisera l'environnement "development", et exécuter npx ng build utilisera
+npm run serve utilisera l'environnement "development", et exécuter npm run build utilisera
 l'environnement "production".
-
-**Profil development:**  Utilisation d'une API localhost     
-**Profil production:**   Utilisation de l'API déployée    
-
-Vous pouvez spécifier un autre environnement avec --configuration
-
-```sh
-npx ng serve --configuration production
-```
 
 Les configurations utilisées sont décrites dans les fichiers suivants    
 [src/environments/development.ts](./src/environments/development.ts)     
@@ -87,7 +76,7 @@ Pour construire le répertoire dist
 
 ```sh
 npm install
-npx ng build
+npm run build
 ```
 
 Les fichiers à placer en serveur seront générés en dossier
@@ -95,14 +84,13 @@ Les fichiers à placer en serveur seront générés en dossier
 **dist/erdline-ihm/browser**
 
 
-# Documentations Supplémentaires
+# Idées d'améliorations
 
 
-Afin de faciliter les mises à jours futures du projet, il est inclus un peu de documentation.
-Il s'agit pour l'instant d'une liste de tests manuels, ainsi que de plusieurs idées 
-d'améliorations.
+Afin de faciliter les mises à jours futures du projet, il est inclus dans le projet une liste d'idées
+d'amélioration. Ces idées d'améliorations pourront servir de bases pour de futures mises à jours, et
+être soient reprises telles quelles, soit servir d'inspirations pour des idées à implémenter.
 
 
-**Tests Manuels:** [doc/tests.md](./doc/tests.md)    
-**Idées d'améliorations:** [doc/amelioration_ideas.md](./doc/amelioration_ideas.md)      
+[doc/amelioration_ideas.md](./doc/amelioration_ideas.md)      
 

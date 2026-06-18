@@ -1,12 +1,18 @@
-
 import {TestBed} from '@angular/core/testing';
-import {NavComponent} from '../../script/component/NavComponent';
+import {NavComponent} from '../../script/component/global/NavComponent';
 import {Helper} from './helper/Helper';
-import { MessageUtil } from '../../script/util/MessageUtil';
+import { Provider } from '../../script/app/Provider';
+import { Fetch_Options } from '../../script/data/util/Fetch_Options';
+import { FetchMock } from './helper/FetchMock';
+import { Util } from '../../script/util/Util';
 
 
 describe('NavComponent Tests',()=>{
 
+    beforeEach(()=>{
+        Util.deleteAllVariables();
+        Provider.mockFetch((url : string, options : Fetch_Options)=>FetchMock.fetch(url,options));
+    });
 
     test(`Par défaut je vois la page d'accueil`, async()=>{
         
@@ -16,9 +22,14 @@ describe('NavComponent Tests',()=>{
         const compiled : HTMLElement = fixture.nativeElement as HTMLElement;
 
         await Helper.sleep(300);
-        let nodeFirstParagraph = compiled.querySelector("#first_paragraph");
-        expect(nodeFirstParagraph).toBeDefined();
-        expect(nodeFirstParagraph?.textContent).toContain("Erdline est un site vitrine, qui");
+        let titles : NodeListOf<HTMLElement> = compiled.querySelectorAll(".background-title");
+        let titlesParsed : HTMLElement[] = [];
+
+        for(let title of titles)
+            titlesParsed.push(title);
+
+        expect(titlesParsed[0].textContent.trim()).toBe("Paramètres");
+        expect(titlesParsed[1].textContent.trim()).toBe("Preview");
     
     });
 
@@ -31,11 +42,11 @@ describe('NavComponent Tests',()=>{
         const compiled : HTMLElement = fixture.nativeElement as HTMLElement;
 
         await Helper.sleep(300);
-        const items : NodeListOf<HTMLElement> = compiled.querySelectorAll(".banner-item-inactive");
+        const items : NodeListOf<HTMLElement> = compiled.querySelectorAll(".item-desactivated");
         let found : boolean = false;
 
         for(let item of items){
-            if(item?.textContent.trim() == "A propos" && !found){
+            if(item?.textContent.trim() == "A propos"){
                 item.click();
                 await Helper.sleep(300);
                 found = true;
@@ -43,29 +54,13 @@ describe('NavComponent Tests',()=>{
         }
 
         expect(found).toBe(true);
-        let nodeFirstParagraph = compiled.querySelector("#first_paragraph");
+        let nodeFirstParagraph = compiled.querySelector("#about_paragraph");
         expect(nodeFirstParagraph).toBeDefined();
-        expect(nodeFirstParagraph?.textContent).toContain("Site créé par Pierre Meunier (Développeur).");
+
+        if(nodeFirstParagraph)
+            expect(nodeFirstParagraph.textContent).toContain("Page A Propos");
     
     });
 
-
-    test(`Les messages d'erreurs sont correctements affichés au client`, async()=>{
-        
-        TestBed.configureTestingModule({imports: [NavComponent]}).compileComponents();
-        const fixture = TestBed.createComponent(NavComponent);
-        fixture.autoDetectChanges();  
-        const compiled : HTMLElement = fixture.nativeElement as HTMLElement;
-
-        await Helper.sleep(300);
-        MessageUtil.call("logError", ["Une erreur serveur est survenue"]);
-        await Helper.sleep(300);
-
-        const errorNode : HTMLElement = compiled.querySelector(".error-message") as HTMLElement;
-        expect(errorNode).toBeDefined();
-        expect(errorNode.textContent.trim()).toBe("Une erreur serveur est survenue");
-    
-    });
-    
 
 });

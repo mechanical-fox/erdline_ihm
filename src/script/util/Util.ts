@@ -1,55 +1,42 @@
-import { WritableSignal, signal } from "@angular/core";
 
+import {signal, WritableSignal} from '@angular/core';
 
 
 export class Util {
 
-    static endings : Map<String, Date> = new Map<String, Date>();
+    static memory : Map<String, any> = new Map<String, any>();
     static timers : Map<String, WritableSignal<boolean>> = new Map<String, WritableSignal<boolean>>();
+    static initialValues : Map<String, boolean> = new Map<String, boolean>();
+    static endings : Map<String, Date> = new Map<String, Date>();
 
-    /** This function return the same text, but in html. Space and enter are converted, and all html characters like
-     *  "<" are escaped to be displayed correctly, and for security purposes. */
-    static toHtmlEscaped(text : string | null) : string | null{
-
-        if(text == null)
-            return null;
-        else{
-            let answer = text.replaceAll("&", "&amp;");
-
-            answer = answer.replaceAll("<", "&lt;");
-            answer = answer.replaceAll(">", "&gt;");
-            answer = answer.replaceAll('"', "&quot;");
-            answer = answer.replaceAll("'", "&#39;");
-
-            answer = answer.replaceAll(" ", "&nbsp;");
-            answer = answer.replaceAll("\n", "<br/>");
-            return answer;      
-        }
-        
+    /** Return the value of the variable asked, or null if not initialized */
+    static getVariable(name: string) : any{
+        return this.memory.get(name);
     }
 
-    /** Return a timer with the name associated. A timer is a signal than has for value "true" when the
-     * timer is started, and remain true during a certain duration. After this duration the timer will be false.
-     * You can start a timer many times. */
-    static createTimer(name : string) : WritableSignal<boolean>{
-        let timer = signal(false);
+    /** Set the value for the variable given */
+    static setVariable(name: string, value : any) : void{
+        this.memory.set(name, value);
+    }
+
+    /** Delete the value for the variable given */
+    static deleteVariable(name: string) : void{
+        if(this.memory.get(name))
+            this.memory.delete(name);
+    }
+
+    static deleteAllVariables(): void{
+        this.memory = new Map<String, any>();
+    }
+
+    /** Return a timer with the name associated. A timer is a signal than can be started to switch beetween 2 boolean values after a 
+     * determined time. A timer must be created, and next started with the function startTimer. At creation, the timer has the Value
+     * initialValue given as parameter.*/
+    static createTimer(name : string, initialValue : boolean) : WritableSignal<boolean>{
+        let timer = signal(initialValue);
         Util.timers.set(name, timer);
+        Util.initialValues.set(name, initialValue);
         return timer;
-    }
-
-    /** Switch the timer with the name given to true, during the duration specified. After this duration the timer
-     * is switched to false. */
-    static async startTimer(timer_name : string, duration_ms : number) : Promise<void>{
-        Util.timers.get(timer_name)?.set(true);
-        let now = new Date();
-        let end = new Date(now.valueOf() + duration_ms);
-        Util.endings.set(timer_name, end);
-        
-        await Util.sleep(duration_ms);
-        let end_actualized = Util.endings.get(timer_name)?.valueOf();
-
-        if( end_actualized && end_actualized.valueOf() == end.valueOf())
-            Util.timers.get(timer_name)?.set(false);
     }
 
     /** This function allow to sleep the number of milliseconds specified. But the function must be called with await to
@@ -57,6 +44,30 @@ export class Util {
     static async sleep(duration_ms : number) : Promise<void>{
         return new Promise(resolve => setTimeout(resolve, duration_ms));
     }
+
+    /** Switch the timer with the name given, to the initialValue of the timer, so the value at creation. Wait during the time indicated, 
+     * and then switch the timer to be different of the previous boolean value. You can start a timer many time, even if the timer isn't
+     * finished. If a timer is started again and wasn't finished, the previous timer set will be ignored. */
+    static async startTimer(timer_name : string, duration_ms : number) : Promise<void>{
+        
+        let timer = Util.timers.get(timer_name);
+        let initialValue = Util.initialValues.get(timer_name);
+
+        if(timer != undefined && initialValue != undefined){
+            timer.set(initialValue);
+            let now = new Date();
+            let ending = new Date(now.valueOf() + duration_ms);
+            Util.endings.set(timer_name, ending);
+            await Util.sleep(duration_ms);
+            let new_ending = Util.endings.get(timer_name);
+
+            if(ending == new_ending)
+                timer.set(!initialValue);
+        }
+
+    }
+
+    
 
 
 }

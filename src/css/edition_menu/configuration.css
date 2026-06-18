@@ -1,0 +1,122 @@
+
+
+.configuration-title{
+    color: rgb(32, 59, 209);
+    font: bold 1.3rem Serif;
+}
+
+.configuration-input-name{
+    margin: 0.3rem 0rem 0.8rem 1rem;
+    display: block;
+    color: rgb(58, 58, 58);
+    font: italic 1.0rem Serif;
+}
+
+.configuration-color-div{
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: var(--configuration-color-div-width);
+}
+
+.configuration-color-div-item{
+    margin: var(--configuration-color-div-item-margin);
+    width: 19rem;
+}
+
+.configuration-label-text{
+    margin: var(--configuration-label-text-margin);
+    color: rgb(0, 0, 0);
+    font: 1.0rem Serif;
+    display: inline-block;
+    width : 6rem;
+    text-align: left;
+}
+
+.configuration-input{
+    margin: var(--configuration-label-text-margin);
+    border: 0.1rem solid rgb(95, 95, 95);
+    display: block;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    font: 0.9rem Serif;
+    border-radius: 0.4rem;
+    width: 8rem;
+    display: inline-block;
+}
+
+.configuration-input-color{
+    margin: var(--configuration-label-text-margin);
+    border: 0.1rem solid rgb(95, 95, 95);
+    padding: 0.35rem 0.35rem 0.35rem 0.35rem;
+    border-radius: 0.6rem;
+    height: 2.0rem;
+    width: 3.5rem;
+    display: inline-block;
+}
+
+.configuration-input-file{
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
+    font: italic 1.0rem Serif;
+    display: inline-block;
+}
+
+.configuration-input-file::file-selector-button{
+    margin: var(--configuration-input-file-margin);
+    border: 0.1rem solid rgb(95, 95, 95);
+    padding: 0.35rem 0.35rem 0.35rem 0.35rem;
+    border-radius: 0.4rem;
+    display: inline-block;
+    cursor: pointer;
+    font: 0.9rem Serif;
+    display: inline-block;
+}
+
+.configuration-center-div{
+    margin: 2.4rem 0rem 0rem 0rem;
+    width: 25rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.configuration-save-button{
+    background-color: rgb(255, 153, 37);
+    color: rgb(0,0,0);
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+    font: bold 1.0rem Serif;
+    border: 0rem solid rgb(58, 58, 58);
+    border-radius: 0.4rem;
+    cursor: pointer;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(59, 59, 59);
+}
+
+.configuration-confirmation-message{
+    position: fixed;
+    inset-inline-end: 5rem;
+    inset-block-start: 2rem;
+    margin:0rem 0rem 0rem 0rem;
+    padding: 0.8rem 0.9rem 0.8rem 0.9rem;
+    width: 7rem;
+    background: rgb(73, 226, 53);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0, 0, 0);
+    font: bold 1.0rem Serif;
+    border-radius: 0.4rem;
+}
+
+.configuration-error-message{
+    position: fixed;
+    inset-inline-end: 5rem;
+    inset-block-start: 2rem;
+    margin:0rem 0rem 0rem 0rem;
+    padding: 0.8rem 0.9rem 0.8rem 0.9rem;
+    width: 7rem;
+    background: rgb(226, 37, 37);
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(0, 0, 0);
+    font: bold 1.0rem Serif;
+    border-radius: 0.4rem;
+}

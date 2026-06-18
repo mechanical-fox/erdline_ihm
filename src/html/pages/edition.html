@@ -1,0 +1,51 @@
+
+<div class="edition-flexbox">
+
+
+    <div class="edition-menu">
+        @for(item of items(); track item){
+            @if(selected() == item){
+                @if(focus_on() == item){
+                    <p class="edition-menu-item-activated-focus" (mouseout)="mouse_out()"> {{item}}</p>
+                }
+                @else{
+                    <p class="edition-menu-item-activated" (mouseover)="mouse_over(item)"> {{item}}</p>
+                }
+            }
+            @else{
+                @if(focus_on() == item){
+                    <p class="edition-menu-item-desactivated-focus" (click)="select(item)" (mouseout)="mouse_out()"> {{item}}</p>
+                }
+                @else{
+                    <p class="edition-menu-item-desactivated" (click)="select(item)" (mouseover)="mouse_over(item)"> {{item}}</p>
+                }
+            }
+        }
+    </div>
+
+
+    <div class="edition-div">
+
+ 
+        @if(selected() == "Décors"){
+            <Background/>
+        }
+        @if(selected() == "Personnages"){
+            <Character/>
+        }
+        @if(selected() == "Scènes"){
+            <Scene/>
+        }
+        @if(selected() == "Jouer"){
+            <Game/>
+        }
+        @if(selected() == "Sauvegarde"){
+            <Saving (connection)="connectionReceived($event)"/>
+        }
+        @if(selected() == "Configuration"){
+            <Configuration/>
+        }
+        
+
+    </div>
+</div>
