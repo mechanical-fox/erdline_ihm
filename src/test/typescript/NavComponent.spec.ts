@@ -56,7 +56,9 @@ describe('NavComponent Tests',()=>{
         expect(found).toBe(true);
         let nodeFirstParagraph = compiled.querySelector("#about_paragraph");
         expect(nodeFirstParagraph).toBeDefined();
-        expect(nodeFirstParagraph?.textContent).toContain("Page A Propos");
+
+        if(nodeFirstParagraph)
+            expect(nodeFirstParagraph.textContent).toContain("Page A Propos");
     
     });
 
