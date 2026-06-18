@@ -1,35 +1,4 @@
 
-# TO DO
-
-
-14. Fait: Entrer une histoire exemple en visual novel
-
-14. Fait (% couverture était encore bon): ajout tests unitaires IHM si necessaire
-14. Fait: Ajout de tests unitaires API
-14. Fait: Faire la page A propos
-14. Fait: Vérifier que la vue mobile fonctionne en page A propos (F12, et modifier la largeur)
-15. Fait: Mise à jour du README ihm
-
-16. Mise à jour du README api
-17. Ecrire de modifier commun_database pour y mettre mes bases erdline + mynrista + indiquer mes mots de passe que
-j'aurai surement mis à password !! Et indiquer pourquoi. Car cela est un petit projet...
-17. Ecrire de modifier après (Genre écrire agenda) les 2 projets mynrista pour ne plus appeller mail, et passer en
-port 8081 + penser à changer n° version, et faire merge request + check les tests unitaires
-
-
-17. Déployement API -> changer le texte. Ne même plus parler certificat https. Changer l'image docker.
-Vérifier que capp pourra se connecter à cdatabase.
-17. Deploiement IHM --> Inutile de faire !! Le texte présent actuellement est bien au passage.
-21. Faire deploiement AVANT les merge request. Voir si pas de soucis.
-
-
-Fin: 
-- Tester le comportement si serveur down. Voir si le message apparait
-- Changer les fichiers de doc pour idée amélioration + tests manuels. --> A été fait, ces fichiers n'étaient présent que en 
-      partie ihm
-- changer N° version
-- Faire merge request / check github action / release
-- supprimer TO DO
 
 # Projet   
 
@@ -39,7 +8,7 @@ est utilisé comme décors de simples dégradés de couleurs.
 
 Les fonctionnalités actuelles sont les suivantes:
 - Sauvegarde via le système de session
-- Possibilité de créer des Visual Novels kinetic (= sans choix)
+- Possibilité de créer des Visual Novels de type Kinetic
 - Décors gérés sous formes de dégradés de couleurs
 - Gestion des Sprites des personnages 
 - Page Exemple
